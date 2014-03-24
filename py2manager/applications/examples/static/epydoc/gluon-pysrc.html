@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;gluon
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon-module.html">Package gluon</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">Web2Py framework modules</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">========================</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'A'</tt><tt class="py-op">,</tt> <tt class="py-string">'B'</tt><tt class="py-op">,</tt> <tt class="py-string">'BEAUTIFY'</tt><tt class="py-op">,</tt> <tt class="py-string">'BODY'</tt><tt class="py-op">,</tt> <tt class="py-string">'BR'</tt><tt class="py-op">,</tt> <tt class="py-string">'CAT'</tt><tt class="py-op">,</tt> <tt class="py-string">'CENTER'</tt><tt class="py-op">,</tt> <tt class="py-string">'CLEANUP'</tt><tt class="py-op">,</tt> <tt class="py-string">'CODE'</tt><tt class="py-op">,</tt> <tt class="py-string">'CRYPT'</tt><tt class="py-op">,</tt> <tt class="py-string">'DAL'</tt><tt class="py-op">,</tt> <tt class="py-string">'DIV'</tt><tt class="py-op">,</tt> <tt class="py-string">'EM'</tt><tt class="py-op">,</tt> <tt class="py-string">'EMBED'</tt><tt class="py-op">,</tt> <tt class="py-string">'FIELDSET'</tt><tt class="py-op">,</tt> <tt class="py-string">'FORM'</tt><tt class="py-op">,</tt> <tt class="py-string">'Field'</tt><tt class="py-op">,</tt> <tt class="py-string">'H1'</tt><tt class="py-op">,</tt> <tt class="py-string">'H2'</tt><tt class="py-op">,</tt> <tt class="py-string">'H3'</tt><tt class="py-op">,</tt> <tt class="py-string">'H4'</tt><tt class="py-op">,</tt> <tt class="py-string">'H5'</tt><tt class="py-op">,</tt> <tt class="py-string">'H6'</tt><tt class="py-op">,</tt> <tt class="py-string">'HEAD'</tt><tt class="py-op">,</tt> <tt class="py-string">'HR'</tt><tt class="py-op">,</tt> <tt class="py-string">'HTML'</tt><tt class="py-op">,</tt> <tt class="py-string">'HTTP'</tt><tt class="py-op">,</tt> <tt class="py-string">'I'</tt><tt class="py-op">,</tt> <tt class="py-string">'IFRAME'</tt><tt class="py-op">,</tt> <tt class="py-string">'IMG'</tt><tt class="py-op">,</tt> <tt class="py-string">'INPUT'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_ALPHANUMERIC'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_DATE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_DATETIME'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_DATETIME_IN_RANGE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_DATE_IN_RANGE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_DECIMAL_IN_RANGE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_EMAIL'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_LIST_OF_EMAILS'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_EMPTY_OR'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_EQUAL_TO'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_EXPR'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_FLOAT_IN_RANGE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_IMAGE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_JSON'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_INT_IN_RANGE'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_IN_DB'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_IN_SET'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_IPV4'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_LENGTH'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_LIST_OF'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_LOWER'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_MATCH'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_NOT_EMPTY'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_NOT_IN_DB'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_NULL_OR'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_SLUG'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_STRONG'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_TIME'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_UPLOAD_FILENAME'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_UPPER'</tt><tt class="py-op">,</tt> <tt class="py-string">'IS_URL'</tt><tt class="py-op">,</tt> <tt class="py-string">'LABEL'</tt><tt class="py-op">,</tt> <tt class="py-string">'LEGEND'</tt><tt class="py-op">,</tt> <tt class="py-string">'LI'</tt><tt class="py-op">,</tt> <tt class="py-string">'LINK'</tt><tt class="py-op">,</tt> <tt class="py-string">'LOAD'</tt><tt class="py-op">,</tt> <tt class="py-string">'MARKMIN'</tt><tt class="py-op">,</tt> <tt class="py-string">'MENU'</tt><tt class="py-op">,</tt> <tt class="py-string">'META'</tt><tt class="py-op">,</tt> <tt class="py-string">'OBJECT'</tt><tt class="py-op">,</tt> <tt class="py-string">'OL'</tt><tt class="py-op">,</tt> <tt class="py-string">'ON'</tt><tt class="py-op">,</tt> <tt class="py-string">'OPTGROUP'</tt><tt class="py-op">,</tt> <tt class="py-string">'OPTION'</tt><tt class="py-op">,</tt> <tt class="py-string">'P'</tt><tt class="py-op">,</tt> <tt class="py-string">'PRE'</tt><tt class="py-op">,</tt> <tt class="py-string">'SCRIPT'</tt><tt class="py-op">,</tt> <tt class="py-string">'SELECT'</tt><tt class="py-op">,</tt> <tt class="py-string">'SPAN'</tt><tt class="py-op">,</tt> <tt class="py-string">'SQLFORM'</tt><tt class="py-op">,</tt> <tt class="py-string">'SQLTABLE'</tt><tt class="py-op">,</tt> <tt class="py-string">'STRONG'</tt><tt class="py-op">,</tt> <tt class="py-string">'STYLE'</tt><tt class="py-op">,</tt> <tt class="py-string">'TABLE'</tt><tt class="py-op">,</tt> <tt class="py-string">'TAG'</tt><tt class="py-op">,</tt> <tt class="py-string">'TBODY'</tt><tt class="py-op">,</tt> <tt class="py-string">'TD'</tt><tt class="py-op">,</tt> <tt class="py-string">'TEXTAREA'</tt><tt class="py-op">,</tt> <tt class="py-string">'TFOOT'</tt><tt class="py-op">,</tt> <tt class="py-string">'TH'</tt><tt class="py-op">,</tt> <tt class="py-string">'THEAD'</tt><tt class="py-op">,</tt> <tt class="py-string">'TITLE'</tt><tt class="py-op">,</tt> <tt class="py-string">'TR'</tt><tt class="py-op">,</tt> <tt class="py-string">'TT'</tt><tt class="py-op">,</tt> <tt class="py-string">'UL'</tt><tt class="py-op">,</tt> <tt class="py-string">'URL'</tt><tt class="py-op">,</tt> <tt class="py-string">'XHTML'</tt><tt class="py-op">,</tt> <tt class="py-string">'XML'</tt><tt class="py-op">,</tt> <tt class="py-string">'redirect'</tt><tt class="py-op">,</tt> <tt class="py-string">'current'</tt><tt class="py-op">,</tt> <tt class="py-string">'embed64'</tt><tt class="py-op">]</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module gluon.globals=gluon.globals-module.html"><a title="gluon.globals" class="py-name" href="#" onclick="return doclink('link-0', 'globals', 'link-0');">globals</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable gluon.current=gluon-module.html#current,Variable gluon.globals.current=gluon.globals-module.html#current,Variable gluon.template.current=gluon.template-module.html#current,Variable gluon.tools.current=gluon.tools-module.html#current"><a title="gluon.current
+gluon.globals.current
+gluon.template.current
+gluon.tools.current" class="py-name" href="#" onclick="return doclink('link-1', 'current', 'link-1');">current</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module gluon.html=gluon.html-module.html"><a title="gluon.html" class="py-name" href="#" onclick="return doclink('link-2', 'html', 'link-2');">html</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Function gluon.tools.validators()=gluon.tools-module.html#validators,Module gluon.validators=gluon.validators-module.html"><a title="gluon.tools.validators
+gluon.validators" class="py-name" href="#" onclick="return doclink('link-3', 'validators', 'link-3');">validators</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Module gluon.http=gluon.http-module.html"><a title="gluon.http" class="py-name" href="#" onclick="return doclink('link-4', 'http', 'link-4');">http</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Function gluon.http.redirect()=gluon.http-module.html#redirect"><a title="gluon.http.redirect" class="py-name" href="#" onclick="return doclink('link-5', 'redirect', 'link-5');">redirect</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class gluon.http.HTTP=gluon.http.HTTP-class.html"><a title="gluon.http.HTTP" class="py-name" href="#" onclick="return doclink('link-6', 'HTTP', 'link-6');">HTTP</a></tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name" targets="Module gluon.dal=gluon.dal-module.html"><a title="gluon.dal" class="py-name" href="#" onclick="return doclink('link-7', 'dal', 'link-7');">dal</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class gluon.dal.DAL=gluon.dal.DAL-class.html"><a title="gluon.dal.DAL" class="py-name" href="#" onclick="return doclink('link-8', 'DAL', 'link-8');">DAL</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Class gluon.dal.Field=gluon.dal.Field-class.html"><a title="gluon.dal.Field" class="py-name" href="#" onclick="return doclink('link-9', 'Field', 'link-9');">Field</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name" targets="Module gluon.sqlhtml=gluon.sqlhtml-module.html"><a title="gluon.sqlhtml" class="py-name" href="#" onclick="return doclink('link-10', 'sqlhtml', 'link-10');">sqlhtml</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Class gluon.sqlhtml.SQLFORM=gluon.sqlhtml.SQLFORM-class.html"><a title="gluon.sqlhtml.SQLFORM" class="py-name" href="#" onclick="return doclink('link-11', 'SQLFORM', 'link-11');">SQLFORM</a></tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name" targets="Class gluon.sqlhtml.SQLTABLE=gluon.sqlhtml.SQLTABLE-class.html"><a title="gluon.sqlhtml.SQLTABLE" class="py-name" href="#" onclick="return doclink('link-12', 'SQLTABLE', 'link-12');">SQLTABLE</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-13" class="py-name" targets="Module gluon.compileapp=gluon.compileapp-module.html"><a title="gluon.compileapp" class="py-name" href="#" onclick="return doclink('link-13', 'compileapp', 'link-13');">compileapp</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Function gluon.compileapp.LOAD()=gluon.compileapp-module.html#LOAD"><a title="gluon.compileapp.LOAD" class="py-name" href="#" onclick="return doclink('link-14', 'LOAD', 'link-14');">LOAD</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment"># Dummy code to enable code completion in IDE's.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-15" class="py-name"><a title="gluon.globals" class="py-name" href="#" onclick="return doclink('link-15', 'globals', 'link-0');">globals</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class gluon.globals.Request=gluon.globals.Request-class.html"><a title="gluon.globals.Request" class="py-name" href="#" onclick="return doclink('link-16', 'Request', 'link-16');">Request</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name" targets="Class gluon.globals.Response=gluon.globals.Response-class.html"><a title="gluon.globals.Response" class="py-name" href="#" onclick="return doclink('link-17', 'Response', 'link-17');">Response</a></tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name" targets="Class gluon.globals.Session=gluon.globals.Session-class.html"><a title="gluon.globals.Session" class="py-name" href="#" onclick="return doclink('link-18', 'Session', 'link-18');">Session</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-19" class="py-name" targets="Module gluon.cache=gluon.cache-module.html"><a title="gluon.cache" class="py-name" href="#" onclick="return doclink('link-19', 'cache', 'link-19');">cache</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Class gluon.cache.Cache=gluon.cache.Cache-class.html"><a title="gluon.cache.Cache" class="py-name" href="#" onclick="return doclink('link-20', 'Cache', 'link-20');">Cache</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-21" class="py-name" targets="Module gluon.languages=gluon.languages-module.html"><a title="gluon.languages" class="py-name" href="#" onclick="return doclink('link-21', 'languages', 'link-21');">languages</a></tt> <tt class="py-keyword">import</tt> <tt id="link-22" class="py-name" targets="Class gluon.languages.translator=gluon.languages.translator-class.html"><a title="gluon.languages.translator" class="py-name" href="#" onclick="return doclink('link-22', 'translator', 'link-22');">translator</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-23" class="py-name" targets="Module gluon.tools=gluon.tools-module.html"><a title="gluon.tools" class="py-name" href="#" onclick="return doclink('link-23', 'tools', 'link-23');">tools</a></tt> <tt class="py-keyword">import</tt> <tt id="link-24" class="py-name" targets="Class gluon.tools.Auth=gluon.tools.Auth-class.html"><a title="gluon.tools.Auth" class="py-name" href="#" onclick="return doclink('link-24', 'Auth', 'link-24');">Auth</a></tt><tt class="py-op">,</tt> <tt id="link-25" class="py-name" targets="Class gluon.tools.Crud=gluon.tools.Crud-class.html"><a title="gluon.tools.Crud" class="py-name" href="#" onclick="return doclink('link-25', 'Crud', 'link-25');">Crud</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name" targets="Class gluon.tools.Mail=gluon.tools.Mail-class.html"><a title="gluon.tools.Mail" class="py-name" href="#" onclick="return doclink('link-26', 'Mail', 'link-26');">Mail</a></tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name" targets="Class gluon.tools.Service=gluon.tools.Service-class.html"><a title="gluon.tools.Service" class="py-name" href="#" onclick="return doclink('link-27', 'Service', 'link-27');">Service</a></tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name" targets="Class gluon.tools.PluginManager=gluon.tools.PluginManager-class.html"><a title="gluon.tools.PluginManager" class="py-name" href="#" onclick="return doclink('link-28', 'PluginManager', 'link-28');">PluginManager</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-comment"># API objects</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt id="link-29" class="py-name" targets="Variable gluon.request=gluon-module.html#request"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-29', 'request', 'link-29');">request</a></tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="gluon.globals.Request" class="py-name" href="#" onclick="return doclink('link-30', 'Request', 'link-16');">Request</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt id="link-31" class="py-name" targets="Variable gluon.response=gluon-module.html#response"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-31', 'response', 'link-31');">response</a></tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="gluon.globals.Response" class="py-name" href="#" onclick="return doclink('link-32', 'Response', 'link-17');">Response</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt id="link-33" class="py-name" targets="Variable gluon.session=gluon-module.html#session"><a title="gluon.session" class="py-name" href="#" onclick="return doclink('link-33', 'session', 'link-33');">session</a></tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name"><a title="gluon.globals.Session" class="py-name" href="#" onclick="return doclink('link-34', 'Session', 'link-18');">Session</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt id="link-35" class="py-name"><a title="gluon.cache" class="py-name" href="#" onclick="return doclink('link-35', 'cache', 'link-19');">cache</a></tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="gluon.cache.Cache" class="py-name" href="#" onclick="return doclink('link-36', 'Cache', 'link-20');">Cache</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-37', 'request', 'link-29');">request</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt id="link-38" class="py-name" targets="Variable gluon.T=gluon-module.html#T,Variable gluon.languages.lazyT.T=gluon.languages.lazyT-class.html#T"><a title="gluon.T
+gluon.languages.lazyT.T" class="py-name" href="#" onclick="return doclink('link-38', 'T', 'link-38');">T</a></tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="gluon.languages.translator" class="py-name" href="#" onclick="return doclink('link-39', 'translator', 'link-22');">translator</a></tt><tt class="py-op">(</tt><tt id="link-40" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-40', 'request', 'link-29');">request</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-comment"># Objects commonly defined in application model files</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-comment"># (names are conventions only -- not part of API)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt id="link-41" class="py-name" targets="Variable gluon.db=gluon-module.html#db"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-41', 'db', 'link-41');">db</a></tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="gluon.dal.DAL" class="py-name" href="#" onclick="return doclink('link-42', 'DAL', 'link-8');">DAL</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt id="link-43" class="py-name" targets="Variable gluon.auth=gluon-module.html#auth"><a title="gluon.auth" class="py-name" href="#" onclick="return doclink('link-43', 'auth', 'link-43');">auth</a></tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="gluon.tools.Auth" class="py-name" href="#" onclick="return doclink('link-44', 'Auth', 'link-24');">Auth</a></tt><tt class="py-op">(</tt><tt id="link-45" class="py-name"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-45', 'db', 'link-41');">db</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt id="link-46" class="py-name" targets="Variable gluon.crud=gluon-module.html#crud"><a title="gluon.crud" class="py-name" href="#" onclick="return doclink('link-46', 'crud', 'link-46');">crud</a></tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name"><a title="gluon.tools.Crud" class="py-name" href="#" onclick="return doclink('link-47', 'Crud', 'link-25');">Crud</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-48', 'db', 'link-41');">db</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt id="link-49" class="py-name" targets="Variable gluon.mail=gluon-module.html#mail"><a title="gluon.mail" class="py-name" href="#" onclick="return doclink('link-49', 'mail', 'link-49');">mail</a></tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="gluon.tools.Mail" class="py-name" href="#" onclick="return doclink('link-50', 'Mail', 'link-26');">Mail</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt id="link-51" class="py-name" targets="Variable gluon.service=gluon-module.html#service"><a title="gluon.service" class="py-name" href="#" onclick="return doclink('link-51', 'service', 'link-51');">service</a></tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="gluon.tools.Service" class="py-name" href="#" onclick="return doclink('link-52', 'Service', 'link-27');">Service</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt id="link-53" class="py-name" targets="Variable gluon.plugins=gluon-module.html#plugins"><a title="gluon.plugins" class="py-name" href="#" onclick="return doclink('link-53', 'plugins', 'link-53');">plugins</a></tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="gluon.tools.PluginManager" class="py-name" href="#" onclick="return doclink('link-54', 'PluginManager', 'link-28');">PluginManager</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:56 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

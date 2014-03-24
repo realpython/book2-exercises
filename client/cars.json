@@ -1,0 +1,26 @@
+[
+   {
+      "CAR":[
+         {
+            "MAKE":"Ford",
+            "MODEL":"Focus",
+            "COST":"15000"
+         },
+         {
+            "MAKE":"Honda",
+            "MODEL":"Civic",
+            "COST":"20000"
+         },
+         {
+            "MAKE":"Toyota",
+            "MODEL":"Camry",
+            "COST":"25000"
+         },
+         {
+            "MAKE":"Honda",
+            "MODEL":"Accord",
+            "COST":"22000"
+         }
+      ]
+   }
+]

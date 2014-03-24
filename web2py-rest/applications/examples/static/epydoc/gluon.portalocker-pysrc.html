@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.portalocker</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;portalocker
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.portalocker-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.portalocker-module.html" onclick="show_private();">Module gluon.portalocker</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># portalocker.py</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Cross-platform (posix/nt) API for flock-style file locking.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#                  Requires python 1.5.2 or better.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">Cross-platform (posix/nt) API for flock-style file locking.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">Synopsis:</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">   import portalocker</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">   file = open(\"somefile\", \"r+\")</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">   portalocker.lock(file, portalocker.LOCK_EX)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">   file.seek(12)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">   file.write(\"foo\")</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">   file.close()</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">If you know what you're doing, you may choose to</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">   portalocker.unlock(file)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">before closing the file, but why?</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">Methods:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">   lock( file, flags )</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">   unlock( file )</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">Constants:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">   LOCK_EX</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">   LOCK_SH</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">   LOCK_NB</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">I learned the win32 technique for locking files from sample code</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">provided by John Nielsen &lt;nielsenjf@my-deja.com&gt; in the documentation</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">that accompanies the win32 modules.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">Author: Jonathan Feinberg &lt;jdf@pobox.com&gt;</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">Version: $Id: portalocker.py,v 1.3 2001/05/29 18:47:55 Administrator Exp $</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">platform</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable gluon.cache.logger=gluon.cache-module.html#logger,Variable gluon.compileapp.logger=gluon.compileapp-module.html#logger,Variable gluon.debug.logger=gluon.debug-module.html#logger,Variable gluon.main.logger=gluon.main-module.html#logger,Variable gluon.newcron.logger=gluon.newcron-module.html#logger,Variable gluon.portalocker.logger=gluon.portalocker-module.html#logger,Variable gluon.restricted.logger=gluon.restricted-module.html#logger,Variable gluon.rewrite.logger=gluon.rewrite-module.html#logger,Variable gluon.scheduler.logger=gluon.scheduler-module.html#logger,Variable gluon.shell.logger=gluon.shell-module.html#logger,Variable gluon.tools.logger=gluon.tools-module.html#logger,Variable gluon.utils.logger=gluon.utils-module.html#logger,Variable gluon.widget.logger=gluon.widget-module.html#logger"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-0', 'logger', 'link-0');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">"web2py"</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable gluon.portalocker.os_locking=gluon.portalocker-module.html#os_locking"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-1', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">google</tt><tt class="py-op">.</tt><tt class="py-name">appengine</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt id="link-2" class="py-name"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-2', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'gae'</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">fcntl</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt id="link-3" class="py-name"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-3', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'posix'</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">            <tt class="py-keyword">import</tt> <tt class="py-name">win32con</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">            <tt class="py-keyword">import</tt> <tt class="py-name">win32file</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt class="py-keyword">import</tt> <tt class="py-name">pywintypes</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt id="link-4" class="py-name"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-4', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'windows'</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-5" class="py-name"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-5', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">==</tt> <tt class="py-string">'windows'</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable gluon.portalocker.LOCK_EX=gluon.portalocker-module.html#LOCK_EX"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-6', 'LOCK_EX', 'link-6');">LOCK_EX</a></tt> <tt class="py-op">=</tt> <tt class="py-name">win32con</tt><tt class="py-op">.</tt><tt class="py-name">LOCKFILE_EXCLUSIVE_LOCK</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Variable gluon.portalocker.LOCK_SH=gluon.portalocker-module.html#LOCK_SH"><a title="gluon.portalocker.LOCK_SH" class="py-name" href="#" onclick="return doclink('link-7', 'LOCK_SH', 'link-7');">LOCK_SH</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt>  <tt class="py-comment"># the default</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt id="link-8" class="py-name" targets="Variable gluon.portalocker.LOCK_NB=gluon.portalocker-module.html#LOCK_NB"><a title="gluon.portalocker.LOCK_NB" class="py-name" href="#" onclick="return doclink('link-8', 'LOCK_NB', 'link-8');">LOCK_NB</a></tt> <tt class="py-op">=</tt> <tt class="py-name">win32con</tt><tt class="py-op">.</tt><tt class="py-name">LOCKFILE_FAIL_IMMEDIATELY</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-comment"># is there any reason not to reuse the following structure?</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable gluon.portalocker.__overlapped=gluon.portalocker-module.html#__overlapped"><a title="gluon.portalocker.__overlapped" class="py-name" href="#" onclick="return doclink('link-9', '__overlapped', 'link-9');">__overlapped</a></tt> <tt class="py-op">=</tt> <tt class="py-name">pywintypes</tt><tt class="py-op">.</tt><tt class="py-name">OVERLAPPED</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="lock"></a><div id="lock-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="lock-toggle" onclick="return toggle('lock');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#lock">lock</a><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">,</tt> <tt class="py-param">flags</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="lock-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="lock-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">hfile</tt> <tt class="py-op">=</tt> <tt class="py-name">win32file</tt><tt class="py-op">.</tt><tt class="py-name">_get_osfhandle</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Variable gluon.rocket.Connection.fileno=gluon.rocket.Connection-class.html#fileno"><a title="gluon.rocket.Connection.fileno" class="py-name" href="#" onclick="return doclink('link-10', 'fileno', 'link-10');">fileno</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">win32file</tt><tt class="py-op">.</tt><tt class="py-name">LockFileEx</tt><tt class="py-op">(</tt><tt class="py-name">hfile</tt><tt class="py-op">,</tt> <tt class="py-name">flags</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0x7fff0000</tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name"><a title="gluon.portalocker.__overlapped" class="py-name" href="#" onclick="return doclink('link-11', '__overlapped', 'link-9');">__overlapped</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="unlock"></a><div id="unlock-def"><a name="L78"></a><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="unlock-toggle" onclick="return toggle('unlock');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#unlock">unlock</a><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="unlock-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="unlock-expanded"><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">hfile</tt> <tt class="py-op">=</tt> <tt class="py-name">win32file</tt><tt class="py-op">.</tt><tt class="py-name">_get_osfhandle</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="gluon.rocket.Connection.fileno" class="py-name" href="#" onclick="return doclink('link-12', 'fileno', 'link-10');">fileno</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">win32file</tt><tt class="py-op">.</tt><tt class="py-name">UnlockFileEx</tt><tt class="py-op">(</tt><tt class="py-name">hfile</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0x7fff0000</tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name"><a title="gluon.portalocker.__overlapped" class="py-name" href="#" onclick="return doclink('link-13', '__overlapped', 'link-9');">__overlapped</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-keyword">elif</tt> <tt id="link-14" class="py-name"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-14', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">==</tt> <tt class="py-string">'posix'</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt id="link-15" class="py-name"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-15', 'LOCK_EX', 'link-6');">LOCK_EX</a></tt> <tt class="py-op">=</tt> <tt class="py-name">fcntl</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-16', 'LOCK_EX', 'link-6');">LOCK_EX</a></tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="gluon.portalocker.LOCK_SH" class="py-name" href="#" onclick="return doclink('link-17', 'LOCK_SH', 'link-7');">LOCK_SH</a></tt> <tt class="py-op">=</tt> <tt class="py-name">fcntl</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="gluon.portalocker.LOCK_SH" class="py-name" href="#" onclick="return doclink('link-18', 'LOCK_SH', 'link-7');">LOCK_SH</a></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt id="link-19" class="py-name"><a title="gluon.portalocker.LOCK_NB" class="py-name" href="#" onclick="return doclink('link-19', 'LOCK_NB', 'link-8');">LOCK_NB</a></tt> <tt class="py-op">=</tt> <tt class="py-name">fcntl</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="gluon.portalocker.LOCK_NB" class="py-name" href="#" onclick="return doclink('link-20', 'LOCK_NB', 'link-8');">LOCK_NB</a></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="lock"></a><div id="lock-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="lock-toggle" onclick="return toggle('lock');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#lock">lock</a><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">,</tt> <tt class="py-param">flags</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="lock-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="lock-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">fcntl</tt><tt class="py-op">.</tt><tt class="py-name">flock</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="gluon.rocket.Connection.fileno" class="py-name" href="#" onclick="return doclink('link-21', 'fileno', 'link-10');">fileno</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">flags</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="unlock"></a><div id="unlock-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="unlock-toggle" onclick="return toggle('unlock');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#unlock">unlock</a><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="unlock-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="unlock-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">fcntl</tt><tt class="py-op">.</tt><tt class="py-name">flock</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="gluon.rocket.Connection.fileno" class="py-name" href="#" onclick="return doclink('link-22', 'fileno', 'link-10');">fileno</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">fcntl</tt><tt class="py-op">.</tt><tt class="py-name">LOCK_UN</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">platform</tt><tt class="py-op">.</tt><tt class="py-name">system</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'Windows'</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt id="link-23" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-23', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method gluon.tools.Service.error()=gluon.tools.Service-class.html#error,Method gluon.widget.web2pyDialog.error()=gluon.widget.web2pyDialog-class.html#error"><a title="gluon.tools.Service.error
+gluon.widget.web2pyDialog.error" class="py-name" href="#" onclick="return doclink('link-24', 'error', 'link-24');">error</a></tt><tt class="py-op">(</tt><tt class="py-string">'no file locking, you must install the win32 extensions from: http://sourceforge.net/projects/pywin32/files/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-25" class="py-name"><a title="gluon.portalocker.os_locking" class="py-name" href="#" onclick="return doclink('link-25', 'os_locking', 'link-1');">os_locking</a></tt> <tt class="py-op">!=</tt> <tt class="py-string">'gae'</tt><tt class="py-op">:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt id="link-26" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-26', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Module gluon.debug=gluon.debug-module.html"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-27', 'debug', 'link-27');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'no file locking, this will cause problems'</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt id="link-28" class="py-name"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-28', 'LOCK_EX', 'link-6');">LOCK_EX</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt id="link-29" class="py-name"><a title="gluon.portalocker.LOCK_SH" class="py-name" href="#" onclick="return doclink('link-29', 'LOCK_SH', 'link-7');">LOCK_SH</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt id="link-30" class="py-name"><a title="gluon.portalocker.LOCK_NB" class="py-name" href="#" onclick="return doclink('link-30', 'LOCK_NB', 'link-8');">LOCK_NB</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="lock"></a><div id="lock-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="lock-toggle" onclick="return toggle('lock');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#lock">lock</a><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">,</tt> <tt class="py-param">flags</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="lock-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="lock-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="unlock"></a><div id="unlock-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="unlock-toggle" onclick="return toggle('unlock');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#unlock">unlock</a><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="unlock-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="unlock-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile"></a><div id="LockedFile-def"><a name="L112"></a><tt class="py-lineno">112</tt> <a class="py-toggle" href="#" id="LockedFile-toggle" onclick="return toggle('LockedFile');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html">LockedFile</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LockedFile-expanded"><a name="LockedFile.__init__"></a><div id="LockedFile.__init__-def"><a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="LockedFile.__init__-toggle" onclick="return toggle('LockedFile.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">mode</tt><tt class="py-op">=</tt><tt class="py-string">'rb'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.__init__-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mode</tt> <tt class="py-op">=</tt> <tt class="py-name">mode</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'r'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mode</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">            <tt id="link-31" class="py-name" targets="Function gluon.portalocker.lock()=gluon.portalocker-module.html#lock"><a title="gluon.portalocker.lock" class="py-name" href="#" onclick="return doclink('link-31', 'lock', 'link-31');">lock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name"><a title="gluon.portalocker.LOCK_SH" class="py-name" href="#" onclick="return doclink('link-32', 'LOCK_SH', 'link-7');">LOCK_SH</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-string">'w'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mode</tt> <tt class="py-keyword">or</tt> <tt class="py-string">'a'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mode</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method gluon.dal.Expression.replace()=gluon.dal.Expression-class.html#replace,Method gluon.utf8.Utf8.replace()=gluon.utf8.Utf8-class.html#replace"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-33', 'replace', 'link-33');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'w'</tt><tt class="py-op">,</tt> <tt class="py-string">'a'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt id="link-34" class="py-name"><a title="gluon.portalocker.lock" class="py-name" href="#" onclick="return doclink('link-34', 'lock', 'link-31');">lock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">,</tt> <tt id="link-35" class="py-name"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-35', 'LOCK_EX', 'link-6');">LOCK_EX</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-string">'a'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mode</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt class="py-name">seek</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method gluon.dal.BaseAdapter.truncate()=gluon.dal.BaseAdapter-class.html#truncate,Method gluon.dal.GoogleDatastoreAdapter.truncate()=gluon.dal.GoogleDatastoreAdapter-class.html#truncate,Method gluon.dal.MongoDBAdapter.truncate()=gluon.dal.MongoDBAdapter-class.html#truncate,Method gluon.dal.Table.truncate()=gluon.dal.Table-class.html#truncate,Function gluon.utf8.truncate()=gluon.utf8-module.html#truncate"><a title="gluon.dal.BaseAdapter.truncate
+gluon.dal.GoogleDatastoreAdapter.truncate
+gluon.dal.MongoDBAdapter.truncate
+gluon.dal.Table.truncate
+gluon.utf8.truncate" class="py-name" href="#" onclick="return doclink('link-36', 'truncate', 'link-36');">truncate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">RuntimeError</tt><tt class="py-op">(</tt><tt class="py-string">"invalid LockedFile(...,mode)"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile.read"></a><div id="LockedFile.read-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="LockedFile.read-toggle" onclick="return toggle('LockedFile.read');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#read">read</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">size</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.read-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.read-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method gluon.dal.DatabaseStoredFile.read()=gluon.dal.DatabaseStoredFile-class.html#read,Method gluon.debug.Pipe.read()=gluon.debug.Pipe-class.html#read,Method gluon.languages.lazyT.read()=gluon.languages.lazyT-class.html#read,Method gluon.portalocker.LockedFile.read()=gluon.portalocker.LockedFile-class.html#read,Method gluon.rocket.ChunkedReader.read()=gluon.rocket.ChunkedReader-class.html#read,Variable gluon.rocket.Connection.read=gluon.rocket.Connection-class.html#read,Method gluon.tools.Config.read()=gluon.tools.Config-class.html#read,Method gluon.tools.Crud.read()=gluon.tools.Crud-class.html#read,Method gluon.tools.Wiki.read()=gluon.tools.Wiki-class.html#read"><a title="gluon.dal.DatabaseStoredFile.read
+gluon.debug.Pipe.read
+gluon.languages.lazyT.read
+gluon.portalocker.LockedFile.read
+gluon.rocket.ChunkedReader.read
+gluon.rocket.Connection.read
+gluon.tools.Config.read
+gluon.tools.Crud.read
+gluon.tools.Wiki.read" class="py-name" href="#" onclick="return doclink('link-37', 'read', 'link-37');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt id="link-38" class="py-name" targets="Function gluon.utf8.size()=gluon.utf8-module.html#size"><a title="gluon.utf8.size" class="py-name" href="#" onclick="return doclink('link-38', 'size', 'link-38');">size</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">else</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="gluon.dal.DatabaseStoredFile.read
+gluon.debug.Pipe.read
+gluon.languages.lazyT.read
+gluon.portalocker.LockedFile.read
+gluon.rocket.ChunkedReader.read
+gluon.rocket.Connection.read
+gluon.tools.Config.read
+gluon.tools.Crud.read
+gluon.tools.Wiki.read" class="py-name" href="#" onclick="return doclink('link-39', 'read', 'link-37');">read</a></tt><tt class="py-op">(</tt><tt id="link-40" class="py-name"><a title="gluon.utf8.size" class="py-name" href="#" onclick="return doclink('link-40', 'size', 'link-38');">size</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile.readline"></a><div id="LockedFile.readline-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="LockedFile.readline-toggle" onclick="return toggle('LockedFile.readline');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#readline">readline</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.readline-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.readline-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method gluon.dal.DatabaseStoredFile.readline()=gluon.dal.DatabaseStoredFile-class.html#readline,Method gluon.debug.Pipe.readline()=gluon.debug.Pipe-class.html#readline,Method gluon.portalocker.LockedFile.readline()=gluon.portalocker.LockedFile-class.html#readline,Method gluon.rocket.ChunkedReader.readline()=gluon.rocket.ChunkedReader-class.html#readline,Method gluon.rocket.FileLikeSocket.readline()=gluon.rocket.FileLikeSocket-class.html#readline"><a title="gluon.dal.DatabaseStoredFile.readline
+gluon.debug.Pipe.readline
+gluon.portalocker.LockedFile.readline
+gluon.rocket.ChunkedReader.readline
+gluon.rocket.FileLikeSocket.readline" class="py-name" href="#" onclick="return doclink('link-41', 'readline', 'link-41');">readline</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile.readlines"></a><div id="LockedFile.readlines-def"><a name="L135"></a><tt class="py-lineno">135</tt> <a class="py-toggle" href="#" id="LockedFile.readlines-toggle" onclick="return toggle('LockedFile.readlines');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#readlines">readlines</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.readlines-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.readlines-expanded"><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method gluon.portalocker.LockedFile.readlines()=gluon.portalocker.LockedFile-class.html#readlines,Method gluon.rocket.ChunkedReader.readlines()=gluon.rocket.ChunkedReader-class.html#readlines,Method gluon.rocket.FileLikeSocket.readlines()=gluon.rocket.FileLikeSocket-class.html#readlines"><a title="gluon.portalocker.LockedFile.readlines
+gluon.rocket.ChunkedReader.readlines
+gluon.rocket.FileLikeSocket.readlines" class="py-name" href="#" onclick="return doclink('link-42', 'readlines', 'link-42');">readlines</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile.write"></a><div id="LockedFile.write-def"><a name="L138"></a><tt class="py-lineno">138</tt> <a class="py-toggle" href="#" id="LockedFile.write-toggle" onclick="return toggle('LockedFile.write');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#write">write</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.write-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.write-expanded"><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Method gluon.dal.DatabaseStoredFile.write()=gluon.dal.DatabaseStoredFile-class.html#write,Method gluon.debug.Pipe.write()=gluon.debug.Pipe-class.html#write,Method gluon.globals.Response.write()=gluon.globals.Response-class.html#write,Method gluon.portalocker.LockedFile.write()=gluon.portalocker.LockedFile-class.html#write,Variable gluon.rocket.Connection.write=gluon.rocket.Connection-class.html#write,Method gluon.rocket.WSGIWorker.write()=gluon.rocket.WSGIWorker-class.html#write,Method gluon.template.DummyResponse.write()=gluon.template.DummyResponse-class.html#write,Method gluon.widget.IO.write()=gluon.widget.IO-class.html#write"><a title="gluon.dal.DatabaseStoredFile.write
+gluon.debug.Pipe.write
+gluon.globals.Response.write
+gluon.portalocker.LockedFile.write
+gluon.rocket.Connection.write
+gluon.rocket.WSGIWorker.write
+gluon.template.DummyResponse.write
+gluon.widget.IO.write" class="py-name" href="#" onclick="return doclink('link-43', 'write', 'link-43');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method gluon.debug.Pipe.flush()=gluon.debug.Pipe-class.html#flush"><a title="gluon.debug.Pipe.flush" class="py-name" href="#" onclick="return doclink('link-44', 'flush', 'link-44');">flush</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile.close"></a><div id="LockedFile.close-def"><a name="L142"></a><tt class="py-lineno">142</tt> <a class="py-toggle" href="#" id="LockedFile.close-toggle" onclick="return toggle('LockedFile.close');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#close">close</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.close-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.close-expanded"><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt id="link-45" class="py-name" targets="Function gluon.portalocker.unlock()=gluon.portalocker-module.html#unlock"><a title="gluon.portalocker.unlock" class="py-name" href="#" onclick="return doclink('link-45', 'unlock', 'link-45');">unlock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Method gluon.dal.ConnectionPool.close()=gluon.dal.ConnectionPool-class.html#close,Method gluon.dal.DAL.close()=gluon.dal.DAL-class.html#close,Method gluon.dal.DatabaseStoredFile.close()=gluon.dal.DatabaseStoredFile-class.html#close,Method gluon.dal.TeradataAdapter.close()=gluon.dal.TeradataAdapter-class.html#close,Method gluon.portalocker.LockedFile.close()=gluon.portalocker.LockedFile-class.html#close,Method gluon.rocket.Connection.close()=gluon.rocket.Connection-class.html#close,Method gluon.rocket.FileLikeSocket.close()=gluon.rocket.FileLikeSocket-class.html#close"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-46', 'close', 'link-46');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="LockedFile.__del__"></a><div id="LockedFile.__del__-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="LockedFile.__del__-toggle" onclick="return toggle('LockedFile.__del__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker.LockedFile-class.html#__del__">__del__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LockedFile.__del__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LockedFile.__del__-expanded"><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-47', 'close', 'link-46');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="read_locked"></a><div id="read_locked-def"><a name="L153"></a><tt class="py-lineno">153</tt> <a class="py-toggle" href="#" id="read_locked-toggle" onclick="return toggle('read_locked');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#read_locked">read_locked</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="read_locked-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="read_locked-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-name">fp</tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name" targets="Class gluon.portalocker.LockedFile=gluon.portalocker.LockedFile-class.html"><a title="gluon.portalocker.LockedFile" class="py-name" href="#" onclick="return doclink('link-48', 'LockedFile', 'link-48');">LockedFile</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">fp</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="gluon.dal.DatabaseStoredFile.read
+gluon.debug.Pipe.read
+gluon.languages.lazyT.read
+gluon.portalocker.LockedFile.read
+gluon.rocket.ChunkedReader.read
+gluon.rocket.Connection.read
+gluon.tools.Config.read
+gluon.tools.Crud.read
+gluon.tools.Wiki.read" class="py-name" href="#" onclick="return doclink('link-49', 'read', 'link-37');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">fp</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-50', 'close', 'link-46');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">data</tt> </tt>
+</div><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="write_locked"></a><div id="write_locked-def"><a name="L160"></a><tt class="py-lineno">160</tt> <a class="py-toggle" href="#" id="write_locked-toggle" onclick="return toggle('write_locked');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.portalocker-module.html#write_locked">write_locked</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="write_locked-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="write_locked-expanded"><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-name">fp</tt> <tt class="py-op">=</tt> <tt id="link-51" class="py-name"><a title="gluon.portalocker.LockedFile" class="py-name" href="#" onclick="return doclink('link-51', 'LockedFile', 'link-48');">LockedFile</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'w'</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">fp</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="gluon.dal.DatabaseStoredFile.write
+gluon.debug.Pipe.write
+gluon.globals.Response.write
+gluon.portalocker.LockedFile.write
+gluon.rocket.Connection.write
+gluon.rocket.WSGIWorker.write
+gluon.template.DummyResponse.write
+gluon.widget.IO.write" class="py-name" href="#" onclick="return doclink('link-52', 'write', 'link-43');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-name">fp</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-53', 'close', 'link-46');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt id="link-54" class="py-name" targets="Variable gluon.languages.lazyT.f=gluon.languages.lazyT-class.html#f"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-54', 'f', 'link-54');">f</a></tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="gluon.portalocker.LockedFile" class="py-name" href="#" onclick="return doclink('link-55', 'LockedFile', 'link-48');">LockedFile</a></tt><tt class="py-op">(</tt><tt class="py-string">'test.txt'</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">=</tt><tt class="py-string">'wb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt id="link-56" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-56', 'f', 'link-54');">f</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="gluon.dal.DatabaseStoredFile.write
+gluon.debug.Pipe.write
+gluon.globals.Response.write
+gluon.portalocker.LockedFile.write
+gluon.rocket.Connection.write
+gluon.rocket.WSGIWorker.write
+gluon.template.DummyResponse.write
+gluon.widget.IO.write" class="py-name" href="#" onclick="return doclink('link-57', 'write', 'link-43');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">'test ok'</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt id="link-58" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-58', 'f', 'link-54');">f</a></tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-59', 'close', 'link-46');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt id="link-60" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-60', 'f', 'link-54');">f</a></tt> <tt class="py-op">=</tt> <tt id="link-61" class="py-name"><a title="gluon.portalocker.LockedFile" class="py-name" href="#" onclick="return doclink('link-61', 'LockedFile', 'link-48');">LockedFile</a></tt><tt class="py-op">(</tt><tt class="py-string">'test.txt'</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">=</tt><tt class="py-string">'rb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stdout</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="gluon.dal.DatabaseStoredFile.write
+gluon.debug.Pipe.write
+gluon.globals.Response.write
+gluon.portalocker.LockedFile.write
+gluon.rocket.Connection.write
+gluon.rocket.WSGIWorker.write
+gluon.template.DummyResponse.write
+gluon.widget.IO.write" class="py-name" href="#" onclick="return doclink('link-62', 'write', 'link-43');">write</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-63', 'f', 'link-54');">f</a></tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="gluon.dal.DatabaseStoredFile.read
+gluon.debug.Pipe.read
+gluon.languages.lazyT.read
+gluon.portalocker.LockedFile.read
+gluon.rocket.ChunkedReader.read
+gluon.rocket.Connection.read
+gluon.tools.Config.read
+gluon.tools.Crud.read
+gluon.tools.Wiki.read" class="py-name" href="#" onclick="return doclink('link-64', 'read', 'link-37');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">+</tt><tt class="py-string">'\n'</tt><tt class="py-op">)</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt id="link-65" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-65', 'f', 'link-54');">f</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-66', 'close', 'link-46');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:57 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

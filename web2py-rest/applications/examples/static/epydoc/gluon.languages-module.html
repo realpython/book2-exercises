@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.languages</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;languages
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.languages-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module languages</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.languages-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+
+This file is part of the web2py Web Framework
+Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;
+License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+
+Plural subsystem is created by Vladyslav Kozlovskyy (Ukraine)
+                               &lt;dbdevelop@gmail.com&gt;
+
+</pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages.lazyT-class.html" class="summary-name" onclick="show_private();">lazyT</a><br />
+      never to be called explicitly, returned by translator.__call__() or
+        translator.M()
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages.translator-class.html" class="summary-name">translator</a><br />
+      this class is instantiated by gluon.compileapp.build_environment
+as the T object
+::
+    T.force(None) # turns off translation
+    T.force('fr, it') # forces web2py to translate using fr.py or it.py
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DEFAULT_GET_PLURAL_ID"></a><span class="summary-sig-name">DEFAULT_GET_PLURAL_ID</span>(<span class="summary-sig-arg">n</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#DEFAULT_GET_PLURAL_ID">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DEFAULT_CONSTRUCT_PLURAL_FORM"></a><span class="summary-sig-name">DEFAULT_CONSTRUCT_PLURAL_FORM</span>(<span class="summary-sig-arg">word</span>,
+        <span class="summary-sig-arg">plural_id</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#DEFAULT_CONSTRUCT_PLURAL_FORM">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="safe_eval"></a><span class="summary-sig-name">safe_eval</span>(<span class="summary-sig-arg">text</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#safe_eval">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="markmin"></a><span class="summary-sig-name">markmin</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#markmin">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="upper_fun"></a><span class="summary-sig-name">upper_fun</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#upper_fun">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="title_fun"></a><span class="summary-sig-name">title_fun</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#title_fun">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cap_fun"></a><span class="summary-sig-name">cap_fun</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#cap_fun">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_from_cache"></a><span class="summary-sig-name">get_from_cache</span>(<span class="summary-sig-arg">cache</span>,
+        <span class="summary-sig-arg">val</span>,
+        <span class="summary-sig-arg">fun</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#get_from_cache">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clear_cache"></a><span class="summary-sig-name">clear_cache</span>(<span class="summary-sig-arg">filename</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#clear_cache">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_dict_aux"></a><span class="summary-sig-name">read_dict_aux</span>(<span class="summary-sig-arg">filename</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_dict_aux">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_dict"></a><span class="summary-sig-name">read_dict</span>(<span class="summary-sig-arg">filename</span>)</span><br />
+      return dictionary with translation messages</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_possible_plural_rules"></a><span class="summary-sig-name">read_possible_plural_rules</span>()</span><br />
+      create list of all possible plural rules files result is cached in 
+      PLURAL_RULES dictionary to increase speed</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_possible_plural_rules">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_possible_languages_aux"></a><span class="summary-sig-name">read_possible_languages_aux</span>(<span class="summary-sig-arg">langdir</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_possible_languages_aux">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_possible_languages"></a><span class="summary-sig-name">read_possible_languages</span>(<span class="summary-sig-arg">langpath</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_possible_languages">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_plural_dict_aux"></a><span class="summary-sig-name">read_plural_dict_aux</span>(<span class="summary-sig-arg">filename</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_plural_dict_aux">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="read_plural_dict"></a><span class="summary-sig-name">read_plural_dict</span>(<span class="summary-sig-arg">filename</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#read_plural_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="write_plural_dict"></a><span class="summary-sig-name">write_plural_dict</span>(<span class="summary-sig-arg">filename</span>,
+        <span class="summary-sig-arg">contents</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#write_plural_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="write_dict"></a><span class="summary-sig-name">write_dict</span>(<span class="summary-sig-arg">filename</span>,
+        <span class="summary-sig-arg">contents</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#write_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="pickle_lazyT"></a><span class="summary-sig-name">pickle_lazyT</span>(<span class="summary-sig-arg">c</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#pickle_lazyT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="findT"></a><span class="summary-sig-name">findT</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">language</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">en</code><code class="variable-quote">'</code></span>)</span><br />
+      must be run by the admin app</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#findT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="update_all_languages"></a><span class="summary-sig-name">update_all_languages</span>(<span class="summary-sig-arg">application_path</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.languages-pysrc.html#update_all_languages">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="is_gae"></a><span class="summary-name">is_gae</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_LANGUAGE"></a><span class="summary-name">DEFAULT_LANGUAGE</span> = <code title="'en'"><code class="variable-quote">'</code><code class="variable-string">en</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_LANGUAGE_NAME"></a><span class="summary-name">DEFAULT_LANGUAGE_NAME</span> = <code title="'English'"><code class="variable-quote">'</code><code class="variable-string">English</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_NPLURALS"></a><span class="summary-name">DEFAULT_NPLURALS</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NUMBERS"></a><span class="summary-name">NUMBERS</span> = <code title="(&lt;type 'int'&gt;, &lt;type 'long'&gt;, &lt;type 'float'&gt;)"><code class="variable-group">(</code>&lt;type 'int'&gt;<code class="variable-op">, </code>&lt;type 'long'&gt;<code class="variable-op">, </code>&lt;type 'float'&gt;<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#PY_STRING_LITERAL_RE" class="summary-name" onclick="show_private();">PY_STRING_LITERAL_RE</a> = <code title="'(?&lt;=[^\\w]T\\()(?P&lt;name&gt;[uU]?[rR]?(?:\'\'\'(?:[^\']|\'{1,2}(?!\'))*\'\
+\'\')|(?:\'(?:[^\'\\\\]|\\\\.)*\')|(?:&quot;&quot;&quot;(?:[^&quot;]|&quot;{1,2}(?!&quot;))*&quot;&quot;&quot;)|(?:\
+&quot;(?:[^&quot;\\\\]|\\\\.)*&quot;))'"><code class="variable-quote">'</code><code class="variable-string">(?&lt;=[^\\w]T\\()(?P&lt;name&gt;[uU]?[rR]?(?:\</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#regex_translate" class="summary-name" onclick="show_private();">regex_translate</a> = <code title="re.compile(r'(?s)(?&lt;=[^\w]T\()(?P&lt;name&gt;[uU]?[rR]?(?:\'\'\'(?:[^\']|\'{\
+1,2}(?!\'))*\'\'\')|(?:\'(?:[^\'\\]|\\.)*\')|(?:&quot;&quot;&quot;(?:[^&quot;]|&quot;{1,2}(?!&quot;)\
+)*&quot;&quot;&quot;)|(?:&quot;(?:[^&quot;\\]|\\.)*&quot;))')">re.compile(r'<code class="re-flags">(?s)</code><code class="re-group">(?&lt;=</code><code class="re-group">[</code><code class="re-op">^</code>\w<code class="re-group">]</code>T\(<code class="re-group">)</code><code class="re-group">(?P&lt;</code><code class="re-ref">name</code><code class="re-group">&gt;</code><code class="re-group">[</code>uU<code class="re-group">]</code><code class="re-op">?</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_param"></a><span class="summary-name">regex_param</span> = <code title="re.compile(r'\{(?P&lt;s&gt;.+?)\}')">re.compile(r'\{<code class="re-group">(?P&lt;</code><code class="re-ref">s</code><code class="re-group">&gt;</code>.<code class="re-op">+?</code><code class="re-group">)</code>\}')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#regex_language" class="summary-name" onclick="show_private();">regex_language</a> = <code title="re.compile(r'([a-z]{2,3}(?:-[a-z]{2})?(?:-[a-z]{2})?)(?:[,;]|$)')">re.compile(r'<code class="re-group">(</code><code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2,3}</code><code class="re-group">(?:</code>-<code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(?:</code>-<code class="re-group">[</code>a<code class="re-op">-</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_langfile"></a><span class="summary-name">regex_langfile</span> = <code title="re.compile(r'^[a-z]{2,3}(-[a-z]{2})?\.py$')">re.compile(r'^<code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2,3}</code><code class="re-group">(</code>-<code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">)</code><code class="re-op">?</code>\.py$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_backslash"></a><span class="summary-name">regex_backslash</span> = <code title="re.compile(r'\\([\\\{\}%])')">re.compile(r'\\<code class="re-group">(</code><code class="re-group">[</code>\\\{\}%<code class="re-group">]</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_plural"></a><span class="summary-name">regex_plural</span> = <code title="re.compile(r'%(\{.+?\})')">re.compile(r'%<code class="re-group">(</code>\{.<code class="re-op">+?</code>\}<code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#regex_plural_dict" class="summary-name" onclick="show_private();">regex_plural_dict</a> = <code title="re.compile(r'^\{(?P&lt;w&gt;[^\(\)\[\]][^\(\)\[\]]*?)\((?P&lt;n&gt;[^\(\)\[\]]+)\)\
+\}$')">re.compile(r'^\{<code class="re-group">(?P&lt;</code><code class="re-ref">w</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="re-op">^</code>\(\)\[\]<code class="re-group">]</code><code class="re-group">[</code><code class="re-op">^</code>\(\)\[\<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#regex_plural_tuple" class="summary-name" onclick="show_private();">regex_plural_tuple</a> = <code title="re.compile(r'^\{(?P&lt;w&gt;[^\[\]\(\)]+)(?:\[(?P&lt;i&gt;\d+)\])?\}$')">re.compile(r'^\{<code class="re-group">(?P&lt;</code><code class="re-ref">w</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="re-op">^</code>\[\]\(\)<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(?:</code>\[<code class="re-group">(</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#regex_plural_file" class="summary-name" onclick="show_private();">regex_plural_file</a> = <code title="re.compile(r'^plural-[a-zA-Z]{2}(-[a-zA-Z]{2})?\.py$')">re.compile(r'^plural-<code class="re-group">[</code>a<code class="re-op">-</code>zA<code class="re-op">-</code>Z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">(</code>-<code class="re-group">[</code>a<code class="re-op">-</code>zA<code class="re-op">-</code>Z<code class="re-group">]</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#ttab_in" class="summary-name" onclick="show_private();">ttab_in</a> = <code title="'''\x00\x01\x02\x03\x04\x05\x06\x07\x08\t
+\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\
+\x1d\x1e\x1f !&quot;#$\x1d&amp;\'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTU\
+VWXYZ[\x1c]^_`abcdefghijklmnopqrstuvwxyz\x1e|\x1f~\x7f\x80\x81\x82\x83\
+\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x\
+95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\
+\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\x\
+b8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\
+..."><code class="variable-quote">'</code><code class="variable-string">\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#ttab_out" class="summary-name" onclick="show_private();">ttab_out</a> = <code title="'''\x00\x01\x02\x03\x04\x05\x06\x07\x08\t
+\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\\%{\
+} !&quot;#$%&amp;\'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`ab\
+cdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x\
+89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\
+\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\x\
+ac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\
+\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\x\
+..."><code class="variable-quote">'</code><code class="variable-string">\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="global_language_cache"></a><span class="summary-name">global_language_cache</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.languages-module.html#PLURAL_RULES" class="summary-name" onclick="show_private();">PLURAL_RULES</a> = <code title="read_possible_plural_rules()"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">af</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">af</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">, </code>&lt;function &lt;lambda&gt; at 0x2807b9<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'gluon'"><code class="variable-quote">'</code><code class="variable-string">gluon</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="PY_STRING_LITERAL_RE"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PY_STRING_LITERAL_RE</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'</code><code class="variable-string">(?&lt;=[^\\w]T\\()(?P&lt;name&gt;[uU]?[rR]?(?:\'\'\'(?:[^\']|\'{1,2}(?!\'))*\'</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">\'\')|(?:\'(?:[^\'\\\\]|\\\\.)*\')|(?:&quot;&quot;&quot;(?:[^&quot;]|&quot;{1,2}(?!&quot;))*&quot;&quot;&quot;)|(?:</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">&quot;(?:[^&quot;\\\\]|\\\\.)*&quot;))</code><code class="variable-quote">'</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_translate"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_translate</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-flags">(?s)</code><code class="re-group">(?&lt;=</code><code class="re-group">[</code><code class="re-op">^</code>\w<code class="re-group">]</code>T\(<code class="re-group">)</code><code class="re-group">(?P&lt;</code><code class="re-ref">name</code><code class="re-group">&gt;</code><code class="re-group">[</code>uU<code class="re-group">]</code><code class="re-op">?</code><code class="re-group">[</code>rR<code class="re-group">]</code><code class="re-op">?</code><code class="re-group">(?:</code>\'\'\'<code class="re-group">(?:</code><code class="re-group">[^</code>\'<code class="re-group">]</code><code class="re-op">|</code>\'<code class="re-op">{</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-op">1,2}</code><code class="re-group">(?!</code>\'<code class="re-group">)</code><code class="re-group">)</code><code class="re-op">*</code>\'\'\'<code class="re-group">)</code><code class="re-op">|</code><code class="re-group">(?:</code>\'<code class="re-group">(?:</code><code class="re-group">[</code><code class="re-op">^</code>\'\\<code class="re-group">]</code><code class="re-op">|</code>\\.<code class="re-group">)</code><code class="re-op">*</code>\'<code class="re-group">)</code><code class="re-op">|</code><code class="re-group">(?:</code>&quot;&quot;&quot;<code class="re-group">(?:</code><code class="re-group">[^</code>&quot;<code class="re-group">]</code><code class="re-op">|</code>&quot;<code class="re-op">{1,2}</code><code class="re-group">(?!</code>&quot;<code class="re-group">)</code><code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">)</code><code class="re-op">*</code>&quot;&quot;&quot;<code class="re-group">)</code><code class="re-op">|</code><code class="re-group">(?:</code>&quot;<code class="re-group">(?:</code><code class="re-group">[</code><code class="re-op">^</code>&quot;\\<code class="re-group">]</code><code class="re-op">|</code>\\.<code class="re-group">)</code><code class="re-op">*</code>&quot;<code class="re-group">)</code><code class="re-group">)</code>')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_language"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_language</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-group">(</code><code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2,3}</code><code class="re-group">(?:</code>-<code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(?:</code>-<code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">)</code><code class="re-group">(?:</code><code class="re-group">[</code>,;<code class="re-group">]</code><code class="re-op">|</code>$<code class="re-group">)</code>')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_plural_dict"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_plural_dict</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^\{<code class="re-group">(?P&lt;</code><code class="re-ref">w</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="re-op">^</code>\(\)\[\]<code class="re-group">]</code><code class="re-group">[</code><code class="re-op">^</code>\(\)\[\]<code class="re-group">]</code><code class="re-op">*?</code><code class="re-group">)</code>\(<code class="re-group">(?P&lt;</code><code class="re-ref">n</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="re-op">^</code>\(\)\[\]<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>\)<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+\}$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_plural_tuple"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_plural_tuple</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^\{<code class="re-group">(?P&lt;</code><code class="re-ref">w</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="re-op">^</code>\[\]\(\)<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(?:</code>\[<code class="re-group">(?P&lt;</code><code class="re-ref">i</code><code class="re-group">&gt;</code>\d<code class="re-op">+</code><code class="re-group">)</code>\]<code class="re-group">)</code><code class="re-op">?</code>\}$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_plural_file"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_plural_file</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^plural-<code class="re-group">[</code>a<code class="re-op">-</code>zA<code class="re-op">-</code>Z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">(</code>-<code class="re-group">[</code>a<code class="re-op">-</code>zA<code class="re-op">-</code>Z<code class="re-group">]</code><code class="re-op">{2}</code><code class="re-group">)</code><code class="re-op">?</code>\.py$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ttab_in"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ttab_in</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">\x00\x01\x02\x03\x04\x05\x06\x07\x08\t</code>
+<code class="variable-string">\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">\x1d\x1e\x1f !&quot;#$\x1d&amp;\'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTU</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">VWXYZ[\x1c]^_`abcdefghijklmnopqrstuvwxyz\x1e|\x1f~\x7f\x80\x81\x82\x83</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\x</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">b8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ttab_out"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ttab_out</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">\x00\x01\x02\x03\x04\x05\x06\x07\x08\t</code>
+<code class="variable-string">\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\\%{</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">} !&quot;#$%&amp;\'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`ab</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">cdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\x</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">ac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\x</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PLURAL_RULES"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PLURAL_RULES</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+read_possible_plural_rules()
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:38 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

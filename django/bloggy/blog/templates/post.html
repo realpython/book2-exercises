@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ single_post.title }}</h2>
+<ul>
+<p><em>{{ single_post.created_at }}</em></p>
+<p>{{ single_post.content }}</p>
+<p>Tag: {{ single_post.tag }}
+<br/>
+<p>
+{% if single_post.image %}
+  <img src="/media/{{ single_post.image }}">
+{% endif %}
+</ul>
+<p>Had enough? Return <a href="/blog">home</a>.<br/>
+{% endblock %}
