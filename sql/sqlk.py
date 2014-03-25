@@ -1,4 +1,4 @@
-# ex3.6c.py - JOINing data from multiple tables
+# JOINing data from multiple tables
 
 
 import sqlite3

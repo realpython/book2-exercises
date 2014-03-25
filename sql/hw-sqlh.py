@@ -1,4 +1,4 @@
-# hw3.7b.py - JOIN + SQLite Functions
+# JOIN + SQLite Functions
 
 """Output the car's make and model on one line, the quantity on another line, 
 and then the order count on the next line. The latter is a bit difficult, 

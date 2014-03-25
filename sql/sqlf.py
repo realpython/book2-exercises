@@ -1,4 +1,4 @@
-# ex3.4a.py - SELECT statement
+# SELECT statement
 
 
 import sqlite3

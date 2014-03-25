@@ -1,4 +1,4 @@
-# ex3.2a.py - Create a SQLite3 database and table
+# Create a SQLite3 database and table
 
 
 # import the sqlite3 library

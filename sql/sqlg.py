@@ -1,4 +1,4 @@
-# ex3.4b.py - SELECT statement, remove unicode characters
+# SELECT statement, remove unicode characters
 
 
 import sqlite3

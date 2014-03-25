@@ -1,4 +1,4 @@
-# ex3.3b.py - executemany() method
+# executemany() method
 
 
 import sqlite3

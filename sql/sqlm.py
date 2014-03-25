@@ -1,4 +1,4 @@
-# ex3.7a.py - SQLite Functions
+# SQLite Functions
 
 import sqlite3
 

@@ -1,4 +1,4 @@
-# ex3.3a.py - INSERT Command
+# INSERT Command
 
 
 # import the sqlite3 library

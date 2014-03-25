@@ -1,4 +1,4 @@
-#ex3.6d.py - JOINing data from multiple tables - cleanup
+# JOINing data from multiple tables - cleanup
 
 
 import sqlite3

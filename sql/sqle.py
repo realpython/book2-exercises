@@ -1,4 +1,4 @@
-# ex3.3d.py - INSERT Command with Error Handler
+# INSERT Command with Error Handler
 
 
 # import the sqlite3 library

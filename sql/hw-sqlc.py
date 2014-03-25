@@ -1,4 +1,4 @@
-# hw3.5b.py - UPDATE statement
+# UPDATE statement
 
 """Update the quantity on two of the records, 
 and then output all of the records from the table."""

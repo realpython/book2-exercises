@@ -1,4 +1,4 @@
-# ex3.6b.py - Create a table and populate it with data
+# Create a table and populate it with data
 
 
 import sqlite3

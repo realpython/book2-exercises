@@ -1,4 +1,4 @@
-# hw3.5a.py - INSERT Command
+# INSERT Command
 
 """Using the "inventory" table from the homework in Lesson 2.2, 
 add (`INSERT`) 5 records (rows of data) to the table. 

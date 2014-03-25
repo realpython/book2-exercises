@@ -1,4 +1,4 @@
-# hw3.6a.py - Create a table and populate it with data
+# Create a table and populate it with data
 
 """Add another table to accompany your "inventory" table called "orders". 
 This table should have the following fields: "make", "model", and "order_date". 

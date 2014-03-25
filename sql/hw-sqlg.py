@@ -1,4 +1,4 @@
-# hw3.7a.py - SQLite Functions
+# SQLite Functions
 
 """Using the COUNT() function, calculate the total number of orders for each make and model."""
 

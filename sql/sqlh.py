@@ -1,4 +1,4 @@
-# ex3.5a.py
+# UPDATE and DELETE statements
 
 import sqlite3
 

@@ -1,4 +1,4 @@
-# ex3.c.py - WHERE clause
+# WHERE clause
 
 """Finally output only records that are for Ford vehicles."""
 

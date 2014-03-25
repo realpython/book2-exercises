@@ -1,4 +1,4 @@
-# ex3.3c.py - import from CSV
+# import from CSV
 
 # import the csv library
 import csv

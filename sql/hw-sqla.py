@@ -1,4 +1,4 @@
-# hw3.2a.py - Create a SQLite3 database and table
+# Create a SQLite3 database and table
 
 """Create a new database called "cars", and add a table called "inventory" 
 that includes the following fields: "Make", "Model", and "Quantity". 
