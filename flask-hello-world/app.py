@@ -1,5 +1,3 @@
-# ex2.3a.py - Flask Hello World
-
 # import the Flask class from the flask module
 from flask import Flask
 
