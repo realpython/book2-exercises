@@ -1,0 +1,24 @@
+body { 
+  padding: 60px 0px;
+  font-family: sans-serif; 
+  background: #eee; 
+}
+
+.flash { 
+  background: #CEE5F5; 
+  padding: 0.5em; 
+}
+
+.error { 
+  background: #F0D6D6; 
+  padding: 0.5em; 
+}
+
+.table {
+  background-color: white;
+}
+
+thead {
+  background-color: black;
+  color: white
+}

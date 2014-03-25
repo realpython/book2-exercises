@@ -1,0 +1,77 @@
+{% extends "template.html" %}
+{% block content %}    
+<h1>Welcome to FlaskTaskr.</h1>
+<div class="add-task">
+  <div class="lead">Add a new task:</div>
+    <form action="{{ url_for('tasks.new_task') }}" method="post" role="form">
+      <p>
+        {{ form.name.label }}: {{ form.name }}&nbsp;{{ form.due_date.label }}: {{ form.due_date }}&nbsp;{{ form.posted_date.label }}: {{ form.posted_date }}&nbsp;{{ form.priority.label }}: {{ form.priority }}
+      <button class="btn btn-md btn-primary" type="submit">Submit</button></p>
+    </form>
+</div>
+<div class="entries">
+  <br>
+  <br>
+  <div class="lead">Open tasks</div>
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Task Name</th>
+        <th>Due Date</th>
+        <th>Posted Date</th>
+        <th>Priority</th>
+        <th>Posted By</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for o in open_tasks %}
+      <tr> 
+        <td>{{ o.name }}</td>
+        <td>{{ o.due_date }}</td>
+        <td>{{ o.posted_date }}</td>
+        <td>{{ o.priority }}</td>
+        <td>{{ o.poster.name }}</td>
+        <td>
+          <a href="{{ url_for('tasks.delete_entry', task_id = o.task_id) }}">Delete</a>  - 
+          <a href="{{ url_for('tasks.complete', task_id = o.task_id) }}">Mark as Complete</a>
+        </td>
+      </tr> 
+    {% endfor %} 
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
+<div class="entries">
+  <div class="lead">Closed tasks</div>
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Task Name</th>
+        <th>Due Date</th>
+        <th>Posted Date</th>
+        <th>Priority</th>
+        <th>Posted By</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for c in closed_tasks %}
+      <tr> 
+        <td>{{ c.name }}</td>
+        <td>{{ c.due_date }}</td>
+        <td>{{ c.posted_date }}</td>
+        <td>{{ c.priority }}</td>
+        <td>{{ c.poster.name }}</td>
+        <td>
+           <a href="{{ url_for('tasks.delete_entry', task_id = c.task_id) }}">Delete</a>
+        </td>
+      </tr> 
+    {% endfor %} 
+    <tbody>
+  </table>
+</div>
+{% endblock %}
