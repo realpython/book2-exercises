@@ -1,4 +1,4 @@
-# ex3.8a.py Download stock quotes in CSV
+# Download stock quotes in CSV
 
 
 import requests
