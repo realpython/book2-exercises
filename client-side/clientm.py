@@ -1,4 +1,4 @@
-# ex3.6c.py Twitter Web Services
+# Twitter Web Services
 
 
 import tweepy

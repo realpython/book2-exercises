@@ -1,4 +1,4 @@
-# ex3.5a.py - JSON Parsing 1
+# JSON Parsing 1
 
 
 import json

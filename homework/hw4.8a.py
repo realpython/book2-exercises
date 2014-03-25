@@ -1,4 +1,4 @@
-# hw3.8a.py - Beautiful Soup find all links
+# Beautiful Soup find all links
 
 
 from bs4 import BeautifulSoup

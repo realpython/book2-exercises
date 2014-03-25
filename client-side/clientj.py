@@ -1,4 +1,4 @@
-# ex3.5c.py - POST JSON Payload
+# POST JSON Payload
 
 
 import json 

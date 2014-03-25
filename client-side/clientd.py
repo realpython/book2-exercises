@@ -1,4 +1,4 @@
-# ex3.2c.py - Submitting to a web form
+# Submitting to a web form
 
 
 import requests
@@ -10,4 +10,4 @@ data = {'fname': 'Michael', 'lname': 'Herman'}
 r = requests.post(url, data=data)
 
 # display the response to screen
-print r
+print r.content

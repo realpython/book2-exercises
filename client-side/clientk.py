@@ -1,4 +1,4 @@
-# ex3.6a.py - Basic web services example
+# Basic web services example
 
 
 # import the client libraries

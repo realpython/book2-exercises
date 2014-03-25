@@ -1,4 +1,4 @@
-# ex3.7b.py - GET data from Rotten Tomatoes, parse, and write to database
+# GET data from Rotten Tomatoes, parse, and write to database
 
 
 import json

@@ -1,4 +1,4 @@
-# ex3.2a.py - Retrieving a web page
+# Retrieving a web page
 
 
 import requests

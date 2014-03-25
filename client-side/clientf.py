@@ -1,4 +1,4 @@
-# ex3.4b.py - XML Parsing 2
+# XML Parsing 2
 
 
 from xml.etree import ElementTree as et

@@ -1,4 +1,4 @@
-# ex3.2b.py - Downloading a web page
+# Downloading a web page
 
 
 import requests
