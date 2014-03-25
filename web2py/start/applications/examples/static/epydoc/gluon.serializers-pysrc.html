@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.serializers</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;serializers
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.serializers-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.serializers-module.html" onclick="show_private();">Module gluon.serializers</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">decimal</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package gluon=gluon-module.html"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-0', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module gluon.storage=gluon.storage-module.html"><a title="gluon.storage" class="py-name" href="#" onclick="return doclink('link-1', 'storage', 'link-1');">storage</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class gluon.storage.Storage=gluon.storage.Storage-class.html"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-2', 'Storage', 'link-2');">Storage</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-3', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module gluon.html=gluon.html-module.html"><a title="gluon.html" class="py-name" href="#" onclick="return doclink('link-4', 'html', 'link-4');">html</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Variable gluon.TAG=gluon-module.html#TAG,Variable gluon.html.TAG=gluon.html-module.html#TAG,Variable gluon.tools.TAG=gluon.tools-module.html#TAG"><a title="gluon.TAG
+gluon.html.TAG
+gluon.tools.TAG" class="py-name" href="#" onclick="return doclink('link-5', 'TAG', 'link-5');">TAG</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class gluon.html.XmlComponent=gluon.html.XmlComponent-class.html"><a title="gluon.html.XmlComponent" class="py-name" href="#" onclick="return doclink('link-6', 'XmlComponent', 'link-6');">XmlComponent</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Function gluon.html.xmlescape()=gluon.html-module.html#xmlescape"><a title="gluon.html.xmlescape" class="py-name" href="#" onclick="return doclink('link-7', 'xmlescape', 'link-7');">xmlescape</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-8', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Module gluon.languages=gluon.languages-module.html"><a title="gluon.languages" class="py-name" href="#" onclick="return doclink('link-9', 'languages', 'link-9');">languages</a></tt> <tt class="py-keyword">import</tt> <tt id="link-10" class="py-name" targets="Class gluon.languages.lazyT=gluon.languages.lazyT-class.html"><a title="gluon.languages.lazyT" class="py-name" href="#" onclick="return doclink('link-10', 'lazyT', 'link-10');">lazyT</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-11" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-11', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">rss2</tt> <tt class="py-keyword">as</tt> <tt class="py-name">rss2</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Variable gluon.dal.simplejson=gluon.dal-module.html#simplejson"><a title="gluon.dal.simplejson" class="py-name" href="#" onclick="return doclink('link-12', 'simplejson', 'link-12');">simplejson</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">json_parser</tt>                <tt class="py-comment"># try external module</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt id="link-13" class="py-name" targets="Method gluon.globals.Response.json()=gluon.globals.Response-class.html#json,Function gluon.serializers.json()=gluon.serializers-module.html#json,Method gluon.tools.Service.json()=gluon.tools.Service-class.html#json"><a title="gluon.globals.Response.json
+gluon.serializers.json
+gluon.tools.Service.json" class="py-name" href="#" onclick="return doclink('link-13', 'json', 'link-13');">json</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">json_parser</tt>                  <tt class="py-comment"># try stdlib (Python &gt;= 2.6)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-14', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="gluon.dal.simplejson" class="py-name" href="#" onclick="return doclink('link-15', 'simplejson', 'link-12');">simplejson</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">json_parser</tt>    <tt class="py-comment"># fallback to pure-Python module</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable gluon.serializers.have_yaml=gluon.serializers-module.html#have_yaml"><a title="gluon.serializers.have_yaml" class="py-name" href="#" onclick="return doclink('link-16', 'have_yaml', 'link-16');">have_yaml</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-17" class="py-name" targets="Function gluon.serializers.yaml()=gluon.serializers-module.html#yaml"><a title="gluon.serializers.yaml" class="py-name" href="#" onclick="return doclink('link-17', 'yaml', 'link-17');">yaml</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">yamlib</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt id="link-18" class="py-name"><a title="gluon.serializers.have_yaml" class="py-name" href="#" onclick="return doclink('link-18', 'have_yaml', 'link-16');">have_yaml</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="cast_keys"></a><div id="cast_keys-def"><a name="L27"></a><tt class="py-lineno"> 27</tt> <a class="py-toggle" href="#" id="cast_keys-toggle" onclick="return toggle('cast_keys');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#cast_keys">cast_keys</a><tt class="py-op">(</tt><tt class="py-param">o</tt><tt class="py-op">,</tt> <tt class="py-param">cast</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">=</tt><tt class="py-string">"utf-8"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cast_keys-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="cast_keys-expanded"><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-docstring">""" Builds a new object with &lt;cast&gt; type keys</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">    Arguments:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">        o is the object input</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">        cast (defaults to str) is an object type or function</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">              which supports conversion such as:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">              &gt;&gt;&gt; converted = cast(o)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        encoding (defaults to utf-8) is the encoding for unicode</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">                 keys. This is not used for custom cast functions</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">    Use this funcion if you are in Python &lt; 2.6.5</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    This avoids syntax errors when unpacking dictionary arguments.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">dict</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-19', 'Storage', 'link-2');">Storage</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-name">dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            <tt class="py-name">newobj</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-name">newobj</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-20', 'Storage', 'link-2');">Storage</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method gluon.dal.Row.items()=gluon.dal.Row-class.html#items,Method gluon.dal.Table.items()=gluon.dal.Table-class.html#items"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-21', 'items', 'link-21');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">cast</tt> <tt class="py-op">==</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">unicode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">k</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method gluon.languages.lazyT.encode()=gluon.languages.lazyT-class.html#encode,Method gluon.utf8.Utf8.encode()=gluon.utf8.Utf8-class.html#encode"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-22', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-name">encoding</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">cast</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-name">newobj</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name" targets="Function gluon.serializers.cast_keys()=gluon.serializers-module.html#cast_keys"><a title="gluon.serializers.cast_keys" class="py-name" href="#" onclick="return doclink('link-23', 'cast_keys', 'link-23');">cast_keys</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">cast</tt><tt class="py-op">=</tt><tt class="py-name">cast</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">=</tt><tt class="py-name">encoding</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">tuple</tt><tt class="py-op">,</tt> <tt class="py-name">set</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">newobj</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">item</tt> <tt class="py-keyword">in</tt> <tt class="py-name">o</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">            <tt class="py-name">newobj</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method gluon.html.DIV.append()=gluon.html.DIV-class.html#append,Method gluon.template.BlockNode.append()=gluon.template.BlockNode-class.html#append,Method gluon.template.Content.append()=gluon.template.Content-class.html#append"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-24', 'append', 'link-24');">append</a></tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="gluon.serializers.cast_keys" class="py-name" href="#" onclick="return doclink('link-25', 'cast_keys', 'link-23');">cast_keys</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">,</tt> <tt class="py-name">cast</tt><tt class="py-op">=</tt><tt class="py-name">cast</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">=</tt><tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-name">tuple</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt class="py-name">newobj</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">newobj</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-name">set</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">            <tt class="py-name">newobj</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-name">newobj</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-comment"># no string cast (unknown object)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">newobj</tt> <tt class="py-op">=</tt> <tt class="py-name">o</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">newobj</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="loads_json"></a><div id="loads_json-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="loads_json-toggle" onclick="return toggle('loads_json');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#loads_json">loads_json</a><tt class="py-op">(</tt><tt class="py-param">o</tt><tt class="py-op">,</tt> <tt class="py-param">unicode_keys</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="loads_json-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="loads_json-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-comment"># deserialize a json string</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">json_parser</tt><tt class="py-op">.</tt><tt class="py-name">loads</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">unicode_keys</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-comment"># filter non-str keys in dictionary objects</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="gluon.serializers.cast_keys" class="py-name" href="#" onclick="return doclink('link-26', 'cast_keys', 'link-23');">cast_keys</a></tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                           <tt class="py-name">encoding</tt><tt class="py-op">=</tt><tt class="py-name">kwargs</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-27', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"encoding"</tt><tt class="py-op">,</tt> <tt class="py-string">"utf-8"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="custom_json"></a><div id="custom_json-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="custom_json-toggle" onclick="return toggle('custom_json');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#custom_json">custom_json</a><tt class="py-op">(</tt><tt class="py-param">o</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="custom_json-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="custom_json-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-string">'custom_json'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Function gluon.serializers.custom_json()=gluon.serializers-module.html#custom_json"><a title="gluon.serializers.custom_json" class="py-name" href="#" onclick="return doclink('link-28', 'custom_json', 'link-28');">custom_json</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="gluon.serializers.custom_json" class="py-name" href="#" onclick="return doclink('link-29', 'custom_json', 'link-28');">custom_json</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">date</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                      <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                      <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">o</tt><tt class="py-op">.</tt><tt class="py-name">isoformat</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">19</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method gluon.dal.Expression.replace()=gluon.dal.Expression-class.html#replace,Method gluon.utf8.Utf8.replace()=gluon.utf8.Utf8-class.html#replace"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-30', 'replace', 'link-30');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'T'</tt><tt class="py-op">,</tt> <tt class="py-string">' '</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt id="link-31" class="py-name" targets="Class int=int-class.html"><a title="int" class="py-name" href="#" onclick="return doclink('link-31', 'int', 'link-31');">int</a></tt><tt class="py-op">,</tt> <tt class="py-name">long</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-32" class="py-name"><a title="int" class="py-name" href="#" onclick="return doclink('link-32', 'int', 'link-31');">int</a></tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-name">decimal</tt><tt class="py-op">.</tt><tt class="py-name">Decimal</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt id="link-33" class="py-name"><a title="gluon.languages.lazyT" class="py-name" href="#" onclick="return doclink('link-33', 'lazyT', 'link-10');">lazyT</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt id="link-34" class="py-name"><a title="gluon.html.XmlComponent" class="py-name" href="#" onclick="return doclink('link-34', 'XmlComponent', 'link-6');">XmlComponent</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-string">'as_list'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Method gluon.dal.Rows.as_list()=gluon.dal.Rows-class.html#as_list"><a title="gluon.dal.Rows.as_list" class="py-name" href="#" onclick="return doclink('link-35', 'as_list', 'link-35');">as_list</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="gluon.dal.Rows.as_list" class="py-name" href="#" onclick="return doclink('link-36', 'as_list', 'link-35');">as_list</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">,</tt> <tt class="py-string">'as_dict'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method gluon.dal.DAL.as_dict()=gluon.dal.DAL-class.html#as_dict,Method gluon.dal.Field.as_dict()=gluon.dal.Field-class.html#as_dict,Method gluon.dal.Query.as_dict()=gluon.dal.Query-class.html#as_dict,Method gluon.dal.Row.as_dict()=gluon.dal.Row-class.html#as_dict,Method gluon.dal.Rows.as_dict()=gluon.dal.Rows-class.html#as_dict,Method gluon.dal.Set.as_dict()=gluon.dal.Set-class.html#as_dict,Method gluon.dal.Table.as_dict()=gluon.dal.Table-class.html#as_dict,Method gluon.html.FORM.as_dict()=gluon.html.FORM-class.html#as_dict"><a title="gluon.dal.DAL.as_dict
+gluon.dal.Field.as_dict
+gluon.dal.Query.as_dict
+gluon.dal.Row.as_dict
+gluon.dal.Rows.as_dict
+gluon.dal.Set.as_dict
+gluon.dal.Table.as_dict
+gluon.html.FORM.as_dict" class="py-name" href="#" onclick="return doclink('link-37', 'as_dict', 'link-37');">as_dict</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="gluon.dal.DAL.as_dict
+gluon.dal.Field.as_dict
+gluon.dal.Query.as_dict
+gluon.dal.Row.as_dict
+gluon.dal.Rows.as_dict
+gluon.dal.Set.as_dict
+gluon.dal.Table.as_dict
+gluon.html.FORM.as_dict" class="py-name" href="#" onclick="return doclink('link-38', 'as_dict', 'link-37');">as_dict</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">o</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">" is not JSON serializable"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="xml_rec"></a><div id="xml_rec-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="xml_rec-toggle" onclick="return toggle('xml_rec');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#xml_rec">xml_rec</a><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">,</tt> <tt class="py-param">quote</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="xml_rec-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="xml_rec-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-string">'custom_xml'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">.</tt><tt class="py-name">custom_xml</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">value</tt><tt class="py-op">.</tt><tt class="py-name">custom_xml</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">dict</tt><tt class="py-op">,</tt> <tt id="link-39" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-39', 'Storage', 'link-2');">Storage</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-40" class="py-name"><a title="gluon.TAG
+gluon.html.TAG
+gluon.tools.TAG" class="py-name" href="#" onclick="return doclink('link-40', 'TAG', 'link-5');">TAG</a></tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-op">[</tt><tt id="link-41" class="py-name"><a title="gluon.TAG
+gluon.html.TAG
+gluon.tools.TAG" class="py-name" href="#" onclick="return doclink('link-41', 'TAG', 'link-5');">TAG</a></tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt id="link-42" class="py-name" targets="Function gluon.serializers.xml_rec()=gluon.serializers-module.html#xml_rec"><a title="gluon.serializers.xml_rec" class="py-name" href="#" onclick="return doclink('link-42', 'xml_rec', 'link-42');">xml_rec</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">quote</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                          <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">value</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-43', 'items', 'link-21');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-44" class="py-name"><a title="gluon.TAG
+gluon.html.TAG
+gluon.tools.TAG" class="py-name" href="#" onclick="return doclink('link-44', 'TAG', 'link-5');">TAG</a></tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-op">[</tt><tt id="link-45" class="py-name"><a title="gluon.TAG
+gluon.html.TAG
+gluon.tools.TAG" class="py-name" href="#" onclick="return doclink('link-45', 'TAG', 'link-5');">TAG</a></tt><tt class="py-op">.</tt><tt class="py-name">item</tt><tt class="py-op">(</tt><tt id="link-46" class="py-name"><a title="gluon.serializers.xml_rec" class="py-name" href="#" onclick="return doclink('link-46', 'xml_rec', 'link-42');">xml_rec</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">quote</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">item</tt> <tt class="py-keyword">in</tt> <tt class="py-name">value</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-string">'as_list'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="gluon.dal.Rows.as_list" class="py-name" href="#" onclick="return doclink('link-47', 'as_list', 'link-35');">as_list</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="gluon.serializers.xml_rec" class="py-name" href="#" onclick="return doclink('link-48', 'xml_rec', 'link-42');">xml_rec</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="gluon.dal.Rows.as_list" class="py-name" href="#" onclick="return doclink('link-49', 'as_list', 'link-35');">as_list</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">quote</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-string">'as_dict'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="gluon.dal.DAL.as_dict
+gluon.dal.Field.as_dict
+gluon.dal.Query.as_dict
+gluon.dal.Row.as_dict
+gluon.dal.Rows.as_dict
+gluon.dal.Set.as_dict
+gluon.dal.Table.as_dict
+gluon.html.FORM.as_dict" class="py-name" href="#" onclick="return doclink('link-50', 'as_dict', 'link-37');">as_dict</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="gluon.serializers.xml_rec" class="py-name" href="#" onclick="return doclink('link-51', 'xml_rec', 'link-42');">xml_rec</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="gluon.dal.DAL.as_dict
+gluon.dal.Field.as_dict
+gluon.dal.Query.as_dict
+gluon.dal.Row.as_dict
+gluon.dal.Rows.as_dict
+gluon.dal.Set.as_dict
+gluon.dal.Table.as_dict
+gluon.html.FORM.as_dict" class="py-name" href="#" onclick="return doclink('link-52', 'as_dict', 'link-37');">as_dict</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">quote</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-53" class="py-name"><a title="gluon.html.xmlescape" class="py-name" href="#" onclick="return doclink('link-53', 'xmlescape', 'link-7');">xmlescape</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">quote</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="xml"></a><div id="xml-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="xml-toggle" onclick="return toggle('xml');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#xml">xml</a><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">=</tt><tt class="py-string">'UTF-8'</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">=</tt><tt class="py-string">'document'</tt><tt class="py-op">,</tt> <tt class="py-param">quote</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="xml-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="xml-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-string">'&lt;?xml version="1.0" encoding="%s"?&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-name">encoding</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-54" class="py-name"><a title="gluon.serializers.xml_rec" class="py-name" href="#" onclick="return doclink('link-54', 'xml_rec', 'link-42');">xml_rec</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">quote</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="json"></a><div id="json-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="json-toggle" onclick="return toggle('json');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#json">json</a><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt id="link-55" class="py-name"><a title="gluon.serializers.custom_json" class="py-name" href="#" onclick="return doclink('link-55', 'custom_json', 'link-28');">custom_json</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="json-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="json-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-comment"># replace JavaScript incompatible spacing</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-comment"># http://timelessrepo.com/json-isnt-a-javascript-subset</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">json_parser</tt><tt class="py-op">.</tt><tt class="py-name">dumps</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">default</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-56', 'replace', 'link-30');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">ur'\u2028'</tt><tt class="py-op">,</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                                 <tt class="py-string">'\\u2028'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-57', 'replace', 'link-30');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">ur'\2029'</tt><tt class="py-op">,</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                                                    <tt class="py-string">'\\u2029'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="csv"></a><div id="csv-def"><a name="L128"></a><tt class="py-lineno">128</tt> <a class="py-toggle" href="#" id="csv-toggle" onclick="return toggle('csv');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#csv">csv</a><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="csv-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="csv-expanded"><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">''</tt> </tt>
+</div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="ics"></a><div id="ics-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="ics-toggle" onclick="return toggle('ics');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#ics">ics</a><tt class="py-op">(</tt><tt class="py-param">events</tt><tt class="py-op">,</tt> <tt class="py-param">title</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">link</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">timeshift</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">calname</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-op">**</tt><tt class="py-param">ignored</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ics-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ics-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt id="link-58" class="py-name" targets="Method gluon.utf8.Utf8.title()=gluon.utf8.Utf8-class.html#title"><a title="gluon.utf8.Utf8.title" class="py-name" href="#" onclick="return doclink('link-58', 'title', 'link-58');">title</a></tt> <tt class="py-op">=</tt> <tt id="link-59" class="py-name"><a title="gluon.utf8.Utf8.title" class="py-name" href="#" onclick="return doclink('link-59', 'title', 'link-58');">title</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">'(unknown)'</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">link</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">link</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">link</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">item</tt><tt class="py-op">,</tt> <tt class="py-name">prefix</tt><tt class="py-op">=</tt><tt class="py-name">link</tt><tt class="py-op">:</tt> <tt class="py-name">prefix</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-60', 'replace', 'link-30');">replace</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-string">'[id]'</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt id="link-61" class="py-name" targets="Variable gluon.languages.lazyT.s=gluon.languages.lazyT-class.html#s"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-61', 's', 'link-61');">s</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'BEGIN:VCALENDAR'</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt id="link-62" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-62', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nVERSION:2.0'</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">calname</tt> <tt class="py-keyword">is</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt id="link-63" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-63', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nX-WR-CALNAME:%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">calname</tt> <tt class="py-keyword">or</tt> <tt id="link-64" class="py-name"><a title="gluon.utf8.Utf8.title" class="py-name" href="#" onclick="return doclink('link-64', 'title', 'link-58');">title</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt id="link-65" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-65', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nSUMMARY:%s'</tt> <tt class="py-op">%</tt> <tt id="link-66" class="py-name"><a title="gluon.utf8.Utf8.title" class="py-name" href="#" onclick="return doclink('link-66', 'title', 'link-58');">title</a></tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt id="link-67" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-67', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nPRODID:Generated by web2py'</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt id="link-68" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-68', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nCALSCALE:GREGORIAN'</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt id="link-69" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-69', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nMETHOD:PUBLISH'</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">item</tt> <tt class="py-keyword">in</tt> <tt class="py-name">events</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt id="link-70" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-70', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nBEGIN:VEVENT'</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt id="link-71" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-71', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nUID:%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">item</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">link</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">            <tt id="link-72" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-72', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nURL:%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">link</tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">shift</tt> <tt class="py-op">=</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">timedelta</tt><tt class="py-op">(</tt><tt id="link-73" class="py-name" targets="Method gluon.dal.Expression.seconds()=gluon.dal.Expression-class.html#seconds"><a title="gluon.dal.Expression.seconds" class="py-name" href="#" onclick="return doclink('link-73', 'seconds', 'link-73');">seconds</a></tt><tt class="py-op">=</tt><tt class="py-number">3600</tt> <tt class="py-op">*</tt> <tt class="py-name">timeshift</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt id="link-74" class="py-name" targets="Method gluon.main.HttpServer.start()=gluon.main.HttpServer-class.html#start,Method gluon.rocket.Listener.start()=gluon.rocket.Listener-class.html#start,Method gluon.rocket.Rocket.start()=gluon.rocket.Rocket-class.html#start,Method gluon.rocket.ThreadPool.start()=gluon.rocket.ThreadPool-class.html#start,Function gluon.widget.start()=gluon.widget-module.html#start,Method gluon.widget.web2pyDialog.start()=gluon.widget.web2pyDialog-class.html#start"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-74', 'start', 'link-74');">start</a></tt> <tt class="py-op">=</tt> <tt class="py-name">item</tt><tt class="py-op">[</tt><tt class="py-string">'start_datetime'</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">shift</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt id="link-75" class="py-name" targets="Method gluon.main.HttpServer.stop()=gluon.main.HttpServer-class.html#stop,Method gluon.rocket.Monitor.stop()=gluon.rocket.Monitor-class.html#stop,Method gluon.rocket.Rocket.stop()=gluon.rocket.Rocket-class.html#stop,Method gluon.rocket.ThreadPool.stop()=gluon.rocket.ThreadPool-class.html#stop,Method gluon.widget.web2pyDialog.stop()=gluon.widget.web2pyDialog-class.html#stop"><a title="gluon.main.HttpServer.stop
+gluon.rocket.Monitor.stop
+gluon.rocket.Rocket.stop
+gluon.rocket.ThreadPool.stop
+gluon.widget.web2pyDialog.stop" class="py-name" href="#" onclick="return doclink('link-75', 'stop', 'link-75');">stop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">item</tt><tt class="py-op">[</tt><tt class="py-string">'stop_datetime'</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">shift</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt id="link-76" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-76', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nDTSTART:%s'</tt> <tt class="py-op">%</tt> <tt id="link-77" class="py-name"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-77', 'start', 'link-74');">start</a></tt><tt class="py-op">.</tt><tt class="py-name">strftime</tt><tt class="py-op">(</tt><tt class="py-string">'%Y%m%dT%H%M%S'</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt id="link-78" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-78', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nDTEND:%s'</tt> <tt class="py-op">%</tt> <tt id="link-79" class="py-name"><a title="gluon.main.HttpServer.stop
+gluon.rocket.Monitor.stop
+gluon.rocket.Rocket.stop
+gluon.rocket.ThreadPool.stop
+gluon.widget.web2pyDialog.stop" class="py-name" href="#" onclick="return doclink('link-79', 'stop', 'link-75');">stop</a></tt><tt class="py-op">.</tt><tt class="py-name">strftime</tt><tt class="py-op">(</tt><tt class="py-string">'%Y%m%dT%H%M%S'</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt id="link-80" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-80', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nSUMMARY:%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">item</tt><tt class="py-op">[</tt><tt class="py-string">'title'</tt><tt class="py-op">]</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt id="link-81" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-81', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nEND:VEVENT'</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt id="link-82" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-82', 's', 'link-61');">s</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\nEND:VCALENDAR'</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-83" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-83', 's', 'link-61');">s</a></tt> </tt>
+</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"> </tt>
+<a name="rss"></a><div id="rss-def"><a name="L163"></a><tt class="py-lineno">163</tt> <a class="py-toggle" href="#" id="rss-toggle" onclick="return toggle('rss');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#rss">rss</a><tt class="py-op">(</tt><tt class="py-param">feed</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="rss-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="rss-expanded"><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-string">'entries'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">feed</tt> <tt class="py-keyword">and</tt> <tt class="py-string">'items'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">feed</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-name">feed</tt><tt class="py-op">[</tt><tt class="py-string">'entries'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">feed</tt><tt class="py-op">[</tt><tt class="py-string">'items'</tt><tt class="py-op">]</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt id="link-84" class="py-name" targets="Method gluon.scheduler.Scheduler.now()=gluon.scheduler.Scheduler-class.html#now"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-84', 'now', 'link-84');">now</a></tt> <tt class="py-op">=</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-85', 'now', 'link-84');">now</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt id="link-86" class="py-name" targets="Function gluon.serializers.rss()=gluon.serializers-module.html#rss,Method gluon.tools.Service.rss()=gluon.tools.Service-class.html#rss"><a title="gluon.serializers.rss
+gluon.tools.Service.rss" class="py-name" href="#" onclick="return doclink('link-86', 'rss', 'link-86');">rss</a></tt> <tt class="py-op">=</tt> <tt class="py-name">rss2</tt><tt class="py-op">.</tt><tt class="py-name">RSS2</tt><tt class="py-op">(</tt><tt id="link-87" class="py-name"><a title="gluon.utf8.Utf8.title" class="py-name" href="#" onclick="return doclink('link-87', 'title', 'link-58');">title</a></tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">feed</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-88', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'title'</tt><tt class="py-op">,</tt> <tt class="py-string">'(notitle)'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-89', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">,</tt> <tt class="py-string">'replace'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">                    <tt class="py-name">link</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">feed</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-90', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'link'</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-91', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">,</tt> <tt class="py-string">'replace'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">                    <tt class="py-name">description</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">feed</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-92', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'description'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-93" class="py-name"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-93', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">,</tt> <tt class="py-string">'replace'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                    <tt class="py-name">lastBuildDate</tt><tt class="py-op">=</tt><tt class="py-name">feed</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-94', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'created_on'</tt><tt class="py-op">,</tt> <tt id="link-95" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-95', 'now', 'link-84');">now</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">                    <tt id="link-96" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-96', 'items', 'link-21');">items</a></tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-name">rss2</tt><tt class="py-op">.</tt><tt class="py-name">RSSItem</tt><tt class="py-op">(</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                           <tt id="link-97" class="py-name"><a title="gluon.utf8.Utf8.title" class="py-name" href="#" onclick="return doclink('link-97', 'title', 'link-58');">title</a></tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">entry</tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-98', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'title'</tt><tt class="py-op">,</tt> <tt class="py-string">'(notitle)'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-99', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">,</tt> <tt class="py-string">'replace'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">                           <tt class="py-name">link</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">entry</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-100', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'link'</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-101', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">,</tt> <tt class="py-string">'replace'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">                           <tt class="py-name">description</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">entry</tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-102', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'description'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-103', 'encode', 'link-22');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">,</tt> <tt class="py-string">'replace'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">                           <tt class="py-name">pubDate</tt><tt class="py-op">=</tt><tt class="py-name">entry</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-104', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'created_on'</tt><tt class="py-op">,</tt> <tt id="link-105" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-105', 'now', 'link-84');">now</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">                           <tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">entry</tt> <tt class="py-keyword">in</tt> <tt class="py-name">feed</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-106', 'get', 'link-27');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'entries'</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-107" class="py-name"><a title="gluon.serializers.rss
+gluon.tools.Service.rss" class="py-name" href="#" onclick="return doclink('link-107', 'rss', 'link-86');">rss</a></tt><tt class="py-op">.</tt><tt class="py-name">to_xml</tt><tt class="py-op">(</tt><tt class="py-name">encoding</tt><tt class="py-op">=</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="yaml"></a><div id="yaml-def"><a name="L180"></a><tt class="py-lineno">180</tt> <a class="py-toggle" href="#" id="yaml-toggle" onclick="return toggle('yaml');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#yaml">yaml</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="yaml-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="yaml-expanded"><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-108" class="py-name"><a title="gluon.serializers.have_yaml" class="py-name" href="#" onclick="return doclink('link-108', 'have_yaml', 'link-16');">have_yaml</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">yamlib</tt><tt class="py-op">.</tt><tt class="py-name">dump</tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> <tt class="py-keyword">raise</tt> <tt class="py-name">ImportError</tt><tt class="py-op">(</tt><tt class="py-string">"No YAML serializer available"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"> </tt>
+<a name="loads_yaml"></a><div id="loads_yaml-def"><a name="L185"></a><tt class="py-lineno">185</tt> <a class="py-toggle" href="#" id="loads_yaml-toggle" onclick="return toggle('loads_yaml');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.serializers-module.html#loads_yaml">loads_yaml</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="loads_yaml-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="loads_yaml-expanded"><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-109" class="py-name"><a title="gluon.serializers.have_yaml" class="py-name" href="#" onclick="return doclink('link-109', 'have_yaml', 'link-16');">have_yaml</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">yamlib</tt><tt class="py-op">.</tt><tt id="link-110" class="py-name" targets="Method gluon.restricted.RestrictedError.load()=gluon.restricted.RestrictedError-class.html#load,Method gluon.restricted.TicketStorage.load()=gluon.restricted.TicketStorage-class.html#load,Function gluon.rewrite.load()=gluon.rewrite-module.html#load"><a title="gluon.restricted.RestrictedError.load
+gluon.restricted.TicketStorage.load
+gluon.rewrite.load" class="py-name" href="#" onclick="return doclink('link-110', 'load', 'link-110');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> <tt class="py-keyword">raise</tt> <tt class="py-name">ImportError</tt><tt class="py-op">(</tt><tt class="py-string">"No YAML serializer available"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:57 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

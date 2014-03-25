@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.import_all</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;import_all
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.import_all-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.import_all-module.html">Module gluon.import_all</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">This file is not strictly required by web2py. It is used for three purposes:</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">1) check that all required modules are installed properly</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">2) provide py2exe and py2app a list of modules to be packaged in the binary</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">3) (optional) preload modules in memory to speed up http responses</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable gluon.import_all.base_modules=gluon.import_all-module.html#base_modules"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-0', 'base_modules', 'link-0');">base_modules</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'aifc'</tt><tt class="py-op">,</tt> <tt class="py-string">'anydbm'</tt><tt class="py-op">,</tt> <tt class="py-string">'array'</tt><tt class="py-op">,</tt> <tt class="py-string">'asynchat'</tt><tt class="py-op">,</tt> <tt class="py-string">'asyncore'</tt><tt class="py-op">,</tt> <tt class="py-string">'atexit'</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                <tt class="py-string">'audioop'</tt><tt class="py-op">,</tt> <tt class="py-string">'base64'</tt><tt class="py-op">,</tt> <tt class="py-string">'BaseHTTPServer'</tt><tt class="py-op">,</tt> <tt class="py-string">'Bastion'</tt><tt class="py-op">,</tt> <tt class="py-string">'binascii'</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">                <tt class="py-string">'binhex'</tt><tt class="py-op">,</tt> <tt class="py-string">'bisect'</tt><tt class="py-op">,</tt> <tt class="py-string">'bz2'</tt><tt class="py-op">,</tt> <tt class="py-string">'calendar'</tt><tt class="py-op">,</tt> <tt class="py-string">'cgi'</tt><tt class="py-op">,</tt> <tt class="py-string">'CGIHTTPServer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">                <tt class="py-string">'cgitb'</tt><tt class="py-op">,</tt> <tt class="py-string">'chunk'</tt><tt class="py-op">,</tt> <tt class="py-string">'cmath'</tt><tt class="py-op">,</tt> <tt class="py-string">'cmd'</tt><tt class="py-op">,</tt> <tt class="py-string">'code'</tt><tt class="py-op">,</tt> <tt class="py-string">'codecs'</tt><tt class="py-op">,</tt> <tt class="py-string">'codeop'</tt><tt class="py-op">,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">                <tt class="py-string">'collections'</tt><tt class="py-op">,</tt> <tt class="py-string">'colorsys'</tt><tt class="py-op">,</tt> <tt class="py-string">'compileall'</tt><tt class="py-op">,</tt> <tt class="py-string">'compiler'</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">                <tt class="py-string">'compiler.ast'</tt><tt class="py-op">,</tt> <tt class="py-string">'compiler.visitor'</tt><tt class="py-op">,</tt> <tt class="py-string">'ConfigParser'</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">                <tt class="py-string">'contextlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'Cookie'</tt><tt class="py-op">,</tt> <tt class="py-string">'cookielib'</tt><tt class="py-op">,</tt> <tt class="py-string">'copy'</tt><tt class="py-op">,</tt> <tt class="py-string">'copy_reg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                <tt class="py-string">'cPickle'</tt><tt class="py-op">,</tt> <tt class="py-string">'cProfile'</tt><tt class="py-op">,</tt> <tt class="py-string">'cStringIO'</tt><tt class="py-op">,</tt> <tt class="py-string">'csv'</tt><tt class="py-op">,</tt> <tt class="py-string">'ctypes'</tt><tt class="py-op">,</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                <tt class="py-string">'datetime'</tt><tt class="py-op">,</tt> <tt class="py-string">'decimal'</tt><tt class="py-op">,</tt> <tt class="py-string">'difflib'</tt><tt class="py-op">,</tt> <tt class="py-string">'dircache'</tt><tt class="py-op">,</tt> <tt class="py-string">'dis'</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                <tt class="py-string">'doctest'</tt><tt class="py-op">,</tt> <tt class="py-string">'DocXMLRPCServer'</tt><tt class="py-op">,</tt> <tt class="py-string">'dumbdbm'</tt><tt class="py-op">,</tt> <tt class="py-string">'dummy_thread'</tt><tt class="py-op">,</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">                <tt class="py-string">'dummy_threading'</tt><tt class="py-op">,</tt> <tt class="py-string">'email'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.charset'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.encoders'</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">                <tt class="py-string">'email.errors'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.generator'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.header'</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                <tt class="py-string">'email.iterators'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.message'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.mime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                <tt class="py-string">'email.mime.audio'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.mime.base'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.mime.image'</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                <tt class="py-string">'email.mime.message'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.mime.multipart'</tt><tt class="py-op">,</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                <tt class="py-string">'email.mime.nonmultipart'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.mime.text'</tt><tt class="py-op">,</tt> <tt class="py-string">'email.parser'</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                <tt class="py-string">'email.utils'</tt><tt class="py-op">,</tt> <tt class="py-string">'encodings.idna'</tt><tt class="py-op">,</tt> <tt class="py-string">'errno'</tt><tt class="py-op">,</tt> <tt class="py-string">'exceptions'</tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                <tt class="py-string">'filecmp'</tt><tt class="py-op">,</tt> <tt class="py-string">'fileinput'</tt><tt class="py-op">,</tt> <tt class="py-string">'fnmatch'</tt><tt class="py-op">,</tt> <tt class="py-string">'formatter'</tt><tt class="py-op">,</tt> <tt class="py-string">'fpformat'</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                <tt class="py-string">'ftplib'</tt><tt class="py-op">,</tt> <tt class="py-string">'functools'</tt><tt class="py-op">,</tt> <tt class="py-string">'gc'</tt><tt class="py-op">,</tt> <tt class="py-string">'getopt'</tt><tt class="py-op">,</tt> <tt class="py-string">'getpass'</tt><tt class="py-op">,</tt> <tt class="py-string">'gettext'</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                <tt class="py-string">'glob'</tt><tt class="py-op">,</tt> <tt class="py-string">'gzip'</tt><tt class="py-op">,</tt> <tt class="py-string">'hashlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'heapq'</tt><tt class="py-op">,</tt> <tt class="py-string">'hmac'</tt><tt class="py-op">,</tt> <tt class="py-string">'hotshot'</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-string">'hotshot.stats'</tt><tt class="py-op">,</tt> <tt class="py-string">'htmlentitydefs'</tt><tt class="py-op">,</tt> <tt class="py-string">'htmllib'</tt><tt class="py-op">,</tt> <tt class="py-string">'HTMLParser'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt class="py-string">'httplib'</tt><tt class="py-op">,</tt> <tt class="py-string">'imaplib'</tt><tt class="py-op">,</tt> <tt class="py-string">'imghdr'</tt><tt class="py-op">,</tt> <tt class="py-string">'imp'</tt><tt class="py-op">,</tt> <tt class="py-string">'inspect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                <tt class="py-string">'itertools'</tt><tt class="py-op">,</tt> <tt class="py-string">'keyword'</tt><tt class="py-op">,</tt> <tt class="py-string">'linecache'</tt><tt class="py-op">,</tt> <tt class="py-string">'locale'</tt><tt class="py-op">,</tt> <tt class="py-string">'logging'</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                <tt class="py-string">'macpath'</tt><tt class="py-op">,</tt> <tt class="py-string">'mailbox'</tt><tt class="py-op">,</tt> <tt class="py-string">'mailcap'</tt><tt class="py-op">,</tt> <tt class="py-string">'marshal'</tt><tt class="py-op">,</tt> <tt class="py-string">'math'</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                <tt class="py-string">'mimetools'</tt><tt class="py-op">,</tt> <tt class="py-string">'mimetypes'</tt><tt class="py-op">,</tt> <tt class="py-string">'mmap'</tt><tt class="py-op">,</tt> <tt class="py-string">'modulefinder'</tt><tt class="py-op">,</tt> <tt class="py-string">'mutex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-string">'netrc'</tt><tt class="py-op">,</tt> <tt class="py-string">'new'</tt><tt class="py-op">,</tt> <tt class="py-string">'nntplib'</tt><tt class="py-op">,</tt> <tt class="py-string">'operator'</tt><tt class="py-op">,</tt> <tt class="py-string">'optparse'</tt><tt class="py-op">,</tt> <tt class="py-string">'os'</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                <tt class="py-string">'parser'</tt><tt class="py-op">,</tt> <tt class="py-string">'pdb'</tt><tt class="py-op">,</tt> <tt class="py-string">'pickle'</tt><tt class="py-op">,</tt> <tt class="py-string">'pickletools'</tt><tt class="py-op">,</tt> <tt class="py-string">'pkgutil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt class="py-string">'platform'</tt><tt class="py-op">,</tt> <tt class="py-string">'poplib'</tt><tt class="py-op">,</tt> <tt class="py-string">'pprint'</tt><tt class="py-op">,</tt> <tt class="py-string">'py_compile'</tt><tt class="py-op">,</tt> <tt class="py-string">'pyclbr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-string">'pydoc'</tt><tt class="py-op">,</tt> <tt class="py-string">'Queue'</tt><tt class="py-op">,</tt> <tt class="py-string">'quopri'</tt><tt class="py-op">,</tt> <tt class="py-string">'random'</tt><tt class="py-op">,</tt> <tt class="py-string">'re'</tt><tt class="py-op">,</tt> <tt class="py-string">'repr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-string">'rexec'</tt><tt class="py-op">,</tt> <tt class="py-string">'rfc822'</tt><tt class="py-op">,</tt> <tt class="py-string">'rlcompleter'</tt><tt class="py-op">,</tt> <tt class="py-string">'robotparser'</tt><tt class="py-op">,</tt> <tt class="py-string">'runpy'</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-string">'sched'</tt><tt class="py-op">,</tt> <tt class="py-string">'select'</tt><tt class="py-op">,</tt> <tt class="py-string">'sgmllib'</tt><tt class="py-op">,</tt> <tt class="py-string">'shelve'</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-string">'shlex'</tt><tt class="py-op">,</tt> <tt class="py-string">'shutil'</tt><tt class="py-op">,</tt> <tt class="py-string">'signal'</tt><tt class="py-op">,</tt> <tt class="py-string">'SimpleHTTPServer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-string">'SimpleXMLRPCServer'</tt><tt class="py-op">,</tt> <tt class="py-string">'site'</tt><tt class="py-op">,</tt> <tt class="py-string">'smtpd'</tt><tt class="py-op">,</tt> <tt class="py-string">'smtplib'</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-string">'sndhdr'</tt><tt class="py-op">,</tt> <tt class="py-string">'socket'</tt><tt class="py-op">,</tt> <tt class="py-string">'SocketServer'</tt><tt class="py-op">,</tt> <tt class="py-string">'sqlite3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-string">'stat'</tt><tt class="py-op">,</tt> <tt class="py-string">'statvfs'</tt><tt class="py-op">,</tt> <tt class="py-string">'string'</tt><tt class="py-op">,</tt> <tt class="py-string">'StringIO'</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                <tt class="py-string">'stringprep'</tt><tt class="py-op">,</tt> <tt class="py-string">'struct'</tt><tt class="py-op">,</tt> <tt class="py-string">'subprocess'</tt><tt class="py-op">,</tt> <tt class="py-string">'sunau'</tt><tt class="py-op">,</tt> <tt class="py-string">'symbol'</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                <tt class="py-string">'tabnanny'</tt><tt class="py-op">,</tt> <tt class="py-string">'tarfile'</tt><tt class="py-op">,</tt> <tt class="py-string">'telnetlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'tempfile'</tt><tt class="py-op">,</tt> <tt class="py-string">'textwrap'</tt><tt class="py-op">,</tt> <tt class="py-string">'thread'</tt><tt class="py-op">,</tt> <tt class="py-string">'threading'</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                <tt class="py-string">'time'</tt><tt class="py-op">,</tt> <tt class="py-string">'timeit'</tt><tt class="py-op">,</tt> <tt class="py-string">'Tix'</tt><tt class="py-op">,</tt> <tt class="py-string">'Tkinter'</tt><tt class="py-op">,</tt> <tt class="py-string">'token'</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-string">'tokenize'</tt><tt class="py-op">,</tt> <tt class="py-string">'trace'</tt><tt class="py-op">,</tt> <tt class="py-string">'traceback'</tt><tt class="py-op">,</tt> <tt class="py-string">'types'</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-string">'unicodedata'</tt><tt class="py-op">,</tt> <tt class="py-string">'unittest'</tt><tt class="py-op">,</tt> <tt class="py-string">'urllib'</tt><tt class="py-op">,</tt> <tt class="py-string">'urllib2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                <tt class="py-string">'urlparse'</tt><tt class="py-op">,</tt> <tt class="py-string">'user'</tt><tt class="py-op">,</tt> <tt class="py-string">'UserDict'</tt><tt class="py-op">,</tt> <tt class="py-string">'UserList'</tt><tt class="py-op">,</tt> <tt class="py-string">'UserString'</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-string">'uu'</tt><tt class="py-op">,</tt> <tt class="py-string">'uuid'</tt><tt class="py-op">,</tt> <tt class="py-string">'warnings'</tt><tt class="py-op">,</tt> <tt class="py-string">'wave'</tt><tt class="py-op">,</tt> <tt class="py-string">'weakref'</tt><tt class="py-op">,</tt> <tt class="py-string">'webbrowser'</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-string">'whichdb'</tt><tt class="py-op">,</tt> <tt class="py-string">'wsgiref'</tt><tt class="py-op">,</tt> <tt class="py-string">'wsgiref.handlers'</tt><tt class="py-op">,</tt> <tt class="py-string">'wsgiref.headers'</tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-string">'wsgiref.simple_server'</tt><tt class="py-op">,</tt> <tt class="py-string">'wsgiref.util'</tt><tt class="py-op">,</tt> <tt class="py-string">'wsgiref.validate'</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                <tt class="py-string">'xdrlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.dom'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.dom.minidom'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.dom.pulldom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                <tt class="py-string">'xml.etree.ElementTree'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.parsers.expat'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.sax'</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                <tt class="py-string">'xml.sax.handler'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.sax.saxutils'</tt><tt class="py-op">,</tt> <tt class="py-string">'xml.sax.xmlreader'</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-string">'xmlrpclib'</tt><tt class="py-op">,</tt> <tt class="py-string">'zipfile'</tt><tt class="py-op">,</tt> <tt class="py-string">'zipimport'</tt><tt class="py-op">,</tt> <tt class="py-string">'zlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'mhlib'</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                <tt class="py-string">'MimeWriter'</tt><tt class="py-op">,</tt> <tt class="py-string">'mimify'</tt><tt class="py-op">,</tt> <tt class="py-string">'multifile'</tt><tt class="py-op">,</tt> <tt class="py-string">'sets'</tt><tt class="py-op">]</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable gluon.import_all.contributed_modules=gluon.import_all-module.html#contributed_modules"><a title="gluon.import_all.contributed_modules" class="py-name" href="#" onclick="return doclink('link-1', 'contributed_modules', 'link-1');">contributed_modules</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-keyword">for</tt> <tt id="link-2" class="py-name" targets="Variable gluon.import_all.root=gluon.import_all-module.html#root"><a title="gluon.import_all.root" class="py-name" href="#" onclick="return doclink('link-2', 'root', 'link-2');">root</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Variable gluon.import_all.dirs=gluon.import_all-module.html#dirs"><a title="gluon.import_all.dirs" class="py-name" href="#" onclick="return doclink('link-3', 'dirs', 'link-3');">dirs</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Variable gluon.import_all.files=gluon.import_all-module.html#files"><a title="gluon.import_all.files" class="py-name" href="#" onclick="return doclink('link-4', 'files', 'link-4');">files</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">walk</tt><tt class="py-op">(</tt><tt class="py-string">'gluon'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-5" class="py-name" targets="Variable gluon.import_all.candidate=gluon.import_all-module.html#candidate"><a title="gluon.import_all.candidate" class="py-name" href="#" onclick="return doclink('link-5', 'candidate', 'link-5');">candidate</a></tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'.'</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Function gluon.html.join()=gluon.html-module.html#join,Method gluon.rocket.Listener.join()=gluon.rocket.Listener-class.html#join,Method gluon.utf8.Utf8.join()=gluon.utf8.Utf8-class.html#join"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-6', 'join', 'link-6');">join</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                      <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable gluon.scheduler.path=gluon.scheduler-module.html#path"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-7', 'path', 'link-7');">path</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-8', 'join', 'link-6');">join</a></tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="gluon.import_all.root" class="py-name" href="#" onclick="return doclink('link-9', 'root', 'link-2');">root</a></tt><tt class="py-op">,</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-10', 'path', 'link-7');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">splitext</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name" targets="Variable gluon.import_all.name=gluon.import_all-module.html#name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-11', 'name', 'link-11');">name</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method gluon.utf8.Utf8.split()=gluon.utf8.Utf8-class.html#split"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-12', 'split', 'link-12');">split</a></tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                      <tt class="py-keyword">for</tt> <tt id="link-13" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-13', 'name', 'link-11');">name</a></tt> <tt class="py-keyword">in</tt> <tt id="link-14" class="py-name"><a title="gluon.import_all.files" class="py-name" href="#" onclick="return doclink('link-14', 'files', 'link-4');">files</a></tt> <tt class="py-keyword">if</tt> <tt id="link-15" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-15', 'name', 'link-11');">name</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method gluon.dal.Expression.endswith()=gluon.dal.Expression-class.html#endswith,Method gluon.utf8.Utf8.endswith()=gluon.utf8.Utf8-class.html#endswith"><a title="gluon.dal.Expression.endswith
+gluon.utf8.Utf8.endswith" class="py-name" href="#" onclick="return doclink('link-16', 'endswith', 'link-16');">endswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'.py'</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                      <tt class="py-keyword">and</tt> <tt id="link-17" class="py-name"><a title="gluon.import_all.root" class="py-name" href="#" onclick="return doclink('link-17', 'root', 'link-2');">root</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-18', 'split', 'link-12');">split</a></tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-op">[</tt><tt class="py-string">'gluon'</tt><tt class="py-op">,</tt> <tt class="py-string">'tests'</tt><tt class="py-op">]</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                      <tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt id="link-19" class="py-name"><a title="gluon.import_all.contributed_modules" class="py-name" href="#" onclick="return doclink('link-19', 'contributed_modules', 'link-1');">contributed_modules</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method gluon.html.DIV.append()=gluon.html.DIV-class.html#append,Method gluon.template.BlockNode.append()=gluon.template.BlockNode-class.html#append,Method gluon.template.Content.append()=gluon.template.Content-class.html#append"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-20', 'append', 'link-20');">append</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="gluon.import_all.candidate" class="py-name" href="#" onclick="return doclink('link-21', 'candidate', 'link-5');">candidate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-comment"># Python base version</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable gluon.import_all.python_version=gluon.import_all-module.html#python_version,Variable gluon.utils.python_version=gluon.utils-module.html#python_version"><a title="gluon.import_all.python_version
+gluon.utils.python_version" class="py-name" href="#" onclick="return doclink('link-22', 'python_version', 'link-22');">python_version</a></tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">version</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-comment"># Modules which we want to raise an Exception if they are missing</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable gluon.import_all.alert_dependency=gluon.import_all-module.html#alert_dependency"><a title="gluon.import_all.alert_dependency" class="py-name" href="#" onclick="return doclink('link-23', 'alert_dependency', 'link-23');">alert_dependency</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'hashlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'uuid'</tt><tt class="py-op">]</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-comment"># Now we remove the blacklisted modules if we are using the stated</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-comment"># python version.</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-comment"># List of modules deprecated in Python 2.6 or 2.7 that are in the above set</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable gluon.import_all.py26_deprecated=gluon.import_all-module.html#py26_deprecated"><a title="gluon.import_all.py26_deprecated" class="py-name" href="#" onclick="return doclink('link-24', 'py26_deprecated', 'link-24');">py26_deprecated</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'mhlib'</tt><tt class="py-op">,</tt> <tt class="py-string">'multifile'</tt><tt class="py-op">,</tt> <tt class="py-string">'mimify'</tt><tt class="py-op">,</tt> <tt class="py-string">'sets'</tt><tt class="py-op">,</tt> <tt class="py-string">'MimeWriter'</tt><tt class="py-op">]</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable gluon.import_all.py27_deprecated=gluon.import_all-module.html#py27_deprecated"><a title="gluon.import_all.py27_deprecated" class="py-name" href="#" onclick="return doclink('link-25', 'py27_deprecated', 'link-25');">py27_deprecated</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt>  <tt class="py-comment"># ['optparse'] but we need it for now</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-26" class="py-name"><a title="gluon.import_all.python_version
+gluon.utils.python_version" class="py-name" href="#" onclick="return doclink('link-26', 'python_version', 'link-22');">python_version</a></tt> <tt class="py-op">&gt;=</tt> <tt class="py-string">'2.6'</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt id="link-27" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-27', 'base_modules', 'link-0');">base_modules</a></tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt><tt class="py-string">'json'</tt><tt class="py-op">,</tt> <tt class="py-string">'multiprocessing'</tt><tt class="py-op">]</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt id="link-28" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-28', 'base_modules', 'link-0');">base_modules</a></tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-29', 'base_modules', 'link-0');">base_modules</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">difference</tt><tt class="py-op">(</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="gluon.import_all.py26_deprecated" class="py-name" href="#" onclick="return doclink('link-30', 'py26_deprecated', 'link-24');">py26_deprecated</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-31" class="py-name"><a title="gluon.import_all.python_version
+gluon.utils.python_version" class="py-name" href="#" onclick="return doclink('link-31', 'python_version', 'link-22');">python_version</a></tt> <tt class="py-op">&gt;=</tt> <tt class="py-string">'2.7'</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt id="link-32" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-32', 'base_modules', 'link-0');">base_modules</a></tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt><tt class="py-string">'argparse'</tt><tt class="py-op">]</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt id="link-33" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-33', 'base_modules', 'link-0');">base_modules</a></tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-34', 'base_modules', 'link-0');">base_modules</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">difference</tt><tt class="py-op">(</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="gluon.import_all.py27_deprecated" class="py-name" href="#" onclick="return doclink('link-35', 'py27_deprecated', 'link-25');">py27_deprecated</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-comment"># Now iterate in the base_modules, trying to do the import</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-keyword">for</tt> <tt id="link-36" class="py-name" targets="Variable gluon.import_all.module=gluon.import_all-module.html#module"><a title="gluon.import_all.module" class="py-name" href="#" onclick="return doclink('link-36', 'module', 'link-36');">module</a></tt> <tt class="py-keyword">in</tt> <tt id="link-37" class="py-name"><a title="gluon.import_all.base_modules" class="py-name" href="#" onclick="return doclink('link-37', 'base_modules', 'link-0');">base_modules</a></tt> <tt class="py-op">+</tt> <tt id="link-38" class="py-name"><a title="gluon.import_all.contributed_modules" class="py-name" href="#" onclick="return doclink('link-38', 'contributed_modules', 'link-1');">contributed_modules</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">__import__</tt><tt class="py-op">(</tt><tt id="link-39" class="py-name"><a title="gluon.import_all.module" class="py-name" href="#" onclick="return doclink('link-39', 'module', 'link-36');">module</a></tt><tt class="py-op">,</tt> <tt id="link-40" class="py-name" targets="Module gluon.globals=gluon.globals-module.html"><a title="gluon.globals" class="py-name" href="#" onclick="return doclink('link-40', 'globals', 'link-40');">globals</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">locals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-comment"># Raise an exception if the current module is a dependency</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-41" class="py-name"><a title="gluon.import_all.module" class="py-name" href="#" onclick="return doclink('link-41', 'module', 'link-36');">module</a></tt> <tt class="py-keyword">in</tt> <tt id="link-42" class="py-name"><a title="gluon.import_all.alert_dependency" class="py-name" href="#" onclick="return doclink('link-42', 'alert_dependency', 'link-23');">alert_dependency</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt id="link-43" class="py-name" targets="Variable gluon.widget.msg=gluon.widget-module.html#msg"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-43', 'msg', 'link-43');">msg</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Missing dependency: %(module)s\n"</tt> <tt class="py-op">%</tt> <tt class="py-name">locals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt id="link-44" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-44', 'msg', 'link-43');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">"Try the following command: "</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt id="link-45" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-45', 'msg', 'link-43');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">"easy_install-%(python_version)s -U %(module)s"</tt> <tt class="py-op">%</tt> <tt class="py-name">locals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ImportError</tt><tt class="py-op">(</tt><tt id="link-46" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-46', 'msg', 'link-43');">msg</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:53 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

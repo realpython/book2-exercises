@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.tools.Mail</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.tools-module.html">Module&nbsp;tools</a> ::
+        Class&nbsp;Mail
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.tools.Mail-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Mail</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.tools-pysrc.html#Mail">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Mail</strong>
+</pre>
+
+<hr />
+<p>Class for configuring and sending emails with alternative text / html 
+  body, multiple attachments and encryption support</p>
+  <p>Works with SMTP and Google App Engine.</p>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.tools.Mail.Attachment-class.html" class="summary-name">Attachment</a><br />
+      Email attachment
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.tools.Mail-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">server</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">sender</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">login</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">tls</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Main Mail object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.tools-pysrc.html#Mail.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.tools.Mail-class.html#send" class="summary-sig-name">send</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">to</span>,
+        <span class="summary-sig-arg">subject</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">[no subject]</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">message</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">[no message]</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">attachments</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cc</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">bcc</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">reply_to</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">sender</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">encoding</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">utf-8</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">raw</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">headers</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span><br />
+      Sends an email using data specified in constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.tools-pysrc.html#Mail.send">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">server</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">sender</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">login</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">tls</span>=<span class="sig-default">True</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.tools-pysrc.html#Mail.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Main Mail object
+
+Arguments:
+
+    server: SMTP server address in address:port notation
+    sender: sender email address
+    login: sender login name and password in login:password notation
+           or None if no authentication is required
+    tls: enables/disables encryption (True by default)
+
+In Google App Engine use:
+
+    server='gae'
+
+For sake of backward compatibility all fields are optional and default
+to None, however, to be able to send emails at least server and sender
+must be specified. They are available under following fields:
+
+    mail.settings.server
+    mail.settings.sender
+    mail.settings.login
+
+When server is 'logging', email is logged but not sent (debug mode)
+
+Optionally you can use PGP encryption or X509:
+
+    mail.settings.cipher_type = None
+    mail.settings.gpg_home = None
+    mail.settings.sign = True
+    mail.settings.sign_passphrase = None
+    mail.settings.encrypt = True
+    mail.settings.x509_sign_keyfile = None
+    mail.settings.x509_sign_certfile = None
+    mail.settings.x509_nocerts = False
+    mail.settings.x509_crypt_certfiles = None
+
+    cipher_type       : None
+                        gpg - need a python-pyme package and gpgme lib
+                        x509 - smime
+    gpg_home          : you can set a GNUPGHOME environment variable
+                        to specify home of gnupg
+    sign              : sign the message (True or False)
+    sign_passphrase   : passphrase for key signing
+    encrypt           : encrypt the message
+                     ... x509 only ...
+    x509_sign_keyfile : the signers private key filename (PEM format)
+    x509_sign_certfile: the signers certificate filename (PEM format)
+    x509_nocerts      : if True then no attached certificate in mail
+    x509_crypt_certfiles: the certificates file to encrypt the messages
+                          with can be a file name or a list of
+                          file names (PEM format)
+
+Examples:
+
+    #Create Mail object with authentication data for remote server:
+    mail = Mail('example.com:25', 'me@example.com', 'me:password')
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="send"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">send</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">to</span>,
+        <span class="sig-arg">subject</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">[no subject]</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">message</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">[no message]</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">attachments</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">cc</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">bcc</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">reply_to</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">sender</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">encoding</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">utf-8</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">raw</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">headers</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.tools-pysrc.html#Mail.send">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Sends an email using data specified in constructor
+
+Arguments:
+
+    to: list or tuple of receiver addresses; will also accept single
+        object
+    subject: subject of the email
+    message: email body text; depends on type of passed object:
+             if 2-list or 2-tuple is passed: first element will be
+             source of plain text while second of html text;
+             otherwise: object will be the only source of plain text
+             and html source will be set to None;
+             If text or html source is:
+             None: content part will be ignored,
+             string: content part will be set to it,
+             file-like object: content part will be fetched from
+                               it using it's read() method
+    attachments: list or tuple of Mail.Attachment objects; will also
+                 accept single object
+    cc: list or tuple of carbon copy receiver addresses; will also
+        accept single object
+    bcc: list or tuple of blind carbon copy receiver addresses; will
+        also accept single object
+    reply_to: address to which reply should be composed
+    encoding: encoding of all strings passed to this method (including
+              message bodies)
+    headers: dictionary of headers to refine the headers just before
+             sending mail, e.g. {'Return-Path' : 'bounces@example.org'}
+
+Examples:
+
+    #Send plain text message to single address:
+    mail.send('you@example.com',
+              'Message subject',
+              'Plain text body of the message')
+
+    #Send html message to single address:
+    mail.send('you@example.com',
+              'Message subject',
+              '&lt;html&gt;Plain text body of the message&lt;/html&gt;')
+
+    #Send text and html message to three addresses (two in cc):
+    mail.send('you@example.com',
+              'Message subject',
+              ('Plain text body', '&lt;html&gt;html body&lt;/html&gt;'),
+              cc=['other1@example.com', 'other2@example.com'])
+
+    #Send html only message with image attachment available from
+    the message by 'photo' content id:
+    mail.send('you@example.com',
+              'Message subject',
+              (None, '&lt;html&gt;&lt;img src=&quot;cid:photo&quot; /&gt;&lt;/html&gt;'),
+              Mail.Attachment('/path/to/photo.jpg'
+                              content_id='photo'))
+
+    #Send email with two attachments and no body text
+    mail.send('you@example.com,
+              'Message subject',
+              None,
+              [Mail.Attachment('/path/to/fist.file'),
+               Mail.Attachment('/path/to/second.file')])
+
+Returns True on success, False on failure.
+
+Before return, method updates two object's fields:
+self.result: return value of smtplib.SMTP.sendmail() or GAE's
+             mail.send_mail() method
+self.error: Exception message or None if above was successful
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:44 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
