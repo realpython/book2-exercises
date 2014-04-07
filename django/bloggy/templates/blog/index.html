@@ -1,0 +1,18 @@
+<html>
+<head> 
+  <title>Bloggy: a blog app</title> 
+</head>
+<body>
+<h2>Welcome to Bloggy!</h2>
+{% if latest_posts %}
+<ul>
+{% for post in latest_posts %}
+  <h3><a href="/blog/{{ post.url }}">{{ post.title }}</a></h3>
+  <p><em>{{ post.created_at }}</em></p>
+  <p>{{ post.content }}</p>
+  <br>
+{% endfor %}
+</ul>
+{% endif %}
+</body>
+</html>

@@ -1,11 +1,12 @@
-# Django settings for bloggy project.
+# Django settings for hello_world_project project.
 
 import os
-    
+
 SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir) 
 PROJECT_ROOT = os.path.abspath(PROJECT_PATH)
 
+print PROJECT_ROOT
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -18,8 +19,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'bloggy.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -90,7 +91,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '3e9yoe62y920d%_v_=g#orinyfw)pk1s=k2_k=o9#_hz=@r#9e'
+SECRET_KEY = 'h*(-i08qb*7gd6uzl&h^_f0qk7)@%i1&qp&xx@^5&vd6j76viy'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -109,14 +110,14 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'bloggy.urls'
+ROOT_URLCONF = 'hello_world_project.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'bloggy.wsgi.application'
+WSGI_APPLICATION = 'hello_world_project.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'templates'),
-)
+    os.path.join(PROJECT_ROOT, 'templates')
+    )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -125,9 +126,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
+    'hello_world',
+    # Uncomment the next line to enable the admin:
+    # 'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
