@@ -12,12 +12,6 @@ def index(request):
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
-# def post(request, post_id):
-#     single_post = get_object_or_404(Post, pk=post_id)
-#     t = loader.get_template('blog/post.html')
-#     c = Context({'single_post': single_post,})
-#     return HttpResponse(t.render(c))
-
 def post(request, post_name):
     single_post = get_object_or_404(Post, title=post_name.replace('_', ' '))
     t = loader.get_template('blog/post.html')
