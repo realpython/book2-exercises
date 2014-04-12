@@ -1,7 +1,9 @@
 from django.http import HttpResponse
+from django.template import Context, loader, RequestContext
+from django.shortcuts import get_object_or_404, render_to_response, redirect
+
 from blog.models import Post
-from django.template import Context, loader  
-from django.shortcuts import get_object_or_404   
+from blog.forms import PostForm 
 
 def index(request):
     latest_posts = Post.objects.all().order_by('-created_at')
@@ -23,6 +25,19 @@ def post(request, post_name):
     t = loader.get_template('blog/post.html')
     c = Context({'single_post': single_post, 'popular_posts' : popular_posts,})
     return HttpResponse(t.render(c))
+
+def add_post(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():  # is the form valid?
+            form.save(commit=True)  # yes? save to database
+            return redirect(index)
+        else:
+            print form.errors  # no? display errors to end user
+    else:
+        form = PostForm()
+    return render_to_response('blog/add_post.html', {'form': form}, context)
 
 # helper function
 def encode_url(url):

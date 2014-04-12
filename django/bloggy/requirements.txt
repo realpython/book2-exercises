@@ -1,0 +1,5 @@
+Django==1.5.5
+Pillow==2.4.0
+South==0.8.4
+django-forms-bootstrap==3.0.0
+wsgiref==0.1.2
