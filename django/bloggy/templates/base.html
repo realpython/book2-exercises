@@ -46,16 +46,16 @@
       </div>
     </div>
 
-   <div id="messages">
+    <div id="messages">
      {% if messages %}
-       {% for message in messages %}
-         <div class="alert alert-{{message.tags}}">
-           <a class="close" data-dismiss="alert">×</a>
-           {{message}}
-         </div>
-       {% endfor %}
+        {% for message in messages %}
+          <div class="alert alert-{{message.tags}}">
+            <a class="close" data-dismiss="alert">×</a>
+            {{message}}
+          </div>
+        {% endfor %}
      {% endif %}
-   </div>
+    </div>
 
    <div class="container">
    {% block content %}

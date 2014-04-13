@@ -32,7 +32,7 @@ def add_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():  # is the form valid?
             form.save(commit=True)  # yes? save to database
-            return redirect(index)
+            return post(request, form.cleaned_data['title'])  # call the post function 
         else:
             print form.errors  # no? display errors to end user
     else:
