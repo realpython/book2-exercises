@@ -5,4 +5,4 @@ class UserAdmin(admin.ModelAdmin):
     class Meta:
         model = User
 
-admin.site.register(User,UserAdmin)
+admin.site.register(User, UserAdmin)

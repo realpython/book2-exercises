@@ -1,13 +1,18 @@
 # Django settings for mvp project.
 
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import abspath, dirname, normpath, join
+
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DIRS = (
+  normpath(join(DJANGO_ROOT, 'templates')),
+)
 
 STRIPE_SECRET = 'sk_test_h36oicOrlA7ATkI9JJ6dUGyA'
 STRIPE_PUBLISHABLE = 'pk_test_8Xho4FfArFFuQspdH8V1KlHS'
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -16,10 +21,10 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test.db',                      
- }
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': 'test.db'                     
+   }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -68,7 +73,6 @@ STATIC_ROOT = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
-# Additional locations of static files
 STATICFILES_DIRS = (
     normpath(join(DJANGO_ROOT, 'static')),
 )
@@ -82,7 +86,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'o#ap3u1cg#dyz*kzwnq4^z(j*un)kx!=1v0l4=6-bl2xvovnoy'
+SECRET_KEY = '4n6ubt+ab%t-b1)qhs9e8hx6*@*moa4fy1-%o8_u*e7-trd&(x'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -98,16 +102,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-)
+)  
 
 ROOT_URLCONF = 'mvp.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'mvp.wsgi.application'
-
-TEMPLATE_DIRS = (
-    normpath(join(DJANGO_ROOT, 'templates')),
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -116,8 +116,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
     'django.contrib.admin',
+    'main',
     'django.contrib.flatpages',
     'contact',
     'payments',

@@ -1,5 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+    
 from payments.models import User
 
 def index(request):
