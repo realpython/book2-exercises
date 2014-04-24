@@ -8,7 +8,7 @@ def index(request):
 def about(request):
     return HttpResponse("Here is the About Page. Want to return home? <a href='/'>Back Home</a")
 
-def better_hello(request):
+def better(request):
     t = loader.get_template('betterhello.html')
     c = Context({'current_time': datetime.now(),})
     return HttpResponse(t.render(c))
