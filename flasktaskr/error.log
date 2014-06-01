@@ -137,3 +137,7 @@ NameError: global name 'request' is not defined
 2014-06-01 18:07:48,563 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]
 2014-06-01 18:08:12,426 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]
 2014-06-01 18:16:47,589 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]
+2014-06-01 18:54:04,547 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]
+2014-06-01 18:54:05,939 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]
+2014-06-01 18:54:40,506 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]
+2014-06-01 18:54:47,293 INFO: errors [in /Users/michaelherman/Documents/repos/realpython/book2-exercises/flasktaskr/app/__init__.py:24]

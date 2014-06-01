@@ -54,7 +54,7 @@ def tasks():
 
     return jsonify(items=json_results)
 
-@app.route('/api/task/<int:task_id>')
+@app.route('/api/tasks/<int:task_id>')
 def task(task_id):
   if request.method == 'GET':
     result = db.session.query(FTasks).filter_by(task_id=task_id).first()
