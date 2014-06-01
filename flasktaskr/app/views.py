@@ -2,7 +2,7 @@
 
 
 from app import app, db
-from flask import flash, redirect, render_template, session, url_for, request, jsonify
+from flask import flash, redirect, render_template, session, url_for, request, jsonify, make_response
 from functools import wraps
 from app.models import FTasks
 
@@ -58,15 +58,19 @@ def tasks():
 def task(task_id):
   if request.method == 'GET':
     result = db.session.query(FTasks).filter_by(task_id=task_id).first()
-
-    json_result = {
-            'task_id' : result.task_id,
-            'task name': result.name,
-            'due date': str(result.due_date),
-            'priority': result.priority,
-            'posted date': str(result.posted_date),
-            'status': result.status,
-            'user id': result.user_id
-            }
-
-    return jsonify(items=json_result)
+    if result:
+        json_result = {
+                'task_id' : result.task_id,
+                'task name': result.name,
+                'due date': str(result.due_date),
+                'priority': result.priority,
+                'posted date': str(result.posted_date),
+                'status': result.status,
+                'user id': result.user_id
+                }
+        result = json_result
+        code = 200
+    else:
+        result = {"sorry": "Element does not exist"}
+        code = 404
+    return make_response(jsonify(result), code)

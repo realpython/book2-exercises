@@ -20,21 +20,24 @@ def hello_world():
 def search(search_query):
     return search_query
 
-# dynamic route with type checking
+# dynamic route with an int type
 @app.route("/integer/<int:value>")
 def type(value):
     print value + 1
     return "correct"
 
+# dynamic route with an float type
 @app.route("/float/<float:value>")
 def type(value):
     print value + 1
     return "correct"
 
+# dynamic route that accepts slashes
 @app.route("/path/<path:value>")
 def type(value):
     print value
     return "correct"
+http://localhost:5000/path/just/a/random/path
 
 # dynamic route with explicit status codes
 @app.route("/name/<name>") 
