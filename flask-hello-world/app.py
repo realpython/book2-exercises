@@ -37,7 +37,6 @@ def type(value):
 def type(value):
     print value
     return "correct"
-http://localhost:5000/path/just/a/random/path
 
 # dynamic route with explicit status codes
 @app.route("/name/<name>") 
