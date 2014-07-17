@@ -64,10 +64,10 @@ def register(request):
                 plan="gold",
             )
             # customer = stripe.Charge.create(
-            #   description = form.cleaned_data['email'],
-            #   card = form.cleaned_data['stripe_token'],
-            #   amount="5000",
-            #   currency="usd"
+            #     description=form.cleaned_data['email'],
+            #     card=form.cleaned_data['stripe_token'],
+            #     amount="5000",
+            #     currency="usd"
             # )
 
             user = User(
