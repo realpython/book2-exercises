@@ -57,18 +57,19 @@ def register(request):
         if form.is_valid():
 
             #update based on your billing method (subscription vs one time)
-            customer = stripe.Customer.create(
-                email=form.cleaned_data['email'],
-                description=form.cleaned_data['name'],
-                card=form.cleaned_data['stripe_token'],
-                plan="gold",
-            )
-            # customer = stripe.Charge.create(
-            #     description=form.cleaned_data['email'],
+            # customer = stripe.Customer.create(
+            #     email=form.cleaned_data['email'],
+            #     description=form.cleaned_data['name'],
             #     card=form.cleaned_data['stripe_token'],
-            #     amount="5000",
-            #     currency="usd"
+            #     plan="gold",
             # )
+
+            customer = stripe.Charge.create(
+                description=form.cleaned_data['email'],
+                card=form.cleaned_data['stripe_token'],
+                amount="5000",
+                currency="usd"
+            )
 
             user = User(
                 name=form.cleaned_data['name'],
