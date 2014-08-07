@@ -95,7 +95,7 @@ class AllTests(unittest.TestCase):
         )
         self.assertIn('Thanks for registering. Please login.', response.data)
 
-    def test_user_registeration_error(self):
+    def test_duplicate_user_registeration_throws_error(self):
         self.app.get('register/', follow_redirects=True)
         self.register('Michael', 'michael@realpython.com', 'python', 'python')
         self.app.get('register/', follow_redirects=True)
@@ -104,6 +104,15 @@ class AllTests(unittest.TestCase):
         )
         self.assertIn(
             'Oh no! That username and/or email already exist.',
+            response.data
+        )
+
+    def test_user_registeration_field_errors(self):
+        response = self.register(
+            'Michael', 'michael@realpython.com', 'python', ''
+        )
+        self.assertIn(
+            'This field is required.',
             response.data
         )
 

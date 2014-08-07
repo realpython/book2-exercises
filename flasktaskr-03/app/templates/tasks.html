@@ -8,8 +8,7 @@
       <form action="{{ url_for('new_task') }}" method="post">
         {{ form.csrf_token }}
         <p>
-        {{ form.name.label }}
-        {{ form.name }}
+        {{ form.name(placeholder="name") }}
         <span class="error">
           {% if form.name.errors %}
             {% for error in form.name.errors %}
@@ -19,8 +18,7 @@
         </span>
         </p>
         <p>
-        {{ form.due_date.label }}
-        {{ form.due_date }}
+        {{ form.due_date(placeholder="due date") }}
         <span class="error">
           {% if form.due_date.errors %}
             {% for error in form.due_date.errors %}

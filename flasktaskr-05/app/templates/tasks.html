@@ -1,17 +1,45 @@
 {% extends "template.html" %}
-
 {% block content %}
-
-<h1>Welcome to FlaskTaskr.</h1>
-<div class="add-task">
-  <div class="lead">Add a new task:</div>
-    <form action="{{ url_for('new_task') }}" method="post" role="form">
-      {{ form.csrf_token }}
-      <p>
-        {{ form.name(placeholder="task name") }}&nbsp;{{ form.due_date(placeholder="due date (MM/DD/YYYY)") }}&nbsp;{{ form.posted_date(placeholder="posted date (MM/DD/YYYY)") }}<br><br>{{ form.priority.label }}: {{ form.priority(class="form-control",style="max-width:60px;") }}<br>
-      <button class="btn btn-sm btn-success" type="submit">Submit</button></p>
-    </form>
-</div>
+  <h1>Welcome to FlaskTaskr</h1>
+  <div class="add-task">
+    <div class="lead">Add a new task:</div>
+      <form action="{{ url_for('new_task') }}" method="post">
+        {{ form.csrf_token }}
+        <p>
+        {{ form.name(placeholder="name") }}
+        <span class="error">
+          {% if form.name.errors %}
+            {% for error in form.name.errors %}
+              {{ error }}
+            {% endfor %}
+          {% endif %}
+        </span>
+        </p>
+        <p>
+        {{ form.due_date(placeholder="due date") }}
+        <span class="error">
+          {% if form.due_date.errors %}
+            {% for error in form.due_date.errors %}
+              {{ error }}
+            {% endfor %}
+          {% endif %}
+        </span>
+        </p>
+        <p>
+        {{ form.priority.label }}
+        {{ form.priority(class="form-control",style="max-width:60px;") }}
+        <span class="error">
+          {% if form.priority.errors %}
+            {% for error in form.priority.errors %}
+              {{ error }}
+            {% endfor %}
+          {% endif %}
+        </span>
+        </p>
+        <br>
+        <p><button class="btn btn-sm btn-success" type="submit">Submit</button></p>
+      </form>
+  </div>
 <div class="entries">
   <br>
   <br>

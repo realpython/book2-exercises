@@ -11,10 +11,10 @@ with sqlite3.connect(DATABASE_PATH) as connection:
     # get a cursor object used to execute SQL commands
     c = connection.cursor()
 
-    # temporarily change the name of ftasks table
+    # temporarily change the name of tasks table
     c.execute("""ALTER TABLE tasks RENAME TO old_tasks""")
 
-    # recreate a new ftasks table with updated schema
+    # recreate a new tasks table with updated schema
     db.create_all()
 
     # retrieve data from old_tasks table
@@ -25,9 +25,9 @@ with sqlite3.connect(DATABASE_PATH) as connection:
     data = [(row[0], row[1], row[2], row[3],
             datetime.now(), 1) for row in c.fetchall()]
 
-    # insert data to ftasks table
+    # insert data to tasks table
     c.executemany("""INSERT INTO tasks (name, due_date, priority, status,
                     posted_date, user_id) VALUES (?, ?, ?, ?, ?, ?)""", data)
 
-    # delete old_ftasks table
+    # delete old_tasks table
     c.execute("DROP TABLE old_tasks")

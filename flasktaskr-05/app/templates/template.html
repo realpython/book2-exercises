@@ -36,13 +36,16 @@
     </div>
     <div class="container">
       <div class="content">
+        {% for message in get_flashed_messages() %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
         {% if error %}
-          <br>
-          <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
-          <br>
+          <div class="error"><strong>Error:</strong> {{ error }}</div>
         {% endif %}
+
         {% block content %}
         {% endblock %}
+
       </div>
       <div class="footer">
         <hr>

@@ -27,7 +27,7 @@ class Task(db.Model):
         self.user_id = user_id
 
     def __repr__(self):
-        return '<name %r>' % (self.body)
+        return '<name %r>' % (self.name)
 
 
 class User(db.Model):
@@ -39,11 +39,13 @@ class User(db.Model):
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     tasks = db.relationship('Task', backref='poster')
+    role = db.Column(db.String, default='user')
 
-    def __init__(self, name=None, email=None, password=None):
+    def __init__(self, name=None, email=None, password=None, role=None):
         self.name = name
         self.email = email
         self.password = password
+        self.role = role
 
     def __repr__(self):
         return '<User %r>' % (self.name)
