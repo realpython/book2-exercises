@@ -7,8 +7,7 @@
   {{ form.csrf_token }}
   <div class="lead">Please sign in to access your task list</div>
     <p>
-    {{ form.name.label }}
-    {{ form.name }}
+    {{ form.name(placeholder="email address") }}
     <span class="error">
       {% if form.name.errors %}
         {% for error in form.name.errors %}
@@ -18,8 +17,7 @@
     </span>
     </p>
     <p>
-    {{ form.password.label }}
-    {{ form.password }}
+    {{ form.password(placeholder="password") }}
     <span class="error">
       {% if form.password.errors %}
         {% for error in form.password.errors %}

@@ -1,19 +1,19 @@
 # test.py
-    
-    
+
+
 import os
 import unittest
-    
+
 from app import app, db
 from app.models import User, FTasks
 from config import basedir
 
 from datetime import datetime, date
-    
+
 TEST_DB = 'test.db'
 
 class TasksTest(unittest.TestCase):
-    
+
     # setup db and teardown
     def setUp(self):
         app.config['TESTING'] = True
@@ -21,7 +21,7 @@ class TasksTest(unittest.TestCase):
                 os.path.join(basedir, TEST_DB)
         self.app = app.test_client()
         db.create_all()
-    
+
     def tearDown(self):
         db.drop_all()
 
@@ -35,7 +35,7 @@ class TasksTest(unittest.TestCase):
 
     def logout(self):
         return self.app.get('users/logout', follow_redirects=True)
-    
+
     def register(self):
         return self.app.post('users/register/', data=dict(
             name= 'michael',
@@ -62,14 +62,14 @@ class TasksTest(unittest.TestCase):
     # testing the views
     def test_users_can_add_tasks(self):
         self.create_user()
-        self.login('mherman','michaelherman')   
+        self.login('mherman','michaelherman')
         self.app.get('tasks/tasks/',follow_redirects=True)
         response = self.create_task()
         assert 'New entry was successfully posted. Thanks.' in response.data
 
     def test_users_can_complete_tasks(self):
         self.create_user()
-        self.login('mherman','michaelherman')   
+        self.login('mherman','michaelherman')
         self.app.get('/tasks/tasks',follow_redirects=True)
         self.create_task()
         response = self.app.get("tasks/complete/1/", follow_redirects=True)
@@ -77,7 +77,7 @@ class TasksTest(unittest.TestCase):
 
     def test_users_can_delete_tasks(self):
         self.create_user()
-        self.login('mherman','michaelherman')   
+        self.login('mherman','michaelherman')
         self.app.get('tasks/tasks/',follow_redirects=True)
         self.create_task()
         response = self.app.get("tasks/delete/1/", follow_redirects=True)
@@ -85,7 +85,7 @@ class TasksTest(unittest.TestCase):
 
     def test_users_cannot_add_tasks_when_error(self):
         self.create_user()
-        self.login('mherman','michaelherman')   
+        self.login('mherman','michaelherman')
         self.app.get('/tasks/tasks',follow_redirects=True)
         response = self.app.post('tasks/add/', data=dict(
             name = 'Go to the bank',
@@ -100,15 +100,15 @@ class TasksTest(unittest.TestCase):
     # testing the models
     def test_users_can_add_tasks_model(self):
         self.create_user()
-        self.login('mherman','michaelherman')   
+        self.login('mherman','michaelherman')
         self.app.get('tasks/tasks/',follow_redirects=True)
-        new_task = FTasks("Go to the bank", date.today(), "1", date.today(), "1", "1") 
-        db.session.add(new_task) 
+        new_task = FTasks("Go to the bank", date.today(), "1", date.today(), "1", "1")
+        db.session.add(new_task)
         db.session.commit()
         test = db.session.query(FTasks).all()
         for t in test:
             t.name
-        assert t.name == "Go to the bank" 
+        assert t.name == "Go to the bank"
 
 
 if __name__ == "__main__":

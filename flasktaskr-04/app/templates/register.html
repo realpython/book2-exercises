@@ -7,8 +7,7 @@
   <div class="lead">Please register to start a task list</div>
   {{ form.csrf_token }}
   <p>
-    {{ form.name.label }}:
-    {{ form.name }}
+    {{ form.name(placeholder="name") }}
     <span class="error">
       {% if form.name.errors %}
         {% for error in form.name.errors %}
@@ -18,8 +17,7 @@
     </span>
   </p>
   <p>
-    {{ form.email.label }}:
-    {{ form.email }}
+    {{ form.email(placeholder="email address") }}
     <span class="error">
       {% if form.email.errors %}
         {% for error in form.email.errors %}
@@ -29,8 +27,7 @@
     </span>
   </p>
   <p>
-    {{ form.password.label }}:
-    {{ form.password }}
+    {{ form.password(placeholder="password") }}
     <span class="error">
       {% if form.password.errors %}
         {% for error in form.password.errors %}
@@ -39,8 +36,7 @@
       {% endif %}
     </span>
   </p>
-    {{ form.confirm.label }}:
-    {{ form.confirm }}
+    {{ form.confirm(placeholder="confirm password") }}
     <span class="error">
       {% if form.confirm.errors %}
         {% for error in form.confirm.errors %}
