@@ -36,7 +36,7 @@ class UsersTests(unittest.TestCase):
 
     def login(self, name, password):
         return self.app.post(
-            '',
+            '/users/',
             data=dict(
                 name=name,
                 password=password
@@ -55,7 +55,7 @@ class UsersTests(unittest.TestCase):
 
     def register(self):
         return self.app.post(
-            'register/',
+            'users/register/',
             data=dict(
                 name='Fletcher',
                 email='fletcher@realpython.com',
@@ -66,10 +66,10 @@ class UsersTests(unittest.TestCase):
         )
 
     def logout(self):
-        return self.app.get('logout/', follow_redirects=True)
+        return self.app.get('users/logout/', follow_redirects=True)
 
     def create_task(self):
-        return self.app.post('add/', data=dict(
+        return self.app.post('tasks/add/', data=dict(
             name='Go to the bank',
             due_date='02/05/2014',
             priority='1',
@@ -82,7 +82,7 @@ class UsersTests(unittest.TestCase):
     ###################
 
     def test_form_is_present_on_login_page(self):
-        response = self.app.get('/')
+        response = self.app.get('/users/')
         self.assertEquals(response.status_code, 200)
         self.assertIn('Please sign in to access your task list', response.data)
 
@@ -103,14 +103,14 @@ class UsersTests(unittest.TestCase):
         self.register()
         self.login('Fletcher', 'python101')
         response = self.logout()
-        self.assertIn('You are logged out. Bye. :(', response.data)
+        self.assertIn('You are logged out.', response.data)
 
     def test_not_logged_in_users_cannot_logout(self):
         response = self.logout()
         self.assertNotIn('You are logged out. Bye. :(', response.data)
 
     def test_user_registeration(self):
-        self.app.get('register/', follow_redirects=True)
+        self.app.get('users/register/', follow_redirects=True)
         response = self.register()
         self.assertIn('Thanks for registering. Please login.', response.data)
 
@@ -124,7 +124,7 @@ class UsersTests(unittest.TestCase):
         self.assertIn('Invalid username or password.', response.data)
 
     def test_form_is_present_on_register_page(self):
-        response = self.app.get('register/')
+        response = self.app.get('users/register/')
         self.assertEquals(response.status_code, 200)
         self.assertIn('Please register to start a task list', response.data)
 
@@ -132,13 +132,13 @@ class UsersTests(unittest.TestCase):
         self.register()
         response = self.register()
         self.assertIn(
-            'Oh no! That username and/or email already exist.',
+            'Sorry that username and/or email error already exist.',
             response.data
         )
 
     def test_user_registeration_field_errors(self):
         response = self.app.post(
-            'register/',
+            'users/register/',
             data=dict(
                 name='Fletcher',
                 email='fletcher',
@@ -152,7 +152,7 @@ class UsersTests(unittest.TestCase):
 
     def test_user_login_field_errors(self):
         response = self.app.post(
-            '',
+            '/users/',
             data=dict(
                 name='',
                 password='python101',
