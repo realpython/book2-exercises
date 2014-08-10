@@ -68,6 +68,11 @@ class UsersTests(unittest.TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertIn('Please sign in to access your task list', response.data)
 
+    def test_404_error(self):
+        response = self.app.get('/this-route-does-not-exist/')
+        self.assertEquals(response.status_code, 404)
+        self.assertIn('Sorry. There\'s nothing here.', response.data)
+
     ###############
     #### views ####
     ###############
