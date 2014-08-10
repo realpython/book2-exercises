@@ -34,9 +34,15 @@
               <li><a href="{{ url_for('users.logout') }}">Signout</a></li>
             {% endif %}
           </ul>
+          {% if session.logged_in %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>Welcome, {{username}}.</a></li>
+          </ul>
+          {% endif %}
         </div><!--/.nav-collapse -->
       </div>
     </div>
+
     <div class="container">
       <div class="content">
         {% for message in get_flashed_messages() %}

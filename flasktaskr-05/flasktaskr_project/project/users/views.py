@@ -35,7 +35,7 @@ users_blueprint = Blueprint(
 def logout():
     session.pop('logged_in', None)
     session.pop('user_id', None)
-    session.pop('user_id', None)
+    session.pop('role', None)
     flash('You are logged out.')
     return redirect(url_for('users.login'))
 
@@ -90,7 +90,7 @@ def register():
                 flash('Thanks for registering. Please login.')
                 return redirect(url_for('users.login'))
             except IntegrityError:
-                error = 'Sorry that username and/or email error already exist.'
+                error = 'Sorry that username and/or email already exist.'
                 return render_template('register.html', form=form, error=error)
         else:
             return render_template('register.html', form=form, error=error)

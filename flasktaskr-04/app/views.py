@@ -54,7 +54,7 @@ def flash_errors(form):
 def logout():
     session.pop('logged_in', None)
     session.pop('user_id', None)
-    session.pop('user_id', None)
+    session.pop('role', None)
     flash('You are logged out. Bye. :(')
     return redirect(url_for('login'))
 

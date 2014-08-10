@@ -44,15 +44,6 @@ class UsersTests(unittest.TestCase):
             follow_redirects=True
         )
 
-    def create_user(self):
-        new_user = User(
-            name='Michael',
-            email='michael@realpython.com',
-            password='python'
-        )
-        db.session.add(new_user)
-        db.session.commit()
-
     def register(self):
         return self.app.post(
             'users/register/',
@@ -67,15 +58,6 @@ class UsersTests(unittest.TestCase):
 
     def logout(self):
         return self.app.get('users/logout/', follow_redirects=True)
-
-    def create_task(self):
-        return self.app.post('tasks/add/', data=dict(
-            name='Go to the bank',
-            due_date='02/05/2014',
-            priority='1',
-            posted_date='02/04/2014',
-            status='1'
-        ), follow_redirects=True)
 
     ###################
     #### templates ####
@@ -178,7 +160,6 @@ class UsersTests(unittest.TestCase):
         db.session.commit()
 
         users = db.session.query(User).all()
-        print users
         for user in users:
             self.assertEquals(user.name, 'Johnny')
 
@@ -195,7 +176,6 @@ class UsersTests(unittest.TestCase):
         db.session.commit()
 
         users = db.session.query(User).all()
-        print users
         for user in users:
             self.assertEquals(user.role, 'user')
 

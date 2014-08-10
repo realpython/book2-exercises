@@ -4,7 +4,7 @@
 import os
 import unittest
 
-from project import app, db
+from project import app, db, bcrypt
 from config import basedir
 from project.models import Task, User
 
@@ -48,7 +48,7 @@ class TasksTests(unittest.TestCase):
         new_user = User(
             name='Michael',
             email='michael@realpython.com',
-            password='python'
+            password=bcrypt.generate_password_hash('python')
         )
         db.session.add(new_user)
         db.session.commit()
@@ -57,7 +57,7 @@ class TasksTests(unittest.TestCase):
         new_user = User(
             name='Superman',
             email='admin@realpython.com',
-            password='allpowerful',
+            password=bcrypt.generate_password_hash('allpowerful'),
             role='admin'
         )
         db.session.add(new_user)
@@ -87,6 +87,16 @@ class TasksTests(unittest.TestCase):
             status='1'
         ), follow_redirects=True)
 
+    ###################
+    #### templates ####
+    ###################
+
+    def test_task_template_displays_logged_in_user_name(self):
+        self.register()
+        self.login('Fletcher', 'python101')
+        response = self.app.get('tasks/tasks/', follow_redirects=True)
+        self.assertIn('Fletcher', response.data)
+
     ###############
     #### views ####
     ###############
@@ -101,6 +111,63 @@ class TasksTests(unittest.TestCase):
     def test_not_logged_in_users_cannot_access_tasks_page(self):
         response = self.app.get('tasks/tasks/', follow_redirects=True)
         self.assertIn('You need to login first.', response.data)
+
+    def test_users_cannot_see_task_modify_links_for_tasks_not_created_by_them(self):
+        self.create_user()
+        self.login('Michael', 'python')
+        self.app.get('tasks/tasks/', follow_redirects=True)
+        self.create_task()
+        self.logout()
+        self.register()
+        response = self.login('Fletcher', 'python101')
+        self.app.get('tasks/tasks/', follow_redirects=True)
+        self.assertNotIn(
+            'Mark as complete', response.data
+        )
+        self.assertNotIn(
+            'Delete', response.data
+        )
+
+    def test_users_can_see_task_modify_links_for_tasks_created_by_them(self):
+        self.create_user()
+        self.login('Michael', 'python')
+        self.app.get('tasks/tasks/', follow_redirects=True)
+        self.create_task()
+        self.logout()
+        self.register()
+        self.login('Fletcher', 'python101')
+        self.app.get('tasks/tasks/', follow_redirects=True)
+        response = self.create_task()
+        self.assertIn(
+            'tasks/complete/2/', response.data
+        )
+        self.assertIn(
+            'tasks/delete/2/', response.data
+        )
+
+    def test_admin_users_can_see_task_modify_links_for_all_tasks(self):
+        self.create_user()
+        self.login('Michael', 'python')
+        self.app.get('tasks/tasks/', follow_redirects=True)
+        self.create_task()
+        self.logout()
+        self.create_admin_user()
+        self.login('Superman', 'allpowerful')
+        self.app.get('tasks/tasks/', follow_redirects=True)
+        response = self.create_task()
+        self.assertIn(
+            'tasks/complete/1/', response.data
+        )
+        self.assertIn(
+            'tasks/delete/1/', response.data
+        )
+        self.assertIn(
+            'tasks/complete/2/', response.data
+        )
+        self.assertIn(
+            'tasks/delete/2/', response.data
+        )
+
 
     ###############
     #### forms ####
@@ -221,7 +288,6 @@ class TasksTests(unittest.TestCase):
         db.session.commit()
 
         tasks = db.session.query(Task).all()
-        print tasks
         for task in tasks:
             self.assertEquals(task.name, 'Run around in circles')
 
