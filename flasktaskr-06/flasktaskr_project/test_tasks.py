@@ -172,7 +172,6 @@ class TasksTests(unittest.TestCase):
             'tasks/delete/2/', response.data
         )
 
-
     ###############
     #### forms ####
     ###############

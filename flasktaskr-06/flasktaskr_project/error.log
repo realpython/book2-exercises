@@ -112,3 +112,13 @@
 404 error at 11-08-2014 20:20:27: http://localhost/complete/1/ 
 404 error at 11-08-2014 20:20:30: http://localhost/delete/1/ 
 404 error at 11-08-2014 20:20:41: http://localhost/this-route-does-not-exist/ 
+404 error at 12-08-2014 07:40:03: http://localhost/api/tasks/ 
+404 error at 12-08-2014 07:44:35: http://localhost/api/tasks/ 
+404 error at 12-08-2014 07:44:49: http://localhost/api/tasks/ 
+404 error at 12-08-2014 10:17:00: http://localhost/api/tasks/2 
+404 error at 12-08-2014 10:34:56: http://localhost/complete/1/ 
+404 error at 12-08-2014 10:34:58: http://localhost/delete/1/ 
+404 error at 12-08-2014 10:35:09: http://localhost/this-route-does-not-exist/ 
+404 error at 12-08-2014 10:36:31: http://localhost/complete/1/ 
+404 error at 12-08-2014 10:36:32: http://localhost/delete/1/ 
+404 error at 12-08-2014 10:36:44: http://localhost/this-route-does-not-exist/ 
