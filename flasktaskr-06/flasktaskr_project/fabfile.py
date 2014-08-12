@@ -23,7 +23,7 @@ def push():
 def prepare():
     test()
     commit()
-    # push()
+    push()
 
 
 # deploy
@@ -41,7 +41,7 @@ def heroku_test():
 
 
 def deploy():
-    # pull()
+    pull()
     test()
     commit()
     heroku()
