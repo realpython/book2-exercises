@@ -5,6 +5,7 @@ from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
 from hackernews.items import HackernewsItem
 
+
 class MySpider(BaseSpider):
 
     # name the spider

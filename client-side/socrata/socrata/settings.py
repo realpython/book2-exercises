@@ -6,7 +6,7 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #
 
-BOT_NAME = 'socrata'
+BOT_NAME = 'socrata2'
 
 SPIDER_MODULES = ['socrata.spiders']
 NEWSPIDER_MODULE = 'socrata.spiders'
