@@ -9,7 +9,7 @@ def index(request):
 
 def about(request):
     return HttpResponse(
-        "Here is the About Page. Want to return home? <a href='/'>Back Home</a"
+        "Here is the About Page. Want to return home? <a href='/'>Back Home</a>"
     )
 
 
