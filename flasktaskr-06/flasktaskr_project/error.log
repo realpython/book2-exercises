@@ -128,3 +128,8 @@
 404 error at 12-08-2014 12:40:13: http://localhost/complete/1/ 
 404 error at 12-08-2014 12:40:14: http://localhost/delete/1/ 
 404 error at 12-08-2014 12:40:25: http://localhost/this-route-does-not-exist/ 
+404 error at 30-08-2014 10:02:59: http://localhost:5000/favicon.ico 
+500 error at 30-08-2014 10:03:31: http://localhost:5000/users/ 
+404 error at 30-08-2014 10:04:21: http://localhost/complete/1/ 
+404 error at 30-08-2014 10:04:22: http://localhost/delete/1/ 
+404 error at 30-08-2014 10:04:39: http://localhost/this-route-does-not-exist/ 
