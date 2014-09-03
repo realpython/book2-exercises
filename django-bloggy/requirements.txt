@@ -1,4 +1,4 @@
-Django==1.7c3
+Django==1.7
 Pillow==2.5.3
 django-forms-bootstrap==3.0.0
 wsgiref==0.1.2
