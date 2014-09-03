@@ -22,7 +22,8 @@ class MySpider(BaseSpider):
         for title in titles:
             item = WikipediaItem()
             url = title.select("a/@href").extract()
-            item["title"] = title.select("a/text()").extract()
-            item["url"] = urljoin("http://en.wikipedia.org", url[1:])
-            items.append(item)
+            if url:
+                item["title"] = title.select("a/text()").extract()
+                item["url"] = urljoin("http://en.wikipedia.org", url[0])
+                items.append(item)
         return(items)
