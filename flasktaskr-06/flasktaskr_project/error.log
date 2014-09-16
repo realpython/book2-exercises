@@ -133,3 +133,9 @@
 404 error at 30-08-2014 10:04:21: http://localhost/complete/1/ 
 404 error at 30-08-2014 10:04:22: http://localhost/delete/1/ 
 404 error at 30-08-2014 10:04:39: http://localhost/this-route-does-not-exist/ 
+404 error at 05-09-2014 08:13:37: http://localhost/complete/1/ 
+404 error at 05-09-2014 08:13:38: http://localhost/delete/1/ 
+404 error at 05-09-2014 08:13:49: http://localhost/this-route-does-not-exist/ 
+404 error at 05-09-2014 08:15:37: http://localhost/complete/1/ 
+404 error at 05-09-2014 08:15:40: http://localhost/delete/1/ 
+404 error at 05-09-2014 08:15:51: http://localhost/this-route-does-not-exist/ 
