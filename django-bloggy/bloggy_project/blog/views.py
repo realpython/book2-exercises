@@ -6,45 +6,48 @@ from blog.models import Post
 from blog.forms import PostForm
 
 
-def get_popular_posts():
-    """ helper function, returns a list of the most popular posts"""
-    popular_posts = Post.objects.order_by('-views')[:5]
-    return popular_posts
+# helper function
+def encode_url(url):
+    return url.replace(' ', '_')
 
 
 def index(request):
     latest_posts = Post.objects.all().order_by('-created_at')
+    popular_posts = Post.objects.order_by('-views')[:5]
     t = loader.get_template('blog/index.html')
     context_dict = {
-        'latest_posts': latest_posts,
-        'popular_posts': get_popular_posts(),
+        'latest_posts': latest_posts, 'popular_posts': popular_posts,
     }
+    for post in latest_posts:
+        post.url = encode_url(post.title)
+    for popular_post in popular_posts:
+        popular_post.url = encode_url(popular_post.title)
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
 
-def post(request, slug):
-    single_post = get_object_or_404(Post, slug=slug)
-    single_post.views += 1  # increment the number of views
-    single_post.save()      # and save it
+def post(request, post_name):
+    single_post = get_object_or_404(Post, title=post_name.replace('_', ' '))
+    popular_posts = Post.objects.order_by('-views')[:5]
     t = loader.get_template('blog/post.html')
     context_dict = {
-        'single_post': single_post,
-        'popular_posts': get_popular_posts(),
+        'single_post': single_post, 'popular_posts': popular_posts,
     }
+    for popular_post in popular_posts:
+        popular_post.url = encode_url(popular_post.title)
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
 
 def add_post(request):
     context = RequestContext(request)
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save(commit=True)
+        if form.is_valid():  # is the form valid?
+            form.save(commit=True)  # yes? save to database
             return redirect(index)
         else:
-            print(form.errors)
+            print form.errors  # no? display errors to end user
     else:
         form = PostForm()
     return render_to_response('blog/add_post.html', {'form': form}, context)

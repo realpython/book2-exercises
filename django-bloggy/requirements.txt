@@ -1,6 +1,4 @@
 Django==1.7
 Pillow==2.5.3
-Unidecode==0.04.16
 django-forms-bootstrap==3.0.0
-django-uuslug==1.0.2
-python-slugify==0.0.9
+wsgiref==0.1.2
