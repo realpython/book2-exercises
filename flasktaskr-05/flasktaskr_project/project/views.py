@@ -37,4 +37,4 @@ def login_required(test):
 
 @app.route('/', defaults={'page': 'index'})
 def index(page):
-    return(redirect(url_for('tasks.tasks')))
+    return redirect(url_for('tasks.tasks'))
