@@ -18,7 +18,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: XEtRjqqP6ZgiZKDi/OjSyMhJIPVPUzmX+5899LXfm2eyMtItYqFouCtBAOmBU5bWnZiwgXdB9l9ra2yiC+321TET1WVJe1WHDTFW1rzIpWS7t/ZIJYPhmwcYxa02kzLQZsrDZH/BW/cUuoHlOhmGSpuqO6SO1h1XnzwqHVe68vw=
+    secure: Kq95wr8v6rGlspuTt3Y8NdPse2eandSAF0DGmQm
   app: flasktaskr
   on:
     branch: master
