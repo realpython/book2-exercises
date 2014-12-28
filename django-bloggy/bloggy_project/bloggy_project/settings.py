@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_ROOT = os.path.abspath(PROJECT_PATH)
@@ -18,13 +19,17 @@ PROJECT_ROOT = os.path.abspath(PROJECT_PATH)
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
 )
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = '/static/'
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y%sny_5zx0o%^4w0zk+^@a=8+831bnw7rqiwcz$qs&tn+te7(%'
+SECRET_KEY = 'b48yhafb4(%m%aapg8=gr=3xs%2=4j!oqr392^h536jm_5gj^2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,8 +98,3 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
