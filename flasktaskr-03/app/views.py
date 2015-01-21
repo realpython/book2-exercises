@@ -159,7 +159,7 @@ def new_task():
 
 
 # Mark tasks as complete:
-@app.route('/complete/<int:task_id>/',)
+@app.route('/complete/<int:task_id>/')
 @login_required
 def complete(task_id):
     new_id = task_id
@@ -170,7 +170,7 @@ def complete(task_id):
 
 
 # Delete Tasks:
-@app.route('/delete/<int:task_id>/',)
+@app.route('/delete/<int:task_id>/')
 @login_required
 def delete_entry(task_id):
     new_id = task_id
