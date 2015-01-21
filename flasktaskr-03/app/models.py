@@ -27,7 +27,7 @@ class Task(db.Model):
         self.user_id = user_id
 
     def __repr__(self):
-        return '<name %r>' % (self.body)
+        return '<name %r>' % (self.name)
 
 
 class User(db.Model):
