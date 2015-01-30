@@ -14,6 +14,5 @@ class ContactForm(models.Model):
     def __unicode__(self):
         return self.email
 
-
-class Meta:
-    ordering = ['-timestamp']
+    class Meta:
+        ordering = ['-timestamp']
