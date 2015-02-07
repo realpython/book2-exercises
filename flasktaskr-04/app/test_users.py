@@ -165,7 +165,7 @@ class UsersTests(unittest.TestCase):
     #### models ####
     ################
 
-    def test_string_reprsentation_of_the_user_object(self):
+    def test_string_representation_of_the_user_object(self):
 
         db.session.add(
             User(
