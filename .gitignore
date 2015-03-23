@@ -1,6 +1,6 @@
 env
 *.pyc
-DS_Store
+*.DS_Store
 cover
 .coverage
 archive

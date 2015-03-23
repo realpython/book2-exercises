@@ -12,5 +12,6 @@ def main():
     for num in xrange(0, 10):
         add_one(num)
 
+
 if __name__ == "__main__":
     main()
