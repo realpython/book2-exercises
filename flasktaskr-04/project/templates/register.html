@@ -17,7 +17,7 @@
   </p>
   <p>
     {{ form.email(placeholder="email address") }}
-    {% if form.name.errors %}
+    {% if form.email.errors %}
       <span class="error">
         {% for error in form.email.errors %}
           {{ error }}
@@ -27,7 +27,7 @@
   </p>
   <p>
     {{ form.password(placeholder="password") }}
-    {% if form.name.errors %}
+    {% if form.password.errors %}
       <span class="error">
         {% for error in form.password.errors %}
           {{ error }}
@@ -37,7 +37,7 @@
   </p>
   <p>
     {{ form.confirm(placeholder="confirm password") }}
-    {% if form.name.errors %}
+    {% if form.confirm.errors %}
       <span class="error">
         {% for error in form.confirm.errors %}
           {{ error }}
