@@ -3,7 +3,6 @@
 
 from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
-
 from wikipedia.items import WikipediaItem
 from urlparse import urljoin
 
@@ -17,7 +16,7 @@ class MySpider(BaseSpider):
 
     def parse(self, response):
         hxs = HtmlXPathSelector(response)
-        titles = hxs.select('//tr[@style="vertical-align: top;"]//li')
+        titles = hxs.select('//div[@id="mw-pages"]//li')
         items = []
         for title in titles:
             item = WikipediaItem()
@@ -26,4 +25,4 @@ class MySpider(BaseSpider):
                 item["title"] = title.select("a/text()").extract()
                 item["url"] = urljoin("http://en.wikipedia.org", url[0])
                 items.append(item)
-        return(items)
+        return items
