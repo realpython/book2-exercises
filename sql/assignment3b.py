@@ -1,3 +1,4 @@
+
 # Assignment 3b - prompt the user
 
 
@@ -35,8 +36,13 @@ while True:
         # fetchone() retrieves one record from the query
         get = cursor.fetchone()
 
+        # just for better output
+        output = {"avg": "Average", "max": "Maximum", "min": "Minimum", "sum": "Sum"}
+
         # output result to screen
-        print operation + ":  %f" % get[0]
+        print
+        print output[operation] + ":  %f" % get[0]
+        print
 
     # if user enters 5
     elif x == "5":
