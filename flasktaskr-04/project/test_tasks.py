@@ -91,7 +91,6 @@ class TasksTests(unittest.TestCase):
         response = self.app.get('tasks/', follow_redirects=True)
         self.assertIn(b'You need to login first.', response.data)
 
-
     def test_users_can_add_tasks(self):
         self.create_user('Michael', 'michael@realpython.com', 'python')
         self.login('Michael', 'python')

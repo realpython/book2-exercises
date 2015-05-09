@@ -63,7 +63,6 @@ class UsersTests(unittest.TestCase):
             status='1'
         ), follow_redirects=True)
 
-
     def test_users_can_register(self):
         new_user = User("michael", "michael@mherman.org", "michaelherman")
         db.session.add(new_user)
@@ -144,7 +143,7 @@ class UsersTests(unittest.TestCase):
         )
         self.assertIn(b'This field is required.', response.data)
 
-    def test_string_reprsentation_of_the_user_object(self):
+    def test_string_representation_of_the_user_object(self):
 
         db.session.add(
             User(
