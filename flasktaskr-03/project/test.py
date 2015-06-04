@@ -101,13 +101,13 @@ class AllTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Please register to access the task list.', response.data)
 
-    def test_user_registeration(self):
+    def test_user_registration(self):
         self.app.get('register/', follow_redirects=True)
         response = self.register(
             'Michael', 'michael@realpython.com', 'python', 'python')
         self.assertIn(b'Thanks for registering. Please login.', response.data)
 
-    def test_user_registeration_error(self):
+    def test_user_registration_error(self):
         self.app.get('register/', follow_redirects=True)
         self.register('Michael', 'michael@realpython.com', 'python', 'python')
         self.app.get('register/', follow_redirects=True)
