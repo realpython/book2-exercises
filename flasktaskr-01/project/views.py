@@ -18,7 +18,7 @@ app.config.from_object('_config')
 # helper functions
 
 def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
+    return sqlite3.connect(app.config['DATABASE_PATH'])
 
 
 def login_required(test):
