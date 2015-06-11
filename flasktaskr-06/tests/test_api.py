@@ -31,7 +31,7 @@ class APITests(unittest.TestCase):
 
         self.assertEquals(app.debug, False)
 
-    # executed after to each test
+    # executed after each test
     def tearDown(self):
         db.session.remove()
         db.drop_all()

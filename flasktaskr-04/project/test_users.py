@@ -26,8 +26,9 @@ class UsersTests(unittest.TestCase):
         self.app = app.test_client()
         db.create_all()
 
-    # executed after to each test
+    # executed after each test
     def tearDown(self):
+        db.session.remove()
         db.drop_all()
 
 
