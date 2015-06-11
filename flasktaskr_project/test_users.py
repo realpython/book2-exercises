@@ -88,7 +88,7 @@ class UsersTests(unittest.TestCase):
     def test_users_can_login(self):
         self.register()
         response = self.login('Fletcher', 'python101')
-        self.assertIn('You are logged in. Go Crazy.', response.data)
+        self.assertIn('Welcome!', response.data)
 
     def test_logged_in_users_can_logout(self):
         self.register()

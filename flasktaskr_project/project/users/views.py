@@ -62,7 +62,7 @@ def login():
                 session['user_id'] = user.id
                 session['role'] = user.role
                 session['name'] = user.name
-                flash('You are logged in. Go Crazy.')
+                flash('Welcome!')
                 return redirect(url_for('tasks.tasks'))
         else:
             return render_template(
