@@ -52,7 +52,7 @@ def add_entry():
 # connect to database
 def connect_db():
     """Connects to the database."""
-    rv = sqlite3.connect(app.config['DATABASE_PATH'])
+    rv = sqlite3.connect(app.config['DATABASE'])
     rv.row_factory = sqlite3.Row
     return rv
 
