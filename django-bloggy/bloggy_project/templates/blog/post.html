@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 
 {% block content %}
 <div class="row">
@@ -22,7 +22,7 @@
     <h4>Must See:</h4>
     <ul>
       {% for popular_post in popular_posts %}
-        <li><a href="/blog/{{ popular_post.slug }}">{{ popular_post.title }}</a></li>
+        <li><a href="/blog/{{ popular.slug }}">{{ popular_post.title }}</a></li>
       {% endfor %}
     </ul>
   </div>

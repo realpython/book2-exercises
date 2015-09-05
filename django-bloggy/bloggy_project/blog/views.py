@@ -6,18 +6,18 @@ from blog.models import Post
 from blog.forms import PostForm
 
 
-########################
-### helper functions ###
-########################
+####################
+# helper functions #
+####################
 
 def get_popular_posts():
     popular_posts = Post.objects.order_by('-views')[:5]
     return popular_posts
 
 
-######################
-### view functions ###
-######################
+##################
+# view functions #
+##################
 
 def index(request):
     latest_posts = Post.objects.all().order_by('-created_at')
@@ -55,3 +55,4 @@ def add_post(request):
     else:
         form = PostForm()
     return render_to_response('blog/add_post.html', {'form': form}, context)
+

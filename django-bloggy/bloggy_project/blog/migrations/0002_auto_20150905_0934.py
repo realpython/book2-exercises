@@ -15,18 +15,15 @@ class Migration(migrations.Migration):
             model_name='post',
             name='image',
             field=models.ImageField(null=True, upload_to=b'images', blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='post',
             name='tag',
             field=models.CharField(max_length=20, null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='post',
             name='views',
             field=models.IntegerField(default=0),
-            preserve_default=True,
         ),
     ]

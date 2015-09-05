@@ -18,8 +18,5 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('content', models.TextField()),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
     ]
