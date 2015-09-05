@@ -1,6 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from blongo import views
 
-urlpatterns = patterns('blongo.views',
+
+urlpatterns = [
     url(r'^$', views.index, name='index'),
-)
+]
