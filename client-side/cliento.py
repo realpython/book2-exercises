@@ -7,7 +7,7 @@ import sqlite3
 
 YOUR_OWN_KEY = 'GET_YOUR_OWN_KEY'
 url = requests.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=%s" %
-        (YOUR_OWN_KEY,))
+                   (YOUR_OWN_KEY,))
 
 # convert data from feed to binary
 binary = url.content
@@ -24,10 +24,10 @@ with sqlite3.connect("movies.db") as connection:
     # iterate through each movie and write to the database
     for movie in movies:
         c.execute("INSERT INTO new_movies VALUES(?, ?, ?, ?, ?, ?, ?)",
-                (movie["title"], movie["year"], movie["mpaa_rating"],
-                movie["release_dates"]["theater"], movie["runtime"],
-                movie["ratings"]["critics_score"],
-                movie["ratings"]["audience_score"]))
+                  (movie["title"], movie["year"], movie["mpaa_rating"],
+                   movie["release_dates"]["theater"], movie["runtime"],
+                   movie["ratings"]["critics_score"],
+                   movie["ratings"]["audience_score"]))
 
     # retrieve data
     c.execute("SELECT * FROM new_movies ORDER BY title ASC")

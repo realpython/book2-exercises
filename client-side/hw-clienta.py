@@ -13,7 +13,7 @@ with open("test.xml", "wb") as code:
     code.write(xml.content)
 
 # parse the xml file
-doc = et.parse("test.xml") 
+doc = et.parse("test.xml")
 
 for element in doc.findall("route/leg/step"):
     print element.find("html_instructions").text

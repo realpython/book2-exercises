@@ -22,6 +22,6 @@ print "\nPlaylists for " + str.format(user_id) + ":\n"
 for playlist in playlist_feed.entry:
     print playlist.title.text
     playlistid = playlist.id.text.split('/')[-1]
-    video_feed = youtube_service.GetYouTubePlaylistVideoFeed(playlist_id = playlistid)
+    video_feed = youtube_service.GetYouTubePlaylistVideoFeed(playlist_id=playlistid)
     for video in video_feed.entry:
-        print "\t"+video.title.text
+        print "\t" + video.title.text
