@@ -1,8 +1,10 @@
 import requests
 import json
 
+
 def index():
-  return dict()
+    return dict()
+
 
 def grab_movies():
     session.m=[]
