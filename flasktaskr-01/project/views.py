@@ -96,9 +96,9 @@ def new_task():
     else:
         g.db.execute('insert into tasks (name, due_date, priority, status) \
             values (?, ?, ?, 1)', [
-                request.form['name'],
-                request.form['due_date'],
-                request.form['priority']
+                name,
+                date,
+                priority
             ]
         )
         g.db.commit()
