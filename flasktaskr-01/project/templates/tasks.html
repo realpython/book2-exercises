@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Welcome to FlaskTaskr</h1>
-<a href="/logout">Logout</a>
+<a href="{{ url_for('logout') }}">Logout</a>
 <div class="add-task">
   <h3>Add a new task:</h3>
   <table>
