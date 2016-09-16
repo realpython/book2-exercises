@@ -14,9 +14,9 @@ with sqlite3.connect("cars.db") as connection:
     rows = c.fetchall()
 
     # output headers
-    print 'Make Model Qty'
-    print '--------------'
+    print('Make Model Qty')
+    print('--------------')
 
     # output the rows to the screen, row by row
     for r in rows:
-        print r[0], r[1], r[2]
+        print(r[0], r[1], r[2])
