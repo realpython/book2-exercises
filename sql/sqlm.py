@@ -13,7 +13,7 @@ with sqlite3.connect("new.db") as connection:
            'count': "SELECT count(city) FROM population"}
 
     # run each sql query item in the dictionary
-    for keys, values in sql.iteritems():
+    for keys, values in sql.items():
 
         # run sql
         c.execute(values)
@@ -22,4 +22,4 @@ with sqlite3.connect("new.db") as connection:
         result = c.fetchone()
 
         # output the result to screen
-        print keys + ":", result[0]
+        print(keys + ":", result[0])

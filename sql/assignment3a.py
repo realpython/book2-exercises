@@ -1,4 +1,4 @@
-# Assignment 2a - insert random data
+# Assignment 3a - insert random data
 
 
 # import the sqlite3 library

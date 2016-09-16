@@ -1,8 +1,8 @@
 # Create a table and populate it with data
 
-"""Add another table to accompany your "inventory" table called "orders". 
-This table should have the following fields: "make", "model", and "order_date". 
-Make sure to only include makes and models for the cars found in the inventory table. 
+"""Add another table to accompany your "inventory" table called "orders".
+This table should have the following fields: "make", "model", and "order_date".
+Make sure to only include makes and models for the cars found in the inventory table.
 Add 15 records (3 for each car), each with a separate order date (YYYY-MM-DD)."""
 
 import sqlite3
@@ -39,4 +39,4 @@ with sqlite3.connect("cars.db") as connection:
     rows = c.fetchall()
 
     for r in rows:
-        print r[0], r[1], r[2]
+        print(r[0], r[1], r[2])
