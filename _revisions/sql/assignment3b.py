@@ -23,7 +23,7 @@ Select the operation that you want to perform [1-5]:
 # loop until user enters a valid operation number [1-5]
 while True:
     # get user input
-    x = raw_input(prompt)
+    x = input(prompt)
 
     # if user enters any choice from 1-4
     if x in set(["1", "2", "3", "4"]):
@@ -40,14 +40,13 @@ while True:
         output = {"avg": "Average", "max": "Maximum", "min": "Minimum", "sum": "Sum"}
 
         # output result to screen
-        print
-        print output[operation] + ":  %f" % get[0]
-        print
+        print()
+        print(output[operation] + ":  %f" % get[0])
+        print()
 
     # if user enters 5
     elif x == "5":
-        print "Exit"
+        print("Exit")
 
         # exit loop
         break
-

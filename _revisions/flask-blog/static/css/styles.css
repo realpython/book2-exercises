@@ -1,15 +1,37 @@
-.container { 
-  background: #f4f4f4; 
-  margin: 2em auto; 
-  padding: 0.8em; 
-  width: 30em; 
-  border: 2px solid #000; 
+.container {
+  background: #f4f4f4;
+  margin: 2em auto;
+  padding: 0.8em;
+  width: 30em;
+  border: 2px solid #000;
 }
 
-.flash, .error { 
-  background: #000; 
-  color: #fff; 
-  padding: 0.5em; 
+.login-wrapper {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login-wrapper label {
+  display: inline-block;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 5px;
+  margin: 10px 0;
 }
 
 
+.flash, .error {
+  background: #000;
+  color: #fff;
+  padding: 0.5em;
+}
