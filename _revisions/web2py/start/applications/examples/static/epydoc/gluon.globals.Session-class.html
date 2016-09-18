@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.globals.Session</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.globals-module.html" onclick="show_private();">Module&nbsp;globals</a> ::
+        Class&nbsp;Session
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.globals.Session-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Session</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.globals-pysrc.html#Session">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+ object --+        
+          |        
+       dict --+    
+              |    
+<a href="gluon.storage.Storage-class.html">storage.Storage</a> --+
+                  |
+                 <strong class="uidshort">Session</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+
+defines the session object and the default values of its members (None)
+
+    response.session_storage_type   : 'file', 'db', or 'cookie'
+    response.session_cookie_compression_level :
+    response.session_cookie_expires : cookie expiration
+    response.session_cookie_key     : for encrypted sessions in cookies
+    response.session_id             : a number or None if no session
+    response.session_id_name        :
+    response.session_locked         :
+    response.session_masterapp      :
+    response.session_new            : a new session obj is being created
+    response.session_hash           : hash of the pickled loaded session
+    response.session_pickled        : picked session
+
+if session in cookie:
+
+    response.session_data_name      : name of the cookie for session data
+
+if session in db:
+
+    response.session_db_record_id   :
+    response.session_db_table       :
+    response.session_db_unique_key  :
+
+if session in file:
+
+    response.session_file           :
+    response.session_filename       :
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.globals.Session-class.html#connect" class="summary-sig-name">connect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">response</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">db</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">tablename</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">web2py_session</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">masterapp</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">migrate</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">separate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">check_client</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">cookie_key</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cookie_expires</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">compression_level</span>=<span class="summary-sig-default">None</span>)</span><br />
+      separate can be separate=lambda(session_name): session_name[-2:] and 
+      it is used to determine a session prefix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.connect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="renew"></a><span class="summary-sig-name">renew</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">clear_session</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.renew">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fixup_before_save"></a><span class="summary-sig-name">_fixup_before_save</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._fixup_before_save">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clear_session_cookies"></a><span class="summary-sig-name">clear_session_cookies</span>(<span class="summary-sig-arg">sefl</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.clear_session_cookies">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="save_session_id_cookie"></a><span class="summary-sig-name">save_session_id_cookie</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.save_session_id_cookie">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.globals.Session-class.html#clear" class="summary-sig-name">clear</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove all items from D.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.clear">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_new"></a><span class="summary-sig-name">is_new</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.is_new">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_expired"></a><span class="summary-sig-name">is_expired</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">seconds</span>=<span class="summary-sig-default">3600</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.is_expired">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="secure"></a><span class="summary-sig-name">secure</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.secure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="forget"></a><span class="summary-sig-name">forget</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">response</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session.forget">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_try_store_in_cookie"></a><span class="summary-sig-name">_try_store_in_cookie</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._try_store_in_cookie">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_unchanged"></a><span class="summary-sig-name">_unchanged</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._unchanged">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_try_store_in_db"></a><span class="summary-sig-name">_try_store_in_db</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._try_store_in_db">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_try_store_in_cookie_or_file"></a><span class="summary-sig-name">_try_store_in_cookie_or_file</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._try_store_in_cookie_or_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_try_store_in_file"></a><span class="summary-sig-name">_try_store_in_file</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._try_store_in_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_unlock"></a><span class="summary-sig-name">_unlock</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._unlock">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_close"></a><span class="summary-sig-name">_close</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">response</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.globals-pysrc.html#Session._close">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.storage.Storage-class.html">storage.Storage</a></code></b>:
+      <code><a href="gluon.storage.Storage-class.html#__copy__">__copy__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#__delattr__">__delattr__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#__getitem__">__getitem__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#__getstate__">__getstate__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#__repr__">__repr__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#__setattr__">__setattr__</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#getfirst">getfirst</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#getlast">getlast</a></code>,
+      <code><a href="gluon.storage.Storage-class.html#getlist">getlist</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__cmp__</code>,
+      <code>__contains__</code>,
+      <code>__delitem__</code>,
+      <code>__eq__</code>,
+      <code>__ge__</code>,
+      <code>__getattribute__</code>,
+      <code>__gt__</code>,
+      <code>__init__</code>,
+      <code>__iter__</code>,
+      <code>__le__</code>,
+      <code>__len__</code>,
+      <code>__lt__</code>,
+      <code>__ne__</code>,
+      <code>__new__</code>,
+      <code>__setitem__</code>,
+      <code>__sizeof__</code>,
+      <code>copy</code>,
+      <code>fromkeys</code>,
+      <code>get</code>,
+      <code>has_key</code>,
+      <code>items</code>,
+      <code>iteritems</code>,
+      <code>iterkeys</code>,
+      <code>itervalues</code>,
+      <code>keys</code>,
+      <code>pop</code>,
+      <code>popitem</code>,
+      <code>setdefault</code>,
+      <code>update</code>,
+      <code>values</code>,
+      <code>viewitems</code>,
+      <code>viewkeys</code>,
+      <code>viewvalues</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__hash__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="connect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">connect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">request</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">response</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">db</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">tablename</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">web2py_session</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">masterapp</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">migrate</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">separate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">check_client</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">cookie_key</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">cookie_expires</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">compression_level</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.globals-pysrc.html#Session.connect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>separate can be separate=lambda(session_name): session_name[-2:] and 
+  it is used to determine a session prefix. separate can be True and it is 
+  set to session_name[-2:]</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="clear"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clear</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.globals-pysrc.html#Session.clear">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove all items from D.</p>
+  <dl class="fields">
+    <dt>Returns: None</dt>
+    <dt>Overrides:
+        dict.clear
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:41 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+_HiStOrY_V2_
+exit()
+db\040=\040DAL('sqlite://storage.sqlite',pool_size=1,check_reserved=['all'])
+db.define_table('special_users',\040Field('name'),\040Field('email'))
+db.special_users.insert(id=1,\040name="Alex",\040email="hey@alex.com")
+b.special_users.bulk_insert([{'name':'Alan',\040'email':'a@a.com'},\040\040\040\040\040\040\040\040\040
+\040\040{'name':'John',\040'email':'j@j.com'},\040{'name':'Tim',\040'email':'t@t.com'}])
+db.special_users.bulk_insert([{'name':'Alan',\040'email':'a@a.com'},\040\040\040\040\040\040\040\040\040
+\040\040{'name':'John',\040'email':'j@j.com'},\040{'name':'Tim',\040'email':'t@t.com'}])
+db.commit()
+for\040row\040in\040db().select(db.special_users.ALL):
+\040\040\040\040print\040row.name
+for\040row\040in\040db().select(db.special_users.ALL):
+\040\040\040\040print\040row
+db.special_users.drop()
+exit()

@@ -1,0 +1,4 @@
+Django==1.8.4
+mongoengine==0.8.0
+pymongo==2.7.2
+wheel==0.24.0

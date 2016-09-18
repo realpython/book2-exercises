@@ -1,0 +1,5 @@
+def index():
+    return dict()
+
+def data():
+  return dict(num=int(request.vars.key)+10)

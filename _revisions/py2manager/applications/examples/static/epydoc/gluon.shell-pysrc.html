@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.shell</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;shell
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.shell-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.shell-module.html">Module gluon.shell</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Developed by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;,</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">limodou &lt;limodou@gmail.com&gt; and srackham &lt;srackham@gmail.com&gt;.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">code</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable gluon.dal.BaseAdapter.types=gluon.dal.BaseAdapter-class.html#types,Variable gluon.dal.CouchDBAdapter.types=gluon.dal.CouchDBAdapter-class.html#types,Variable gluon.dal.DB2Adapter.types=gluon.dal.DB2Adapter-class.html#types,Variable gluon.dal.FireBirdAdapter.types=gluon.dal.FireBirdAdapter-class.html#types,Variable gluon.dal.GoogleDatastoreAdapter.types=gluon.dal.GoogleDatastoreAdapter-class.html#types,Variable gluon.dal.IMAPAdapter.types=gluon.dal.IMAPAdapter-class.html#types,Variable gluon.dal.InformixAdapter.types=gluon.dal.InformixAdapter-class.html#types,Variable gluon.dal.IngresAdapter.types=gluon.dal.IngresAdapter-class.html#types,Variable gluon.dal.IngresUnicodeAdapter.types=gluon.dal.IngresUnicodeAdapter-class.html#types,Variable gluon.dal.MSSQL2Adapter.types=gluon.dal.MSSQL2Adapter-class.html#types,Variable gluon.dal.MSSQLAdapter.types=gluon.dal.MSSQLAdapter-class.html#types,Variable gluon.dal.MongoDBAdapter.types=gluon.dal.MongoDBAdapter-class.html#types,Variable gluon.dal.MySQLAdapter.types=gluon.dal.MySQLAdapter-class.html#types,Variable gluon.dal.NewPostgreSQLAdapter.types=gluon.dal.NewPostgreSQLAdapter-class.html#types,Variable gluon.dal.OracleAdapter.types=gluon.dal.OracleAdapter-class.html#types,Variable gluon.dal.PostgreSQLAdapter.types=gluon.dal.PostgreSQLAdapter-class.html#types,Variable gluon.dal.SAPDBAdapter.types=gluon.dal.SAPDBAdapter-class.html#types,Variable gluon.dal.SpatiaLiteAdapter.types=gluon.dal.SpatiaLiteAdapter-class.html#types,Variable gluon.dal.SybaseAdapter.types=gluon.dal.SybaseAdapter-class.html#types,Variable gluon.dal.TeradataAdapter.types=gluon.dal.TeradataAdapter-class.html#types,Variable gluon.dal.VerticaAdapter.types=gluon.dal.VerticaAdapter-class.html#types"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-0', 'types', 'link-0');">types</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">optparse</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">glob</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package gluon=gluon-module.html"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-1', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module gluon.fileutils=gluon.fileutils-module.html"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-2', 'fileutils', 'link-2');">fileutils</a></tt> <tt class="py-keyword">as</tt> <tt id="link-3" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-3', 'fileutils', 'link-2');">fileutils</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-4', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module gluon.settings=gluon.settings-module.html,Variable gluon.settings.settings=gluon.settings-module.html#settings"><a title="gluon.settings
+gluon.settings.settings" class="py-name" href="#" onclick="return doclink('link-5', 'settings', 'link-5');">settings</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Variable gluon.settings.global_settings=gluon.settings-module.html#global_settings"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-6', 'global_settings', 'link-6');">global_settings</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-7', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module gluon.utils=gluon.utils-module.html"><a title="gluon.utils" class="py-name" href="#" onclick="return doclink('link-8', 'utils', 'link-8');">utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Function gluon.utils.web2py_uuid()=gluon.utils-module.html#web2py_uuid"><a title="gluon.utils.web2py_uuid" class="py-name" href="#" onclick="return doclink('link-9', 'web2py_uuid', 'link-9');">web2py_uuid</a></tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-10', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Module gluon.compileapp=gluon.compileapp-module.html"><a title="gluon.compileapp" class="py-name" href="#" onclick="return doclink('link-11', 'compileapp', 'link-11');">compileapp</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Function gluon.compileapp.build_environment()=gluon.compileapp-module.html#build_environment"><a title="gluon.compileapp.build_environment" class="py-name" href="#" onclick="return doclink('link-12', 'build_environment', 'link-12');">build_environment</a></tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name" targets="Function gluon.compileapp.read_pyc()=gluon.compileapp-module.html#read_pyc"><a title="gluon.compileapp.read_pyc" class="py-name" href="#" onclick="return doclink('link-13', 'read_pyc', 'link-13');">read_pyc</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Function gluon.compileapp.run_models_in()=gluon.compileapp-module.html#run_models_in"><a title="gluon.compileapp.run_models_in" class="py-name" href="#" onclick="return doclink('link-14', 'run_models_in', 'link-14');">run_models_in</a></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-15" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-15', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Module gluon.restricted=gluon.restricted-module.html,Function gluon.restricted.restricted()=gluon.restricted-module.html#restricted"><a title="gluon.restricted
+gluon.restricted.restricted" class="py-name" href="#" onclick="return doclink('link-16', 'restricted', 'link-16');">restricted</a></tt> <tt class="py-keyword">import</tt> <tt id="link-17" class="py-name" targets="Class gluon.restricted.RestrictedError=gluon.restricted.RestrictedError-class.html"><a title="gluon.restricted.RestrictedError" class="py-name" href="#" onclick="return doclink('link-17', 'RestrictedError', 'link-17');">RestrictedError</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-18" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-18', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Module gluon.globals=gluon.globals-module.html"><a title="gluon.globals" class="py-name" href="#" onclick="return doclink('link-19', 'globals', 'link-19');">globals</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Class gluon.globals.Request=gluon.globals.Request-class.html"><a title="gluon.globals.Request" class="py-name" href="#" onclick="return doclink('link-20', 'Request', 'link-20');">Request</a></tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name" targets="Class gluon.globals.Response=gluon.globals.Response-class.html"><a title="gluon.globals.Response" class="py-name" href="#" onclick="return doclink('link-21', 'Response', 'link-21');">Response</a></tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Class gluon.globals.Session=gluon.globals.Session-class.html"><a title="gluon.globals.Session" class="py-name" href="#" onclick="return doclink('link-22', 'Session', 'link-22');">Session</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-23" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-23', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Module gluon.storage=gluon.storage-module.html"><a title="gluon.storage" class="py-name" href="#" onclick="return doclink('link-24', 'storage', 'link-24');">storage</a></tt> <tt class="py-keyword">import</tt> <tt id="link-25" class="py-name" targets="Class gluon.storage.Storage=gluon.storage.Storage-class.html"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-25', 'Storage', 'link-25');">Storage</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name" targets="Class gluon.storage.List=gluon.storage.List-class.html"><a title="gluon.storage.List" class="py-name" href="#" onclick="return doclink('link-26', 'List', 'link-26');">List</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-27" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-27', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Module gluon.admin=gluon.admin-module.html"><a title="gluon.admin" class="py-name" href="#" onclick="return doclink('link-28', 'admin', 'link-28');">admin</a></tt> <tt class="py-keyword">import</tt> <tt id="link-29" class="py-name" targets="Function gluon.fileutils.w2p_unpack()=gluon.fileutils-module.html#w2p_unpack"><a title="gluon.fileutils.w2p_unpack" class="py-name" href="#" onclick="return doclink('link-29', 'w2p_unpack', 'link-29');">w2p_unpack</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-30" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-30', 'gluon', 'link-1');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Module gluon.dal=gluon.dal-module.html"><a title="gluon.dal" class="py-name" href="#" onclick="return doclink('link-31', 'dal', 'link-31');">dal</a></tt> <tt class="py-keyword">import</tt> <tt id="link-32" class="py-name" targets="Class gluon.dal.BaseAdapter=gluon.dal.BaseAdapter-class.html"><a title="gluon.dal.BaseAdapter" class="py-name" href="#" onclick="return doclink('link-32', 'BaseAdapter', 'link-32');">BaseAdapter</a></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable gluon.cache.logger=gluon.cache-module.html#logger,Variable gluon.compileapp.logger=gluon.compileapp-module.html#logger,Variable gluon.debug.logger=gluon.debug-module.html#logger,Variable gluon.main.logger=gluon.main-module.html#logger,Variable gluon.newcron.logger=gluon.newcron-module.html#logger,Variable gluon.portalocker.logger=gluon.portalocker-module.html#logger,Variable gluon.restricted.logger=gluon.restricted-module.html#logger,Variable gluon.rewrite.logger=gluon.rewrite-module.html#logger,Variable gluon.scheduler.logger=gluon.scheduler-module.html#logger,Variable gluon.shell.logger=gluon.shell-module.html#logger,Variable gluon.tools.logger=gluon.tools-module.html#logger,Variable gluon.utils.logger=gluon.utils-module.html#logger,Variable gluon.widget.logger=gluon.widget-module.html#logger"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-33', 'logger', 'link-33');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">"web2py"</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="enable_autocomplete_and_history"></a><div id="enable_autocomplete_and_history-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="enable_autocomplete_and_history-toggle" onclick="return toggle('enable_autocomplete_and_history');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#enable_autocomplete_and_history">enable_autocomplete_and_history</a><tt class="py-op">(</tt><tt class="py-param">adir</tt><tt class="py-op">,</tt><tt class="py-param">env</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="enable_autocomplete_and_history-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="enable_autocomplete_and_history-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">rlcompleter</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">atexit</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt id="link-34" class="py-name" targets="Method gluon.dal.DatabaseStoredFile.readline()=gluon.dal.DatabaseStoredFile-class.html#readline,Method gluon.debug.Pipe.readline()=gluon.debug.Pipe-class.html#readline,Method gluon.portalocker.LockedFile.readline()=gluon.portalocker.LockedFile-class.html#readline,Method gluon.rocket.ChunkedReader.readline()=gluon.rocket.ChunkedReader-class.html#readline,Method gluon.rocket.FileLikeSocket.readline()=gluon.rocket.FileLikeSocket-class.html#readline"><a title="gluon.dal.DatabaseStoredFile.readline
+gluon.debug.Pipe.readline
+gluon.portalocker.LockedFile.readline
+gluon.rocket.ChunkedReader.readline
+gluon.rocket.FileLikeSocket.readline" class="py-name" href="#" onclick="return doclink('link-34', 'readline', 'link-34');">readline</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="gluon.dal.DatabaseStoredFile.readline
+gluon.debug.Pipe.readline
+gluon.portalocker.LockedFile.readline
+gluon.rocket.ChunkedReader.readline
+gluon.rocket.FileLikeSocket.readline" class="py-name" href="#" onclick="return doclink('link-35', 'readline', 'link-34');">readline</a></tt><tt class="py-op">.</tt><tt class="py-name">parse_and_bind</tt><tt class="py-op">(</tt><tt class="py-string">"bind ^I rl_complete"</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                                <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">platform</tt> <tt class="py-op">==</tt> <tt class="py-string">'darwin'</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                                <tt class="py-keyword">else</tt> <tt class="py-string">"tab: complete"</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">history_file</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Variable gluon.scheduler.path=gluon.scheduler-module.html#path"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-36', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Function gluon.html.join()=gluon.html-module.html#join,Method gluon.rocket.Listener.join()=gluon.rocket.Listener-class.html#join,Method gluon.utf8.Utf8.join()=gluon.utf8.Utf8-class.html#join"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-37', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">adir</tt><tt class="py-op">,</tt><tt class="py-string">'.pythonhistory'</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            <tt id="link-38" class="py-name"><a title="gluon.dal.DatabaseStoredFile.readline
+gluon.debug.Pipe.readline
+gluon.portalocker.LockedFile.readline
+gluon.rocket.ChunkedReader.readline
+gluon.rocket.FileLikeSocket.readline" class="py-name" href="#" onclick="return doclink('link-38', 'readline', 'link-34');">readline</a></tt><tt class="py-op">.</tt><tt class="py-name">read_history_file</tt><tt class="py-op">(</tt><tt class="py-name">history_file</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">IOError</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">history_file</tt><tt class="py-op">,</tt> <tt class="py-string">'a'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method gluon.dal.ConnectionPool.close()=gluon.dal.ConnectionPool-class.html#close,Method gluon.dal.DAL.close()=gluon.dal.DAL-class.html#close,Method gluon.dal.DatabaseStoredFile.close()=gluon.dal.DatabaseStoredFile-class.html#close,Method gluon.dal.TeradataAdapter.close()=gluon.dal.TeradataAdapter-class.html#close,Method gluon.portalocker.LockedFile.close()=gluon.portalocker.LockedFile-class.html#close,Method gluon.rocket.Connection.close()=gluon.rocket.Connection-class.html#close,Method gluon.rocket.FileLikeSocket.close()=gluon.rocket.FileLikeSocket-class.html#close"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-39', 'close', 'link-39');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">atexit</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method gluon.dal.MethodAdder.register()=gluon.dal.MethodAdder-class.html#register,Method gluon.tools.Auth.register()=gluon.tools.Auth-class.html#register"><a title="gluon.dal.MethodAdder.register
+gluon.tools.Auth.register" class="py-name" href="#" onclick="return doclink('link-40', 'register', 'link-40');">register</a></tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="gluon.dal.DatabaseStoredFile.readline
+gluon.debug.Pipe.readline
+gluon.portalocker.LockedFile.readline
+gluon.rocket.ChunkedReader.readline
+gluon.rocket.FileLikeSocket.readline" class="py-name" href="#" onclick="return doclink('link-41', 'readline', 'link-34');">readline</a></tt><tt class="py-op">.</tt><tt class="py-name">write_history_file</tt><tt class="py-op">,</tt> <tt class="py-name">history_file</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt id="link-42" class="py-name"><a title="gluon.dal.DatabaseStoredFile.readline
+gluon.debug.Pipe.readline
+gluon.portalocker.LockedFile.readline
+gluon.rocket.ChunkedReader.readline
+gluon.rocket.FileLikeSocket.readline" class="py-name" href="#" onclick="return doclink('link-42', 'readline', 'link-34');">readline</a></tt><tt class="py-op">.</tt><tt class="py-name">set_completer</tt><tt class="py-op">(</tt><tt class="py-name">rlcompleter</tt><tt class="py-op">.</tt><tt class="py-name">Completer</tt><tt class="py-op">(</tt><tt id="link-43" class="py-name" targets="Function gluon.shell.env()=gluon.shell-module.html#env"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-43', 'env', 'link-43');">env</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">complete</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="exec_environment"></a><div id="exec_environment-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="exec_environment-toggle" onclick="return toggle('exec_environment');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#exec_environment">exec_environment</a><tt class="py-op">(</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-param">pyfile</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-param">request</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-param">response</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-param">session</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="exec_environment-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="exec_environment-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    .. function:: gluon.shell.exec_environment([pyfile=''[, request=Request()</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        [, response=Response[, session=Session()]]]])</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        Environment builder and module loader.</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        Builds a web2py environment and optionally executes a Python</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        file into the environment.</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        A Storage dictionary containing the resulting environment is returned.</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        The working directory must be web2py root -- this is the web2py default.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-44" class="py-name" targets="Variable gluon.request=gluon-module.html#request"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-44', 'request', 'link-44');">request</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt id="link-45" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-45', 'request', 'link-44');">request</a></tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="gluon.globals.Request" class="py-name" href="#" onclick="return doclink('link-46', 'Request', 'link-20');">Request</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-47" class="py-name" targets="Variable gluon.response=gluon-module.html#response"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-47', 'response', 'link-47');">response</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt id="link-48" class="py-name"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-48', 'response', 'link-47');">response</a></tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="gluon.globals.Response" class="py-name" href="#" onclick="return doclink('link-49', 'Response', 'link-21');">Response</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-50" class="py-name" targets="Variable gluon.session=gluon-module.html#session"><a title="gluon.session" class="py-name" href="#" onclick="return doclink('link-50', 'session', 'link-50');">session</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt id="link-51" class="py-name"><a title="gluon.session" class="py-name" href="#" onclick="return doclink('link-51', 'session', 'link-50');">session</a></tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="gluon.globals.Session" class="py-name" href="#" onclick="return doclink('link-52', 'Session', 'link-22');">Session</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-53" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-53', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Variable gluon.dal.BaseAdapter.folder=gluon.dal.BaseAdapter-class.html#folder"><a title="gluon.dal.BaseAdapter.folder" class="py-name" href="#" onclick="return doclink('link-54', 'folder', 'link-54');">folder</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">mo</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-string">r'(|.*/)applications/(?P&lt;appname&gt;[^/]+)'</tt><tt class="py-op">,</tt> <tt class="py-name">pyfile</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">mo</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-name">appname</tt> <tt class="py-op">=</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'appname'</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt id="link-55" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-55', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="gluon.dal.BaseAdapter.folder" class="py-name" href="#" onclick="return doclink('link-56', 'folder', 'link-54');">folder</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-57', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-58', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-string">'applications'</tt><tt class="py-op">,</tt> <tt class="py-name">appname</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt id="link-59" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-59', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="gluon.dal.BaseAdapter.folder" class="py-name" href="#" onclick="return doclink('link-60', 'folder', 'link-54');">folder</a></tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt id="link-61" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-61', 'env', 'link-43');">env</a></tt> <tt class="py-op">=</tt> <tt id="link-62" class="py-name"><a title="gluon.compileapp.build_environment" class="py-name" href="#" onclick="return doclink('link-62', 'build_environment', 'link-12');">build_environment</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-63', 'request', 'link-44');">request</a></tt><tt class="py-op">,</tt> <tt id="link-64" class="py-name"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-64', 'response', 'link-47');">response</a></tt><tt class="py-op">,</tt> <tt id="link-65" class="py-name"><a title="gluon.session" class="py-name" href="#" onclick="return doclink('link-65', 'session', 'link-50');">session</a></tt><tt class="py-op">,</tt> <tt class="py-name">store_current</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">pyfile</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">pycfile</tt> <tt class="py-op">=</tt> <tt class="py-name">pyfile</tt> <tt class="py-op">+</tt> <tt class="py-string">'c'</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-66', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">pycfile</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">exec</tt> <tt id="link-67" class="py-name"><a title="gluon.compileapp.read_pyc" class="py-name" href="#" onclick="return doclink('link-67', 'read_pyc', 'link-13');">read_pyc</a></tt><tt class="py-op">(</tt><tt class="py-name">pycfile</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-68" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-68', 'env', 'link-43');">env</a></tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-name">execfile</tt><tt class="py-op">(</tt><tt class="py-name">pyfile</tt><tt class="py-op">,</tt> <tt id="link-69" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-69', 'env', 'link-43');">env</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-70" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-70', 'Storage', 'link-25');">Storage</a></tt><tt class="py-op">(</tt><tt id="link-71" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-71', 'env', 'link-43');">env</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="env"></a><div id="env-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="env-toggle" onclick="return toggle('env');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#env">env</a><tt class="py-op">(</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-param">a</tt><tt class="py-op">,</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-param">import_models</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-param">c</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-param">f</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-param">dir</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-param">extra_request</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="env-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="env-expanded"><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    Return web2py execution environment for application (a), controller (c),</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">    function (f).</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">    If import_models is True the exec all application models into the</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">    environment.</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    extra_request allows you to pass along any extra</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">    variables to the request object before your models</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    get executed. This was mainly done to support</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">    web2py_utils.test_runner, however you can use it</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    with any wrapper scripts that need access to the</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    web2py environment.</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt id="link-72" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-72', 'request', 'link-44');">request</a></tt> <tt class="py-op">=</tt> <tt id="link-73" class="py-name"><a title="gluon.globals.Request" class="py-name" href="#" onclick="return doclink('link-73', 'Request', 'link-20');">Request</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt id="link-74" class="py-name"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-74', 'response', 'link-47');">response</a></tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="gluon.globals.Response" class="py-name" href="#" onclick="return doclink('link-75', 'Response', 'link-21');">Response</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt id="link-76" class="py-name"><a title="gluon.session" class="py-name" href="#" onclick="return doclink('link-76', 'session', 'link-50');">session</a></tt> <tt class="py-op">=</tt> <tt id="link-77" class="py-name"><a title="gluon.globals.Session" class="py-name" href="#" onclick="return doclink('link-77', 'Session', 'link-22');">Session</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt id="link-78" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-78', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">application</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-comment"># Populate the dummy environment with sensible defaults.</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">dir</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt id="link-79" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-79', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="gluon.dal.BaseAdapter.folder" class="py-name" href="#" onclick="return doclink('link-80', 'folder', 'link-54');">folder</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-81', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-82', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-string">'applications'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt id="link-83" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-83', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="gluon.dal.BaseAdapter.folder" class="py-name" href="#" onclick="return doclink('link-84', 'folder', 'link-54');">folder</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dir</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt id="link-85" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-85', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">controller</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt> <tt class="py-keyword">or</tt> <tt class="py-string">'default'</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt id="link-86" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-86', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">function</tt> <tt class="py-op">=</tt> <tt id="link-87" class="py-name" targets="Variable gluon.languages.lazyT.f=gluon.languages.lazyT-class.html#f"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-87', 'f', 'link-87');">f</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">'index'</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt id="link-88" class="py-name"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-88', 'response', 'link-47');">response</a></tt><tt class="py-op">.</tt><tt class="py-name">view</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s/%s.html'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-89" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-89', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">controller</tt><tt class="py-op">,</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                                    <tt id="link-90" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-90', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">function</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-91" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-91', 'global_settings', 'link-6');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">cmd_options</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-name">ip</tt> <tt class="py-op">=</tt> <tt id="link-92" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-92', 'global_settings', 'link-6');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">cmd_options</tt><tt class="py-op">.</tt><tt class="py-name">ip</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">port</tt> <tt class="py-op">=</tt> <tt id="link-93" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-93', 'global_settings', 'link-6');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">cmd_options</tt><tt class="py-op">.</tt><tt class="py-name">port</tt>  </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">ip</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt> <tt class="py-op">=</tt> <tt class="py-string">'127.0.0.1'</tt><tt class="py-op">,</tt> <tt class="py-string">'8000'</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt id="link-94" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-94', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-95', 'env', 'link-43');">env</a></tt><tt class="py-op">.</tt><tt class="py-name">http_host</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s:%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">ip</tt><tt class="py-op">,</tt><tt class="py-name">port</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt id="link-96" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-96', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-97', 'env', 'link-43');">env</a></tt><tt class="py-op">.</tt><tt class="py-name">remote_addr</tt> <tt class="py-op">=</tt> <tt class="py-string">'127.0.0.1'</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt id="link-98" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-98', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-99', 'env', 'link-43');">env</a></tt><tt class="py-op">.</tt><tt class="py-name">web2py_runtime_gae</tt> <tt class="py-op">=</tt> <tt id="link-100" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-100', 'global_settings', 'link-6');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">web2py_runtime_gae</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">extra_request</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name" targets="Method gluon.dal.Row.items()=gluon.dal.Row-class.html#items,Method gluon.dal.Table.items()=gluon.dal.Table-class.html#items"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-101', 'items', 'link-101');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt id="link-102" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-102', 'request', 'link-44');">request</a></tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-name">path_info</tt> <tt class="py-op">=</tt> <tt class="py-string">'/%s/%s/%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-103" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-103', 'f', 'link-87');">f</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-104" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-104', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">args</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-name">path_info</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s/%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">path_info</tt><tt class="py-op">,</tt> <tt class="py-string">'/'</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-105', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt id="link-106" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-106', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt class="py-name">args</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-107" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-107', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-108" class="py-name" targets="Variable gluon.globals.Request.vars=gluon.globals.Request-class.html#vars"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-108', 'vars', 'link-108');">vars</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt id="link-109" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-109', 'vars', 'link-108');">vars</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'%s=%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">v</tt> <tt class="py-keyword">else</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">k</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-110" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-110', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-111', 'vars', 'link-108');">vars</a></tt><tt class="py-op">.</tt><tt id="link-112" class="py-name" targets="Method gluon.dal.Row.iteritems()=gluon.dal.Row-class.html#iteritems,Method gluon.dal.Table.iteritems()=gluon.dal.Table-class.html#iteritems"><a title="gluon.dal.Row.iteritems
+gluon.dal.Table.iteritems" class="py-name" href="#" onclick="return doclink('link-112', 'iteritems', 'link-112');">iteritems</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">path_info</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s?%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">path_info</tt><tt class="py-op">,</tt> <tt class="py-string">'&amp;'</tt><tt class="py-op">.</tt><tt id="link-113" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-113', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt id="link-114" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-114', 'vars', 'link-108');">vars</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt id="link-115" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-115', 'request', 'link-44');">request</a></tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-116', 'env', 'link-43');">env</a></tt><tt class="py-op">.</tt><tt class="py-name">path_info</tt> <tt class="py-op">=</tt> <tt class="py-name">path_info</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-comment"># Monkey patch so credentials checks pass.</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">check_credentials</tt><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">other_application</tt><tt class="py-op">=</tt><tt class="py-string">'admin'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt id="link-117" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-117', 'fileutils', 'link-2');">fileutils</a></tt><tt class="py-op">.</tt><tt id="link-118" class="py-name" targets="Function gluon.fileutils.check_credentials()=gluon.fileutils-module.html#check_credentials"><a title="gluon.fileutils.check_credentials" class="py-name" href="#" onclick="return doclink('link-118', 'check_credentials', 'link-118');">check_credentials</a></tt> <tt class="py-op">=</tt> <tt id="link-119" class="py-name"><a title="gluon.fileutils.check_credentials" class="py-name" href="#" onclick="return doclink('link-119', 'check_credentials', 'link-118');">check_credentials</a></tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-name">environment</tt> <tt class="py-op">=</tt> <tt id="link-120" class="py-name"><a title="gluon.compileapp.build_environment" class="py-name" href="#" onclick="return doclink('link-120', 'build_environment', 'link-12');">build_environment</a></tt><tt class="py-op">(</tt><tt id="link-121" class="py-name"><a title="gluon.request" class="py-name" href="#" onclick="return doclink('link-121', 'request', 'link-44');">request</a></tt><tt class="py-op">,</tt> <tt id="link-122" class="py-name"><a title="gluon.response" class="py-name" href="#" onclick="return doclink('link-122', 'response', 'link-47');">response</a></tt><tt class="py-op">,</tt> <tt id="link-123" class="py-name"><a title="gluon.session" class="py-name" href="#" onclick="return doclink('link-123', 'session', 'link-50');">session</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">import_models</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt id="link-124" class="py-name"><a title="gluon.compileapp.run_models_in" class="py-name" href="#" onclick="return doclink('link-124', 'run_models_in', 'link-14');">run_models_in</a></tt><tt class="py-op">(</tt><tt class="py-name">environment</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt id="link-125" class="py-name"><a title="gluon.restricted.RestrictedError" class="py-name" href="#" onclick="return doclink('link-125', 'RestrictedError', 'link-17');">RestrictedError</a></tt><tt class="py-op">,</tt> <tt id="link-126" class="py-name" targets="Variable gluon.dal.e=gluon.dal-module.html#e"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-126', 'e', 'link-126');">e</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">.</tt><tt id="link-127" class="py-name" targets="Method gluon.dal.DatabaseStoredFile.write()=gluon.dal.DatabaseStoredFile-class.html#write,Method gluon.debug.Pipe.write()=gluon.debug.Pipe-class.html#write,Method gluon.globals.Response.write()=gluon.globals.Response-class.html#write,Method gluon.portalocker.LockedFile.write()=gluon.portalocker.LockedFile-class.html#write,Variable gluon.rocket.Connection.write=gluon.rocket.Connection-class.html#write,Method gluon.rocket.WSGIWorker.write()=gluon.rocket.WSGIWorker-class.html#write,Method gluon.template.DummyResponse.write()=gluon.template.DummyResponse-class.html#write,Method gluon.widget.IO.write()=gluon.widget.IO-class.html#write"><a title="gluon.dal.DatabaseStoredFile.write
+gluon.debug.Pipe.write
+gluon.globals.Response.write
+gluon.portalocker.LockedFile.write
+gluon.rocket.Connection.write
+gluon.rocket.WSGIWorker.write
+gluon.template.DummyResponse.write
+gluon.widget.IO.write" class="py-name" href="#" onclick="return doclink('link-127', 'write', 'link-127');">write</a></tt><tt class="py-op">(</tt><tt id="link-128" class="py-name"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-128', 'e', 'link-126');">e</a></tt><tt class="py-op">.</tt><tt class="py-name">traceback</tt> <tt class="py-op">+</tt> <tt class="py-string">'\n'</tt><tt class="py-op">)</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-name">environment</tt><tt class="py-op">[</tt><tt class="py-string">'__name__'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-string">'__main__'</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">environment</tt> </tt>
+</div><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="exec_pythonrc"></a><div id="exec_pythonrc-def"><a name="L175"></a><tt class="py-lineno">175</tt> <a class="py-toggle" href="#" id="exec_pythonrc-toggle" onclick="return toggle('exec_pythonrc');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#exec_pythonrc">exec_pythonrc</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="exec_pythonrc-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="exec_pythonrc-expanded"><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">    <tt class="py-name">pythonrc</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-129" class="py-name" targets="Variable gluon.main.LazyWSGI.environ=gluon.main.LazyWSGI-class.html#environ"><a title="gluon.main.LazyWSGI.environ" class="py-name" href="#" onclick="return doclink('link-129', 'environ', 'link-129');">environ</a></tt><tt class="py-op">.</tt><tt id="link-130" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-130', 'get', 'link-130');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'PYTHONSTARTUP'</tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">pythonrc</tt> <tt class="py-keyword">and</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-131', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">pythonrc</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">execfile_getlocals</tt><tt class="py-op">(</tt><tt class="py-param">file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">            <tt class="py-name">execfile</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">locals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">execfile_getlocals</tt><tt class="py-op">(</tt><tt class="py-name">pythonrc</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">NameError</tt><tt class="py-op">:</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"> </tt>
+<a name="run"></a><div id="run-def"><a name="L188"></a><tt class="py-lineno">188</tt> <a class="py-toggle" href="#" id="run-toggle" onclick="return toggle('run');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#run">run</a><tt class="py-op">(</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">    <tt class="py-param">appname</tt><tt class="py-op">,</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">    <tt class="py-param">plain</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-param">import_models</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">    <tt class="py-param">startfile</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">    <tt class="py-param">bpython</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-param">python_code</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-param">cronjob</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="run-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="run-expanded"><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">    Start interactive shell or run Python script (startfile) in web2py</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">    controller environment. appname is formatted like:</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">    a      web2py application name</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">    a/c    exec the controller c into the application environment</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-132" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-132', 'f', 'link-87');">f</a></tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">,</tt> <tt id="link-133" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-133', 'vars', 'link-108');">vars</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-134" class="py-name" targets="Function gluon.shell.parse_path_info()=gluon.shell-module.html#parse_path_info"><a title="gluon.shell.parse_path_info" class="py-name" href="#" onclick="return doclink('link-134', 'parse_path_info', 'link-134');">parse_path_info</a></tt><tt class="py-op">(</tt><tt class="py-name">appname</tt><tt class="py-op">,</tt> <tt class="py-name">av</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">    <tt class="py-name">errmsg</tt> <tt class="py-op">=</tt> <tt class="py-string">'invalid application name: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">appname</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">a</tt><tt class="py-op">:</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt id="link-135" class="py-name" targets="Method gluon.scheduler.MetaScheduler.die()=gluon.scheduler.MetaScheduler-class.html#die,Function gluon.shell.die()=gluon.shell-module.html#die"><a title="gluon.scheduler.MetaScheduler.die
+gluon.shell.die" class="py-name" href="#" onclick="return doclink('link-135', 'die', 'link-135');">die</a></tt><tt class="py-op">(</tt><tt class="py-name">errmsg</tt><tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt class="py-name">adir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-136" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-136', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-137" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-137', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-string">'applications'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-138', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-139" class="py-name" targets="Static Method gluon.dal.DatabaseStoredFile.exists()=gluon.dal.DatabaseStoredFile-class.html#exists"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-139', 'exists', 'link-139');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">adir</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stdin</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stdin</tt><tt class="py-op">.</tt><tt id="link-140" class="py-name" targets="Variable gluon.import_all.name=gluon.import_all-module.html#name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-140', 'name', 'link-140');">name</a></tt> <tt class="py-op">==</tt> <tt class="py-string">'/dev/null'</tt><tt class="py-op">:</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">            <tt id="link-141" class="py-name" targets="Static Method gluon.html.FORM.confirm()=gluon.html.FORM-class.html#confirm"><a title="gluon.html.FORM.confirm" class="py-name" href="#" onclick="return doclink('link-141', 'confirm', 'link-141');">confirm</a></tt> <tt class="py-op">=</tt> <tt class="py-name">raw_input</tt><tt class="py-op">(</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">                <tt class="py-string">'application %s does not exist, create (y/n)?'</tt> <tt class="py-op">%</tt> <tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">            <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">'application does not exist and will not be created'</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-142" class="py-name"><a title="gluon.html.FORM.confirm" class="py-name" href="#" onclick="return doclink('link-142', 'confirm', 'link-141');">confirm</a></tt><tt class="py-op">.</tt><tt id="link-143" class="py-name" targets="Method gluon.dal.Expression.lower()=gluon.dal.Expression-class.html#lower,Method gluon.utf8.Utf8.lower()=gluon.utf8.Utf8-class.html#lower"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-143', 'lower', 'link-143');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'y'</tt><tt class="py-op">,</tt> <tt class="py-string">'yes'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">            <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">mkdir</tt><tt class="py-op">(</tt><tt class="py-name">adir</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">            <tt id="link-144" class="py-name"><a title="gluon.fileutils.w2p_unpack" class="py-name" href="#" onclick="return doclink('link-144', 'w2p_unpack', 'link-29');">w2p_unpack</a></tt><tt class="py-op">(</tt><tt class="py-string">'welcome.w2p'</tt><tt class="py-op">,</tt> <tt class="py-name">adir</tt><tt class="py-op">)</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">subfolder</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'models'</tt><tt class="py-op">,</tt> <tt class="py-string">'views'</tt><tt class="py-op">,</tt> <tt class="py-string">'controllers'</tt><tt class="py-op">,</tt> <tt class="py-string">'databases'</tt><tt class="py-op">,</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                              <tt class="py-string">'modules'</tt><tt class="py-op">,</tt> <tt class="py-string">'cron'</tt><tt class="py-op">,</tt> <tt class="py-string">'errors'</tt><tt class="py-op">,</tt> <tt class="py-string">'sessions'</tt><tt class="py-op">,</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                              <tt class="py-string">'languages'</tt><tt class="py-op">,</tt> <tt class="py-string">'static'</tt><tt class="py-op">,</tt> <tt class="py-string">'private'</tt><tt class="py-op">,</tt> <tt class="py-string">'uploads'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">                <tt class="py-name">subpath</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-145" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-145', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-146" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-146', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">adir</tt><tt class="py-op">,</tt> <tt class="py-name">subfolder</tt><tt class="py-op">)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-147" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-147', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-148" class="py-name"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-148', 'exists', 'link-139');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">subpath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">                    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">mkdir</tt><tt class="py-op">(</tt><tt class="py-name">subpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">            <tt id="link-149" class="py-name" targets="Variable gluon.db=gluon-module.html#db"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-149', 'db', 'link-149');">db</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-150" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-150', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-151" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-151', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">adir</tt><tt class="py-op">,</tt> <tt class="py-string">'models/db.py'</tt><tt class="py-op">)</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-152" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-152', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-153" class="py-name"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-153', 'exists', 'link-139');">exists</a></tt><tt class="py-op">(</tt><tt id="link-154" class="py-name"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-154', 'db', 'link-149');">db</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">                <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt id="link-155" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-155', 'fileutils', 'link-2');">fileutils</a></tt><tt class="py-op">.</tt><tt id="link-156" class="py-name" targets="Function gluon.fileutils.read_file()=gluon.fileutils-module.html#read_file"><a title="gluon.fileutils.read_file" class="py-name" href="#" onclick="return doclink('link-156', 'read_file', 'link-156');">read_file</a></tt><tt class="py-op">(</tt><tt id="link-157" class="py-name"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-157', 'db', 'link-149');">db</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">                <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt id="link-158" class="py-name" targets="Method gluon.dal.Expression.replace()=gluon.dal.Expression-class.html#replace,Method gluon.utf8.Utf8.replace()=gluon.utf8.Utf8-class.html#replace"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-158', 'replace', 'link-158');">replace</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">                    <tt class="py-string">'&lt;your secret key&gt;'</tt><tt class="py-op">,</tt> <tt class="py-string">'sha512:'</tt> <tt class="py-op">+</tt> <tt id="link-159" class="py-name"><a title="gluon.utils.web2py_uuid" class="py-name" href="#" onclick="return doclink('link-159', 'web2py_uuid', 'link-9');">web2py_uuid</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">                <tt id="link-160" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-160', 'fileutils', 'link-2');">fileutils</a></tt><tt class="py-op">.</tt><tt id="link-161" class="py-name" targets="Function gluon.fileutils.write_file()=gluon.fileutils-module.html#write_file"><a title="gluon.fileutils.write_file" class="py-name" href="#" onclick="return doclink('link-161', 'write_file', 'link-161');">write_file</a></tt><tt class="py-op">(</tt><tt id="link-162" class="py-name"><a title="gluon.db" class="py-name" href="#" onclick="return doclink('link-162', 'db', 'link-149');">db</a></tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">c</tt><tt class="py-op">:</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt class="py-name">import_models</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">    <tt class="py-name">extra_request</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-name">extra_request</tt><tt class="py-op">[</tt><tt class="py-string">'args'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">args</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-163" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-163', 'vars', 'link-108');">vars</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">        <tt class="py-name">extra_request</tt><tt class="py-op">[</tt><tt class="py-string">'vars'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-164" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-164', 'vars', 'link-108');">vars</a></tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-name">_env</tt> <tt class="py-op">=</tt> <tt id="link-165" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-165', 'env', 'link-43');">env</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt><tt class="py-op">=</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-166" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-166', 'f', 'link-87');">f</a></tt><tt class="py-op">=</tt><tt id="link-167" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-167', 'f', 'link-87');">f</a></tt><tt class="py-op">,</tt> <tt class="py-name">import_models</tt><tt class="py-op">=</tt><tt class="py-name">import_models</tt><tt class="py-op">,</tt> <tt class="py-name">extra_request</tt><tt class="py-op">=</tt><tt class="py-name">extra_request</tt><tt class="py-op">)</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">c</tt><tt class="py-op">:</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-name">pyfile</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-168" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-168', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-169" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-169', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-string">'applications'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-string">'controllers'</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt> <tt class="py-op">+</tt> <tt class="py-string">'.py'</tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-name">pycfile</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-170" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-170', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-171" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-171', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-string">'applications'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-string">'compiled'</tt><tt class="py-op">,</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">                                 <tt class="py-string">"controllers_%s_%s.pyc"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-172" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-172', 'f', 'link-87');">f</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">cronjob</tt> <tt class="py-keyword">and</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-173" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-173', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">pycfile</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">            <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-174" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-174', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">pyfile</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">            <tt class="py-keyword">exec</tt> <tt id="link-175" class="py-name"><a title="gluon.compileapp.read_pyc" class="py-name" href="#" onclick="return doclink('link-175', 'read_pyc', 'link-13');">read_pyc</a></tt><tt class="py-op">(</tt><tt class="py-name">pycfile</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">_env</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-176" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-176', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">pyfile</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">            <tt class="py-name">execfile</tt><tt class="py-op">(</tt><tt class="py-name">pyfile</tt><tt class="py-op">,</tt> <tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">            <tt id="link-177" class="py-name"><a title="gluon.scheduler.MetaScheduler.die
+gluon.shell.die" class="py-name" href="#" onclick="return doclink('link-177', 'die', 'link-135');">die</a></tt><tt class="py-op">(</tt><tt class="py-name">errmsg</tt><tt class="py-op">)</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-178" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-178', 'f', 'link-87');">f</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">        <tt class="py-keyword">exec</tt> <tt class="py-op">(</tt><tt class="py-string">'print %s()'</tt> <tt class="py-op">%</tt> <tt id="link-179" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-179', 'f', 'link-87');">f</a></tt><tt class="py-op">,</tt> <tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">    <tt class="py-name">_env</tt><tt class="py-op">.</tt><tt id="link-180" class="py-name" targets="Method gluon.dal.BaseAdapter.update()=gluon.dal.BaseAdapter-class.html#update,Method gluon.dal.CouchDBAdapter.update()=gluon.dal.CouchDBAdapter-class.html#update,Method gluon.dal.GoogleDatastoreAdapter.update()=gluon.dal.GoogleDatastoreAdapter-class.html#update,Method gluon.dal.IMAPAdapter.update()=gluon.dal.IMAPAdapter-class.html#update,Method gluon.dal.LazySet.update()=gluon.dal.LazySet-class.html#update,Method gluon.dal.MongoDBAdapter.update()=gluon.dal.MongoDBAdapter-class.html#update,Method gluon.dal.Row.update()=gluon.dal.Row-class.html#update,Method gluon.dal.Set.update()=gluon.dal.Set-class.html#update,Method gluon.dal.Table.update()=gluon.dal.Table-class.html#update,Method gluon.html.DIV.update()=gluon.html.DIV-class.html#update,Method gluon.storage.FastStorage.update()=gluon.storage.FastStorage-class.html#update,Method gluon.tools.Crud.update()=gluon.tools.Crud-class.html#update,Method gluon.widget.web2pyDialog.update()=gluon.widget.web2pyDialog-class.html#update"><a title="gluon.dal.BaseAdapter.update
+gluon.dal.CouchDBAdapter.update
+gluon.dal.GoogleDatastoreAdapter.update
+gluon.dal.IMAPAdapter.update
+gluon.dal.LazySet.update
+gluon.dal.MongoDBAdapter.update
+gluon.dal.Row.update
+gluon.dal.Set.update
+gluon.dal.Table.update
+gluon.html.DIV.update
+gluon.storage.FastStorage.update
+gluon.tools.Crud.update
+gluon.widget.web2pyDialog.update" class="py-name" href="#" onclick="return doclink('link-180', 'update', 'link-180');">update</a></tt><tt class="py-op">(</tt><tt id="link-181" class="py-name" targets="Function gluon.shell.exec_pythonrc()=gluon.shell-module.html#exec_pythonrc"><a title="gluon.shell.exec_pythonrc" class="py-name" href="#" onclick="return doclink('link-181', 'exec_pythonrc', 'link-181');">exec_pythonrc</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">startfile</tt><tt class="py-op">:</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">            <tt class="py-name">ccode</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">startfile</tt><tt class="py-op">.</tt><tt id="link-182" class="py-name" targets="Method gluon.dal.Expression.endswith()=gluon.dal.Expression-class.html#endswith,Method gluon.utf8.Utf8.endswith()=gluon.utf8.Utf8-class.html#endswith"><a title="gluon.dal.Expression.endswith
+gluon.utf8.Utf8.endswith" class="py-name" href="#" onclick="return doclink('link-182', 'endswith', 'link-182');">endswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'.pyc'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">                <tt class="py-name">ccode</tt> <tt class="py-op">=</tt> <tt id="link-183" class="py-name"><a title="gluon.compileapp.read_pyc" class="py-name" href="#" onclick="return doclink('link-183', 'read_pyc', 'link-13');">read_pyc</a></tt><tt class="py-op">(</tt><tt class="py-name">startfile</tt><tt class="py-op">)</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">                <tt class="py-keyword">exec</tt> <tt class="py-name">ccode</tt> <tt class="py-keyword">in</tt> <tt class="py-name">_env</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">                <tt class="py-name">execfile</tt><tt class="py-op">(</tt><tt class="py-name">startfile</tt><tt class="py-op">,</tt> <tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">import_models</tt><tt class="py-op">:</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">                <tt id="link-184" class="py-name"><a title="gluon.dal.BaseAdapter" class="py-name" href="#" onclick="return doclink('link-184', 'BaseAdapter', 'link-32');">BaseAdapter</a></tt><tt class="py-op">.</tt><tt id="link-185" class="py-name" targets="Static Method gluon.dal.ConnectionPool.close_all_instances()=gluon.dal.ConnectionPool-class.html#close_all_instances"><a title="gluon.dal.ConnectionPool.close_all_instances" class="py-name" href="#" onclick="return doclink('link-185', 'close_all_instances', 'link-185');">close_all_instances</a></tt><tt class="py-op">(</tt><tt class="py-string">'commit'</tt><tt class="py-op">)</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt id="link-186" class="py-name"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-186', 'e', 'link-126');">e</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">format_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">import_models</tt><tt class="py-op">:</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">                <tt id="link-187" class="py-name"><a title="gluon.dal.BaseAdapter" class="py-name" href="#" onclick="return doclink('link-187', 'BaseAdapter', 'link-32');">BaseAdapter</a></tt><tt class="py-op">.</tt><tt id="link-188" class="py-name"><a title="gluon.dal.ConnectionPool.close_all_instances" class="py-name" href="#" onclick="return doclink('link-188', 'close_all_instances', 'link-185');">close_all_instances</a></tt><tt class="py-op">(</tt><tt class="py-string">'rollback'</tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">python_code</tt><tt class="py-op">:</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">            <tt class="py-keyword">exec</tt><tt class="py-op">(</tt><tt class="py-name">python_code</tt><tt class="py-op">,</tt> <tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">import_models</tt><tt class="py-op">:</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">                <tt id="link-189" class="py-name"><a title="gluon.dal.BaseAdapter" class="py-name" href="#" onclick="return doclink('link-189', 'BaseAdapter', 'link-32');">BaseAdapter</a></tt><tt class="py-op">.</tt><tt id="link-190" class="py-name"><a title="gluon.dal.ConnectionPool.close_all_instances" class="py-name" href="#" onclick="return doclink('link-190', 'close_all_instances', 'link-185');">close_all_instances</a></tt><tt class="py-op">(</tt><tt class="py-string">'commit'</tt><tt class="py-op">)</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt id="link-191" class="py-name"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-191', 'e', 'link-126');">e</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">format_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">import_models</tt><tt class="py-op">:</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">                <tt id="link-192" class="py-name"><a title="gluon.dal.BaseAdapter" class="py-name" href="#" onclick="return doclink('link-192', 'BaseAdapter', 'link-32');">BaseAdapter</a></tt><tt class="py-op">.</tt><tt id="link-193" class="py-name"><a title="gluon.dal.ConnectionPool.close_all_instances" class="py-name" href="#" onclick="return doclink('link-193', 'close_all_instances', 'link-185');">close_all_instances</a></tt><tt class="py-op">(</tt><tt class="py-string">'rollback'</tt><tt class="py-op">)</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">plain</tt><tt class="py-op">:</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">bpython</tt><tt class="py-op">:</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">                    <tt class="py-keyword">import</tt> <tt class="py-name">bpython</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">                    <tt class="py-name">bpython</tt><tt class="py-op">.</tt><tt class="py-name">embed</tt><tt class="py-op">(</tt><tt class="py-name">locals_</tt><tt class="py-op">=</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">                    <tt id="link-194" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-194', 'logger', 'link-33');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">                        <tt class="py-string">'import bpython error; trying ipython...'</tt><tt class="py-op">)</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">                    <tt class="py-keyword">import</tt> <tt class="py-name">IPython</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">__version__</tt> <tt class="py-op">&gt;</tt> <tt class="py-string">'1.0.0'</tt><tt class="py-op">:</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">                        <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">start_ipython</tt><tt class="py-op">(</tt><tt class="py-name">user_ns</tt><tt class="py-op">=</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">                    <tt class="py-keyword">elif</tt> <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">__version__</tt> <tt class="py-op">==</tt> <tt class="py-string">'1.0.0'</tt><tt class="py-op">:</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">                        <tt class="py-keyword">from</tt> <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">terminal</tt><tt class="py-op">.</tt><tt class="py-name">embed</tt> <tt class="py-keyword">import</tt> <tt class="py-name">InteractiveShellEmbed</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">                        <tt id="link-195" class="py-name" targets="Module gluon.shell=gluon.shell-module.html"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-195', 'shell', 'link-195');">shell</a></tt> <tt class="py-op">=</tt> <tt class="py-name">InteractiveShellEmbed</tt><tt class="py-op">(</tt><tt class="py-name">user_ns</tt><tt class="py-op">=</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">                        <tt id="link-196" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-196', 'shell', 'link-195');">shell</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">                    <tt class="py-keyword">elif</tt> <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">__version__</tt> <tt class="py-op">&gt;=</tt> <tt class="py-string">'0.11'</tt><tt class="py-op">:</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">                        <tt class="py-keyword">from</tt> <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">frontend</tt><tt class="py-op">.</tt><tt class="py-name">terminal</tt><tt class="py-op">.</tt><tt class="py-name">embed</tt> <tt class="py-keyword">import</tt> <tt class="py-name">InteractiveShellEmbed</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">                        <tt id="link-197" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-197', 'shell', 'link-195');">shell</a></tt> <tt class="py-op">=</tt> <tt class="py-name">InteractiveShellEmbed</tt><tt class="py-op">(</tt><tt class="py-name">user_ns</tt><tt class="py-op">=</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">                        <tt id="link-198" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-198', 'shell', 'link-195');">shell</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">                    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">                        <tt class="py-comment"># following 2 lines fix a problem with</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">                        <tt class="py-comment"># IPython; thanks Michael Toomim</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-string">'__builtins__'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">_env</tt><tt class="py-op">:</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">                            <tt class="py-keyword">del</tt> <tt class="py-name">_env</tt><tt class="py-op">[</tt><tt class="py-string">'__builtins__'</tt><tt class="py-op">]</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">                        <tt id="link-199" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-199', 'shell', 'link-195');">shell</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IPython</tt><tt class="py-op">.</tt><tt class="py-name">Shell</tt><tt class="py-op">.</tt><tt class="py-name">IPShell</tt><tt class="py-op">(</tt><tt class="py-name">argv</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">user_ns</tt><tt class="py-op">=</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">                        <tt id="link-200" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-200', 'shell', 'link-195');">shell</a></tt><tt class="py-op">.</tt><tt class="py-name">mainloop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">                    <tt id="link-201" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-201', 'logger', 'link-33');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">                        <tt class="py-string">'import IPython error; use default python shell'</tt><tt class="py-op">)</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">        <tt id="link-202" class="py-name" targets="Function gluon.shell.enable_autocomplete_and_history()=gluon.shell-module.html#enable_autocomplete_and_history"><a title="gluon.shell.enable_autocomplete_and_history" class="py-name" href="#" onclick="return doclink('link-202', 'enable_autocomplete_and_history', 'link-202');">enable_autocomplete_and_history</a></tt><tt class="py-op">(</tt><tt class="py-name">adir</tt><tt class="py-op">,</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">        <tt class="py-name">code</tt><tt class="py-op">.</tt><tt class="py-name">interact</tt><tt class="py-op">(</tt><tt class="py-name">local</tt><tt class="py-op">=</tt><tt class="py-name">_env</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line"> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line"> </tt>
+<a name="parse_path_info"></a><div id="parse_path_info-def"><a name="L324"></a><tt class="py-lineno">324</tt> <a class="py-toggle" href="#" id="parse_path_info-toggle" onclick="return toggle('parse_path_info');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#parse_path_info">parse_path_info</a><tt class="py-op">(</tt><tt class="py-param">path_info</tt><tt class="py-op">,</tt> <tt class="py-param">av</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parse_path_info-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="parse_path_info-expanded"><a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line"><tt class="py-docstring">    Parse path info formatted like a/c/f where c and f are optional</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"><tt class="py-docstring">    and a leading / accepted.</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"><tt class="py-docstring">    Return tuple (a, c, f). If invalid path_info a is set to None.</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line"><tt class="py-docstring">    If c or f are omitted they are set to None.</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line"><tt class="py-docstring">    If av=True, parse args and vars</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">av</tt><tt class="py-op">:</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">        <tt id="link-203" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-203', 'vars', 'link-108');">vars</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'?'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">path_info</tt><tt class="py-op">:</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">            <tt class="py-name">path_info</tt><tt class="py-op">,</tt> <tt class="py-name">query</tt> <tt class="py-op">=</tt> <tt class="py-name">path_info</tt><tt class="py-op">.</tt><tt id="link-204" class="py-name" targets="Method gluon.utf8.Utf8.split()=gluon.utf8.Utf8-class.html#split"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-204', 'split', 'link-204');">split</a></tt><tt class="py-op">(</tt><tt class="py-string">'?'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">            <tt id="link-205" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-205', 'vars', 'link-108');">vars</a></tt> <tt class="py-op">=</tt> <tt id="link-206" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-206', 'Storage', 'link-25');">Storage</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">var</tt> <tt class="py-keyword">in</tt> <tt class="py-name">query</tt><tt class="py-op">.</tt><tt id="link-207" class="py-name"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-207', 'split', 'link-204');">split</a></tt><tt class="py-op">(</tt><tt class="py-string">'&amp;'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">var</tt><tt class="py-op">,</tt> <tt class="py-name">val</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">var</tt><tt class="py-op">.</tt><tt id="link-208" class="py-name"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-208', 'split', 'link-204');">split</a></tt><tt class="py-op">(</tt><tt class="py-string">'='</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-string">'='</tt> <tt class="py-keyword">in</tt> <tt class="py-name">var</tt> <tt class="py-keyword">else</tt> <tt class="py-op">(</tt><tt class="py-name">var</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line">                <tt id="link-209" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-209', 'vars', 'link-108');">vars</a></tt><tt class="py-op">[</tt><tt class="py-name">var</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">val</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">        <tt id="link-210" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-210', 'items', 'link-101');">items</a></tt> <tt class="py-op">=</tt> <tt id="link-211" class="py-name"><a title="gluon.storage.List" class="py-name" href="#" onclick="return doclink('link-211', 'List', 'link-26');">List</a></tt><tt class="py-op">(</tt><tt class="py-name">path_info</tt><tt class="py-op">.</tt><tt id="link-212" class="py-name"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-212', 'split', 'link-204');">split</a></tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line">        <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt id="link-213" class="py-name"><a title="gluon.storage.List" class="py-name" href="#" onclick="return doclink('link-213', 'List', 'link-26');">List</a></tt><tt class="py-op">(</tt><tt id="link-214" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-214', 'items', 'link-101');">items</a></tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt id="link-215" class="py-name" targets="Method gluon.dal.Expression.len()=gluon.dal.Expression-class.html#len"><a title="gluon.dal.Expression.len" class="py-name" href="#" onclick="return doclink('link-215', 'len', 'link-215');">len</a></tt><tt class="py-op">(</tt><tt id="link-216" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-216', 'items', 'link-101');">items</a></tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">3</tt> <tt class="py-keyword">else</tt> <tt class="py-name">None</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt id="link-217" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-217', 'items', 'link-101');">items</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-218" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-218', 'items', 'link-101');">items</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-219" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-219', 'items', 'link-101');">items</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">,</tt> <tt id="link-220" class="py-name"><a title="gluon.globals.Request.vars" class="py-name" href="#" onclick="return doclink('link-220', 'vars', 'link-108');">vars</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">    <tt class="py-name">mo</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-string">r'^/?(?P&lt;a&gt;\w+)(/(?P&lt;c&gt;\w+)(/(?P&lt;f&gt;\w+))?)?$'</tt><tt class="py-op">,</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">                  <tt class="py-name">path_info</tt><tt class="py-op">)</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">mo</tt><tt class="py-op">:</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'c'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'f'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line"> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"> </tt>
+<a name="die"></a><div id="die-def"><a name="L352"></a><tt class="py-lineno">352</tt> <a class="py-toggle" href="#" id="die-toggle" onclick="return toggle('die');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#die">die</a><tt class="py-op">(</tt><tt class="py-param">msg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="die-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="die-expanded"><a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt id="link-221" class="py-name" targets="Variable gluon.widget.msg=gluon.widget-module.html#msg"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-221', 'msg', 'link-221');">msg</a></tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"> </tt>
+<a name="test"></a><div id="test-def"><a name="L357"></a><tt class="py-lineno">357</tt> <a class="py-toggle" href="#" id="test-toggle" onclick="return toggle('test');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#test">test</a><tt class="py-op">(</tt><tt class="py-param">testpath</tt><tt class="py-op">,</tt> <tt class="py-param">import_models</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">verbose</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="test-expanded"><a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"><tt class="py-docstring">    Run doctests in web2py environment. testpath is formatted like:</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line"><tt class="py-docstring">    a      tests all controllers in application a</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"><tt class="py-docstring">    a/c    tests controller c in application a</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"><tt class="py-docstring">    a/c/f  test function f in controller c, application a</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line"><tt class="py-docstring">    Where a, c and f are application, controller and function names</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"><tt class="py-docstring">    respectively. If the testpath is a file name the file is tested.</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"><tt class="py-docstring">    If a controller is specified models are executed by default.</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line"> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-222" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-222', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">testpath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line">        <tt class="py-name">mo</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-string">r'(|.*/)applications/(?P&lt;a&gt;[^/]+)'</tt><tt class="py-op">,</tt> <tt class="py-name">testpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">mo</tt><tt class="py-op">:</tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line">            <tt id="link-223" class="py-name"><a title="gluon.scheduler.MetaScheduler.die
+gluon.shell.die" class="py-name" href="#" onclick="return doclink('link-223', 'die', 'link-135');">die</a></tt><tt class="py-op">(</tt><tt class="py-string">'test file is not in application directory: %s'</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line">                <tt class="py-op">%</tt> <tt class="py-name">testpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line">        <tt class="py-name">a</tt> <tt class="py-op">=</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">        <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt id="link-224" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-224', 'f', 'link-87');">f</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">        <tt id="link-225" class="py-name" targets="Variable gluon.import_all.files=gluon.import_all-module.html#files"><a title="gluon.import_all.files" class="py-name" href="#" onclick="return doclink('link-225', 'files', 'link-225');">files</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">testpath</tt><tt class="py-op">]</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-226" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-226', 'f', 'link-87');">f</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-227" class="py-name"><a title="gluon.shell.parse_path_info" class="py-name" href="#" onclick="return doclink('link-227', 'parse_path_info', 'link-134');">parse_path_info</a></tt><tt class="py-op">(</tt><tt class="py-name">testpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">        <tt class="py-name">errmsg</tt> <tt class="py-op">=</tt> <tt class="py-string">'invalid test path: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">testpath</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">a</tt><tt class="py-op">:</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line">            <tt id="link-228" class="py-name"><a title="gluon.scheduler.MetaScheduler.die
+gluon.shell.die" class="py-name" href="#" onclick="return doclink('link-228', 'die', 'link-135');">die</a></tt><tt class="py-op">(</tt><tt class="py-name">errmsg</tt><tt class="py-op">)</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">        <tt class="py-name">cdir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-229" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-229', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-230" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-230', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-string">'applications'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-string">'controllers'</tt><tt class="py-op">)</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-231" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-231', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">cdir</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">            <tt id="link-232" class="py-name"><a title="gluon.scheduler.MetaScheduler.die
+gluon.shell.die" class="py-name" href="#" onclick="return doclink('link-232', 'die', 'link-135');">die</a></tt><tt class="py-op">(</tt><tt class="py-name">errmsg</tt><tt class="py-op">)</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">c</tt><tt class="py-op">:</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line">            <tt class="py-name">cfile</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-233" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-233', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-234" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-234', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">cdir</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt> <tt class="py-op">+</tt> <tt class="py-string">'.py'</tt><tt class="py-op">)</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-235" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-235', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">cfile</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line">                <tt id="link-236" class="py-name"><a title="gluon.scheduler.MetaScheduler.die
+gluon.shell.die" class="py-name" href="#" onclick="return doclink('link-236', 'die', 'link-135');">die</a></tt><tt class="py-op">(</tt><tt class="py-name">errmsg</tt><tt class="py-op">)</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line">            <tt id="link-237" class="py-name"><a title="gluon.import_all.files" class="py-name" href="#" onclick="return doclink('link-237', 'files', 'link-225');">files</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">cfile</tt><tt class="py-op">]</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line">            <tt id="link-238" class="py-name"><a title="gluon.import_all.files" class="py-name" href="#" onclick="return doclink('link-238', 'files', 'link-225');">files</a></tt> <tt class="py-op">=</tt> <tt class="py-name">glob</tt><tt class="py-op">.</tt><tt class="py-name">glob</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-239" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-239', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt id="link-240" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-240', 'join', 'link-37');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">cdir</tt><tt class="py-op">,</tt> <tt class="py-string">'*.py'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">testfile</tt> <tt class="py-keyword">in</tt> <tt id="link-241" class="py-name"><a title="gluon.import_all.files" class="py-name" href="#" onclick="return doclink('link-241', 'files', 'link-225');">files</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line">        <tt class="py-name">globs</tt> <tt class="py-op">=</tt> <tt id="link-242" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-242', 'env', 'link-43');">env</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">import_models</tt><tt class="py-op">)</tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line">        <tt class="py-name">ignores</tt> <tt class="py-op">=</tt> <tt class="py-name">globs</tt><tt class="py-op">.</tt><tt id="link-243" class="py-name" targets="Method gluon.dal.Row.keys()=gluon.dal.Row-class.html#keys,Method gluon.tools.PluginManager.keys()=gluon.tools.PluginManager-class.html#keys"><a title="gluon.dal.Row.keys
+gluon.tools.PluginManager.keys" class="py-name" href="#" onclick="return doclink('link-243', 'keys', 'link-243');">keys</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line">        <tt class="py-name">execfile</tt><tt class="py-op">(</tt><tt class="py-name">testfile</tt><tt class="py-op">,</tt> <tt class="py-name">globs</tt><tt class="py-op">)</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">doctest_object</tt><tt class="py-op">(</tt><tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">obj</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">            <tt class="py-docstring">"""doctest obj and enclosed methods and classes."""</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line"> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">obj</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt id="link-244" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-244', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">FunctionType</tt><tt class="py-op">,</tt> <tt id="link-245" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-245', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">TypeType</tt><tt class="py-op">,</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">                             <tt id="link-246" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-246', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">ClassType</tt><tt class="py-op">,</tt> <tt id="link-247" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-247', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">MethodType</tt><tt class="py-op">,</tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line">                             <tt id="link-248" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-248', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">UnboundMethodType</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line"> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line">                <tt class="py-comment"># Reload environment before each test.</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line"> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">                <tt class="py-name">globs</tt> <tt class="py-op">=</tt> <tt id="link-249" class="py-name"><a title="gluon.shell.env" class="py-name" href="#" onclick="return doclink('link-249', 'env', 'link-43');">env</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">c</tt><tt class="py-op">=</tt><tt class="py-name">c</tt><tt class="py-op">,</tt> <tt id="link-250" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-250', 'f', 'link-87');">f</a></tt><tt class="py-op">=</tt><tt id="link-251" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-251', 'f', 'link-87');">f</a></tt><tt class="py-op">,</tt> <tt class="py-name">import_models</tt><tt class="py-op">=</tt><tt class="py-name">import_models</tt><tt class="py-op">)</tt> </tt>
+<a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line">                <tt class="py-name">execfile</tt><tt class="py-op">(</tt><tt class="py-name">testfile</tt><tt class="py-op">,</tt> <tt class="py-name">globs</tt><tt class="py-op">)</tt> </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line">                <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">run_docstring_examples</tt><tt class="py-op">(</tt> </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line">                    <tt class="py-name">obj</tt><tt class="py-op">,</tt> <tt class="py-name">globs</tt><tt class="py-op">=</tt><tt class="py-name">globs</tt><tt class="py-op">,</tt> </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line">                    <tt id="link-252" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-252', 'name', 'link-140');">name</a></tt><tt class="py-op">=</tt><tt class="py-string">'%s: %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-253" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-253', 'path', 'link-36');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">basename</tt><tt class="py-op">(</tt><tt class="py-name">testfile</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line">                                     <tt id="link-254" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-254', 'name', 'link-140');">name</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">verbose</tt><tt class="py-op">=</tt><tt class="py-name">verbose</tt><tt class="py-op">)</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">obj</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt id="link-255" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-255', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">TypeType</tt><tt class="py-op">,</tt> <tt id="link-256" class="py-name"><a title="gluon.dal.BaseAdapter.types
+gluon.dal.CouchDBAdapter.types
+gluon.dal.DB2Adapter.types
+gluon.dal.FireBirdAdapter.types
+gluon.dal.GoogleDatastoreAdapter.types
+gluon.dal.IMAPAdapter.types
+gluon.dal.InformixAdapter.types
+gluon.dal.IngresAdapter.types
+gluon.dal.IngresUnicodeAdapter.types
+gluon.dal.MSSQL2Adapter.types
+gluon.dal.MSSQLAdapter.types
+gluon.dal.MongoDBAdapter.types
+gluon.dal.MySQLAdapter.types
+gluon.dal.NewPostgreSQLAdapter.types
+gluon.dal.OracleAdapter.types
+gluon.dal.PostgreSQLAdapter.types
+gluon.dal.SAPDBAdapter.types
+gluon.dal.SpatiaLiteAdapter.types
+gluon.dal.SybaseAdapter.types
+gluon.dal.TeradataAdapter.types
+gluon.dal.VerticaAdapter.types" class="py-name" href="#" onclick="return doclink('link-256', 'types', 'link-0');">types</a></tt><tt class="py-op">.</tt><tt class="py-name">ClassType</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line">                    <tt class="py-keyword">for</tt> <tt class="py-name">attr_name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dir</tt><tt class="py-op">(</tt><tt class="py-name">obj</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line"> </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">                        <tt class="py-comment"># Execute . operator so decorators are executed.</tt> </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line"> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line">                        <tt class="py-name">o</tt> <tt class="py-op">=</tt> <tt class="py-name">eval</tt><tt class="py-op">(</tt><tt class="py-string">'%s.%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-257" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-257', 'name', 'link-140');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">attr_name</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">globs</tt><tt class="py-op">)</tt> </tt>
+<a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line">                        <tt class="py-name">doctest_object</tt><tt class="py-op">(</tt><tt class="py-name">attr_name</tt><tt class="py-op">,</tt> <tt class="py-name">o</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line"> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt id="link-258" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-258', 'name', 'link-140');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">obj</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">globs</tt><tt class="py-op">.</tt><tt id="link-259" class="py-name"><a title="gluon.dal.Row.items
+gluon.dal.Table.items" class="py-name" href="#" onclick="return doclink('link-259', 'items', 'link-101');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-260" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-260', 'name', 'link-140');">name</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">ignores</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt id="link-261" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-261', 'f', 'link-87');">f</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt id="link-262" class="py-name"><a title="gluon.languages.lazyT.f" class="py-name" href="#" onclick="return doclink('link-262', 'f', 'link-87');">f</a></tt> <tt class="py-op">==</tt> <tt id="link-263" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-263', 'name', 'link-140');">name</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L424"></a><tt class="py-lineno">424</tt>  <tt class="py-line">                <tt class="py-name">doctest_object</tt><tt class="py-op">(</tt><tt id="link-264" class="py-name"><a title="gluon.import_all.name" class="py-name" href="#" onclick="return doclink('link-264', 'name', 'link-140');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">obj</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L425"></a><tt class="py-lineno">425</tt>  <tt class="py-line"> </tt>
+<a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line"> </tt>
+<a name="get_usage"></a><div id="get_usage-def"><a name="L427"></a><tt class="py-lineno">427</tt> <a class="py-toggle" href="#" id="get_usage-toggle" onclick="return toggle('get_usage');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#get_usage">get_usage</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get_usage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="get_usage-expanded"><a name="L428"></a><tt class="py-lineno">428</tt>  <tt class="py-line">    <tt class="py-name">usage</tt> <tt class="py-op">=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L429"></a><tt class="py-lineno">429</tt>  <tt class="py-line"><tt class="py-string">  %prog [options] pythonfile</tt> </tt>
+<a name="L430"></a><tt class="py-lineno">430</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L431"></a><tt class="py-lineno">431</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">usage</tt> </tt>
+</div><a name="L432"></a><tt class="py-lineno">432</tt>  <tt class="py-line"> </tt>
+<a name="L433"></a><tt class="py-lineno">433</tt>  <tt class="py-line"> </tt>
+<a name="execute_from_command_line"></a><div id="execute_from_command_line-def"><a name="L434"></a><tt class="py-lineno">434</tt> <a class="py-toggle" href="#" id="execute_from_command_line-toggle" onclick="return toggle('execute_from_command_line');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.shell-module.html#execute_from_command_line">execute_from_command_line</a><tt class="py-op">(</tt><tt class="py-param">argv</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="execute_from_command_line-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="execute_from_command_line-expanded"><a name="L435"></a><tt class="py-lineno">435</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">argv</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L436"></a><tt class="py-lineno">436</tt>  <tt class="py-line">        <tt class="py-name">argv</tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt> </tt>
+<a name="L437"></a><tt class="py-lineno">437</tt>  <tt class="py-line"> </tt>
+<a name="L438"></a><tt class="py-lineno">438</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">optparse</tt><tt class="py-op">.</tt><tt class="py-name">OptionParser</tt><tt class="py-op">(</tt><tt class="py-name">usage</tt><tt class="py-op">=</tt><tt id="link-265" class="py-name" targets="Function gluon.shell.get_usage()=gluon.shell-module.html#get_usage"><a title="gluon.shell.get_usage" class="py-name" href="#" onclick="return doclink('link-265', 'get_usage', 'link-265');">get_usage</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L439"></a><tt class="py-lineno">439</tt>  <tt class="py-line"> </tt>
+<a name="L440"></a><tt class="py-lineno">440</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt><tt class="py-string">'-S'</tt><tt class="py-op">,</tt> <tt class="py-string">'--shell'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'shell'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'APPNAME'</tt><tt class="py-op">,</tt> </tt>
+<a name="L441"></a><tt class="py-lineno">441</tt>  <tt class="py-line">                      <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'run web2py in interactive shell '</tt> <tt class="py-op">+</tt> </tt>
+<a name="L442"></a><tt class="py-lineno">442</tt>  <tt class="py-line">                      <tt class="py-string">'or IPython(if installed) with specified appname'</tt><tt class="py-op">)</tt> </tt>
+<a name="L443"></a><tt class="py-lineno">443</tt>  <tt class="py-line">    <tt id="link-266" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-266', 'msg', 'link-221');">msg</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'run web2py in interactive shell or bpython (if installed) with'</tt> </tt>
+<a name="L444"></a><tt class="py-lineno">444</tt>  <tt class="py-line">    <tt id="link-267" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-267', 'msg', 'link-221');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">' specified appname (if app does not exist it will be created).'</tt> </tt>
+<a name="L445"></a><tt class="py-lineno">445</tt>  <tt class="py-line">    <tt id="link-268" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-268', 'msg', 'link-221');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n Use combined with --shell'</tt> </tt>
+<a name="L446"></a><tt class="py-lineno">446</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt> </tt>
+<a name="L447"></a><tt class="py-lineno">447</tt>  <tt class="py-line">        <tt class="py-string">'-B'</tt><tt class="py-op">,</tt> </tt>
+<a name="L448"></a><tt class="py-lineno">448</tt>  <tt class="py-line">        <tt class="py-string">'--bpython'</tt><tt class="py-op">,</tt> </tt>
+<a name="L449"></a><tt class="py-lineno">449</tt>  <tt class="py-line">        <tt id="link-269" class="py-name" targets="Method gluon.cache.Cache.action()=gluon.cache.Cache-class.html#action"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-269', 'action', 'link-269');">action</a></tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> </tt>
+<a name="L450"></a><tt class="py-lineno">450</tt>  <tt class="py-line">        <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L451"></a><tt class="py-lineno">451</tt>  <tt class="py-line">        <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'bpython'</tt><tt class="py-op">,</tt> </tt>
+<a name="L452"></a><tt class="py-lineno">452</tt>  <tt class="py-line">        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt id="link-270" class="py-name"><a title="gluon.widget.msg" class="py-name" href="#" onclick="return doclink('link-270', 'msg', 'link-221');">msg</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L453"></a><tt class="py-lineno">453</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
+<a name="L454"></a><tt class="py-lineno">454</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt> </tt>
+<a name="L455"></a><tt class="py-lineno">455</tt>  <tt class="py-line">        <tt class="py-string">'-P'</tt><tt class="py-op">,</tt> </tt>
+<a name="L456"></a><tt class="py-lineno">456</tt>  <tt class="py-line">        <tt class="py-string">'--plain'</tt><tt class="py-op">,</tt> </tt>
+<a name="L457"></a><tt class="py-lineno">457</tt>  <tt class="py-line">        <tt id="link-271" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-271', 'action', 'link-269');">action</a></tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> </tt>
+<a name="L458"></a><tt class="py-lineno">458</tt>  <tt class="py-line">        <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L459"></a><tt class="py-lineno">459</tt>  <tt class="py-line">        <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'plain'</tt><tt class="py-op">,</tt> </tt>
+<a name="L460"></a><tt class="py-lineno">460</tt>  <tt class="py-line">        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'only use plain python shell, should be used with --shell option'</tt><tt class="py-op">,</tt> </tt>
+<a name="L461"></a><tt class="py-lineno">461</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
+<a name="L462"></a><tt class="py-lineno">462</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt> </tt>
+<a name="L463"></a><tt class="py-lineno">463</tt>  <tt class="py-line">        <tt class="py-string">'-M'</tt><tt class="py-op">,</tt> </tt>
+<a name="L464"></a><tt class="py-lineno">464</tt>  <tt class="py-line">        <tt class="py-string">'--import_models'</tt><tt class="py-op">,</tt> </tt>
+<a name="L465"></a><tt class="py-lineno">465</tt>  <tt class="py-line">        <tt id="link-272" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-272', 'action', 'link-269');">action</a></tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> </tt>
+<a name="L466"></a><tt class="py-lineno">466</tt>  <tt class="py-line">        <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L467"></a><tt class="py-lineno">467</tt>  <tt class="py-line">        <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'import_models'</tt><tt class="py-op">,</tt> </tt>
+<a name="L468"></a><tt class="py-lineno">468</tt>  <tt class="py-line">        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'auto import model files, default is False, '</tt> <tt class="py-op">+</tt> </tt>
+<a name="L469"></a><tt class="py-lineno">469</tt>  <tt class="py-line">        <tt class="py-string">' should be used with --shell option'</tt><tt class="py-op">,</tt> </tt>
+<a name="L470"></a><tt class="py-lineno">470</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
+<a name="L471"></a><tt class="py-lineno">471</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt> </tt>
+<a name="L472"></a><tt class="py-lineno">472</tt>  <tt class="py-line">        <tt class="py-string">'-R'</tt><tt class="py-op">,</tt> </tt>
+<a name="L473"></a><tt class="py-lineno">473</tt>  <tt class="py-line">        <tt class="py-string">'--run'</tt><tt class="py-op">,</tt> </tt>
+<a name="L474"></a><tt class="py-lineno">474</tt>  <tt class="py-line">        <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'run'</tt><tt class="py-op">,</tt> </tt>
+<a name="L475"></a><tt class="py-lineno">475</tt>  <tt class="py-line">        <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'PYTHON_FILE'</tt><tt class="py-op">,</tt> </tt>
+<a name="L476"></a><tt class="py-lineno">476</tt>  <tt class="py-line">        <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> </tt>
+<a name="L477"></a><tt class="py-lineno">477</tt>  <tt class="py-line">        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'run PYTHON_FILE in web2py environment, '</tt> <tt class="py-op">+</tt> </tt>
+<a name="L478"></a><tt class="py-lineno">478</tt>  <tt class="py-line">        <tt class="py-string">'should be used with --shell option'</tt><tt class="py-op">,</tt> </tt>
+<a name="L479"></a><tt class="py-lineno">479</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
+<a name="L480"></a><tt class="py-lineno">480</tt>  <tt class="py-line"> </tt>
+<a name="L481"></a><tt class="py-lineno">481</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt id="link-273" class="py-name" targets="Method gluon.validators.IS_IN_DB.options()=gluon.validators.IS_IN_DB-class.html#options,Method gluon.validators.IS_IN_SET.options()=gluon.validators.IS_IN_SET-class.html#options"><a title="gluon.validators.IS_IN_DB.options
+gluon.validators.IS_IN_SET.options" class="py-name" href="#" onclick="return doclink('link-273', 'options', 'link-273');">options</a></tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L482"></a><tt class="py-lineno">482</tt>  <tt class="py-line"> </tt>
+<a name="L483"></a><tt class="py-lineno">483</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-274" class="py-name"><a title="gluon.dal.Expression.len" class="py-name" href="#" onclick="return doclink('link-274', 'len', 'link-215');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L484"></a><tt class="py-lineno">484</tt>  <tt class="py-line">        <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">print_help</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L485"></a><tt class="py-lineno">485</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L486"></a><tt class="py-lineno">486</tt>  <tt class="py-line"> </tt>
+<a name="L487"></a><tt class="py-lineno">487</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-275" class="py-name"><a title="gluon.dal.Expression.len" class="py-name" href="#" onclick="return doclink('link-275', 'len', 'link-215');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L488"></a><tt class="py-lineno">488</tt>  <tt class="py-line">        <tt class="py-name">startfile</tt> <tt class="py-op">=</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L489"></a><tt class="py-lineno">489</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L490"></a><tt class="py-lineno">490</tt>  <tt class="py-line">        <tt class="py-name">startfile</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L491"></a><tt class="py-lineno">491</tt>  <tt class="py-line">    <tt id="link-276" class="py-name" targets="Method gluon.debug.WebDebugger.run()=gluon.debug.WebDebugger-class.html#run,Method gluon.newcron.cronlauncher.run()=gluon.newcron.cronlauncher-class.html#run,Method gluon.newcron.extcron.run()=gluon.newcron.extcron-class.html#run,Method gluon.newcron.hardcron.run()=gluon.newcron.hardcron-class.html#run,Method gluon.newcron.softcron.run()=gluon.newcron.softcron-class.html#run,Method gluon.rocket.Monitor.run()=gluon.rocket.Monitor-class.html#run,Method gluon.rocket.Worker.run()=gluon.rocket.Worker-class.html#run,Method gluon.rocket._WorkItem.run()=gluon.rocket._WorkItem-class.html#run,Method gluon.scheduler.MetaScheduler.run()=gluon.scheduler.MetaScheduler-class.html#run,Function gluon.shell.run()=gluon.shell-module.html#run,Method gluon.tools.Service.run()=gluon.tools.Service-class.html#run"><a title="gluon.debug.WebDebugger.run
+gluon.newcron.cronlauncher.run
+gluon.newcron.extcron.run
+gluon.newcron.hardcron.run
+gluon.newcron.softcron.run
+gluon.rocket.Monitor.run
+gluon.rocket.Worker.run
+gluon.rocket._WorkItem.run
+gluon.scheduler.MetaScheduler.run
+gluon.shell.run
+gluon.tools.Service.run" class="py-name" href="#" onclick="return doclink('link-276', 'run', 'link-276');">run</a></tt><tt class="py-op">(</tt><tt id="link-277" class="py-name"><a title="gluon.validators.IS_IN_DB.options
+gluon.validators.IS_IN_SET.options" class="py-name" href="#" onclick="return doclink('link-277', 'options', 'link-273');">options</a></tt><tt class="py-op">.</tt><tt id="link-278" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-278', 'shell', 'link-195');">shell</a></tt><tt class="py-op">,</tt> <tt id="link-279" class="py-name"><a title="gluon.validators.IS_IN_DB.options
+gluon.validators.IS_IN_SET.options" class="py-name" href="#" onclick="return doclink('link-279', 'options', 'link-273');">options</a></tt><tt class="py-op">.</tt><tt class="py-name">plain</tt><tt class="py-op">,</tt> <tt class="py-name">startfile</tt><tt class="py-op">=</tt><tt class="py-name">startfile</tt><tt class="py-op">,</tt> </tt>
+<a name="L492"></a><tt class="py-lineno">492</tt>  <tt class="py-line">        <tt class="py-name">bpython</tt><tt class="py-op">=</tt><tt id="link-280" class="py-name"><a title="gluon.validators.IS_IN_DB.options
+gluon.validators.IS_IN_SET.options" class="py-name" href="#" onclick="return doclink('link-280', 'options', 'link-273');">options</a></tt><tt class="py-op">.</tt><tt class="py-name">bpython</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L493"></a><tt class="py-lineno">493</tt>  <tt class="py-line"> </tt>
+<a name="L494"></a><tt class="py-lineno">494</tt>  <tt class="py-line"> </tt>
+<a name="L495"></a><tt class="py-lineno">495</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L496"></a><tt class="py-lineno">496</tt>  <tt class="py-line">    <tt id="link-281" class="py-name" targets="Function gluon.shell.execute_from_command_line()=gluon.shell-module.html#execute_from_command_line"><a title="gluon.shell.execute_from_command_line" class="py-name" href="#" onclick="return doclink('link-281', 'execute_from_command_line', 'link-281');">execute_from_command_line</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L497"></a><tt class="py-lineno">497</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:55 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{{extend 'layout.html'}}
+<h1>Add a Post</h1>
+{{=form}}
+<h1>Current Posts</h1>
+<br/>
+<table>
+  <tr><td><h3>Title</h3></td><td><h3>Post</h3></td></tr>
+  {{for p in posts:}}
+  <tr><td>{{=(A(p.title))}}</td><td>{{=(A(p.post))}}</td></tr>
+  {{pass}}
+</table>

@@ -1,0 +1,11 @@
+<!-- project/templates/500.html -->
+
+{% extends "template.html" %}
+
+{% block content %}
+
+  <h1>500</h1>
+  <p>Something went terribly wrong. Fortunately we are working to fix it right now!</p>
+  <p><a href="{{url_for('users.login')}}">Go back home</a></p>
+
+{% endblock %}

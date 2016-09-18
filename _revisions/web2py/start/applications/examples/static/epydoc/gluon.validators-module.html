@@ -1,0 +1,1435 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.validators</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;validators
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.validators-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module validators</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.validators-pysrc.html">source&nbsp;code</a></span></p>
+<p>This file is part of the web2py Web Framework Copyrighted by Massimo 
+  Di Pierro &lt;mdipierro@cs.depaul.edu&gt; License: LGPLv3 
+  (http://www.gnu.org/licenses/lgpl.html)</p>
+  <p>Thanks to ga2arch for help with IS_IN_DB and IS_NOT_IN_DB on GAE</p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.Validator-class.html" class="summary-name" onclick="show_private();">Validator</a><br />
+      Root for all validators, mainly for documentation purposes.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_MATCH-class.html" class="summary-name">IS_MATCH</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EQUAL_TO-class.html" class="summary-name">IS_EQUAL_TO</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EXPR-class.html" class="summary-name">IS_EXPR</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_LENGTH-class.html" class="summary-name">IS_LENGTH</a><br />
+      Checks if length of field's value fits between given boundaries.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_JSON-class.html" class="summary-name">IS_JSON</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IN_SET-class.html" class="summary-name">IS_IN_SET</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IN_DB-class.html" class="summary-name">IS_IN_DB</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_NOT_IN_DB-class.html" class="summary-name">IS_NOT_IN_DB</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_INT_IN_RANGE-class.html" class="summary-name">IS_INT_IN_RANGE</a><br />
+      Determine that the argument is (or can be represented as) an int, 
+        and that it falls within the specified range.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_FLOAT_IN_RANGE-class.html" class="summary-name">IS_FLOAT_IN_RANGE</a><br />
+      Determine that the argument is (or can be represented as) a float, 
+        and that it falls within the specified inclusive range.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_DECIMAL_IN_RANGE-class.html" class="summary-name">IS_DECIMAL_IN_RANGE</a><br />
+      Determine that the argument is (or can be represented as) a Python 
+        Decimal, and that it falls within the specified inclusive range.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_NOT_EMPTY-class.html" class="summary-name">IS_NOT_EMPTY</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_ALPHANUMERIC-class.html" class="summary-name">IS_ALPHANUMERIC</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EMAIL-class.html" class="summary-name">IS_EMAIL</a><br />
+      Checks if field's value is a valid email address.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_LIST_OF_EMAILS-class.html" class="summary-name">IS_LIST_OF_EMAILS</a><br />
+      use as follows:...
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_GENERIC_URL-class.html" class="summary-name" onclick="show_private();">IS_GENERIC_URL</a><br />
+      Rejects a URL string if any of the following is true:
+   * The string is empty or None
+   * The string uses characters that are not allowed in a URL
+   * The URL scheme specified (if one is specified) is not valid
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_HTTP_URL-class.html" class="summary-name" onclick="show_private();">IS_HTTP_URL</a><br />
+      Rejects a URL string if any of the following is true:
+   * The string is empty or None
+   * The string uses characters that are not allowed in a URL
+   * The string breaks any of the HTTP syntactic rules
+   * The URL scheme specified (if one is specified) is not 'http' or 'https'
+   * The top-level domain (if a host name is specified) does not exist
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_URL-class.html" class="summary-name">IS_URL</a><br />
+      Rejects a URL string if any of the following is true:
+   * The string is empty or None
+   * The string uses characters that are not allowed in a URL
+   * The string breaks any of the HTTP syntactic rules
+   * The URL scheme specified (if one is specified) is not 'http' or 'https'
+   * The top-level domain (if a host name is specified) does not exist
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_TIME-class.html" class="summary-name">IS_TIME</a><br />
+      example:
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.UTC-class.html" class="summary-name" onclick="show_private();">UTC</a><br />
+      UTC
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_DATE-class.html" class="summary-name">IS_DATE</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_DATETIME-class.html" class="summary-name">IS_DATETIME</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_DATE_IN_RANGE-class.html" class="summary-name">IS_DATE_IN_RANGE</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_DATETIME_IN_RANGE-class.html" class="summary-name">IS_DATETIME_IN_RANGE</a><br />
+      example:
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_LIST_OF-class.html" class="summary-name">IS_LIST_OF</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_LOWER-class.html" class="summary-name">IS_LOWER</a><br />
+      convert to lower case
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_UPPER-class.html" class="summary-name">IS_UPPER</a><br />
+      convert to upper case
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_SLUG-class.html" class="summary-name">IS_SLUG</a><br />
+      convert arbitrary text string to a slug
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.ANY_OF-class.html" class="summary-name">ANY_OF</a><br />
+      test if any of the validators in a list return successfully
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EMPTY_OR-class.html" class="summary-name">IS_EMPTY_OR</a><br />
+      dummy class for testing IS_EMPTY_OR
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EMPTY_OR-class.html" class="summary-name">IS_NULL_OR</a><br />
+      dummy class for testing IS_EMPTY_OR
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.CLEANUP-class.html" class="summary-name">CLEANUP</a><br />
+      example:
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.LazyCrypt-class.html" class="summary-name" onclick="show_private();">LazyCrypt</a><br />
+      Stores a lazy password hash
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.CRYPT-class.html" class="summary-name">CRYPT</a><br />
+      example::
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_STRONG-class.html" class="summary-name">IS_STRONG</a><br />
+      example:
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IN_SUBSET-class.html" class="summary-name" onclick="show_private();">IS_IN_SUBSET</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IMAGE-class.html" class="summary-name">IS_IMAGE</a><br />
+      Checks if file uploaded through file input was saved in one of 
+        selected image formats and has dimensions (width and height) within
+        given boundaries.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_UPLOAD_FILENAME-class.html" class="summary-name">IS_UPLOAD_FILENAME</a><br />
+      Checks if name and extension of file uploaded through file input matches
+given criteria.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IPV4-class.html" class="summary-name">IS_IPV4</a><br />
+      Checks if field's value is an IP version 4 address in decimal form.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IPV6-class.html" class="summary-name">IS_IPV6</a><br />
+      Checks if field's value is an IP version 6 address.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_IPADDRESS-class.html" class="summary-name">IS_IPADDRESS</a><br />
+      Checks if field's value is an IP Address (v4 or v6).
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="translate"></a><span class="summary-sig-name">translate</span>(<span class="summary-sig-arg">text</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#translate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="options_sorter"></a><span class="summary-sig-name">options_sorter</span>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#options_sorter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="range_error_message"></a><span class="summary-sig-name">range_error_message</span>(<span class="summary-sig-arg">error_message</span>,
+        <span class="summary-sig-arg">what_to_enter</span>,
+        <span class="summary-sig-arg">minimum</span>,
+        <span class="summary-sig-arg">maximum</span>)</span><br />
+      build the error message for the number range validators</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#range_error_message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="str2dec"></a><span class="summary-sig-name">str2dec</span>(<span class="summary-sig-arg">number</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#str2dec">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_empty"></a><span class="summary-sig-name">is_empty</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">empty_regex</span>=<span class="summary-sig-default">None</span>)</span><br />
+      test empty field</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#is_empty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators-module.html#escape_unicode" class="summary-sig-name" onclick="show_private();">escape_unicode</a>(<span class="summary-sig-arg">string</span>)</span><br />
+      Converts a unicode string into US-ASCII, using a simple conversion scheme.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#escape_unicode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators-module.html#unicode_to_ascii_authority" class="summary-sig-name" onclick="show_private();">unicode_to_ascii_authority</a>(<span class="summary-sig-arg">authority</span>)</span><br />
+      Follows the steps in RFC 3490, Section 4 to convert a unicode authority
+string into its ASCII equivalent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#unicode_to_ascii_authority">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators-module.html#unicode_to_ascii_url" class="summary-sig-name" onclick="show_private();">unicode_to_ascii_url</a>(<span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">prepend_scheme</span>)</span><br />
+      Converts the inputed unicode url into a US-ASCII equivalent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#unicode_to_ascii_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators-module.html#urlify" class="summary-sig-name" onclick="show_private();">urlify</a>(<span class="summary-sig-arg">s</span>,
+        <span class="summary-sig-arg">maxlen</span>=<span class="summary-sig-default">80</span>,
+        <span class="summary-sig-arg">keep_underscores</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Convert incoming string to a simplified ASCII subset.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#urlify">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="calc_entropy"></a><span class="summary-sig-name">calc_entropy</span>(<span class="summary-sig-arg">string</span>)</span><br />
+      calculate a simple entropy for a given string</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#calc_entropy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_isint"></a><span class="summary-name">regex_isint</span> = <code title="re.compile(r'^[\+-]?\d+$')">re.compile(r'^<code class="re-group">[</code>\+-<code class="re-group">]</code><code class="re-op">?</code>\d<code class="re-op">+</code>$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#JSONErrors" class="summary-name" onclick="show_private();">JSONErrors</a> = <code title="(&lt;type 'exceptions.NameError'&gt;,
+ &lt;type 'exceptions.TypeError'&gt;,
+ &lt;type 'exceptions.ValueError'&gt;,
+ &lt;type 'exceptions.AttributeError'&gt;,
+ &lt;type 'exceptions.KeyError'&gt;)"><code class="variable-group">(</code>&lt;type 'exceptions.NameError'&gt;<code class="variable-op">, </code>&lt;type 'exceptions<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="have_current"></a><span class="summary-name">have_current</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex1"></a><span class="summary-name">regex1</span> = <code title="re.compile(r'\w+\.\w+')">re.compile(r'\w<code class="re-op">+</code>\.\w<code class="re-op">+</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex2"></a><span class="summary-name">regex2</span> = <code title="re.compile(r'%\((?P&lt;name&gt;[^\)]+)\)s')">re.compile(r'%\(<code class="re-group">(?P&lt;</code><code class="re-ref">name</code><code class="re-group">&gt;</code><code class="re-group">[^</code>\)<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>\)s')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#official_url_schemes" class="summary-name" onclick="show_private();">official_url_schemes</a> = <code title="['aaa',
+ 'aaas',
+ 'acap',
+ 'cap',
+ 'cid',
+ 'crid',
+ 'data',
+ 'dav',
+..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">aaa</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">aaas</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">acap</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cap</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cid</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#unofficial_url_schemes" class="summary-name" onclick="show_private();">unofficial_url_schemes</a> = <code title="['about',
+ 'adiumxtra',
+ 'aim',
+ 'afp',
+ 'aw',
+ 'callto',
+ 'chrome',
+ 'cvs',
+..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">about</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">adiumxtra</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">aim</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">afp</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#all_url_schemes" class="summary-name" onclick="show_private();">all_url_schemes</a> = <code title="[None,
+ 'aaa',
+ 'aaas',
+ 'acap',
+ 'cap',
+ 'cid',
+ 'crid',
+ 'data',
+..."><code class="variable-group">[</code>None<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">aaa</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">aaas</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">acap</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cap</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cid</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="http_schemes"></a><span class="summary-name">http_schemes</span> = <code title="[None, 'http', 'https']"><code class="variable-group">[</code>None<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">http</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">https</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#url_split_regex" class="summary-name" onclick="show_private();">url_split_regex</a> = <code title="re.compile(r'^(([^:/\?#]+):)?(//([^/\?#]*))?([^\?#]*)(\?([^#]*))?(#(.*\
+))?')">re.compile(r'^<code class="re-group">(</code><code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>:/\?#<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>:<code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code>//<code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>/\?#<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="label_split_regex"></a><span class="summary-name">label_split_regex</span> = <code title="re.compile(r'[\.\u3002\uff0e\uff61]')">re.compile(r'<code class="re-group">[</code>\.\u3002\uff0e\uff61<code class="re-group">]</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#official_top_level_domains" class="summary-name" onclick="show_private();">official_top_level_domains</a> = <code title="['ac',
+ 'ad',
+ 'ae',
+ 'aero',
+ 'af',
+ 'ag',
+ 'ai',
+ 'al',
+..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">ac</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ad</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ae</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">aero</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">af</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#regex_time" class="summary-name" onclick="show_private();">regex_time</a> = <code title="re.compile(r'((?P&lt;h&gt;[0-9]+))([^0-9 ]+(?P&lt;m&gt;[0-9 ]+))?([^0-9ap ]+(?P&lt;s&gt;\
+[0-9]*))?((?P&lt;d&gt;[ap]m))?')">re.compile(r'<code class="re-group">(</code><code class="re-group">(?P&lt;</code><code class="re-ref">h</code><code class="re-group">&gt;</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>0<code class="re-op">-</code>9 <code class="re-group">]</code><code class="re-op">+</code><code class="re-group">(?P&lt;</code><code class="re-ref">m</code><code class="re-group">&gt;</code><code class="re-group">[</code>0<code class="re-op">-</code>9 <code class="re-group">]</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="utc"></a><span class="summary-name">utc</span> = <code title="UTC()">UTC()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#lowerset" class="summary-name" onclick="show_private();">lowerset</a> = <code title="frozenset([u'a',
+           u'b',
+           u'c',
+           u'd',
+           u'e',
+           u'f',
+           u'g',
+           u'h',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">b</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">c</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">d</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">e</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">f</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">g</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#upperset" class="summary-name" onclick="show_private();">upperset</a> = <code title="frozenset([u'A',
+           u'B',
+           u'C',
+           u'D',
+           u'E',
+           u'F',
+           u'G',
+           u'H',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">A</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">B</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">C</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">D</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">F</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">G</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#numberset" class="summary-name" onclick="show_private();">numberset</a> = <code title="frozenset([u'0',
+           u'1',
+           u'2',
+           u'3',
+           u'4',
+           u'5',
+           u'6',
+           u'7',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">0</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">1</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">2</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">4</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">5</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">6</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#sym1set" class="summary-name" onclick="show_private();">sym1set</a> = <code title="frozenset([u'!',
+           u'#',
+           u'$',
+           u'%',
+           u'&amp;',
+           u'(',
+           u')',
+           u'*',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">!</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">#</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">$</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">%</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">&amp;</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">(</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">)</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#sym2set" class="summary-name" onclick="show_private();">sym2set</a> = <code title="frozenset([u'&quot;',
+           u''',
+           u'+',
+           u',',
+           u'-',
+           u'.',
+           u'/',
+           u':',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">&quot;</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">'</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">+</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">,</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">-</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">.</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">/</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators-module.html#otherset" class="summary-name" onclick="show_private();">otherset</a> = <code title="frozenset([u'0',
+           u'1',
+           u'2',
+           u'3',
+           u'4',
+           u'5',
+           u'6',
+           u'7',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">0</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">1</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">2</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">4</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">5</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">u'</code><code class="variable-string">6</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'gluon'"><code class="variable-quote">'</code><code class="variable-string">gluon</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="escape_unicode"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">escape_unicode</span>(<span class="sig-arg">string</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#escape_unicode">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Converts a unicode string into US-ASCII, using a simple conversion scheme.
+Each unicode character that does not have a US-ASCII equivalent is
+converted into a URL escaped form based on its hexadecimal value.
+For example, the unicode character '\u4e86' will become the string '%4e%86'
+
+:param string: unicode string, the unicode string to convert into an
+    escaped US-ASCII form
+:returns: the US-ASCII escaped form of the inputted string
+:rtype: string
+
+@author: Jonathan Benn
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="unicode_to_ascii_authority"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unicode_to_ascii_authority</span>(<span class="sig-arg">authority</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#unicode_to_ascii_authority">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Follows the steps in RFC 3490, Section 4 to convert a unicode authority
+string into its ASCII equivalent.
+For example, u'www.Alliancefran&#231;aise.nu' will be converted into
+'www.xn--alliancefranaise-npb.nu'
+
+:param authority: unicode string, the URL authority component to convert,
+                  e.g. u'www.Alliancefran&#231;aise.nu'
+:returns: the US-ASCII character equivalent to the inputed authority,
+         e.g. 'www.xn--alliancefranaise-npb.nu'
+:rtype: string
+:raises Exception: if the function is not able to convert the inputed
+    authority
+
+@author: Jonathan Benn
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="unicode_to_ascii_url"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unicode_to_ascii_url</span>(<span class="sig-arg">url</span>,
+        <span class="sig-arg">prepend_scheme</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#unicode_to_ascii_url">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Converts the inputed unicode url into a US-ASCII equivalent. This function
+goes a little beyond RFC 3490, which is limited in scope to the domain name
+(authority) only. Here, the functionality is expanded to what was observed
+on Wikipedia on 2009-Jan-22:
+
+   Component    Can Use Unicode?
+   ---------    ----------------
+   scheme       No
+   authority    Yes
+   path         Yes
+   query        Yes
+   fragment     No
+
+The authority component gets converted to punycode, but occurrences of
+unicode in other components get converted into a pair of URI escapes (we
+assume 4-byte unicode). E.g. the unicode character U+4E2D will be
+converted into '%4E%2D'. Testing with Firefox v3.0.5 has shown that it can
+understand this kind of URI encoding.
+
+:param url: unicode string, the URL to convert from unicode into US-ASCII
+:param prepend_scheme: string, a protocol scheme to prepend to the URL if
+    we're having trouble parsing it.
+    e.g. &quot;http&quot;. Input None to disable this functionality
+:returns: a US-ASCII equivalent of the inputed url
+:rtype: string
+
+@author: Jonathan Benn
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="urlify"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">urlify</span>(<span class="sig-arg">s</span>,
+        <span class="sig-arg">maxlen</span>=<span class="sig-default">80</span>,
+        <span class="sig-arg">keep_underscores</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#urlify">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convert incoming string to a simplified ASCII subset. if 
+  (keep_underscores): underscores are retained in the string else: 
+  underscores are translated to hyphens (default)</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="JSONErrors"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">JSONErrors</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code>&lt;type 'exceptions.NameError'&gt;<code class="variable-op">,</code>
+ &lt;type 'exceptions.TypeError'&gt;<code class="variable-op">,</code>
+ &lt;type 'exceptions.ValueError'&gt;<code class="variable-op">,</code>
+ &lt;type 'exceptions.AttributeError'&gt;<code class="variable-op">,</code>
+ &lt;type 'exceptions.KeyError'&gt;<code class="variable-group">)</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="official_url_schemes"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">official_url_schemes</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">aaa</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">aaas</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">acap</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cap</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cid</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">crid</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">data</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">dav</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unofficial_url_schemes"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">unofficial_url_schemes</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">about</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">adiumxtra</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">aim</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">afp</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">aw</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">callto</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">chrome</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cvs</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="all_url_schemes"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">all_url_schemes</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code>None<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">aaa</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">aaas</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">acap</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cap</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cid</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">crid</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">data</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="url_split_regex"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">url_split_regex</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^<code class="re-group">(</code><code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>:/\?#<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>:<code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code>//<code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>/\?#<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>\?#<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">(</code>\?<code class="re-group">(</code><code class="re-group">[^</code>#<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code>#<code class="re-group">(</code>.<code class="re-op">*</code><code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code>')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="official_top_level_domains"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">official_top_level_domains</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">ac</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ad</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ae</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">aero</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">af</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ag</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ai</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">al</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_time"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_time</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-group">(</code><code class="re-group">(?P&lt;</code><code class="re-ref">h</code><code class="re-group">&gt;</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>0<code class="re-op">-</code>9 <code class="re-group">]</code><code class="re-op">+</code><code class="re-group">(?P&lt;</code><code class="re-ref">m</code><code class="re-group">&gt;</code><code class="re-group">[</code>0<code class="re-op">-</code>9 <code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>0<code class="re-op">-</code>9ap <code class="re-group">]</code><code class="re-op">+</code><code class="re-group">(?P&lt;</code><code class="re-ref">s</code><code class="re-group">&gt;</code><code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code><code class="re-group">(?P&lt;</code><code class="re-ref">d</code><code class="re-group">&gt;</code><code class="re-group">[</code>ap<code class="re-group">]</code>m<code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code>')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="lowerset"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">lowerset</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">b</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">c</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">d</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">e</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">f</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">g</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">h</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="upperset"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">upperset</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">A</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">B</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">C</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">D</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">E</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">F</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">G</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">H</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="numberset"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">numberset</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">0</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">1</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">2</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">3</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">4</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">5</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">6</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">7</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sym1set"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sym1set</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">!</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">#</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">$</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">%</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">&amp;</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">(</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">*</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sym2set"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sym2set</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">&quot;</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">'</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">+</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">,</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">-</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">.</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">/</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">:</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="otherset"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">otherset</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">u'</code><code class="variable-string">0</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">1</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">2</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">3</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">4</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">5</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">6</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">u'</code><code class="variable-string">7</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:38 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
