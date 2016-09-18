@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.sanitizer.XssCleaner</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.sanitizer-module.html" onclick="show_private();">Module&nbsp;sanitizer</a> ::
+        Class&nbsp;XssCleaner
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.sanitizer.XssCleaner-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class XssCleaner</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+markupbase.ParserBase --+        
+                        |        
+       sgmllib.SGMLParser --+    
+                            |    
+           htmllib.HTMLParser --+
+                                |
+                               <strong class="uidshort">XssCleaner</strong>
+</pre>
+
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">permitted_tags</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">b</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">blockquote</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">br/</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">i</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">li</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ol</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ul</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">p</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-ellipsis">...</code></span>,
+        <span class="summary-sig-arg">allowed_attributes</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">href</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">title</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">blockquote</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">img</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">src</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></span>,
+        <span class="summary-sig-arg">fmt</span>=<span class="summary-sig-default">&lt;class formatter.AbstractFormatter at 0x26980b8&gt;</span>,
+        <span class="summary-sig-arg">strip_disallowed</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Creates an instance of the HTMLParser class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#handle_data" class="summary-sig-name">handle_data</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#handle_charref" class="summary-sig-name">handle_charref</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ref</span>)</span><br />
+      Handle character reference, no need to override.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_charref">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#handle_entityref" class="summary-sig-name">handle_entityref</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ref</span>)</span><br />
+      Handle entity references, no need to override.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_entityref">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#handle_comment" class="summary-sig-name">handle_comment</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">comment</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_comment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#handle_starttag" class="summary-sig-name">handle_starttag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag</span>,
+        <span class="summary-sig-arg">method</span>,
+        <span class="summary-sig-arg">attrs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_starttag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#handle_endtag" class="summary-sig-name">handle_endtag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag</span>,
+        <span class="summary-sig-arg">attrs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_endtag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#unknown_starttag" class="summary-sig-name">unknown_starttag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag</span>,
+        <span class="summary-sig-arg">attributes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.unknown_starttag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#unknown_endtag" class="summary-sig-name">unknown_endtag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.unknown_endtag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="url_is_acceptable"></a><span class="summary-sig-name">url_is_acceptable</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>)</span><br />
+      Accepts relative, absolute, and mailto urls</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.url_is_acceptable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sanitizer.XssCleaner-class.html#strip" class="summary-sig-name">strip</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rawstring</span>,
+        <span class="summary-sig-arg">escape</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Returns the argument stripped of potentially harmful HTML or 
+      Javascript code</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.strip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="xtags"></a><span class="summary-sig-name">xtags</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns a printable string informing the user which tags are allowed</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.xtags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>htmllib.HTMLParser</code></b>:
+      <code>anchor_bgn</code>,
+      <code>anchor_end</code>,
+      <code>ddpop</code>,
+      <code>do_base</code>,
+      <code>do_br</code>,
+      <code>do_dd</code>,
+      <code>do_dt</code>,
+      <code>do_hr</code>,
+      <code>do_img</code>,
+      <code>do_isindex</code>,
+      <code>do_li</code>,
+      <code>do_link</code>,
+      <code>do_meta</code>,
+      <code>do_nextid</code>,
+      <code>do_p</code>,
+      <code>do_plaintext</code>,
+      <code>end_a</code>,
+      <code>end_address</code>,
+      <code>end_b</code>,
+      <code>end_blockquote</code>,
+      <code>end_body</code>,
+      <code>end_cite</code>,
+      <code>end_code</code>,
+      <code>end_dir</code>,
+      <code>end_dl</code>,
+      <code>end_em</code>,
+      <code>end_h1</code>,
+      <code>end_h2</code>,
+      <code>end_h3</code>,
+      <code>end_h4</code>,
+      <code>end_h5</code>,
+      <code>end_h6</code>,
+      <code>end_head</code>,
+      <code>end_html</code>,
+      <code>end_i</code>,
+      <code>end_kbd</code>,
+      <code>end_listing</code>,
+      <code>end_menu</code>,
+      <code>end_ol</code>,
+      <code>end_pre</code>,
+      <code>end_samp</code>,
+      <code>end_strong</code>,
+      <code>end_title</code>,
+      <code>end_tt</code>,
+      <code>end_ul</code>,
+      <code>end_var</code>,
+      <code>end_xmp</code>,
+      <code>error</code>,
+      <code>handle_image</code>,
+      <code>reset</code>,
+      <code>save_bgn</code>,
+      <code>save_end</code>,
+      <code>start_a</code>,
+      <code>start_address</code>,
+      <code>start_b</code>,
+      <code>start_blockquote</code>,
+      <code>start_body</code>,
+      <code>start_cite</code>,
+      <code>start_code</code>,
+      <code>start_dir</code>,
+      <code>start_dl</code>,
+      <code>start_em</code>,
+      <code>start_h1</code>,
+      <code>start_h2</code>,
+      <code>start_h3</code>,
+      <code>start_h4</code>,
+      <code>start_h5</code>,
+      <code>start_h6</code>,
+      <code>start_head</code>,
+      <code>start_html</code>,
+      <code>start_i</code>,
+      <code>start_kbd</code>,
+      <code>start_listing</code>,
+      <code>start_menu</code>,
+      <code>start_ol</code>,
+      <code>start_pre</code>,
+      <code>start_samp</code>,
+      <code>start_strong</code>,
+      <code>start_title</code>,
+      <code>start_tt</code>,
+      <code>start_ul</code>,
+      <code>start_var</code>,
+      <code>start_xmp</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>sgmllib.SGMLParser</code></b>:
+      <code>close</code>,
+      <code>convert_charref</code>,
+      <code>convert_codepoint</code>,
+      <code>convert_entityref</code>,
+      <code>feed</code>,
+      <code>finish_endtag</code>,
+      <code>finish_shorttag</code>,
+      <code>finish_starttag</code>,
+      <code>get_starttag_text</code>,
+      <code>goahead</code>,
+      <code>handle_decl</code>,
+      <code>handle_pi</code>,
+      <code>parse_endtag</code>,
+      <code>parse_pi</code>,
+      <code>parse_starttag</code>,
+      <code>report_unbalanced</code>,
+      <code>setliteral</code>,
+      <code>setnomoretags</code>,
+      <code>unknown_charref</code>,
+      <code>unknown_entityref</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>sgmllib.SGMLParser</code></b> (private):
+      <code>_convert_ref</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>markupbase.ParserBase</code></b>:
+      <code>getpos</code>,
+      <code>parse_comment</code>,
+      <code>parse_declaration</code>,
+      <code>parse_marked_section</code>,
+      <code>unknown_decl</code>,
+      <code>updatepos</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>markupbase.ParserBase</code></b> (private):
+      <code>_parse_doctype_attlist</code>,
+      <code>_parse_doctype_element</code>,
+      <code>_parse_doctype_entity</code>,
+      <code>_parse_doctype_notation</code>,
+      <code>_parse_doctype_subset</code>,
+      <code>_scan_name</code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>sgmllib.SGMLParser</code></b>:
+      <code>entity_or_charref</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>sgmllib.SGMLParser</code></b> (private):
+      <code>_decl_otherchars</code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">permitted_tags</span>=<span class="sig-default"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">b</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">blockquote</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">br/</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">i</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">li</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ol</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ul</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">p</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">c</code><code class="variable-ellipsis">...</code></span>,
+        <span class="sig-arg">allowed_attributes</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">href</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">title</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">blockquote</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">img</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">src</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></span>,
+        <span class="sig-arg">fmt</span>=<span class="sig-default">&lt;class formatter.AbstractFormatter at 0x26980b8&gt;</span>,
+        <span class="sig-arg">strip_disallowed</span>=<span class="sig-default">False</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Creates an instance of the HTMLParser class.</p>
+  <p>The formatter parameter is the formatter instance associated with the 
+  parser.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        markupbase.ParserBase.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handle_data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handle_data</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.handle_data
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handle_charref"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handle_charref</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ref</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_charref">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Handle character reference, no need to override.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.handle_charref
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handle_entityref"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handle_entityref</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ref</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_entityref">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Handle entity references, no need to override.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.handle_entityref
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handle_comment"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handle_comment</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">comment</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_comment">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.handle_comment
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handle_starttag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handle_starttag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag</span>,
+        <span class="sig-arg">method</span>,
+        <span class="sig-arg">attrs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_starttag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.handle_starttag
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handle_endtag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handle_endtag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag</span>,
+        <span class="sig-arg">attrs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.handle_endtag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.handle_endtag
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unknown_starttag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unknown_starttag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag</span>,
+        <span class="sig-arg">attributes</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.unknown_starttag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.unknown_starttag
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unknown_endtag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unknown_endtag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.unknown_endtag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        sgmllib.SGMLParser.unknown_endtag
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="strip"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">strip</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">rawstring</span>,
+        <span class="sig-arg">escape</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sanitizer-pysrc.html#XssCleaner.strip">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the argument stripped of potentially harmful HTML or 
+  Javascript code</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>escape</code></strong> (boolean) - If True (default) it escapes the potentially harmful content, 
+          otherwise remove it</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:43 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

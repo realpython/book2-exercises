@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.validators.IS_EMAIL</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.validators-module.html" onclick="show_private();">Module&nbsp;validators</a> ::
+        Class&nbsp;IS_EMAIL
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.validators.IS_EMAIL-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class IS_EMAIL</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.validators-pysrc.html#IS_EMAIL">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+    
+         |    
+ <a href="gluon.validators.Validator-class.html" onclick="show_private();">Validator</a> --+
+             |
+            <strong class="uidshort">IS_EMAIL</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+
+Checks if field's value is a valid email address. Can be set to disallow
+or force addresses from certain domain(s).
+
+Email regex adapted from
+http://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx,
+generally following the RFCs, except that we disallow quoted strings
+and permit underscores and leading numerics in subdomain labels
+
+Arguments:
+
+- banned: regex text for disallowed address domains
+- forced: regex text for required address domains
+
+Both arguments can also be custom objects with a match(value) method.
+
+Examples::
+
+    #Check for valid email address:
+    INPUT(_type='text', _name='name',
+        requires=IS_EMAIL())
+
+    #Check for valid email address that can't be from a .com domain:
+    INPUT(_type='text', _name='name',
+        requires=IS_EMAIL(banned='^.*\.com(|\..*)$'))
+
+    #Check for valid email address that must be from a .edu domain:
+    INPUT(_type='text', _name='name',
+        requires=IS_EMAIL(forced='^.*\.edu(|\..*)$'))
+
+    &gt;&gt;&gt; IS_EMAIL()('a@b.com')
+    ('a@b.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('abc@def.com')
+    ('abc@def.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('abc@3def.com')
+    ('abc@3def.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('abc@def.us')
+    ('abc@def.us', None)
+    &gt;&gt;&gt; IS_EMAIL()('abc@d_-f.us')
+    ('abc@d_-f.us', None)
+    &gt;&gt;&gt; IS_EMAIL()('@def.com')           # missing name
+    ('@def.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('&quot;abc@def&quot;.com')      # quoted name
+    ('&quot;abc@def&quot;.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc+def.com')        # no @
+    ('abc+def.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc@def.x')          # one-char TLD
+    ('abc@def.x', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc@def.12')         # numeric TLD
+    ('abc@def.12', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc@def..com')       # double-dot in domain
+    ('abc@def..com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc@.def.com')       # dot starts domain
+    ('abc@.def.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc@def.c_m')        # underscore in TLD
+    ('abc@def.c_m', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('NotAnEmail')         # missing @
+    ('NotAnEmail', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('abc@NotAnEmail')     # missing TLD
+    ('abc@NotAnEmail', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('customer/department@example.com')
+    ('customer/department@example.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('$A12345@example.com')
+    ('$A12345@example.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('!def!xyz%abc@example.com')
+    ('!def!xyz%abc@example.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('_Yosemite.Sam@example.com')
+    ('_Yosemite.Sam@example.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('~@example.com')
+    ('~@example.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('.wooly@example.com')       # dot starts name
+    ('.wooly@example.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('wo..oly@example.com')      # adjacent dots in name
+    ('wo..oly@example.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('pootietang.@example.com')  # dot ends name
+    ('pootietang.@example.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('.@example.com')            # name is bare dot
+    ('.@example.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('Ima.Fool@example.com')
+    ('Ima.Fool@example.com', None)
+    &gt;&gt;&gt; IS_EMAIL()('Ima Fool@example.com')     # space in name
+    ('Ima Fool@example.com', 'enter a valid email address')
+    &gt;&gt;&gt; IS_EMAIL()('localguy@localhost')       # localhost as domain
+    ('localguy@localhost', None)
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators.IS_EMAIL-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">banned</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">forced</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">error_message</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">enter a valid email address</code><code class="variable-quote">'</code></span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#IS_EMAIL.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators.IS_EMAIL-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#IS_EMAIL.__call__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.validators.Validator-class.html" onclick="show_private();">Validator</a></code></b>:
+      <code><a href="gluon.validators.Validator-class.html#formatter">formatter</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EMAIL-class.html#regex" class="summary-name">regex</a> = <code title="re.compile(r'(?ix)^(?!\.)([-a-z0-9!#\$%&amp;\'\*\+/=\?\^_`\{\|\}~]|(?&lt;!\.)\
+\.)+(?&lt;!\.)@(localhost|([a-z0-9]([-\w]*[a-z0-9])?\.)+[a-z]{2,})$')">re.compile(r'<code class="re-flags">(?ix)</code>^<code class="re-group">(?!</code>\.<code class="re-group">)</code><code class="re-group">(</code><code class="re-group">[</code>-a<code class="re-op">-</code>z0<code class="re-op">-</code>9!#\$%&amp;\'\*\+/=\?\^_`<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.validators.IS_EMAIL-class.html#regex_proposed_but_failed" class="summary-name">regex_proposed_but_failed</a> = <code title="re.compile(r'(?ix)^([\w!#\$%&amp;\'\*\+-/=\?\^`\{\|\}~]+\.)*[\w!#\$%&amp;\'\*\\
++-/=\?\^`\{\|\}~]+@((((([a-z0-9]{1}[a-z0-9-]{,62}[a-z0-9]{1})|[a-z])\.\
+)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?)$')">re.compile(r'<code class="re-flags">(?ix)</code>^<code class="re-group">(</code><code class="re-group">[</code>\w!#\$%&amp;\'\*\<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">banned</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">forced</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">error_message</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">enter a valid email address</code><code class="variable-quote">'</code></span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#IS_EMAIL.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__call__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+    <br /><em class="fname">(Call operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#IS_EMAIL.__call__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.validators.Validator-class.html#__call__">Validator.__call__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="regex"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-flags">(?ix)</code>^<code class="re-group">(?!</code>\.<code class="re-group">)</code><code class="re-group">(</code><code class="re-group">[</code>-a<code class="re-op">-</code>z0<code class="re-op">-</code>9!#\$%&amp;\'\*\+/=\?\^_`\{\|\}~<code class="re-group">]</code><code class="re-op">|</code><code class="re-group">(?&lt;!</code>\.<code class="re-group">)</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+\.<code class="re-group">)</code><code class="re-op">+</code><code class="re-group">(?&lt;!</code>\.<code class="re-group">)</code>@<code class="re-group">(</code>localhost<code class="re-op">|</code><code class="re-group">(</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">(</code><code class="re-group">[</code>-\w<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">)</code><code class="re-op">?</code>\.<code class="re-group">)</code><code class="re-op">+</code><code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2,}</code><code class="re-group">)</code>$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_proposed_but_failed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_proposed_but_failed</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-flags">(?ix)</code>^<code class="re-group">(</code><code class="re-group">[</code>\w!#\$%&amp;\'\*\+-/=\?\^`\{\|\}~<code class="re-group">]</code><code class="re-op">+</code>\.<code class="re-group">)</code><code class="re-op">*</code><code class="re-group">[</code>\w!#\$%&amp;\'\*\<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
++-/=\?\^`\{\|\}~<code class="re-group">]</code><code class="re-op">+</code>@<code class="re-group">(</code><code class="re-group">(</code><code class="re-group">(</code><code class="re-group">(</code><code class="re-group">(</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{1}</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9-<code class="re-group">]</code><code class="re-op">{,62}</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{1}</code><code class="re-group">)</code><code class="re-op">|</code><code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-group">)</code>\.<code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">)</code><code class="re-op">+</code><code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-op">{2,6}</code><code class="re-group">)</code><code class="re-op">|</code><code class="re-group">(</code>\d<code class="re-op">{1,3}</code>\.<code class="re-group">)</code><code class="re-op">{3}</code>\d<code class="re-op">{1,3}</code><code class="re-group">(</code>:\d<code class="re-op">{1,5}</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">)</code>$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:45 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

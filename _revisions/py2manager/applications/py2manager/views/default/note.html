@@ -1,0 +1,12 @@
+{{extend 'layout.html'}}
+<h2>Project Notes</h2>
+<br/>
+<h4>Current Notes</h4>
+{{for n in allnotes:}}
+<ul>
+<li>{{=db.auth_user[n.created_by].first_name}} on {{=n.created_on.strftime("%m/%d/%Y")}}
+- {{=n.post}}</li>
+</ul>
+{{pass}}
+<h4>Add a note</h4>
+{{=form}}<br>

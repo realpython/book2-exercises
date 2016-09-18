@@ -1,0 +1,11 @@
+{{extend 'layout.html'}}
+<h2>Add a new project:</h2>
+<br/>
+{{=project_form.custom.begin}}
+<strong>Project name</strong><br/>{{=project_form.custom.widget.name}}<br/>
+<strong>Company name</strong><br/>{{=project_form.custom.widget.company_name}}<br/>
+<strong>Description</strong><br/>{{=project_form.custom.widget.description}}<br/>
+<strong>Start Date</strong><br/>{{=project_form.custom.widget.start_date}}<br/>
+<strong>Due Date<strong><br/>{{=project_form.custom.widget.due_date}}<br/>
+{{=project_form.custom.submit}}
+{{=project_form.custom.end}}

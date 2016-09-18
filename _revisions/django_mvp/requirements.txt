@@ -1,0 +1,4 @@
+Django==1.5.5
+requests==2.2.1
+stripe==1.9.2
+wsgiref==0.1.2

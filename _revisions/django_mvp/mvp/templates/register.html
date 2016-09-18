@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="span6 columns">
+  </div>
+</div>
+<div class="page-header">
+  <h1>Register Today!</h1>
+</div>
+<div class="row">
+  <div class="span6 columns">
+    <form id="user_form" accept-charset="UTF-8" action="{% url 'register' %}" class="form-stacked"  method="post">
+      {% csrf_token %}
+      {% if form.is_bound and not form.is_valid %}
+        <div class="alert alert-{{error.tags}}"> <a class="close" data-dismiss="alert">×</a>
+          <div class="errors">
+            {% for field in form.visible_fields %}
+            {% for error in field.errors %}
+            <p>{{ field.label }}: {{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      {% for field in form.visible_fields %}
+      {% include "field.html" %}
+      {% endfor %}
+      <div id="change-card" class="clearfix"{% if not form.last_4_digits.value %} style="display: none"{% endif %}>
+        Card
+        <div class="input">
+          Using card ending with {{ form.last_4_digits.value }}
+          (<a href="#">change</a>)
+        </div>
+      </div>      
+      {% include "cardform.html" %}
+    </form>
+  </div>
+</div>  
+{% endblock %}

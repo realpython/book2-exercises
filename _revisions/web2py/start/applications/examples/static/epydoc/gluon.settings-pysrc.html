@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.settings</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;settings
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.settings-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.settings-module.html" onclick="show_private();">Module gluon.settings</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">platform</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package gluon=gluon-module.html"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-0', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module gluon.storage=gluon.storage-module.html"><a title="gluon.storage" class="py-name" href="#" onclick="return doclink('link-1', 'storage', 'link-1');">storage</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class gluon.storage.Storage=gluon.storage.Storage-class.html"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-2', 'Storage', 'link-2');">Storage</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable gluon.settings.global_settings=gluon.settings-module.html#global_settings"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-3', 'global_settings', 'link-3');">global_settings</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-4', 'Storage', 'link-2');">Storage</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Module gluon.settings=gluon.settings-module.html,Variable gluon.settings.settings=gluon.settings-module.html#settings"><a title="gluon.settings
+gluon.settings.settings" class="py-name" href="#" onclick="return doclink('link-5', 'settings', 'link-5');">settings</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-6', 'global_settings', 'link-3');">global_settings</a></tt>  <tt class="py-comment"># legacy compatibility</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">,</tt> <tt class="py-string">'mkdir'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt id="link-7" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-7', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">db_sessions</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-8" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-8', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">db_sessions</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt id="link-9" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-9', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">db_sessions</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt id="link-10" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-10', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">gluon_parent</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable gluon.main.LazyWSGI.environ=gluon.main.LazyWSGI-class.html#environ"><a title="gluon.main.LazyWSGI.environ" class="py-name" href="#" onclick="return doclink('link-11', 'environ', 'link-11');">environ</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-12', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'web2py_path'</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt id="link-13" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-13', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">applications_parent</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-14', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">gluon_parent</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt id="link-15" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-15', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">app_folders</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt id="link-16" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-16', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">debugging</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt id="link-17" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-17', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Variable gluon.compileapp.is_pypy=gluon.compileapp-module.html#is_pypy"><a title="gluon.compileapp.is_pypy" class="py-name" href="#" onclick="return doclink('link-18', 'is_pypy', 'link-18');">is_pypy</a></tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">platform</tt><tt class="py-op">,</tt> <tt class="py-string">'python_implementation'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-name">platform</tt><tt class="py-op">.</tt><tt class="py-name">python_implementation</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'PyPy'</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt id="link-19" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-19', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Variable gluon.compileapp.is_jython=gluon.compileapp-module.html#is_jython"><a title="gluon.compileapp.is_jython" class="py-name" href="#" onclick="return doclink('link-20', 'is_jython', 'link-20');">is_jython</a></tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-string">'java'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">platform</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method gluon.dal.Expression.lower()=gluon.dal.Expression-class.html#lower,Method gluon.utf8.Utf8.lower()=gluon.utf8.Utf8-class.html#lower"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-21', 'lower', 'link-21');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> \ </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-string">'JYTHON_JAR'</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> \ </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">copyright</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method gluon.dal.Rows.find()=gluon.dal.Rows-class.html#find,Method gluon.utf8.Utf8.find()=gluon.utf8.Utf8-class.html#find"><a title="gluon.dal.Rows.find
+gluon.utf8.Utf8.find" class="py-name" href="#" onclick="return doclink('link-22', 'find', 'link-22');">find</a></tt><tt class="py-op">(</tt><tt class="py-string">'Jython'</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-23" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-23', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">is_source</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Variable gluon.scheduler.path=gluon.scheduler-module.html#path"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-24', 'path', 'link-24');">path</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Static Method gluon.dal.DatabaseStoredFile.exists()=gluon.dal.DatabaseStoredFile-class.html#exists"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-25', 'exists', 'link-25');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-26', 'path', 'link-24');">path</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Function gluon.html.join()=gluon.html-module.html#join,Method gluon.rocket.Listener.join()=gluon.rocket.Listener-class.html#join,Method gluon.utf8.Utf8.join()=gluon.utf8.Utf8-class.html#join"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-27', 'join', 'link-27');">join</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt id="link-28" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-28', 'global_settings', 'link-3');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">gluon_parent</tt><tt class="py-op">,</tt><tt class="py-string">'web2py.py'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:54 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
