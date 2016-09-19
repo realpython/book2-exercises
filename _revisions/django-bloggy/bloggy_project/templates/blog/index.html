@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+ 
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    {% if latest_posts %}
+    <ul>
+      {% for post in latest_posts %}
+        <h3><a href="/blog/{{ post.slug }}">{{ post.title }}</a></h3>
+        <p><em>{{ post.created_at }}</em></p>
+        <p>{{ post.content }}</p>
+        <br>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <div class="col-md-4">
+    <h4>Must See:</h4>
+    <ul>
+      {% for popular_post in popular_posts %}
+        <li><a href="/blog/{{ popular_post.slug }}">{{ popular_post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

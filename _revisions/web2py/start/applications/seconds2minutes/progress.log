@@ -1,0 +1,7 @@
+[2014-03-01 19:46:13] START
+[2014-03-01 19:47:32] EDIT seconds2minutes/controllers/default.py: -46
+[2014-03-01 19:48:25] EDIT seconds2minutes/views/default/index.html: -27
+[2014-03-01 19:49:13] CREATE default/convert.html: 0
+[2014-03-01 19:49:57] EDIT seconds2minutes/views/default/convert.html: 3
+[2014-03-01 19:52:08] EDIT seconds2minutes/controllers/default.py: 0
+[2014-03-01 22:44:11] EDIT seconds2minutes/static/css/web2py_bootstrap.css: 0

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.dal.IngresUnicodeAdapter</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.dal-module.html" onclick="show_private();">Module&nbsp;dal</a> ::
+        Class&nbsp;IngresUnicodeAdapter
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.dal.IngresUnicodeAdapter-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class IngresUnicodeAdapter</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.dal-pysrc.html#IngresUnicodeAdapter">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+    object --+            
+             |            
+<a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a> --+        
+                 |        
+       <a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a> --+    
+                     |    
+         <a href="gluon.dal.IngresAdapter-class.html" onclick="show_private();">IngresAdapter</a> --+
+                         |
+                        <strong class="uidshort">IngresUnicodeAdapter</strong>
+</pre>
+
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.IngresAdapter-class.html" onclick="show_private();">IngresAdapter</a></code></b>:
+      <code><a href="gluon.dal.IngresAdapter-class.html#LEFT_JOIN">LEFT_JOIN</a></code>,
+      <code><a href="gluon.dal.IngresAdapter-class.html#RANDOM">RANDOM</a></code>,
+      <code><a href="gluon.dal.IngresAdapter-class.html#__init__">__init__</a></code>,
+      <code><a href="gluon.dal.IngresAdapter-class.html#create_sequence_and_triggers">create_sequence_and_triggers</a></code>,
+      <code><a href="gluon.dal.IngresAdapter-class.html#lastrowid">lastrowid</a></code>,
+      <code><a href="gluon.dal.IngresAdapter-class.html#select_limitby">select_limitby</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b>:
+      <code><a href="gluon.dal.BaseAdapter-class.html#ADD">ADD</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#AGGREGATE">AGGREGATE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#ALLOW_NULL">ALLOW_NULL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#AND">AND</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#AS">AS</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#BELONGS">BELONGS</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CASE">CASE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CAST">CAST</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COALESCE">COALESCE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COALESCE_ZERO">COALESCE_ZERO</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COMMA">COMMA</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CONCAT">CONCAT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CONTAINS">CONTAINS</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COUNT">COUNT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#DIV">DIV</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#ENDSWITH">ENDSWITH</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#EPOCH">EPOCH</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#EQ">EQ</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#EXTRACT">EXTRACT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#GE">GE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#GT">GT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#ILIKE">ILIKE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#INVERT">INVERT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#JOIN">JOIN</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LE">LE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LENGTH">LENGTH</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LIKE">LIKE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LOWER">LOWER</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LT">LT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#MOD">MOD</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#MUL">MUL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#NE">NE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#NOT">NOT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#NOT_NULL">NOT_NULL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#ON">ON</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#OR">OR</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#PRIMARY_KEY">PRIMARY_KEY</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#RAW">RAW</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#REGEXP">REGEXP</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#REPLACE">REPLACE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#STARTSWITH">STARTSWITH</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#SUB">SUB</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#SUBSTRING">SUBSTRING</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#UPPER">UPPER</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#adapt">adapt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#alias">alias</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#build_parsemap">build_parsemap</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#bulk_insert">bulk_insert</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#close_connection">close_connection</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#commit">commit</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#commit_prepared">commit_prepared</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#common_filter">common_filter</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#concat_add">concat_add</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#constraint_name">constraint_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#count">count</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#create_table">create_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#delete">delete</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#distributed_transaction_begin">distributed_transaction_begin</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#drop">drop</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#execute">execute</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#expand">expand</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#expand_all">expand_all</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_close">file_close</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_delete">file_delete</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_exists">file_exists</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_open">file_open</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#find_driver">find_driver</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#get_table">get_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#id_query">id_query</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#insert">insert</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#isOperationalError">isOperationalError</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#isProgrammingError">isProgrammingError</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#is_numerical_type">is_numerical_type</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#log">log</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#log_execute">log_execute</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#migrate_table">migrate_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse">parse</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_blob">parse_blob</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_boolean">parse_boolean</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_date">parse_date</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_datetime">parse_datetime</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_decimal">parse_decimal</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_double">parse_double</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_id">parse_id</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_integer">parse_integer</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_json">parse_json</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_integers">parse_list_integers</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_references">parse_list_references</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_strings">parse_list_strings</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_reference">parse_reference</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_time">parse_time</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_value">parse_value</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#prepare">prepare</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#represent">represent</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#represent_exceptions">represent_exceptions</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#rollback">rollback</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#rollback_prepared">rollback_prepared</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#rowslice">rowslice</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#save_dbt">save_dbt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#select">select</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#sequence_name">sequence_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#smart_adapt">smart_adapt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#table_alias">table_alias</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#tables">tables</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#trigger_name">trigger_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#truncate">truncate</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#update">update</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#varquote">varquote</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b> (private):
+      <code><a href="gluon.dal.BaseAdapter-class.html#_count" onclick="show_private();">_count</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_delete" onclick="show_private();">_delete</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_drop" onclick="show_private();">_drop</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_fetchall" onclick="show_private();">_fetchall</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_insert" onclick="show_private();">_insert</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_insert_empty" onclick="show_private();">_insert_empty</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_select" onclick="show_private();">_select</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_select_aux" onclick="show_private();">_select_aux</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_truncate" onclick="show_private();">_truncate</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_update" onclick="show_private();">_update</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#after_connection">after_connection</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#after_connection_hook">after_connection_hook</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#close">close</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#find_or_make_work_folder">find_or_make_work_folder</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#reconnect">reconnect</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#close_all_instances">close_all_instances</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#set_folder">set_folder</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="drivers"></a><span class="summary-name">drivers</span> = <code title="'pyodbc',">'pyodbc',</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IngresUnicodeAdapter-class.html#types" class="summary-name">types</a> = <code title="{'big-id': 'BIGINT not null unique with default next value for ii***li\
+neitemsequence',
+ 'big-reference': 'BIGINT, FOREIGN KEY (%(field_name)s) REFERENCES %(f\
+oreign_key)s ON DELETE %(on_delete_action)s',
+ 'bigint': 'BIGINT',
+ 'blob': 'BLOB',
+ 'boolean': 'CHAR(1)',
+ 'date': 'ANSIDATE',
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">big-id</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BIGINT not null unique with default next v</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b>:
+      <code><a href="gluon.dal.BaseAdapter-class.html#FALSE">FALSE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#QUOTE_TEMPLATE">QUOTE_TEMPLATE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#TRUE">TRUE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#T_SEP">T_SEP</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#can_select_for_update">can_select_for_update</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#commit_on_alter_table">commit_on_alter_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#connection">connection</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#dbpath">dbpath</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#driver">driver</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#driver_name">driver_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#folder">folder</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#native_json">native_json</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#support_distributed_transaction">support_distributed_transaction</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#uploads_in_blob">uploads_in_blob</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#POOLS">POOLS</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#check_active_connection">check_active_connection</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="types"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">types</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">big-id</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BIGINT not null unique with default next value for ii***li</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">neitemsequence</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">big-reference</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BIGINT, FOREIGN KEY (%(field_name)s) REFERENCES %(f</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">oreign_key)s ON DELETE %(on_delete_action)s</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">bigint</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BIGINT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">blob</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BLOB</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">boolean</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CHAR(1)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">date</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ANSIDATE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:39 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

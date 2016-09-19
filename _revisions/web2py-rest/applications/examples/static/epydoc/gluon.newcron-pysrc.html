@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.newcron</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;newcron
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.newcron-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.newcron-module.html">Module gluon.newcron</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">Created by Attila Csipa &lt;web2py@csipa.in.rs&gt;</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Modified by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">threading</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sched</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">platform</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module gluon.portalocker=gluon.portalocker-module.html"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-0', 'portalocker', 'link-0');">portalocker</a></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module gluon.fileutils=gluon.fileutils-module.html"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-1', 'fileutils', 'link-1');">fileutils</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">cPickle</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package gluon=gluon-module.html"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-2', 'gluon', 'link-2');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module gluon.settings=gluon.settings-module.html,Variable gluon.settings.settings=gluon.settings-module.html#settings"><a title="gluon.settings
+gluon.settings.settings" class="py-name" href="#" onclick="return doclink('link-3', 'settings', 'link-3');">settings</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Variable gluon.settings.global_settings=gluon.settings-module.html#global_settings"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-4', 'global_settings', 'link-4');">global_settings</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable gluon.cache.logger=gluon.cache-module.html#logger,Variable gluon.compileapp.logger=gluon.compileapp-module.html#logger,Variable gluon.debug.logger=gluon.debug-module.html#logger,Variable gluon.main.logger=gluon.main-module.html#logger,Variable gluon.newcron.logger=gluon.newcron-module.html#logger,Variable gluon.portalocker.logger=gluon.portalocker-module.html#logger,Variable gluon.restricted.logger=gluon.restricted-module.html#logger,Variable gluon.rewrite.logger=gluon.rewrite-module.html#logger,Variable gluon.scheduler.logger=gluon.scheduler-module.html#logger,Variable gluon.shell.logger=gluon.shell-module.html#logger,Variable gluon.tools.logger=gluon.tools-module.html#logger,Variable gluon.utils.logger=gluon.utils-module.html#logger,Variable gluon.widget.logger=gluon.widget-module.html#logger"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-5', 'logger', 'link-5');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">"web2py.cron"</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable gluon.newcron._cron_stopping=gluon.newcron-module.html#_cron_stopping"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-6', '_cron_stopping', 'link-6');">_cron_stopping</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable gluon.newcron._cron_subprocs=gluon.newcron-module.html#_cron_subprocs"><a title="gluon.newcron._cron_subprocs" class="py-name" href="#" onclick="return doclink('link-7', '_cron_subprocs', 'link-7');">_cron_subprocs</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="absolute_path_link"></a><div id="absolute_path_link-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="absolute_path_link-toggle" onclick="return toggle('absolute_path_link');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron-module.html#absolute_path_link">absolute_path_link</a><tt class="py-op">(</tt><tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="absolute_path_link-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="absolute_path_link-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">    Return an absolute path for the destination of a symlink</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Variable gluon.scheduler.path=gluon.scheduler-module.html#path"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-8', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">islink</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-9', 'path', 'link-8');">path</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">link</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">readlink</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-10', 'path', 'link-8');">path</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-11', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isabs</tt><tt class="py-op">(</tt><tt class="py-name">link</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt class="py-name">link</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-12', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Function gluon.html.join()=gluon.html-module.html#join,Method gluon.rocket.Listener.join()=gluon.rocket.Listener-class.html#join,Method gluon.utf8.Utf8.join()=gluon.utf8.Utf8-class.html#join"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-13', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-14', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-15', 'path', 'link-8');">path</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">link</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">link</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-16', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Function gluon.fileutils.abspath()=gluon.fileutils-module.html#abspath"><a title="gluon.fileutils.abspath" class="py-name" href="#" onclick="return doclink('link-17', 'abspath', 'link-17');">abspath</a></tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-18', 'path', 'link-8');">path</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">link</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="stopcron"></a><div id="stopcron-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="stopcron-toggle" onclick="return toggle('stopcron');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron-module.html#stopcron">stopcron</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="stopcron-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="stopcron-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-docstring">"graceful shutdown of cron"</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-keyword">global</tt> <tt id="link-19" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-19', '_cron_stopping', 'link-6');">_cron_stopping</a></tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-20', '_cron_stopping', 'link-6');">_cron_stopping</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt id="link-21" class="py-name"><a title="gluon.newcron._cron_subprocs" class="py-name" href="#" onclick="return doclink('link-21', '_cron_subprocs', 'link-7');">_cron_subprocs</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt id="link-22" class="py-name"><a title="gluon.newcron._cron_subprocs" class="py-name" href="#" onclick="return doclink('link-22', '_cron_subprocs', 'link-7');">_cron_subprocs</a></tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method gluon.scheduler.Scheduler.terminate()=gluon.scheduler.Scheduler-class.html#terminate"><a title="gluon.scheduler.Scheduler.terminate" class="py-name" href="#" onclick="return doclink('link-23', 'terminate', 'link-23');">terminate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="extcron"></a><div id="extcron-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="extcron-toggle" onclick="return toggle('extcron');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.newcron.extcron-class.html">extcron</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="extcron-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="extcron-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="extcron.__init__"></a><div id="extcron.__init__-def"><a name="L51"></a><tt class="py-lineno"> 51</tt> <a class="py-toggle" href="#" id="extcron.__init__-toggle" onclick="return toggle('extcron.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.extcron-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">applications_parent</tt><tt class="py-op">,</tt> <tt class="py-param">apps</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="extcron.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="extcron.__init__-expanded"><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method gluon.cache.Cache.__init__()=gluon.cache.Cache-class.html#__init__,Method gluon.cache.CacheAbstract.__init__()=gluon.cache.CacheAbstract-class.html#__init__,Method gluon.cache.CacheAction.__init__()=gluon.cache.CacheAction-class.html#__init__,Method gluon.cache.CacheInRam.__init__()=gluon.cache.CacheInRam-class.html#__init__,Method gluon.cache.CacheOnDisk.__init__()=gluon.cache.CacheOnDisk-class.html#__init__,Method gluon.compileapp.LoadFactory.__init__()=gluon.compileapp.LoadFactory-class.html#__init__,Method gluon.custom_import.TrackImporter.__init__()=gluon.custom_import.TrackImporter-class.html#__init__,Method gluon.dal.BaseAdapter.__init__()=gluon.dal.BaseAdapter-class.html#__init__,Method gluon.dal.CouchDBAdapter.__init__()=gluon.dal.CouchDBAdapter-class.html#__init__,Method gluon.dal.CubridAdapter.__init__()=gluon.dal.CubridAdapter-class.html#__init__,Method gluon.dal.DAL.__init__()=gluon.dal.DAL-class.html#__init__,Method gluon.dal.DB2Adapter.__init__()=gluon.dal.DB2Adapter-class.html#__init__,Method gluon.dal.DatabaseStoredFile.__init__()=gluon.dal.DatabaseStoredFile-class.html#__init__,Method gluon.dal.Expression.__init__()=gluon.dal.Expression-class.html#__init__,Method gluon.dal.Field.__init__()=gluon.dal.Field-class.html#__init__,Method gluon.dal.FieldMethod.__init__()=gluon.dal.FieldMethod-class.html#__init__,Method gluon.dal.FieldVirtual.__init__()=gluon.dal.FieldVirtual-class.html#__init__,Method gluon.dal.FireBirdAdapter.__init__()=gluon.dal.FireBirdAdapter-class.html#__init__,Method gluon.dal.FireBirdEmbeddedAdapter.__init__()=gluon.dal.FireBirdEmbeddedAdapter-class.html#__init__,Method gluon.dal.GAEDecimalProperty.__init__()=gluon.dal.GAEDecimalProperty-class.html#__init__,Method gluon.dal.GAEF.__init__()=gluon.dal.GAEF-class.html#__init__,Method gluon.dal.GoogleDatastoreAdapter.__init__()=gluon.dal.GoogleDatastoreAdapter-class.html#__init__,Method gluon.dal.GoogleSQLAdapter.__init__()=gluon.dal.GoogleSQLAdapter-class.html#__init__,Method gluon.dal.IMAPAdapter.__init__()=gluon.dal.IMAPAdapter-class.html#__init__,Method gluon.dal.InformixAdapter.__init__()=gluon.dal.InformixAdapter-class.html#__init__,Method gluon.dal.IngresAdapter.__init__()=gluon.dal.IngresAdapter-class.html#__init__,Method gluon.dal.JDBCPostgreSQLAdapter.__init__()=gluon.dal.JDBCPostgreSQLAdapter-class.html#__init__,Method gluon.dal.JDBCSQLiteAdapter.__init__()=gluon.dal.JDBCSQLiteAdapter-class.html#__init__,Method gluon.dal.LazyReferenceGetter.__init__()=gluon.dal.LazyReferenceGetter-class.html#__init__,Method gluon.dal.LazySet.__init__()=gluon.dal.LazySet-class.html#__init__,Method gluon.dal.MSSQLAdapter.__init__()=gluon.dal.MSSQLAdapter-class.html#__init__,Method gluon.dal.MethodAdder.__init__()=gluon.dal.MethodAdder-class.html#__init__,Method gluon.dal.MongoDBAdapter.__init__()=gluon.dal.MongoDBAdapter-class.html#__init__,Method gluon.dal.MySQLAdapter.__init__()=gluon.dal.MySQLAdapter-class.html#__init__,Method gluon.dal.NDBDecimalProperty.__init__()=gluon.dal.NDBDecimalProperty-class.html#__init__,Method gluon.dal.OracleAdapter.__init__()=gluon.dal.OracleAdapter-class.html#__init__,Method gluon.dal.PostgreSQLAdapter.__init__()=gluon.dal.PostgreSQLAdapter-class.html#__init__,Method gluon.dal.Query.__init__()=gluon.dal.Query-class.html#__init__,Method gluon.dal.RecordDeleter.__init__()=gluon.dal.RecordDeleter-class.html#__init__,Method gluon.dal.RecordUpdater.__init__()=gluon.dal.RecordUpdater-class.html#__init__,Method gluon.dal.Row.__init__()=gluon.dal.Row-class.html#__init__,Method gluon.dal.Rows.__init__()=gluon.dal.Rows-class.html#__init__,Method gluon.dal.SAPDBAdapter.__init__()=gluon.dal.SAPDBAdapter-class.html#__init__,Method gluon.dal.SQLALL.__init__()=gluon.dal.SQLALL-class.html#__init__,Method gluon.dal.SQLCustomType.__init__()=gluon.dal.SQLCustomType-class.html#__init__,Method gluon.dal.SQLiteAdapter.__init__()=gluon.dal.SQLiteAdapter-class.html#__init__,Method gluon.dal.Set.__init__()=gluon.dal.Set-class.html#__init__,Method gluon.dal.SpatiaLiteAdapter.__init__()=gluon.dal.SpatiaLiteAdapter-class.html#__init__,Method gluon.dal.SybaseAdapter.__init__()=gluon.dal.SybaseAdapter-class.html#__init__,Method gluon.dal.Table.__init__()=gluon.dal.Table-class.html#__init__,Method gluon.dal.TeradataAdapter.__init__()=gluon.dal.TeradataAdapter-class.html#__init__,Method gluon.dal.VirtualCommand.__init__()=gluon.dal.VirtualCommand-class.html#__init__,Method gluon.debug.Pipe.__init__()=gluon.debug.Pipe-class.html#__init__,Method gluon.debug.WebDebugger.__init__()=gluon.debug.WebDebugger-class.html#__init__,Method gluon.globals.Request.__init__()=gluon.globals.Request-class.html#__init__,Method gluon.globals.Response.__init__()=gluon.globals.Response-class.html#__init__,Method gluon.highlight.Highlighter.__init__()=gluon.highlight.Highlighter-class.html#__init__,Method gluon.html.BEAUTIFY.__init__()=gluon.html.BEAUTIFY-class.html#__init__,Method gluon.html.DIV.__init__()=gluon.html.DIV-class.html#__init__,Method gluon.html.FORM.__init__()=gluon.html.FORM-class.html#__init__,Method gluon.html.MARKMIN.__init__()=gluon.html.MARKMIN-class.html#__init__,Method gluon.html.MENU.__init__()=gluon.html.MENU-class.html#__init__,Method gluon.html.XML.__init__()=gluon.html.XML-class.html#__init__,Method gluon.html.__tag_div__.__init__()=gluon.html.__tag_div__-class.html#__init__,Method gluon.html.web2pyHTMLParser.__init__()=gluon.html.web2pyHTMLParser-class.html#__init__,Method gluon.http.HTTP.__init__()=gluon.http.HTTP-class.html#__init__,Method gluon.languages.lazyT.__init__()=gluon.languages.lazyT-class.html#__init__,Method gluon.languages.translator.__init__()=gluon.languages.translator-class.html#__init__,Method gluon.main.HttpServer.__init__()=gluon.main.HttpServer-class.html#__init__,Method gluon.main.LazyWSGI.__init__()=gluon.main.LazyWSGI-class.html#__init__,Method gluon.messageboxhandler.MessageBoxHandler.__init__()=gluon.messageboxhandler.MessageBoxHandler-class.html#__init__,Method gluon.messageboxhandler.NotifySendHandler.__init__()=gluon.messageboxhandler.NotifySendHandler-class.html#__init__,Method gluon.newcron.Token.__init__()=gluon.newcron.Token-class.html#__init__,Method gluon.newcron.cronlauncher.__init__()=gluon.newcron.cronlauncher-class.html#__init__,Method gluon.newcron.extcron.__init__()=gluon.newcron.extcron-class.html#__init__,Method gluon.newcron.hardcron.__init__()=gluon.newcron.hardcron-class.html#__init__,Method gluon.newcron.softcron.__init__()=gluon.newcron.softcron-class.html#__init__,Method gluon.portalocker.LockedFile.__init__()=gluon.portalocker.LockedFile-class.html#__init__,Method gluon.restricted.RestrictedError.__init__()=gluon.restricted.RestrictedError-class.html#__init__,Method gluon.restricted.TicketStorage.__init__()=gluon.restricted.TicketStorage-class.html#__init__,Method gluon.rewrite.MapUrlIn.__init__()=gluon.rewrite.MapUrlIn-class.html#__init__,Method gluon.rewrite.MapUrlOut.__init__()=gluon.rewrite.MapUrlOut-class.html#__init__,Method gluon.rocket.ChunkedReader.__init__()=gluon.rocket.ChunkedReader-class.html#__init__,Method gluon.rocket.Connection.__init__()=gluon.rocket.Connection-class.html#__init__,Method gluon.rocket.FileLikeSocket.__init__()=gluon.rocket.FileLikeSocket-class.html#__init__,Method gluon.rocket.FuturesMiddleware.__init__()=gluon.rocket.FuturesMiddleware-class.html#__init__,Method gluon.rocket.Listener.__init__()=gluon.rocket.Listener-class.html#__init__,Method gluon.rocket.Monitor.__init__()=gluon.rocket.Monitor-class.html#__init__,Method gluon.rocket.Rocket.__init__()=gluon.rocket.Rocket-class.html#__init__,Method gluon.rocket.ThreadPool.__init__()=gluon.rocket.ThreadPool-class.html#__init__,Method gluon.rocket.WSGIExecutor.__init__()=gluon.rocket.WSGIExecutor-class.html#__init__,Method gluon.rocket.WSGIFuture.__init__()=gluon.rocket.WSGIFuture-class.html#__init__,Method gluon.rocket.WSGIWorker.__init__()=gluon.rocket.WSGIWorker-class.html#__init__,Method gluon.rocket.Worker.__init__()=gluon.rocket.Worker-class.html#__init__,Method gluon.rocket._WorkItem.__init__()=gluon.rocket._WorkItem-class.html#__init__,Method gluon.sanitizer.XssCleaner.__init__()=gluon.sanitizer.XssCleaner-class.html#__init__,Method gluon.scheduler.MetaScheduler.__init__()=gluon.scheduler.MetaScheduler-class.html#__init__,Method gluon.scheduler.Scheduler.__init__()=gluon.scheduler.Scheduler-class.html#__init__,Method gluon.scheduler.TYPE.__init__()=gluon.scheduler.TYPE-class.html#__init__,Method gluon.scheduler.Task.__init__()=gluon.scheduler.Task-class.html#__init__,Method gluon.scheduler.TaskReport.__init__()=gluon.scheduler.TaskReport-class.html#__init__,Method gluon.sqlhtml.AutocompleteWidget.__init__()=gluon.sqlhtml.AutocompleteWidget-class.html#__init__,Method gluon.sqlhtml.ExportClass.__init__()=gluon.sqlhtml.ExportClass-class.html#__init__,Method gluon.sqlhtml.ExporterCSV.__init__()=gluon.sqlhtml.ExporterCSV-class.html#__init__,Method gluon.sqlhtml.ExporterHTML.__init__()=gluon.sqlhtml.ExporterHTML-class.html#__init__,Method gluon.sqlhtml.ExporterJSON.__init__()=gluon.sqlhtml.ExporterJSON-class.html#__init__,Method gluon.sqlhtml.ExporterTSV.__init__()=gluon.sqlhtml.ExporterTSV-class.html#__init__,Method gluon.sqlhtml.ExporterXML.__init__()=gluon.sqlhtml.ExporterXML-class.html#__init__,Method gluon.sqlhtml.SQLFORM.__init__()=gluon.sqlhtml.SQLFORM-class.html#__init__,Method gluon.sqlhtml.SQLTABLE.__init__()=gluon.sqlhtml.SQLTABLE-class.html#__init__,Method gluon.storage.FastStorage.__init__()=gluon.storage.FastStorage-class.html#__init__,Method gluon.storage.Messages.__init__()=gluon.storage.Messages-class.html#__init__,Method gluon.template.BlockNode.__init__()=gluon.template.BlockNode-class.html#__init__,Method gluon.template.Content.__init__()=gluon.template.Content-class.html#__init__,Method gluon.template.DummyResponse.__init__()=gluon.template.DummyResponse-class.html#__init__,Method gluon.template.NOESCAPE.__init__()=gluon.template.NOESCAPE-class.html#__init__,Method gluon.template.Node.__init__()=gluon.template.Node-class.html#__init__,Method gluon.template.SuperNode.__init__()=gluon.template.SuperNode-class.html#__init__,Method gluon.template.TemplateParser.__init__()=gluon.template.TemplateParser-class.html#__init__,Method gluon.tools.Auth.__init__()=gluon.tools.Auth-class.html#__init__,Method gluon.tools.Config.__init__()=gluon.tools.Config-class.html#__init__,Method gluon.tools.Crud.__init__()=gluon.tools.Crud-class.html#__init__,Method gluon.tools.Expose.__init__()=gluon.tools.Expose-class.html#__init__,Method gluon.tools.Mail.Attachment.__init__()=gluon.tools.Mail.Attachment-class.html#__init__,Method gluon.tools.Mail.__init__()=gluon.tools.Mail-class.html#__init__,Method gluon.tools.PluginManager.__init__()=gluon.tools.PluginManager-class.html#__init__,Method gluon.tools.Recaptcha.__init__()=gluon.tools.Recaptcha-class.html#__init__,Method gluon.tools.Service.JsonRpcException.__init__()=gluon.tools.Service.JsonRpcException-class.html#__init__,Method gluon.tools.Service.__init__()=gluon.tools.Service-class.html#__init__,Method gluon.tools.Wiki.__init__()=gluon.tools.Wiki-class.html#__init__,Method gluon.validators.ANY_OF.__init__()=gluon.validators.ANY_OF-class.html#__init__,Method gluon.validators.CLEANUP.__init__()=gluon.validators.CLEANUP-class.html#__init__,Method gluon.validators.CRYPT.__init__()=gluon.validators.CRYPT-class.html#__init__,Method gluon.validators.IS_ALPHANUMERIC.__init__()=gluon.validators.IS_ALPHANUMERIC-class.html#__init__,Method gluon.validators.IS_DATE.__init__()=gluon.validators.IS_DATE-class.html#__init__,Method gluon.validators.IS_DATETIME.__init__()=gluon.validators.IS_DATETIME-class.html#__init__,Method gluon.validators.IS_DATETIME_IN_RANGE.__init__()=gluon.validators.IS_DATETIME_IN_RANGE-class.html#__init__,Method gluon.validators.IS_DATE_IN_RANGE.__init__()=gluon.validators.IS_DATE_IN_RANGE-class.html#__init__,Method gluon.validators.IS_DECIMAL_IN_RANGE.__init__()=gluon.validators.IS_DECIMAL_IN_RANGE-class.html#__init__,Method gluon.validators.IS_EMAIL.__init__()=gluon.validators.IS_EMAIL-class.html#__init__,Method gluon.validators.IS_EMPTY_OR.__init__()=gluon.validators.IS_EMPTY_OR-class.html#__init__,Method gluon.validators.IS_EQUAL_TO.__init__()=gluon.validators.IS_EQUAL_TO-class.html#__init__,Method gluon.validators.IS_EXPR.__init__()=gluon.validators.IS_EXPR-class.html#__init__,Method gluon.validators.IS_FLOAT_IN_RANGE.__init__()=gluon.validators.IS_FLOAT_IN_RANGE-class.html#__init__,Method gluon.validators.IS_GENERIC_URL.__init__()=gluon.validators.IS_GENERIC_URL-class.html#__init__,Method gluon.validators.IS_HTTP_URL.__init__()=gluon.validators.IS_HTTP_URL-class.html#__init__,Method gluon.validators.IS_IMAGE.__init__()=gluon.validators.IS_IMAGE-class.html#__init__,Method gluon.validators.IS_INT_IN_RANGE.__init__()=gluon.validators.IS_INT_IN_RANGE-class.html#__init__,Method gluon.validators.IS_IN_DB.__init__()=gluon.validators.IS_IN_DB-class.html#__init__,Method gluon.validators.IS_IN_SET.__init__()=gluon.validators.IS_IN_SET-class.html#__init__,Method gluon.validators.IS_IN_SUBSET.__init__()=gluon.validators.IS_IN_SUBSET-class.html#__init__,Method gluon.validators.IS_IPADDRESS.__init__()=gluon.validators.IS_IPADDRESS-class.html#__init__,Method gluon.validators.IS_IPV4.__init__()=gluon.validators.IS_IPV4-class.html#__init__,Method gluon.validators.IS_IPV6.__init__()=gluon.validators.IS_IPV6-class.html#__init__,Method gluon.validators.IS_JSON.__init__()=gluon.validators.IS_JSON-class.html#__init__,Method gluon.validators.IS_LENGTH.__init__()=gluon.validators.IS_LENGTH-class.html#__init__,Method gluon.validators.IS_LIST_OF.__init__()=gluon.validators.IS_LIST_OF-class.html#__init__,Method gluon.validators.IS_LIST_OF_EMAILS.__init__()=gluon.validators.IS_LIST_OF_EMAILS-class.html#__init__,Method gluon.validators.IS_MATCH.__init__()=gluon.validators.IS_MATCH-class.html#__init__,Method gluon.validators.IS_NOT_EMPTY.__init__()=gluon.validators.IS_NOT_EMPTY-class.html#__init__,Method gluon.validators.IS_NOT_IN_DB.__init__()=gluon.validators.IS_NOT_IN_DB-class.html#__init__,Method gluon.validators.IS_SLUG.__init__()=gluon.validators.IS_SLUG-class.html#__init__,Method gluon.validators.IS_STRONG.__init__()=gluon.validators.IS_STRONG-class.html#__init__,Method gluon.validators.IS_TIME.__init__()=gluon.validators.IS_TIME-class.html#__init__,Method gluon.validators.IS_UPLOAD_FILENAME.__init__()=gluon.validators.IS_UPLOAD_FILENAME-class.html#__init__,Method gluon.validators.IS_URL.__init__()=gluon.validators.IS_URL-class.html#__init__,Method gluon.validators.LazyCrypt.__init__()=gluon.validators.LazyCrypt-class.html#__init__,Method gluon.widget.IO.__init__()=gluon.widget.IO-class.html#__init__,Method gluon.widget.web2pyDialog.__init__()=gluon.widget.web2pyDialog-class.html#__init__"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-24', '__init__', 'link-24');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setDaemon</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-25', 'path', 'link-8');">path</a></tt> <tt class="py-op">=</tt> <tt class="py-name">applications_parent</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">apps</tt> <tt class="py-op">=</tt> <tt class="py-name">apps</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-comment"># crondance(self.path, 'external', startup=True, apps=self.apps)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="extcron.run"></a><div id="extcron.run-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="extcron.run-toggle" onclick="return toggle('extcron.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.extcron-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="extcron.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="extcron.run-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-26" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-26', '_cron_stopping', 'link-6');">_cron_stopping</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt id="link-27" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-27', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Module gluon.debug=gluon.debug-module.html"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-28', 'debug', 'link-28');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'external cron invocation'</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt id="link-29" class="py-name" targets="Function gluon.newcron.crondance()=gluon.newcron-module.html#crondance"><a title="gluon.newcron.crondance" class="py-name" href="#" onclick="return doclink('link-29', 'crondance', 'link-29');">crondance</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-30', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">'external'</tt><tt class="py-op">,</tt> <tt class="py-name">startup</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">apps</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">apps</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="hardcron"></a><div id="hardcron-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="hardcron-toggle" onclick="return toggle('hardcron');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.newcron.hardcron-class.html">hardcron</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hardcron-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hardcron-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="hardcron.__init__"></a><div id="hardcron.__init__-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="hardcron.__init__-toggle" onclick="return toggle('hardcron.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.hardcron-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">applications_parent</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hardcron.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="hardcron.__init__-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-31', '__init__', 'link-24');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setDaemon</tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-32', 'path', 'link-8');">path</a></tt> <tt class="py-op">=</tt> <tt class="py-name">applications_parent</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt id="link-33" class="py-name"><a title="gluon.newcron.crondance" class="py-name" href="#" onclick="return doclink('link-33', 'crondance', 'link-29');">crondance</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-34', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">'hard'</tt><tt class="py-op">,</tt> <tt class="py-name">startup</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="hardcron.launch"></a><div id="hardcron.launch-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="hardcron.launch-toggle" onclick="return toggle('hardcron.launch');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.hardcron-class.html#launch">launch</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hardcron.launch-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="hardcron.launch-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-35" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-35', '_cron_stopping', 'link-6');">_cron_stopping</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt id="link-36" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-36', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-37', 'debug', 'link-28');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'hard cron invocation'</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt id="link-38" class="py-name"><a title="gluon.newcron.crondance" class="py-name" href="#" onclick="return doclink('link-38', 'crondance', 'link-29');">crondance</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-39', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">'hard'</tt><tt class="py-op">,</tt> <tt class="py-name">startup</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="hardcron.run"></a><div id="hardcron.run-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="hardcron.run-toggle" onclick="return toggle('hardcron.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.hardcron-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hardcron.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="hardcron.run-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt id="link-40" class="py-name" targets="Variable gluon.languages.lazyT.s=gluon.languages.lazyT-class.html#s"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-40', 's', 'link-40');">s</a></tt> <tt class="py-op">=</tt> <tt class="py-name">sched</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Module gluon.scheduler=gluon.scheduler-module.html"><a title="gluon.scheduler" class="py-name" href="#" onclick="return doclink('link-41', 'scheduler', 'link-41');">scheduler</a></tt><tt class="py-op">(</tt><tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">,</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method gluon.scheduler.MetaScheduler.sleep()=gluon.scheduler.MetaScheduler-class.html#sleep,Method gluon.scheduler.Scheduler.sleep()=gluon.scheduler.Scheduler-class.html#sleep"><a title="gluon.scheduler.MetaScheduler.sleep
+gluon.scheduler.Scheduler.sleep" class="py-name" href="#" onclick="return doclink('link-42', 'sleep', 'link-42');">sleep</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt id="link-43" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-43', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'Hard cron daemon started'</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-keyword">not</tt> <tt id="link-44" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-44', '_cron_stopping', 'link-6');">_cron_stopping</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt id="link-45" class="py-name" targets="Method gluon.scheduler.Scheduler.now()=gluon.scheduler.Scheduler-class.html#now"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-45', 'now', 'link-45');">now</a></tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt id="link-46" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-46', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt class="py-name">enter</tt><tt class="py-op">(</tt><tt class="py-number">60</tt> <tt class="py-op">-</tt> <tt id="link-47" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-47', 'now', 'link-45');">now</a></tt> <tt class="py-op">%</tt> <tt class="py-number">60</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method gluon.newcron.hardcron.launch()=gluon.newcron.hardcron-class.html#launch"><a title="gluon.newcron.hardcron.launch" class="py-name" href="#" onclick="return doclink('link-48', 'launch', 'link-48');">launch</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt id="link-49" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-49', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name" targets="Method gluon.debug.WebDebugger.run()=gluon.debug.WebDebugger-class.html#run,Method gluon.newcron.cronlauncher.run()=gluon.newcron.cronlauncher-class.html#run,Method gluon.newcron.extcron.run()=gluon.newcron.extcron-class.html#run,Method gluon.newcron.hardcron.run()=gluon.newcron.hardcron-class.html#run,Method gluon.newcron.softcron.run()=gluon.newcron.softcron-class.html#run,Method gluon.rocket.Monitor.run()=gluon.rocket.Monitor-class.html#run,Method gluon.rocket.Worker.run()=gluon.rocket.Worker-class.html#run,Method gluon.rocket._WorkItem.run()=gluon.rocket._WorkItem-class.html#run,Method gluon.scheduler.MetaScheduler.run()=gluon.scheduler.MetaScheduler-class.html#run,Function gluon.shell.run()=gluon.shell-module.html#run,Method gluon.tools.Service.run()=gluon.tools.Service-class.html#run"><a title="gluon.debug.WebDebugger.run
+gluon.newcron.cronlauncher.run
+gluon.newcron.extcron.run
+gluon.newcron.hardcron.run
+gluon.newcron.softcron.run
+gluon.rocket.Monitor.run
+gluon.rocket.Worker.run
+gluon.rocket._WorkItem.run
+gluon.scheduler.MetaScheduler.run
+gluon.shell.run
+gluon.tools.Service.run" class="py-name" href="#" onclick="return doclink('link-50', 'run', 'link-50');">run</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="softcron"></a><div id="softcron-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="softcron-toggle" onclick="return toggle('softcron');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.newcron.softcron-class.html">softcron</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="softcron-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="softcron-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="softcron.__init__"></a><div id="softcron.__init__-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="softcron.__init__-toggle" onclick="return toggle('softcron.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.softcron-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">applications_parent</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="softcron.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="softcron.__init__-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-51', '__init__', 'link-24');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-52', 'path', 'link-8');">path</a></tt> <tt class="py-op">=</tt> <tt class="py-name">applications_parent</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-comment"># crondance(self.path, 'soft', startup=True)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="softcron.run"></a><div id="softcron.run-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="softcron.run-toggle" onclick="return toggle('softcron.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.softcron-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="softcron.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="softcron.run-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-53" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-53', '_cron_stopping', 'link-6');">_cron_stopping</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt id="link-54" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-54', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-55', 'debug', 'link-28');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'soft cron invocation'</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">            <tt id="link-56" class="py-name"><a title="gluon.newcron.crondance" class="py-name" href="#" onclick="return doclink('link-56', 'crondance', 'link-29');">crondance</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-57', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">'soft'</tt><tt class="py-op">,</tt> <tt class="py-name">startup</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="Token"></a><div id="Token-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="Token-toggle" onclick="return toggle('Token');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.newcron.Token-class.html">Token</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Token-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Token-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="Token.__init__"></a><div id="Token.__init__-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="Token.__init__-toggle" onclick="return toggle('Token.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.Token-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Token.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Token.__init__-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-58', 'path', 'link-8');">path</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-59', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-60', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-61', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">'cron.master'</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-62', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-63" class="py-name" targets="Static Method gluon.dal.DatabaseStoredFile.exists()=gluon.dal.DatabaseStoredFile-class.html#exists"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-63', 'exists', 'link-63');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-64', 'path', 'link-8');">path</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">            <tt id="link-65" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-65', 'fileutils', 'link-1');">fileutils</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Function gluon.fileutils.write_file()=gluon.fileutils-module.html#write_file"><a title="gluon.fileutils.write_file" class="py-name" href="#" onclick="return doclink('link-66', 'write_file', 'link-66');">write_file</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-67', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-string">'wb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-68" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-68', 'now', 'link-45');">now</a></tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="Token.acquire"></a><div id="Token.acquire-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="Token.acquire-toggle" onclick="return toggle('Token.acquire');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.Token-class.html#acquire">acquire</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">startup</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Token.acquire-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Token.acquire-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        returns the time when the lock is acquired or</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        None if cron already running</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        lock is implemented by writing a pickle (start, stop) in cron.master</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        start is time when cron job starts and stop is time when cron completed</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        stop == 0 if job started but did not yet complete</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        if a cron job started within less than 60 seconds, acquire returns None</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        if a cron job started before 60 seconds and did not stop,</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        a warning is issue "Stale cron.master detected"</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">platform</tt> <tt class="py-op">==</tt> <tt class="py-string">'win32'</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-name">locktime</tt> <tt class="py-op">=</tt> <tt class="py-number">59.5</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt class="py-name">locktime</tt> <tt class="py-op">=</tt> <tt class="py-number">59.99</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-69" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-69', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-70" class="py-name" targets="Variable gluon.portalocker.LOCK_EX=gluon.portalocker-module.html#LOCK_EX"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-70', 'LOCK_EX', 'link-70');">LOCK_EX</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">            <tt id="link-71" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-71', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON: Disabled because no file locking'</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-72', 'path', 'link-8');">path</a></tt><tt class="py-op">,</tt> <tt class="py-string">'rb+'</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">            <tt id="link-73" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-73', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-74" class="py-name" targets="Function gluon.portalocker.lock()=gluon.portalocker-module.html#lock"><a title="gluon.portalocker.lock" class="py-name" href="#" onclick="return doclink('link-74', 'lock', 'link-74');">lock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">,</tt> <tt id="link-75" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-75', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-76', 'LOCK_EX', 'link-70');">LOCK_EX</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-77" class="py-name" targets="Method gluon.main.HttpServer.start()=gluon.main.HttpServer-class.html#start,Method gluon.rocket.Listener.start()=gluon.rocket.Listener-class.html#start,Method gluon.rocket.Rocket.start()=gluon.rocket.Rocket-class.html#start,Method gluon.rocket.ThreadPool.start()=gluon.rocket.ThreadPool-class.html#start,Function gluon.widget.start()=gluon.widget-module.html#start,Method gluon.widget.web2pyDialog.start()=gluon.widget.web2pyDialog-class.html#start"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-77', 'start', 'link-77');">start</a></tt><tt class="py-op">,</tt> <tt id="link-78" class="py-name" targets="Method gluon.main.HttpServer.stop()=gluon.main.HttpServer-class.html#stop,Method gluon.rocket.Monitor.stop()=gluon.rocket.Monitor-class.html#stop,Method gluon.rocket.Rocket.stop()=gluon.rocket.Rocket-class.html#stop,Method gluon.rocket.ThreadPool.stop()=gluon.rocket.ThreadPool-class.html#stop,Method gluon.widget.web2pyDialog.stop()=gluon.widget.web2pyDialog-class.html#stop"><a title="gluon.main.HttpServer.stop
+gluon.rocket.Monitor.stop
+gluon.rocket.Rocket.stop
+gluon.rocket.ThreadPool.stop
+gluon.widget.web2pyDialog.stop" class="py-name" href="#" onclick="return doclink('link-78', 'stop', 'link-78');">stop</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name" targets="Method gluon.restricted.RestrictedError.load()=gluon.restricted.RestrictedError-class.html#load,Method gluon.restricted.TicketStorage.load()=gluon.restricted.TicketStorage-class.html#load,Function gluon.rewrite.load()=gluon.rewrite-module.html#load"><a title="gluon.restricted.RestrictedError.load
+gluon.restricted.TicketStorage.load
+gluon.rewrite.load" class="py-name" href="#" onclick="return doclink('link-79', 'load', 'link-79');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-80" class="py-name"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-80', 'start', 'link-77');">start</a></tt><tt class="py-op">,</tt> <tt id="link-81" class="py-name"><a title="gluon.main.HttpServer.stop
+gluon.rocket.Monitor.stop
+gluon.rocket.Rocket.stop
+gluon.rocket.ThreadPool.stop
+gluon.widget.web2pyDialog.stop" class="py-name" href="#" onclick="return doclink('link-81', 'stop', 'link-78');">stop</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">startup</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-82', 'now', 'link-45');">now</a></tt> <tt class="py-op">-</tt> <tt id="link-83" class="py-name"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-83', 'start', 'link-77');">start</a></tt> <tt class="py-op">&gt;</tt> <tt class="py-name">locktime</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">                <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-84', 'now', 'link-45');">now</a></tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-85" class="py-name"><a title="gluon.main.HttpServer.stop
+gluon.rocket.Monitor.stop
+gluon.rocket.Rocket.stop
+gluon.rocket.ThreadPool.stop
+gluon.widget.web2pyDialog.stop" class="py-name" href="#" onclick="return doclink('link-85', 'stop', 'link-78');">stop</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">                    <tt class="py-comment"># this happens if previous cron job longer than 1 minute</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                    <tt id="link-86" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-86', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON: Stale cron.master detected'</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">                <tt id="link-87" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-87', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-88', 'debug', 'link-28');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON: Acquiring lock'</tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt class="py-name">seek</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt class="py-name">dump</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-89', 'now', 'link-45');">now</a></tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name" targets="Method gluon.debug.Pipe.flush()=gluon.debug.Pipe-class.html#flush"><a title="gluon.debug.Pipe.flush" class="py-name" href="#" onclick="return doclink('link-90', 'flush', 'link-90');">flush</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt id="link-91" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-91', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-92" class="py-name" targets="Function gluon.portalocker.unlock()=gluon.portalocker-module.html#unlock"><a title="gluon.portalocker.unlock" class="py-name" href="#" onclick="return doclink('link-92', 'unlock', 'link-92');">unlock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ret</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">            <tt class="py-comment"># do this so no need to release</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt id="link-93" class="py-name" targets="Method gluon.dal.ConnectionPool.close()=gluon.dal.ConnectionPool-class.html#close,Method gluon.dal.DAL.close()=gluon.dal.DAL-class.html#close,Method gluon.dal.DatabaseStoredFile.close()=gluon.dal.DatabaseStoredFile-class.html#close,Method gluon.dal.TeradataAdapter.close()=gluon.dal.TeradataAdapter-class.html#close,Method gluon.portalocker.LockedFile.close()=gluon.portalocker.LockedFile-class.html#close,Method gluon.rocket.Connection.close()=gluon.rocket.Connection-class.html#close,Method gluon.rocket.FileLikeSocket.close()=gluon.rocket.FileLikeSocket-class.html#close"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-93', 'close', 'link-93');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="Token.release"></a><div id="Token.release-def"><a name="L151"></a><tt class="py-lineno">151</tt> <a class="py-toggle" href="#" id="Token.release-toggle" onclick="return toggle('Token.release');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.Token-class.html#release">release</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Token.release-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Token.release-expanded"><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        this function writes into cron.master the time when cron job</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        was completed</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt class="py-name">closed</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt id="link-94" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-94', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="gluon.portalocker.lock" class="py-name" href="#" onclick="return doclink('link-95', 'lock', 'link-74');">lock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">,</tt> <tt id="link-96" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-96', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="gluon.portalocker.LOCK_EX" class="py-name" href="#" onclick="return doclink('link-97', 'LOCK_EX', 'link-70');">LOCK_EX</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt id="link-98" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-98', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-99', 'debug', 'link-28');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON: Releasing cron lock'</tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt class="py-name">seek</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt id="link-100" class="py-name"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-100', 'start', 'link-77');">start</a></tt><tt class="py-op">,</tt> <tt id="link-101" class="py-name"><a title="gluon.main.HttpServer.stop
+gluon.rocket.Monitor.stop
+gluon.rocket.Rocket.stop
+gluon.rocket.ThreadPool.stop
+gluon.widget.web2pyDialog.stop" class="py-name" href="#" onclick="return doclink('link-101', 'stop', 'link-78');">stop</a></tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="gluon.restricted.RestrictedError.load
+gluon.restricted.TicketStorage.load
+gluon.rewrite.load" class="py-name" href="#" onclick="return doclink('link-102', 'load', 'link-79');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-103" class="py-name"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-103', 'start', 'link-77');">start</a></tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-104', 'now', 'link-45');">now</a></tt><tt class="py-op">:</tt>  <tt class="py-comment"># if this is my lock</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt class="py-name">seek</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt class="py-name">dump</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-105', 'now', 'link-45');">now</a></tt><tt class="py-op">,</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">            <tt id="link-106" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-106', 'portalocker', 'link-0');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-107" class="py-name"><a title="gluon.portalocker.unlock" class="py-name" href="#" onclick="return doclink('link-107', 'unlock', 'link-92');">unlock</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">master</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-108', 'close', 'link-93');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="rangetolist"></a><div id="rangetolist-def"><a name="L168"></a><tt class="py-lineno">168</tt> <a class="py-toggle" href="#" id="rangetolist-toggle" onclick="return toggle('rangetolist');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron-module.html#rangetolist">rangetolist</a><tt class="py-op">(</tt><tt class="py-param">s</tt><tt class="py-op">,</tt> <tt class="py-param">period</tt><tt class="py-op">=</tt><tt class="py-string">'min'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="rangetolist-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="rangetolist-expanded"><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-name">retval</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-109" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-109', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-110" class="py-name" targets="Method gluon.dal.Expression.startswith()=gluon.dal.Expression-class.html#startswith,Method gluon.dal.SQLCustomType.startswith()=gluon.dal.SQLCustomType-class.html#startswith,Method gluon.utf8.Utf8.startswith()=gluon.utf8.Utf8-class.html#startswith"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-110', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">period</tt> <tt class="py-op">==</tt> <tt class="py-string">'min'</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">            <tt id="link-111" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-111', 's', 'link-40');">s</a></tt> <tt class="py-op">=</tt> <tt id="link-112" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-112', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-113" class="py-name" targets="Method gluon.dal.Expression.replace()=gluon.dal.Expression-class.html#replace,Method gluon.utf8.Utf8.replace()=gluon.utf8.Utf8-class.html#replace"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-113', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-string">'0-59'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">period</tt> <tt class="py-op">==</tt> <tt class="py-string">'hr'</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">            <tt id="link-114" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-114', 's', 'link-40');">s</a></tt> <tt class="py-op">=</tt> <tt id="link-115" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-115', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-116', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-string">'0-23'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">period</tt> <tt class="py-op">==</tt> <tt class="py-string">'dom'</tt><tt class="py-op">:</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">            <tt id="link-117" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-117', 's', 'link-40');">s</a></tt> <tt class="py-op">=</tt> <tt id="link-118" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-118', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-119', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-string">'1-31'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">period</tt> <tt class="py-op">==</tt> <tt class="py-string">'mon'</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt id="link-120" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-120', 's', 'link-40');">s</a></tt> <tt class="py-op">=</tt> <tt id="link-121" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-121', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-122" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-122', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-string">'1-12'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">period</tt> <tt class="py-op">==</tt> <tt class="py-string">'dow'</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">            <tt id="link-123" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-123', 's', 'link-40');">s</a></tt> <tt class="py-op">=</tt> <tt id="link-124" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-124', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-125', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-string">'0-6'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt id="link-126" class="py-name" targets="Variable gluon.languages.lazyT.m=gluon.languages.lazyT-class.html#m"><a title="gluon.languages.lazyT.m" class="py-name" href="#" onclick="return doclink('link-126', 'm', 'link-126');">m</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">r'(\d+)-(\d+)/(\d+)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-name">match</tt> <tt class="py-op">=</tt> <tt id="link-127" class="py-name"><a title="gluon.languages.lazyT.m" class="py-name" href="#" onclick="return doclink('link-127', 'm', 'link-126');">m</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt id="link-128" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-128', 's', 'link-40');">s</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">match</tt><tt class="py-op">:</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-129" class="py-name" targets="Variable gluon.utf8.i=gluon.utf8-module.html#i"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-129', 'i', 'link-129');">i</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt id="link-130" class="py-name" targets="Class int=int-class.html"><a title="int" class="py-name" href="#" onclick="return doclink('link-130', 'int', 'link-130');">int</a></tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-131" class="py-name"><a title="int" class="py-name" href="#" onclick="return doclink('link-131', 'int', 'link-130');">int</a></tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-132" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-132', 'i', 'link-129');">i</a></tt> <tt class="py-op">%</tt> <tt id="link-133" class="py-name"><a title="int" class="py-name" href="#" onclick="return doclink('link-133', 'int', 'link-130');">int</a></tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">                <tt class="py-name">retval</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name" targets="Method gluon.html.DIV.append()=gluon.html.DIV-class.html#append,Method gluon.template.BlockNode.append()=gluon.template.BlockNode-class.html#append,Method gluon.template.Content.append()=gluon.template.Content-class.html#append"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-134', 'append', 'link-134');">append</a></tt><tt class="py-op">(</tt><tt id="link-135" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-135', 'i', 'link-129');">i</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">retval</tt> </tt>
+</div><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt>
+<a name="parsecronline"></a><div id="parsecronline-def"><a name="L190"></a><tt class="py-lineno">190</tt> <a class="py-toggle" href="#" id="parsecronline-toggle" onclick="return toggle('parsecronline');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron-module.html#parsecronline">parsecronline</a><tt class="py-op">(</tt><tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parsecronline-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="parsecronline-expanded"><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-name">task</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-136" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-136', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@reboot'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-137" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-137', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@reboot'</tt><tt class="py-op">,</tt> <tt class="py-string">'-1 * * * *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-138', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@yearly'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-139" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-139', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@yearly'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 0 1 1 *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-140" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-140', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@annually'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-141" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-141', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@annually'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 0 1 1 *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-142" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-142', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@monthly'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-143" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-143', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@monthly'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 0 1 * *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-144" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-144', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@weekly'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-145" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-145', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@weekly'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 0 * * 0'</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-146" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-146', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@daily'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-147" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-147', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@daily'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 0 * * *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-148" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-148', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@midnight'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-149" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-149', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@midnight'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 0 * * *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-150" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-150', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'@hourly'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-151" class="py-name"><a title="gluon.dal.Expression.replace
+gluon.utf8.Utf8.replace" class="py-name" href="#" onclick="return doclink('link-151', 'replace', 'link-113');">replace</a></tt><tt class="py-op">(</tt><tt class="py-string">'@hourly'</tt><tt class="py-op">,</tt> <tt class="py-string">'0 * * * *'</tt><tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt id="link-152" class="py-name" targets="Variable gluon.rewrite.params=gluon.rewrite-module.html#params"><a title="gluon.rewrite.params" class="py-name" href="#" onclick="return doclink('link-152', 'params', 'link-152');">params</a></tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt id="link-153" class="py-name" targets="Method gluon.sanitizer.XssCleaner.strip()=gluon.sanitizer.XssCleaner-class.html#strip,Method gluon.utf8.Utf8.strip()=gluon.utf8.Utf8-class.html#strip"><a title="gluon.sanitizer.XssCleaner.strip
+gluon.utf8.Utf8.strip" class="py-name" href="#" onclick="return doclink('link-153', 'strip', 'link-153');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-154" class="py-name" targets="Method gluon.utf8.Utf8.split()=gluon.utf8.Utf8-class.html#split"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-154', 'split', 'link-154');">split</a></tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-number">6</tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-155" class="py-name" targets="Method gluon.dal.Expression.len()=gluon.dal.Expression-class.html#len"><a title="gluon.dal.Expression.len" class="py-name" href="#" onclick="return doclink('link-155', 'len', 'link-155');">len</a></tt><tt class="py-op">(</tt><tt id="link-156" class="py-name"><a title="gluon.rewrite.params" class="py-name" href="#" onclick="return doclink('link-156', 'params', 'link-152');">params</a></tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">7</tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">    <tt class="py-name">daysofweek</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">'sun'</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-string">'mon'</tt><tt class="py-op">:</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-string">'tue'</tt><tt class="py-op">:</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-string">'wed'</tt><tt class="py-op">:</tt> <tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-string">'thu'</tt><tt class="py-op">:</tt> <tt class="py-number">4</tt><tt class="py-op">,</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">                  <tt class="py-string">'fri'</tt><tt class="py-op">:</tt> <tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-string">'sat'</tt><tt class="py-op">:</tt> <tt class="py-number">6</tt><tt class="py-op">}</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt id="link-157" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-157', 's', 'link-40');">s</a></tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt id="link-158" class="py-name"><a title="gluon.rewrite.params" class="py-name" href="#" onclick="return doclink('link-158', 'params', 'link-152');">params</a></tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">5</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'min'</tt><tt class="py-op">,</tt> <tt class="py-string">'hr'</tt><tt class="py-op">,</tt> <tt class="py-string">'dom'</tt><tt class="py-op">,</tt> <tt class="py-string">'mon'</tt><tt class="py-op">,</tt> <tt class="py-string">'dow'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-159" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-159', 's', 'link-40');">s</a></tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-string">'*'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">            <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">            <tt class="py-name">vals</tt> <tt class="py-op">=</tt> <tt id="link-160" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-160', 's', 'link-40');">s</a></tt><tt class="py-op">.</tt><tt id="link-161" class="py-name"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-161', 'split', 'link-154');">split</a></tt><tt class="py-op">(</tt><tt class="py-string">','</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">val</tt> <tt class="py-keyword">in</tt> <tt class="py-name">vals</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">val</tt> <tt class="py-op">!=</tt> <tt class="py-string">'-1'</tt> <tt class="py-keyword">and</tt> <tt class="py-string">'-'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">val</tt> <tt class="py-keyword">and</tt> <tt class="py-string">'/'</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">val</tt><tt class="py-op">:</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">                    <tt class="py-name">val</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s/1'</tt> <tt class="py-op">%</tt> <tt class="py-name">val</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-string">'/'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">val</tt><tt class="py-op">:</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">                    <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> <tt class="py-op">+=</tt> <tt id="link-162" class="py-name" targets="Function gluon.newcron.rangetolist()=gluon.newcron-module.html#rangetolist"><a title="gluon.newcron.rangetolist" class="py-name" href="#" onclick="return doclink('link-162', 'rangetolist', 'link-162');">rangetolist</a></tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">val</tt><tt class="py-op">.</tt><tt id="link-163" class="py-name" targets="Method gluon.utf8.Utf8.isdigit()=gluon.utf8.Utf8-class.html#isdigit"><a title="gluon.utf8.Utf8.isdigit" class="py-name" href="#" onclick="return doclink('link-163', 'isdigit', 'link-163');">isdigit</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">val</tt> <tt class="py-op">==</tt> <tt class="py-string">'-1'</tt><tt class="py-op">:</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                    <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-164" class="py-name"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-164', 'append', 'link-134');">append</a></tt><tt class="py-op">(</tt><tt id="link-165" class="py-name"><a title="int" class="py-name" href="#" onclick="return doclink('link-165', 'int', 'link-130');">int</a></tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">id</tt> <tt class="py-op">==</tt> <tt class="py-string">'dow'</tt> <tt class="py-keyword">and</tt> <tt class="py-name">val</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-166" class="py-name" targets="Method gluon.dal.Expression.lower()=gluon.dal.Expression-class.html#lower,Method gluon.utf8.Utf8.lower()=gluon.utf8.Utf8-class.html#lower"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-166', 'lower', 'link-166');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">daysofweek</tt><tt class="py-op">:</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">                    <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-167" class="py-name"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-167', 'append', 'link-134');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">daysofweek</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-168" class="py-name"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-168', 'lower', 'link-166');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">    <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">'user'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-169" class="py-name"><a title="gluon.rewrite.params" class="py-name" href="#" onclick="return doclink('link-169', 'params', 'link-152');">params</a></tt><tt class="py-op">[</tt><tt class="py-number">5</tt><tt class="py-op">]</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">'cmd'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-170" class="py-name"><a title="gluon.rewrite.params" class="py-name" href="#" onclick="return doclink('link-170', 'params', 'link-152');">params</a></tt><tt class="py-op">[</tt><tt class="py-number">6</tt><tt class="py-op">]</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">task</tt> </tt>
+</div><a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"> </tt>
+<a name="cronlauncher"></a><div id="cronlauncher-def"><a name="L231"></a><tt class="py-lineno">231</tt> <a class="py-toggle" href="#" id="cronlauncher-toggle" onclick="return toggle('cronlauncher');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.newcron.cronlauncher-class.html">cronlauncher</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cronlauncher-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="cronlauncher-expanded"><a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"> </tt>
+<a name="cronlauncher.__init__"></a><div id="cronlauncher.__init__-def"><a name="L233"></a><tt class="py-lineno">233</tt> <a class="py-toggle" href="#" id="cronlauncher.__init__-toggle" onclick="return toggle('cronlauncher.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.cronlauncher-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cmd</tt><tt class="py-op">,</tt> <tt class="py-param">shell</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cronlauncher.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="cronlauncher.__init__-expanded"><a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-171" class="py-name"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-171', '__init__', 'link-24');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">platform</tt><tt class="py-op">.</tt><tt class="py-name">system</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'Windows'</tt><tt class="py-op">:</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">            <tt id="link-172" class="py-name" targets="Module gluon.shell=gluon.shell-module.html"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-172', 'shell', 'link-172');">shell</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-name">cmd</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-173" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-173', 'shell', 'link-172');">shell</a></tt> <tt class="py-op">=</tt> <tt id="link-174" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-174', 'shell', 'link-172');">shell</a></tt> </tt>
+</div><a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"> </tt>
+<a name="cronlauncher.run"></a><div id="cronlauncher.run-def"><a name="L240"></a><tt class="py-lineno">240</tt> <a class="py-toggle" href="#" id="cronlauncher.run-toggle" onclick="return toggle('cronlauncher.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron.cronlauncher-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cronlauncher.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="cronlauncher.run-expanded"><a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">subprocess</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-175" class="py-name"><a title="gluon.newcron._cron_subprocs" class="py-name" href="#" onclick="return doclink('link-175', '_cron_subprocs', 'link-7');">_cron_subprocs</a></tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">,</tt> <tt class="py-name">tuple</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-176" class="py-name"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-176', 'split', 'link-154');">split</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-name">proc</tt> <tt class="py-op">=</tt> <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">Popen</tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">                                <tt class="py-name">stdin</tt><tt class="py-op">=</tt><tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">PIPE</tt><tt class="py-op">,</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">                                <tt class="py-name">stdout</tt><tt class="py-op">=</tt><tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">PIPE</tt><tt class="py-op">,</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">                                <tt class="py-name">stderr</tt><tt class="py-op">=</tt><tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">PIPE</tt><tt class="py-op">,</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">                                <tt id="link-177" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-177', 'shell', 'link-172');">shell</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-178" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-178', 'shell', 'link-172');">shell</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt id="link-179" class="py-name"><a title="gluon.newcron._cron_subprocs" class="py-name" href="#" onclick="return doclink('link-179', '_cron_subprocs', 'link-7');">_cron_subprocs</a></tt><tt class="py-op">.</tt><tt id="link-180" class="py-name"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-180', 'append', 'link-134');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">proc</tt><tt class="py-op">)</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">stdoutdata</tt><tt class="py-op">,</tt> <tt class="py-name">stderrdata</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">proc</tt><tt class="py-op">.</tt><tt id="link-181" class="py-name" targets="Function gluon.debug.communicate()=gluon.debug-module.html#communicate"><a title="gluon.debug.communicate" class="py-name" href="#" onclick="return doclink('link-181', 'communicate', 'link-181');">communicate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">        <tt id="link-182" class="py-name"><a title="gluon.newcron._cron_subprocs" class="py-name" href="#" onclick="return doclink('link-182', '_cron_subprocs', 'link-7');">_cron_subprocs</a></tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">proc</tt><tt class="py-op">)</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">proc</tt><tt class="py-op">.</tt><tt class="py-name">returncode</tt> <tt class="py-op">!=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">            <tt id="link-183" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-183', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">                <tt class="py-string">'WEB2PY CRON Call returned code %s:\n%s'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">proc</tt><tt class="py-op">.</tt><tt class="py-name">returncode</tt><tt class="py-op">,</tt> <tt class="py-name">stdoutdata</tt> <tt class="py-op">+</tt> <tt class="py-name">stderrdata</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">            <tt id="link-184" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-184', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-185" class="py-name"><a title="gluon.debug" class="py-name" href="#" onclick="return doclink('link-185', 'debug', 'link-28');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON Call returned success:\n%s'</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">                         <tt class="py-op">%</tt> <tt class="py-name">stdoutdata</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"> </tt>
+<a name="crondance"></a><div id="crondance-def"><a name="L264"></a><tt class="py-lineno">264</tt> <a class="py-toggle" href="#" id="crondance-toggle" onclick="return toggle('crondance');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.newcron-module.html#crondance">crondance</a><tt class="py-op">(</tt><tt class="py-param">applications_parent</tt><tt class="py-op">,</tt> <tt class="py-param">ctype</tt><tt class="py-op">=</tt><tt class="py-string">'soft'</tt><tt class="py-op">,</tt> <tt class="py-param">startup</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">apps</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="crondance-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="crondance-expanded"><a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">    <tt class="py-name">apppath</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-186" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-186', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-187" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-187', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">applications_parent</tt><tt class="py-op">,</tt> <tt class="py-string">'applications'</tt><tt class="py-op">)</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">    <tt class="py-name">cron_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-188" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-188', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-189" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-189', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">applications_parent</tt><tt class="py-op">)</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">    <tt class="py-name">token</tt> <tt class="py-op">=</tt> <tt id="link-190" class="py-name" targets="Class gluon.newcron.Token=gluon.newcron.Token-class.html"><a title="gluon.newcron.Token" class="py-name" href="#" onclick="return doclink('link-190', 'Token', 'link-190');">Token</a></tt><tt class="py-op">(</tt><tt class="py-name">cron_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">    <tt class="py-name">cronmaster</tt> <tt class="py-op">=</tt> <tt class="py-name">token</tt><tt class="py-op">.</tt><tt id="link-191" class="py-name" targets="Method gluon.newcron.Token.acquire()=gluon.newcron.Token-class.html#acquire"><a title="gluon.newcron.Token.acquire" class="py-name" href="#" onclick="return doclink('link-191', 'acquire', 'link-191');">acquire</a></tt><tt class="py-op">(</tt><tt class="py-name">startup</tt><tt class="py-op">=</tt><tt class="py-name">startup</tt><tt class="py-op">)</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">cronmaster</tt><tt class="py-op">:</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">    <tt class="py-name">now_s</tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">localtime</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">    <tt class="py-name">checks</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'min'</tt><tt class="py-op">,</tt> <tt class="py-name">now_s</tt><tt class="py-op">.</tt><tt class="py-name">tm_min</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">              <tt class="py-op">(</tt><tt class="py-string">'hr'</tt><tt class="py-op">,</tt> <tt class="py-name">now_s</tt><tt class="py-op">.</tt><tt class="py-name">tm_hour</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">              <tt class="py-op">(</tt><tt class="py-string">'mon'</tt><tt class="py-op">,</tt> <tt class="py-name">now_s</tt><tt class="py-op">.</tt><tt class="py-name">tm_mon</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">              <tt class="py-op">(</tt><tt class="py-string">'dom'</tt><tt class="py-op">,</tt> <tt class="py-name">now_s</tt><tt class="py-op">.</tt><tt class="py-name">tm_mday</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">              <tt class="py-op">(</tt><tt class="py-string">'dow'</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">now_s</tt><tt class="py-op">.</tt><tt class="py-name">tm_wday</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-op">%</tt> <tt class="py-number">7</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line"> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">apps</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">        <tt class="py-name">apps</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-192" class="py-name" targets="Function gluon.fileutils.listdir()=gluon.fileutils-module.html#listdir"><a title="gluon.fileutils.listdir" class="py-name" href="#" onclick="return doclink('link-192', 'listdir', 'link-192');">listdir</a></tt><tt class="py-op">(</tt><tt class="py-name">apppath</tt><tt class="py-op">)</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-193" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-193', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-194" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-194', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-195" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-195', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">apppath</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line"> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">    <tt class="py-name">full_apath_links</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">app</tt> <tt class="py-keyword">in</tt> <tt class="py-name">apps</tt><tt class="py-op">:</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-196" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-196', '_cron_stopping', 'link-6');">_cron_stopping</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">            <tt class="py-keyword">break</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">        <tt id="link-197" class="py-name" targets="Function gluon.admin.apath()=gluon.admin-module.html#apath"><a title="gluon.admin.apath" class="py-name" href="#" onclick="return doclink('link-197', 'apath', 'link-197');">apath</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-198" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-198', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-199" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-199', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">apppath</tt><tt class="py-op">,</tt> <tt class="py-name">app</tt><tt class="py-op">)</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line"> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">        <tt class="py-comment"># if app is a symbolic link to other app, skip it</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">        <tt class="py-name">full_apath_link</tt> <tt class="py-op">=</tt> <tt id="link-200" class="py-name" targets="Function gluon.newcron.absolute_path_link()=gluon.newcron-module.html#absolute_path_link"><a title="gluon.newcron.absolute_path_link" class="py-name" href="#" onclick="return doclink('link-200', 'absolute_path_link', 'link-200');">absolute_path_link</a></tt><tt class="py-op">(</tt><tt id="link-201" class="py-name"><a title="gluon.admin.apath" class="py-name" href="#" onclick="return doclink('link-201', 'apath', 'link-197');">apath</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">full_apath_link</tt> <tt class="py-keyword">in</tt> <tt class="py-name">full_apath_links</tt><tt class="py-op">:</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">            <tt class="py-keyword">continue</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">            <tt class="py-name">full_apath_links</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">full_apath_link</tt><tt class="py-op">)</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">        <tt class="py-name">cronpath</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-202" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-202', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-203" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-203', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt id="link-204" class="py-name"><a title="gluon.admin.apath" class="py-name" href="#" onclick="return doclink('link-204', 'apath', 'link-197');">apath</a></tt><tt class="py-op">,</tt> <tt class="py-string">'cron'</tt><tt class="py-op">)</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">        <tt class="py-name">crontab</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-205" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-205', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-206" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-206', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">cronpath</tt><tt class="py-op">,</tt> <tt class="py-string">'crontab'</tt><tt class="py-op">)</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-207" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-207', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-208" class="py-name"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-208', 'exists', 'link-63');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">crontab</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">            <tt class="py-keyword">continue</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">            <tt class="py-name">cronlines</tt> <tt class="py-op">=</tt> <tt id="link-209" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-209', 'fileutils', 'link-1');">fileutils</a></tt><tt class="py-op">.</tt><tt id="link-210" class="py-name" targets="Function gluon.fileutils.readlines_file()=gluon.fileutils-module.html#readlines_file"><a title="gluon.fileutils.readlines_file" class="py-name" href="#" onclick="return doclink('link-210', 'readlines_file', 'link-210');">readlines_file</a></tt><tt class="py-op">(</tt><tt class="py-name">crontab</tt><tt class="py-op">,</tt> <tt class="py-string">'rt'</tt><tt class="py-op">)</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">            <tt class="py-name">lines</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-211" class="py-name"><a title="gluon.sanitizer.XssCleaner.strip
+gluon.utf8.Utf8.strip" class="py-name" href="#" onclick="return doclink('link-211', 'strip', 'link-153');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">cronlines</tt> <tt class="py-keyword">if</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-212" class="py-name"><a title="gluon.sanitizer.XssCleaner.strip
+gluon.utf8.Utf8.strip" class="py-name" href="#" onclick="return doclink('link-212', 'strip', 'link-153');">strip</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">            <tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-213" class="py-name"><a title="gluon.sanitizer.XssCleaner.strip
+gluon.utf8.Utf8.strip" class="py-name" href="#" onclick="return doclink('link-213', 'strip', 'link-153');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-214" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-214', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'#'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">            <tt class="py-name">tasks</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-215" class="py-name" targets="Function gluon.newcron.parsecronline()=gluon.newcron-module.html#parsecronline"><a title="gluon.newcron.parsecronline" class="py-name" href="#" onclick="return doclink('link-215', 'parsecronline', 'link-215');">parsecronline</a></tt><tt class="py-op">(</tt><tt class="py-name">cline</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">cline</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lines</tt><tt class="py-op">]</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt id="link-216" class="py-name" targets="Variable gluon.dal.e=gluon.dal-module.html#e"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-216', 'e', 'link-216');">e</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">            <tt id="link-217" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-217', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt id="link-218" class="py-name" targets="Method gluon.tools.Service.error()=gluon.tools.Service-class.html#error,Method gluon.widget.web2pyDialog.error()=gluon.widget.web2pyDialog-class.html#error"><a title="gluon.tools.Service.error
+gluon.widget.web2pyDialog.error" class="py-name" href="#" onclick="return doclink('link-218', 'error', 'link-218');">error</a></tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON: crontab read error %s'</tt> <tt class="py-op">%</tt> <tt id="link-219" class="py-name"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-219', 'e', 'link-216');">e</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">            <tt class="py-keyword">continue</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line"> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">task</tt> <tt class="py-keyword">in</tt> <tt class="py-name">tasks</tt><tt class="py-op">:</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-220" class="py-name"><a title="gluon.newcron._cron_stopping" class="py-name" href="#" onclick="return doclink('link-220', '_cron_stopping', 'link-6');">_cron_stopping</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">executable</tt><tt class="py-op">.</tt><tt id="link-221" class="py-name"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-221', 'lower', 'link-166');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-222" class="py-name" targets="Method gluon.dal.Expression.endswith()=gluon.dal.Expression-class.html#endswith,Method gluon.utf8.Utf8.endswith()=gluon.utf8.Utf8-class.html#endswith"><a title="gluon.dal.Expression.endswith
+gluon.utf8.Utf8.endswith" class="py-name" href="#" onclick="return doclink('link-222', 'endswith', 'link-222');">endswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'pythonservice.exe'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">                <tt class="py-name">_python_exe</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-223" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-223', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-224" class="py-name"><a title="gluon.html.join
+gluon.rocket.Listener.join
+gluon.utf8.Utf8.join" class="py-name" href="#" onclick="return doclink('link-224', 'join', 'link-13');">join</a></tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exec_prefix</tt><tt class="py-op">,</tt> <tt class="py-string">'python.exe'</tt><tt class="py-op">)</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">                <tt class="py-name">_python_exe</tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">executable</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">            <tt class="py-name">commands</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">_python_exe</tt><tt class="py-op">]</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">            <tt class="py-name">w2p_path</tt> <tt class="py-op">=</tt> <tt id="link-225" class="py-name"><a title="gluon.fileutils" class="py-name" href="#" onclick="return doclink('link-225', 'fileutils', 'link-1');">fileutils</a></tt><tt class="py-op">.</tt><tt id="link-226" class="py-name"><a title="gluon.fileutils.abspath" class="py-name" href="#" onclick="return doclink('link-226', 'abspath', 'link-17');">abspath</a></tt><tt class="py-op">(</tt><tt class="py-string">'web2py.py'</tt><tt class="py-op">,</tt> <tt id="link-227" class="py-name"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-227', 'gluon', 'link-2');">gluon</a></tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-228" class="py-name"><a title="gluon.scheduler.path" class="py-name" href="#" onclick="return doclink('link-228', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-229" class="py-name"><a title="gluon.dal.DatabaseStoredFile.exists" class="py-name" href="#" onclick="return doclink('link-229', 'exists', 'link-63');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">w2p_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">                <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-230" class="py-name"><a title="gluon.html.DIV.append
+gluon.template.BlockNode.append
+gluon.template.Content.append" class="py-name" href="#" onclick="return doclink('link-230', 'append', 'link-134');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">w2p_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-231" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-231', 'global_settings', 'link-4');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">applications_parent</tt> <tt class="py-op">!=</tt> <tt id="link-232" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-232', 'global_settings', 'link-4');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">gluon_parent</tt><tt class="py-op">:</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">                <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-233" class="py-name" targets="Method gluon.template.BlockNode.extend()=gluon.template.BlockNode-class.html#extend,Method gluon.template.Content.extend()=gluon.template.Content-class.html#extend,Method gluon.template.TemplateParser.extend()=gluon.template.TemplateParser-class.html#extend"><a title="gluon.template.BlockNode.extend
+gluon.template.Content.extend
+gluon.template.TemplateParser.extend" class="py-name" href="#" onclick="return doclink('link-233', 'extend', 'link-233');">extend</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'-f'</tt><tt class="py-op">,</tt> <tt id="link-234" class="py-name"><a title="gluon.settings.global_settings" class="py-name" href="#" onclick="return doclink('link-234', 'global_settings', 'link-4');">global_settings</a></tt><tt class="py-op">.</tt><tt class="py-name">applications_parent</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">            <tt class="py-name">citems</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">k</tt> <tt class="py-keyword">in</tt> <tt class="py-name">task</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">checks</tt><tt class="py-op">]</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">            <tt class="py-name">task_min</tt> <tt class="py-op">=</tt> <tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-235" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-235', 'get', 'link-235');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'min'</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">task</tt><tt class="py-op">:</tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-keyword">not</tt> <tt class="py-name">startup</tt> <tt class="py-keyword">and</tt> <tt class="py-name">task_min</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">task_min</tt> <tt class="py-op">!=</tt> <tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">reduce</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt id="link-236" class="py-name" targets="Function gluon.rocket.b()=gluon.rocket-module.html#b"><a title="gluon.rocket.b" class="py-name" href="#" onclick="return doclink('link-236', 'b', 'link-236');">b</a></tt><tt class="py-op">:</tt> <tt class="py-name">a</tt> <tt class="py-keyword">or</tt> <tt id="link-237" class="py-name"><a title="gluon.rocket.b" class="py-name" href="#" onclick="return doclink('link-237', 'b', 'link-236');">b</a></tt><tt class="py-op">,</tt> <tt class="py-name">citems</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">            <tt id="link-238" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-238', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'WEB2PY CRON (%s): %s executing %s in %s at %s'</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">                        <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">ctype</tt><tt class="py-op">,</tt> <tt class="py-name">app</tt><tt class="py-op">,</tt> <tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-239" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-239', 'get', 'link-235');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'cmd'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">                           <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt id="link-240" class="py-name"><a title="gluon.scheduler.Scheduler.now" class="py-name" href="#" onclick="return doclink('link-240', 'now', 'link-45');">now</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">            <tt id="link-241" class="py-name" targets="Method gluon.cache.Cache.action()=gluon.cache.Cache-class.html#action"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-241', 'action', 'link-241');">action</a></tt><tt class="py-op">,</tt> <tt class="py-name">command</tt><tt class="py-op">,</tt> <tt class="py-name">models</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">'cmd'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">command</tt><tt class="py-op">.</tt><tt id="link-242" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-242', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'**'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-243" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-243', 'action', 'link-241');">action</a></tt><tt class="py-op">,</tt> <tt class="py-name">models</tt><tt class="py-op">,</tt> <tt class="py-name">command</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">command</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">command</tt><tt class="py-op">.</tt><tt id="link-244" class="py-name"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-244', 'startswith', 'link-110');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-245" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-245', 'action', 'link-241');">action</a></tt><tt class="py-op">,</tt> <tt class="py-name">models</tt><tt class="py-op">,</tt> <tt class="py-name">command</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-string">'-M'</tt><tt class="py-op">,</tt> <tt class="py-name">command</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line">                <tt id="link-246" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-246', 'action', 'link-241');">action</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line"> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-247" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-247', 'action', 'link-241');">action</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">command</tt><tt class="py-op">.</tt><tt id="link-248" class="py-name"><a title="gluon.dal.Expression.endswith
+gluon.utf8.Utf8.endswith" class="py-name" href="#" onclick="return doclink('link-248', 'endswith', 'link-222');">endswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'.py'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">                <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-249" class="py-name"><a title="gluon.template.BlockNode.extend
+gluon.template.Content.extend
+gluon.template.TemplateParser.extend" class="py-name" href="#" onclick="return doclink('link-249', 'extend', 'link-233');">extend</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'-J'</tt><tt class="py-op">,</tt>                <tt class="py-comment"># cron job</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">                                 <tt class="py-name">models</tt><tt class="py-op">,</tt>              <tt class="py-comment"># import models?</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">                                 <tt class="py-string">'-S'</tt><tt class="py-op">,</tt> <tt class="py-name">app</tt><tt class="py-op">,</tt>           <tt class="py-comment"># app name</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">                                 <tt class="py-string">'-a'</tt><tt class="py-op">,</tt> <tt class="py-string">'"&lt;recycle&gt;"'</tt><tt class="py-op">,</tt>  <tt class="py-comment"># password</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">                                 <tt class="py-string">'-R'</tt><tt class="py-op">,</tt> <tt class="py-name">command</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>      <tt class="py-comment"># command</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt id="link-250" class="py-name"><a title="gluon.cache.Cache.action" class="py-name" href="#" onclick="return doclink('link-250', 'action', 'link-241');">action</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">                <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-251" class="py-name"><a title="gluon.template.BlockNode.extend
+gluon.template.Content.extend
+gluon.template.TemplateParser.extend" class="py-name" href="#" onclick="return doclink('link-251', 'extend', 'link-233');">extend</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'-J'</tt><tt class="py-op">,</tt>                  <tt class="py-comment"># cron job</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">                                 <tt class="py-name">models</tt><tt class="py-op">,</tt>                <tt class="py-comment"># import models?</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">                                 <tt class="py-string">'-S'</tt><tt class="py-op">,</tt> <tt class="py-name">app</tt> <tt class="py-op">+</tt> <tt class="py-string">'/'</tt> <tt class="py-op">+</tt> <tt class="py-name">command</tt><tt class="py-op">,</tt>  <tt class="py-comment"># app name</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line">                                 <tt class="py-string">'-a'</tt><tt class="py-op">,</tt> <tt class="py-string">'"&lt;recycle&gt;"'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>  <tt class="py-comment"># password</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line">                <tt class="py-name">commands</tt> <tt class="py-op">=</tt> <tt class="py-name">command</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line"> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line">            <tt class="py-comment"># from python docs:</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line">            <tt class="py-comment"># You do not need shell=True to run a batch file or</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line">            <tt class="py-comment"># console-based executable.</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line">            <tt id="link-252" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-252', 'shell', 'link-172');">shell</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line">                <tt id="link-253" class="py-name" targets="Class gluon.newcron.cronlauncher=gluon.newcron.cronlauncher-class.html"><a title="gluon.newcron.cronlauncher" class="py-name" href="#" onclick="return doclink('link-253', 'cronlauncher', 'link-253');">cronlauncher</a></tt><tt class="py-op">(</tt><tt class="py-name">commands</tt><tt class="py-op">,</tt> <tt id="link-254" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-254', 'shell', 'link-172');">shell</a></tt><tt class="py-op">=</tt><tt id="link-255" class="py-name"><a title="gluon.shell" class="py-name" href="#" onclick="return doclink('link-255', 'shell', 'link-172');">shell</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-256" class="py-name"><a title="gluon.main.HttpServer.start
+gluon.rocket.Listener.start
+gluon.rocket.Rocket.start
+gluon.rocket.ThreadPool.start
+gluon.widget.start
+gluon.widget.web2pyDialog.start" class="py-name" href="#" onclick="return doclink('link-256', 'start', 'link-77');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt id="link-257" class="py-name"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-257', 'e', 'link-216');">e</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line">                <tt id="link-258" class="py-name"><a title="gluon.cache.logger
+gluon.compileapp.logger
+gluon.debug.logger
+gluon.main.logger
+gluon.newcron.logger
+gluon.portalocker.logger
+gluon.restricted.logger
+gluon.rewrite.logger
+gluon.scheduler.logger
+gluon.shell.logger
+gluon.tools.logger
+gluon.utils.logger
+gluon.widget.logger" class="py-name" href="#" onclick="return doclink('link-258', 'logger', 'link-5');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line">                    <tt class="py-string">'WEB2PY CRON: Execution error for %s: %s'</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line">                    <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-259" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-259', 'get', 'link-235');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'cmd'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-260" class="py-name"><a title="gluon.dal.e" class="py-name" href="#" onclick="return doclink('link-260', 'e', 'link-216');">e</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line">    <tt class="py-name">token</tt><tt class="py-op">.</tt><tt id="link-261" class="py-name" targets="Method gluon.newcron.Token.release()=gluon.newcron.Token-class.html#release"><a title="gluon.newcron.Token.release" class="py-name" href="#" onclick="return doclink('link-261', 'release', 'link-261');">release</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:57 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

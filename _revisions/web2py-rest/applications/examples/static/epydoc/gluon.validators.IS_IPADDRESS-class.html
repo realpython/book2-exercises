@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.validators.IS_IPADDRESS</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.validators-module.html" onclick="show_private();">Module&nbsp;validators</a> ::
+        Class&nbsp;IS_IPADDRESS
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.validators.IS_IPADDRESS-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class IS_IPADDRESS</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.validators-pysrc.html#IS_IPADDRESS">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+    
+         |    
+ <a href="gluon.validators.Validator-class.html" onclick="show_private();">Validator</a> --+
+             |
+            <strong class="uidshort">IS_IPADDRESS</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+
+Checks if field's value is an IP Address (v4 or v6). Can be set to force
+addresses from within a specific range. Checks are done with the correct
+IS_IPV4 and IS_IPV6 validators.
+
+Uses ipaddress library if found, falls back to PEP-3144 ipaddr.py from
+Google (in contrib).
+
+Universal arguments:
+
+minip: lowest allowed address; accepts:
+       str, eg. 192.168.0.1
+       list or tuple of octets, eg. [192, 168, 0, 1]
+maxip: highest allowed address; same as above
+invert: True to allow addresses only from outside of given range; note
+        that range boundaries are not matched this way
+
+IPv4 specific arguments:
+
+is_localhost: localhost address treatment:
+              None (default): indifferent
+              True (enforce): query address must match localhost address
+                              (127.0.0.1)
+              False (forbid): query address must not match localhost
+                              address
+is_private: same as above, except that query address is checked against
+            two address ranges: 172.16.0.0 - 172.31.255.255 and
+            192.168.0.0 - 192.168.255.255
+is_automatic: same as above, except that query address is checked against
+              one address range: 169.254.0.0 - 169.254.255.255
+is_ipv4: None (default): indifferent
+         True (enforce): must be an IPv4 address
+         False (forbid): must NOT be an IPv4 address
+
+IPv6 specific arguments:
+
+is_link_local: Same as above but uses fe80::/10 range
+is_reserved: Same as above but uses IETF reserved range
+is_mulicast: Same as above but uses ff00::/8 range
+is_routeable: Similar to above but enforces not private, link_local,
+              reserved or multicast
+is_6to4: Same as above but uses 2002::/16 range
+is_teredo: Same as above but uses 2001::/32 range
+subnets: value must be a member of at least one from list of subnets
+is_ipv6: None (default): indifferent
+         True (enforce): must be an IPv6 address
+         False (forbid): must NOT be an IPv6 address
+
+Minip and maxip may also be lists or tuples of addresses in all above
+forms (str, int, list / tuple), allowing setup of multiple address ranges:
+
+    minip = (minip1, minip2, ... minipN)
+               |       |           |
+               |       |           |
+    maxip = (maxip1, maxip2, ... maxipN)
+
+Longer iterable will be truncated to match length of shorter one.
+
+&gt;&gt;&gt; IS_IPADDRESS()('192.168.1.5')
+('192.168.1.5', None)
+&gt;&gt;&gt; IS_IPADDRESS(is_ipv6=False)('192.168.1.5')
+('192.168.1.5', None)
+&gt;&gt;&gt; IS_IPADDRESS()('255.255.255.255')
+('255.255.255.255', None)
+&gt;&gt;&gt; IS_IPADDRESS()('192.168.1.5 ')
+('192.168.1.5 ', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS()('192.168.1.1.5')
+('192.168.1.1.5', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS()('123.123')
+('123.123', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS()('1111.2.3.4')
+('1111.2.3.4', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS()('0111.2.3.4')
+('0111.2.3.4', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS()('256.2.3.4')
+('256.2.3.4', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS()('300.2.3.4')
+('300.2.3.4', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(minip='192.168.1.0', maxip='192.168.1.255')('192.168.1.100')
+('192.168.1.100', None)
+&gt;&gt;&gt; IS_IPADDRESS(minip='1.2.3.5', maxip='1.2.3.9', error_message='bad ip')('1.2.3.4')
+('1.2.3.4', 'bad ip')
+&gt;&gt;&gt; IS_IPADDRESS(maxip='1.2.3.4', invert=True)('127.0.0.1')
+('127.0.0.1', None)
+&gt;&gt;&gt; IS_IPADDRESS(maxip='192.168.1.4', invert=True)('192.168.1.4')
+('192.168.1.4', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_localhost=True)('127.0.0.1')
+('127.0.0.1', None)
+&gt;&gt;&gt; IS_IPADDRESS(is_localhost=True)('192.168.1.10')
+('192.168.1.10', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_localhost=False)('127.0.0.1')
+('127.0.0.1', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(maxip='100.0.0.0', is_localhost=True)('127.0.0.1')
+('127.0.0.1', 'enter valid IP address')
+
+&gt;&gt;&gt; IS_IPADDRESS()('fe80::126c:8ffa:fe22:b3af')
+('fe80::126c:8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS(is_ipv4=False)('fe80::126c:8ffa:fe22:b3af')
+('fe80::126c:8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS()('fe80::126c:8ffa:fe22:b3af  ')
+('fe80::126c:8ffa:fe22:b3af  ', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_ipv4=True)('fe80::126c:8ffa:fe22:b3af')
+('fe80::126c:8ffa:fe22:b3af', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_ipv6=True)('192.168.1.1')
+('192.168.1.1', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_ipv6=True, error_message='bad ip')('192.168.1.1')
+('192.168.1.1', 'bad ip')
+&gt;&gt;&gt; IS_IPADDRESS(is_link_local=True)('fe80::126c:8ffa:fe22:b3af')
+('fe80::126c:8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS(is_link_local=False)('fe80::126c:8ffa:fe22:b3af')
+('fe80::126c:8ffa:fe22:b3af', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_link_local=True)('2001::126c:8ffa:fe22:b3af')
+('2001::126c:8ffa:fe22:b3af', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_multicast=True)('2001::126c:8ffa:fe22:b3af')
+('2001::126c:8ffa:fe22:b3af', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(is_multicast=True)('ff00::126c:8ffa:fe22:b3af')
+('ff00::126c:8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS(is_routeable=True)('2001::126c:8ffa:fe22:b3af')
+('2001::126c:8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS(is_routeable=True)('ff00::126c:8ffa:fe22:b3af')
+('ff00::126c:8ffa:fe22:b3af', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(subnets='2001::/32')('2001::8ffa:fe22:b3af')
+('2001::8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS(subnets='fb00::/8')('2001::8ffa:fe22:b3af')
+('2001::8ffa:fe22:b3af', 'enter valid IP address')
+&gt;&gt;&gt; IS_IPADDRESS(subnets=['fc00::/8','2001::/32'])('2001::8ffa:fe22:b3af')
+('2001::8ffa:fe22:b3af', None)
+&gt;&gt;&gt; IS_IPADDRESS(subnets='invalidsubnet')('2001::8ffa:fe22:b3af')
+('2001::8ffa:fe22:b3af', 'invalid subnet provided')
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators.IS_IPADDRESS-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">minip</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">0.0.0.0</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">maxip</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">255.255.255.255</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">invert</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">is_localhost</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_private</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_automatic</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_ipv4</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_link_local</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_reserved</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_multicast</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_routeable</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_6to4</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_teredo</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">subnets</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">is_ipv6</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">error_message</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">enter valid IP address</code><code class="variable-quote">'</code></span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#IS_IPADDRESS.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.validators.IS_IPADDRESS-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.validators-pysrc.html#IS_IPADDRESS.__call__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.validators.Validator-class.html" onclick="show_private();">Validator</a></code></b>:
+      <code><a href="gluon.validators.Validator-class.html#formatter">formatter</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">minip</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">0.0.0.0</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">maxip</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">255.255.255.255</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">invert</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">is_localhost</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_private</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_automatic</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_ipv4</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_link_local</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_reserved</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_multicast</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_routeable</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_6to4</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_teredo</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">subnets</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">is_ipv6</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">error_message</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">enter valid IP address</code><code class="variable-quote">'</code></span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#IS_IPADDRESS.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__call__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+    <br /><em class="fname">(Call operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.validators-pysrc.html#IS_IPADDRESS.__call__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.validators.Validator-class.html#__call__">Validator.__call__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:45 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.rewrite</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;rewrite
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.rewrite-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module rewrite</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.rewrite-pysrc.html">source&nbsp;code</a></span></p>
+<p>This file is part of the web2py Web Framework Copyrighted by Massimo 
+  Di Pierro &lt;mdipierro@cs.depaul.edu&gt; License: LGPLv3 
+  (http://www.gnu.org/licenses/lgpl.html)</p>
+  <p>gluon.rewrite parses incoming URLs and formats outgoing URLs for 
+  gluon.html.URL.</p>
+  <p>In addition, it rewrites both incoming and outgoing URLs based on the 
+  (optional) user-supplied routes.py, which also allows for rewriting of 
+  certain error messages.</p>
+  <p>routes.py supports two styles of URL rewriting, depending on whether 
+  'routers' is defined. Refer to router.example.py and routes.example.py 
+  for additional documentation.</p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite.MapUrlIn-class.html" class="summary-name">MapUrlIn</a><br />
+      logic for mapping incoming URLs
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite.MapUrlOut-class.html" class="summary-name">MapUrlOut</a><br />
+      logic for mapping outgoing URLs
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_router_default"></a><span class="summary-sig-name">_router_default</span>()</span><br />
+      return new copy of default base router</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#_router_default">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_params_default"></a><span class="summary-sig-name">_params_default</span>(<span class="summary-sig-arg">app</span>=<span class="summary-sig-default">None</span>)</span><br />
+      return new copy of default parameters</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#_params_default">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="log_rewrite"></a><span class="summary-sig-name">log_rewrite</span>(<span class="summary-sig-arg">string</span>)</span><br />
+      Log rewrite activity under control of routes.py</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#log_rewrite">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fixup_missing_path_info"></a><span class="summary-sig-name">fixup_missing_path_info</span>(<span class="summary-sig-arg">environ</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#fixup_missing_path_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="url_in"></a><span class="summary-sig-name">url_in</span>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">environ</span>)</span><br />
+      parse and rewrite incoming URL</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#url_in">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="url_out"></a><span class="summary-sig-name">url_out</span>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">environ</span>,
+        <span class="summary-sig-arg">application</span>,
+        <span class="summary-sig-arg">controller</span>,
+        <span class="summary-sig-arg">function</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">other</span>,
+        <span class="summary-sig-arg">scheme</span>,
+        <span class="summary-sig-arg">host</span>,
+        <span class="summary-sig-arg">port</span>)</span><br />
+      assemble and rewrite outgoing URL</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#url_out">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="try_rewrite_on_error"></a><span class="summary-sig-name">try_rewrite_on_error</span>(<span class="summary-sig-arg">http_response</span>,
+        <span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">environ</span>,
+        <span class="summary-sig-arg">ticket</span>=<span class="summary-sig-default">None</span>)</span><br />
+      called from main.wsgibase to rewrite the http response.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#try_rewrite_on_error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="try_redirect_on_error"></a><span class="summary-sig-name">try_redirect_on_error</span>(<span class="summary-sig-arg">http_object</span>,
+        <span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">ticket</span>=<span class="summary-sig-default">None</span>)</span><br />
+      called from main.wsgibase to rewrite the http response</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#try_redirect_on_error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.rewrite-module.html#load" class="summary-sig-name">load</a>(<span class="summary-sig-arg">routes</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">routes.py</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">app</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">rdict</span>=<span class="summary-sig-default">None</span>)</span><br />
+      load: read (if file) and parse routes store results in params (called
+      from main.py at web2py initialization time) If data is present, it's 
+      used instead of the routes.py contents.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#load">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.rewrite-module.html#compile_regex" class="summary-sig-name">compile_regex</a>(<span class="summary-sig-arg">k</span>,
+        <span class="summary-sig-arg">v</span>,
+        <span class="summary-sig-arg">env</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Preprocess and compile the regular expressions in routes_app/in/out
+The resulting regex will match a pattern of the form:</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#compile_regex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="load_routers"></a><span class="summary-sig-name">load_routers</span>(<span class="summary-sig-arg">all_apps</span>)</span><br />
+      load-time post-processing of routers</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#load_routers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="regex_uri"></a><span class="summary-sig-name">regex_uri</span>(<span class="summary-sig-arg">e</span>,
+        <span class="summary-sig-arg">regexes</span>,
+        <span class="summary-sig-arg">tag</span>,
+        <span class="summary-sig-arg">default</span>=<span class="summary-sig-default">None</span>)</span><br />
+      filter incoming URI against a list of regexes</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#regex_uri">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="regex_select"></a><span class="summary-sig-name">regex_select</span>(<span class="summary-sig-arg">env</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">app</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">request</span>=<span class="summary-sig-default">None</span>)</span><br />
+      select a set of regex rewrite params for the current request</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#regex_select">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="regex_filter_in"></a><span class="summary-sig-name">regex_filter_in</span>(<span class="summary-sig-arg">e</span>)</span><br />
+      regex rewrite incoming URL</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#regex_filter_in">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="sluggify"></a><span class="summary-sig-name">sluggify</span>(<span class="summary-sig-arg">key</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#sluggify">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="invalid_url"></a><span class="summary-sig-name">invalid_url</span>(<span class="summary-sig-arg">routes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#invalid_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="regex_url_in"></a><span class="summary-sig-name">regex_url_in</span>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">environ</span>)</span><br />
+      rewrite and parse incoming URL</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#regex_url_in">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="regex_filter_out"></a><span class="summary-sig-name">regex_filter_out</span>(<span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">e</span>=<span class="summary-sig-default">None</span>)</span><br />
+      regex rewrite outgoing URL</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#regex_filter_out">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="filter_url"></a><span class="summary-sig-name">filter_url</span>(<span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">get</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">remote</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">0.0.0.0</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">out</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">app</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">lang</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">domain</span>=<span class="summary-sig-default"><code class="variable-group">(</code>None<code class="variable-op">, </code>None<code class="variable-group">)</code></span>,
+        <span class="summary-sig-arg">env</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">scheme</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">host</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">port</span>=<span class="summary-sig-default">None</span>)</span><br />
+      doctest/unittest interface to regex_filter_in() and 
+      regex_filter_out()</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#filter_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="filter_err"></a><span class="summary-sig-name">filter_err</span>(<span class="summary-sig-arg">status</span>,
+        <span class="summary-sig-arg">application</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">app</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">ticket</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">tkt</code><code class="variable-quote">'</code></span>)</span><br />
+      doctest/unittest interface to routes_onerror</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#filter_err">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="map_url_in"></a><span class="summary-sig-name">map_url_in</span>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">app</span>=<span class="summary-sig-default">False</span>)</span><br />
+      route incoming URL</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#map_url_in">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.rewrite-module.html#map_url_out" class="summary-sig-name">map_url_out</a>(<span class="summary-sig-arg">request</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">application</span>,
+        <span class="summary-sig-arg">controller</span>,
+        <span class="summary-sig-arg">function</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">other</span>,
+        <span class="summary-sig-arg">scheme</span>,
+        <span class="summary-sig-arg">host</span>,
+        <span class="summary-sig-arg">port</span>)</span><br />
+      supply /a/c/f (or /a/lang/c/f) portion of outgoing url</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#map_url_out">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_effective_router"></a><span class="summary-sig-name">get_effective_router</span>(<span class="summary-sig-arg">appname</span>)</span><br />
+      return a private copy of the effective router for the specified 
+      application</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.rewrite-pysrc.html#get_effective_router">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="logger"></a><span class="summary-name">logger</span> = <code title="logging.getLogger('web2py.rewrite')">logging.getLogger('web2py.rewrite')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="THREAD_LOCAL"></a><span class="summary-name">THREAD_LOCAL</span> = <code title="threading.local()">threading.local()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_at"></a><span class="summary-name">regex_at</span> = <code title="re.compile(r'(?&lt;!\\)\$[a-zA-Z]\w*')">re.compile(r'<code class="re-group">(?&lt;!</code>\\<code class="re-group">)</code>\$<code class="re-group">[</code>a<code class="re-op">-</code>zA<code class="re-op">-</code>Z<code class="re-group">]</code>\w<code class="re-op">*</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_anything"></a><span class="summary-name">regex_anything</span> = <code title="re.compile(r'(?&lt;!\\)\$anything')">re.compile(r'<code class="re-group">(?&lt;!</code>\\<code class="re-group">)</code>\$anything')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_redirect"></a><span class="summary-name">regex_redirect</span> = <code title="re.compile(r'(\d+)-&gt;(.*)')">re.compile(r'<code class="re-group">(</code>\d<code class="re-op">+</code><code class="re-group">)</code>-&gt;<code class="re-group">(</code>.<code class="re-op">*</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite-module.html#regex_full_url" class="summary-name">regex_full_url</a> = <code title="re.compile(r'^(?P&lt;scheme&gt;http|https|HTTP|HTTPS)://(?P&lt;host&gt;[^/]*)(?P&lt;u\
+ri&gt;.*)')">re.compile(r'^<code class="re-group">(?P&lt;</code><code class="re-ref">scheme</code><code class="re-group">&gt;</code>http<code class="re-op">|</code>https<code class="re-op">|</code>HTTP<code class="re-op">|</code>HTTP<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_version"></a><span class="summary-name">regex_version</span> = <code title="re.compile(r'^(_\d+\.\d+\.\d+)$')">re.compile(r'^<code class="re-group">(</code>_\d<code class="re-op">+</code>\.\d<code class="re-op">+</code>\.\d<code class="re-op">+</code><code class="re-group">)</code>$')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite-module.html#regex_url" class="summary-name">regex_url</a> = <code title="re.compile(r'^/((?P&lt;a&gt;\w+)(/(?P&lt;c&gt;\w+)(/(?P&lt;z&gt;(?P&lt;f&gt;\w+)(\.(?P&lt;e&gt;[\w\.\
+]+))?(?P&lt;s&gt;.*)))?)?)?$')">re.compile(r'^/<code class="re-group">(</code><code class="re-group">(?P&lt;</code><code class="re-ref">a</code><code class="re-group">&gt;</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>/<code class="re-group">(?P&lt;</code><code class="re-ref">c</code><code class="re-group">&gt;</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>/<code class="re-group">(?P&lt;</code><code class="re-ref">z</code><code class="re-group">&gt;</code><code class="re-group">(?P&lt;</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_args"></a><span class="summary-name">regex_args</span> = <code title="re.compile(r'[^\w/\.@=-]')">re.compile(r'<code class="re-group">[</code><code class="re-op">^</code>\w/\.@=-<code class="re-group">]</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="params_apps"></a><span class="summary-name">params_apps</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite-module.html#params" class="summary-name">params</a> = <code title="&lt;Storage {'routes_out': [], 'logging': 'off', 'name': 'BASE', 'routes_\
+apps_raw': [], 'routers': None, 'error_message': '&lt;html&gt;&lt;body&gt;&lt;h1&gt;%s&lt;/\
+h1&gt;&lt;/body&gt;&lt;/html&gt;', 'default_function': 'index', 'default_controller':\
+ 'default', 'error_handler': None, 'routes_app': [], 'routes_in': [], \
+'default_application': 'init', 'error_message_ticket': '&lt;html&gt;&lt;body&gt;&lt;h\
+1&gt;Internal error&lt;/h1&gt;Ticket issued: &lt;a href=&quot;/admin/default/ticket/%(t\
+icket)s&quot; target=&quot;_blank&quot;&gt;%(ticket)s&lt;/a&gt;&lt;/body&gt;&lt;!-- this is junk text e\
+lse IE does not display the page: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+...">&lt;Storage {'routes_out': [], 'logging': 'off', 'name':<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="routers"></a><span class="summary-name">routers</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite-module.html#ROUTER_KEYS" class="summary-name">ROUTER_KEYS</a> = <code title="set(['acfe_match',
+     'applications',
+     'args_match',
+     'controllers',
+     'default_application',
+     'default_controller',
+     'default_function',
+     'default_language',
+..."><code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">acfe_match</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">applications</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">args_match</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.rewrite-module.html#ROUTER_BASE_KEYS" class="summary-name">ROUTER_BASE_KEYS</a> = <code title="set(['applications', 'default_application', 'domains', 'path_prefix'])"><code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">applications</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">default_application</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'gluon'"><code class="variable-quote">'</code><code class="variable-string">gluon</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="load"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">load</span>(<span class="sig-arg">routes</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">routes.py</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">app</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">rdict</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.rewrite-pysrc.html#load">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>load: read (if file) and parse routes store results in params (called 
+  from main.py at web2py initialization time) If data is present, it's used
+  instead of the routes.py contents. If rdict is present, it must be a dict
+  to be used for routers (unit test)</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="compile_regex"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compile_regex</span>(<span class="sig-arg">k</span>,
+        <span class="sig-arg">v</span>,
+        <span class="sig-arg">env</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.rewrite-pysrc.html#compile_regex">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Preprocess and compile the regular expressions in routes_app/in/out
+The resulting regex will match a pattern of the form:
+
+    [remote address]:[protocol]://[host]:[method] [path]
+
+We allow abbreviated regexes on input; here we try to complete them.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="map_url_out"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">map_url_out</span>(<span class="sig-arg">request</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">application</span>,
+        <span class="sig-arg">controller</span>,
+        <span class="sig-arg">function</span>,
+        <span class="sig-arg">args</span>,
+        <span class="sig-arg">other</span>,
+        <span class="sig-arg">scheme</span>,
+        <span class="sig-arg">host</span>,
+        <span class="sig-arg">port</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.rewrite-pysrc.html#map_url_out">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+supply /a/c/f (or /a/lang/c/f) portion of outgoing url
+
+The basic rule is that we can only make transformations
+that map_url_in can reverse.
+
+Suppose that the incoming arguments are a,c,f,args,lang
+and that the router defaults are da, dc, df, dl.
+
+We can perform these transformations trivially if args=[] and lang=None or dl:
+
+/da/dc/df =&gt; /
+/a/dc/df =&gt; /a
+/a/c/df =&gt; /a/c
+
+We would also like to be able to strip the default application or application/controller
+from URLs with function/args present, thus:
+
+    /da/c/f/args  =&gt; /c/f/args
+    /da/dc/f/args =&gt; /f/args
+
+We use [applications] and [controllers] and {functions} to suppress ambiguous omissions.
+
+We assume that language names do not collide with a/c/f names.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="regex_full_url"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_full_url</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^<code class="re-group">(?P&lt;</code><code class="re-ref">scheme</code><code class="re-group">&gt;</code>http<code class="re-op">|</code>https<code class="re-op">|</code>HTTP<code class="re-op">|</code>HTTPS<code class="re-group">)</code>://<code class="re-group">(?P&lt;</code><code class="re-ref">host</code><code class="re-group">&gt;</code><code class="re-group">[^</code>/<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">(?P&lt;</code><code class="re-ref">u</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-ref">ri</code><code class="re-group">&gt;</code>.<code class="re-op">*</code><code class="re-group">)</code>')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="regex_url"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">regex_url</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^/<code class="re-group">(</code><code class="re-group">(?P&lt;</code><code class="re-ref">a</code><code class="re-group">&gt;</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>/<code class="re-group">(?P&lt;</code><code class="re-ref">c</code><code class="re-group">&gt;</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>/<code class="re-group">(?P&lt;</code><code class="re-ref">z</code><code class="re-group">&gt;</code><code class="re-group">(?P&lt;</code><code class="re-ref">f</code><code class="re-group">&gt;</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>\.<code class="re-group">(?P&lt;</code><code class="re-ref">e</code><code class="re-group">&gt;</code><code class="re-group">[</code>\w\.<code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(?P&lt;</code><code class="re-ref">s</code><code class="re-group">&gt;</code>.<code class="re-op">*</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">)</code><code class="re-op">?</code>$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="params"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">params</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&lt;Storage {'routes_out': [], 'logging': 'off', 'name': 'BASE', 'routes_<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+apps_raw': [], 'routers': None, 'error_message': '&lt;html&gt;&lt;body&gt;&lt;h1&gt;%s&lt;/<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+h1&gt;&lt;/body&gt;&lt;/html&gt;', 'default_function': 'index', 'default_controller':<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ 'default', 'error_handler': None, 'routes_app': [], 'routes_in': [], <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+'default_application': 'init', 'error_message_ticket': '&lt;html&gt;&lt;body&gt;&lt;h<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+1&gt;Internal error&lt;/h1&gt;Ticket issued: &lt;a href=&quot;/admin/default/ticket/%(t<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+icket)s&quot; target=&quot;_blank&quot;&gt;%(ticket)s&lt;/a&gt;&lt;/body&gt;&lt;!-- this is junk text e<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+lse IE does not display the page: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ROUTER_KEYS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ROUTER_KEYS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">acfe_match</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">applications</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">args_match</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">controllers</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">default_application</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">default_controller</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">default_function</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">default_language</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ROUTER_BASE_KEYS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ROUTER_BASE_KEYS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">applications</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">default_application</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">domains</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">path_prefix</code><code class="variable-quote">'</code><code class="variable-group">])</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:38 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+gunicorn==18.0
+psycopg2==2.5.2
+requests==2.2.1
+virtualenv==1.11.4
+web2py==2.1.1
+wsgiref==0.1.2

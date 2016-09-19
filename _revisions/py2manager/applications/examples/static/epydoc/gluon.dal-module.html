@@ -1,0 +1,2155 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.dal</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;dal
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.dal-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module dal</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.dal-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+
+This file is part of the web2py Web Framework
+Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;
+License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+
+Thanks to
+    * Niall Sweeny &lt;niall.sweeny@fonjax.com&gt; for MS SQL support
+    * Marcel Leuthi &lt;mluethi@mlsystems.ch&gt; for Oracle support
+    * Denes
+    * Chris Clark
+    * clach05
+    * Denes Lengyel
+    * and many others who have contributed to current and previous versions
+
+This file contains the DAL support for many relational databases,
+including:
+- SQLite &amp; SpatiaLite
+- MySQL
+- Postgres
+- Firebird
+- Oracle
+- MS SQL
+- DB2
+- Interbase
+- Ingres
+- Informix (9+ and SE)
+- SapDB (experimental)
+- Cubrid (experimental)
+- CouchDB (experimental)
+- MongoDB (in progress)
+- Google:nosql
+- Google:sql
+- Teradata
+- IMAP (experimental)
+
+Example of usage:
+
+&gt;&gt;&gt; # from dal import DAL, Field
+
+### create DAL connection (and create DB if it doesn't exist)
+&gt;&gt;&gt; db = DAL(('sqlite://storage.sqlite','mysql://a:b@localhost/x'),
+... folder=None)
+
+### define a table 'person' (create/alter as necessary)
+&gt;&gt;&gt; person = db.define_table('person',Field('name','string'))
+
+### insert a record
+&gt;&gt;&gt; id = person.insert(name='James')
+
+### retrieve it by id
+&gt;&gt;&gt; james = person(id)
+
+### retrieve it by name
+&gt;&gt;&gt; james = person(name='James')
+
+### retrieve it by arbitrary query
+&gt;&gt;&gt; query = (person.name=='James') &amp; (person.name.startswith('J'))
+&gt;&gt;&gt; james = db(query).select(person.ALL)[0]
+
+### update one record
+&gt;&gt;&gt; james.update_record(name='Jim')
+&lt;Row {'id': 1, 'name': 'Jim'}&gt;
+
+### update multiple records by query
+&gt;&gt;&gt; db(person.name.like('J%')).update(name='James')
+1
+
+### delete records by query
+&gt;&gt;&gt; db(person.name.lower() == 'jim').delete()
+0
+
+### retrieve multiple records (rows)
+&gt;&gt;&gt; people = db(person).select(orderby=person.name,
+... groupby=person.name, limitby=(0,100))
+
+### further filter them
+&gt;&gt;&gt; james = people.find(lambda row: row.name == 'James').first()
+&gt;&gt;&gt; print james.id, james.name
+1 James
+
+### check aggregates
+&gt;&gt;&gt; counter = person.id.count()
+&gt;&gt;&gt; print db(person).select(counter).first()(counter)
+1
+
+### delete one record
+&gt;&gt;&gt; james.delete_record()
+1
+
+### delete (drop) entire database table
+&gt;&gt;&gt; person.drop()
+
+Supported field types:
+id string text boolean integer double decimal password upload
+blob time date datetime
+
+Supported DAL URI strings:
+'sqlite://test.db'
+'spatialite://test.db'
+'sqlite:memory'
+'spatialite:memory'
+'jdbc:sqlite://test.db'
+'mysql://root:none@localhost/test'
+'postgres://mdipierro:password@localhost/test'
+'postgres:psycopg2://mdipierro:password@localhost/test'
+'postgres:pg8000://mdipierro:password@localhost/test'
+'jdbc:postgres://mdipierro:none@localhost/test'
+'mssql://web2py:none@A64X2/web2py_test'
+'mssql2://web2py:none@A64X2/web2py_test' # alternate mappings
+'oracle://username:password@database'
+'firebird://user:password@server:3050/database'
+'db2://DSN=dsn;UID=user;PWD=pass'
+'firebird://username:password@hostname/database'
+'firebird_embedded://username:password@c://path'
+'informix://user:password@server:3050/database'
+'informixu://user:password@server:3050/database' # unicode informix
+'ingres://database'  # or use an ODBC connection string, e.g. 'ingres://dsn=dsn_name'
+'google:datastore' # for google app engine datastore
+'google:sql' # for google app engine with sql (mysql compatible)
+'teradata://DSN=dsn;UID=user;PWD=pass; DATABASE=database' # experimental
+'imap://user:password@server:port' # experimental
+'mongodb://user:password@server:port/database' # experimental
+
+For more info:
+help(DAL)
+help(Field)
+
+</pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="int-class.html" class="summary-name" onclick="show_private();">long</a><br />
+      int(x=0) -&gt; int or long int(x, base=10) -&gt; int or long
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.GAEDecimalProperty-class.html" class="summary-name" onclick="show_private();">GAEDecimalProperty</a><br />
+      GAE decimal implementation
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.NDBDecimalProperty-class.html" class="summary-name" onclick="show_private();">NDBDecimalProperty</a><br />
+      NDB decimal implementation
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.ConnectionPool-class.html" class="summary-name" onclick="show_private();">ConnectionPool</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.BaseAdapter-class.html" class="summary-name" onclick="show_private();">BaseAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SQLiteAdapter-class.html" class="summary-name" onclick="show_private();">SQLiteAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SpatiaLiteAdapter-class.html" class="summary-name" onclick="show_private();">SpatiaLiteAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.JDBCSQLiteAdapter-class.html" class="summary-name" onclick="show_private();">JDBCSQLiteAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MySQLAdapter-class.html" class="summary-name" onclick="show_private();">MySQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.PostgreSQLAdapter-class.html" class="summary-name" onclick="show_private();">PostgreSQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.NewPostgreSQLAdapter-class.html" class="summary-name" onclick="show_private();">NewPostgreSQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.JDBCPostgreSQLAdapter-class.html" class="summary-name" onclick="show_private();">JDBCPostgreSQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.OracleAdapter-class.html" class="summary-name" onclick="show_private();">OracleAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MSSQLAdapter-class.html" class="summary-name" onclick="show_private();">MSSQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MSSQL3Adapter-class.html" class="summary-name" onclick="show_private();">MSSQL3Adapter</a><br />
+      experimental support for pagination in MSSQL
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MSSQL4Adapter-class.html" class="summary-name" onclick="show_private();">MSSQL4Adapter</a><br />
+      support for true pagination in MSSQL &gt;= 2012
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MSSQL2Adapter-class.html" class="summary-name" onclick="show_private();">MSSQL2Adapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.VerticaAdapter-class.html" class="summary-name" onclick="show_private();">VerticaAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SybaseAdapter-class.html" class="summary-name" onclick="show_private();">SybaseAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.FireBirdAdapter-class.html" class="summary-name" onclick="show_private();">FireBirdAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.FireBirdEmbeddedAdapter-class.html" class="summary-name" onclick="show_private();">FireBirdEmbeddedAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.InformixAdapter-class.html" class="summary-name" onclick="show_private();">InformixAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.InformixSEAdapter-class.html" class="summary-name" onclick="show_private();">InformixSEAdapter</a><br />
+      work in progress
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.DB2Adapter-class.html" class="summary-name" onclick="show_private();">DB2Adapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.TeradataAdapter-class.html" class="summary-name" onclick="show_private();">TeradataAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IngresAdapter-class.html" class="summary-name" onclick="show_private();">IngresAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IngresUnicodeAdapter-class.html" class="summary-name" onclick="show_private();">IngresUnicodeAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SAPDBAdapter-class.html" class="summary-name" onclick="show_private();">SAPDBAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.CubridAdapter-class.html" class="summary-name" onclick="show_private();">CubridAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.DatabaseStoredFile-class.html" class="summary-name" onclick="show_private();">DatabaseStoredFile</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.UseDatabaseStoredFile-class.html" class="summary-name" onclick="show_private();">UseDatabaseStoredFile</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.GoogleSQLAdapter-class.html" class="summary-name" onclick="show_private();">GoogleSQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.NoSQLAdapter-class.html" class="summary-name" onclick="show_private();">NoSQLAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.GAEF-class.html" class="summary-name" onclick="show_private();">GAEF</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.GoogleDatastoreAdapter-class.html" class="summary-name" onclick="show_private();">GoogleDatastoreAdapter</a><br />
+      NDB:
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.CouchDBAdapter-class.html" class="summary-name" onclick="show_private();">CouchDBAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MongoDBAdapter-class.html" class="summary-name" onclick="show_private();">MongoDBAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IMAPAdapter-class.html" class="summary-name" onclick="show_private();">IMAPAdapter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Row-class.html" class="summary-name" onclick="show_private();">Row</a><br />
+      a dictionary that lets you do d['a'] as well as d.a this is only 
+        used to store a Row
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SQLCallableList-class.html" class="summary-name" onclick="show_private();">SQLCallableList</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.DAL-class.html" class="summary-name">DAL</a><br />
+      an instance of this class represents a database connection
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SQLALL-class.html" class="summary-name" onclick="show_private();">SQLALL</a><br />
+      Helper class providing a comma-separated string having all the 
+        field names (prefixed by table name and '.')
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Reference-class.html" class="summary-name" onclick="show_private();">Reference</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.MethodAdder-class.html" class="summary-name" onclick="show_private();">MethodAdder</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Table-class.html" class="summary-name" onclick="show_private();">Table</a><br />
+      an instance of this class represents a database table
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Expression-class.html" class="summary-name" onclick="show_private();">Expression</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.SQLCustomType-class.html" class="summary-name" onclick="show_private();">SQLCustomType</a><br />
+      allows defining of custom SQL types
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.FieldVirtual-class.html" class="summary-name" onclick="show_private();">FieldVirtual</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.FieldMethod-class.html" class="summary-name" onclick="show_private();">FieldMethod</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Field-class.html" class="summary-name">Field</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Query-class.html" class="summary-name" onclick="show_private();">Query</a><br />
+      a query object necessary to define a set.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Set-class.html" class="summary-name" onclick="show_private();">Set</a><br />
+      a Set represents a set of records in the database,
+the records are identified by the query=Query(...) object.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.RecordUpdater-class.html" class="summary-name" onclick="show_private();">RecordUpdater</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.RecordDeleter-class.html" class="summary-name" onclick="show_private();">RecordDeleter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.LazyReferenceGetter-class.html" class="summary-name" onclick="show_private();">LazyReferenceGetter</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.LazySet-class.html" class="summary-name" onclick="show_private();">LazySet</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.VirtualCommand-class.html" class="summary-name" onclick="show_private();">VirtualCommand</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Rows-class.html" class="summary-name" onclick="show_private();">Rows</a><br />
+      A wrapper for the return value of a select.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Field-class.html" class="summary-name" onclick="show_private();">SQLField</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Table-class.html" class="summary-name" onclick="show_private();">SQLTable</a><br />
+      an instance of this class represents a database table
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Expression-class.html" class="summary-name" onclick="show_private();">SQLXorable</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Query-class.html" class="summary-name" onclick="show_private();">SQLQuery</a><br />
+      a query object necessary to define a set.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Set-class.html" class="summary-name" onclick="show_private();">SQLSet</a><br />
+      a Set represents a set of records in the database,
+the records are identified by the query=Query(...) object.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Rows-class.html" class="summary-name" onclick="show_private();">SQLRows</a><br />
+      A wrapper for the return value of a select.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.Row-class.html" class="summary-name" onclick="show_private();">SQLStorage</a><br />
+      a dictionary that lets you do d['a'] as well as d.a this is only 
+        used to store a Row
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.DAL-class.html" class="summary-name" onclick="show_private();">SQLDB</a><br />
+      an instance of this class represents a database connection
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.DAL-class.html" class="summary-name" onclick="show_private();">GQLDB</a><br />
+      an instance of this class represents a database connection
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ogetattr"></a><span class="summary-sig-name">ogetattr</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      x.__getattribute__('name') &lt;==&gt; x.name</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="osetattr"></a><span class="summary-sig-name">osetattr</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      x.__setattr__('name', value) &lt;==&gt; x.name = value</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DEFAULT"></a><span class="summary-sig-name">DEFAULT</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#DEFAULT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="pluralize"></a><span class="summary-sig-name">pluralize</span>(<span class="summary-sig-arg">singular</span>,
+        <span class="summary-sig-arg">rules</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-group">(</code>re.compile(r'child$')<code class="variable-op">, </code>re.compile(r'child$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">children</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">, </code><code class="variable-group">(</code><code class="variable-ellipsis">...</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#pluralize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hide_password"></a><span class="summary-sig-name">hide_password</span>(<span class="summary-sig-arg">uri</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#hide_password">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OR"></a><span class="summary-sig-name">OR</span>(<span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#OR">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="AND"></a><span class="summary-sig-name">AND</span>(<span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#AND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="IDENTITY"></a><span class="summary-sig-name">IDENTITY</span>(<span class="summary-sig-arg">x</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IDENTITY">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="varquote_aux"></a><span class="summary-sig-name">varquote_aux</span>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">quotestr</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">%s</code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#varquote_aux">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="quote_keyword"></a><span class="summary-sig-name">quote_keyword</span>(<span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">keyword</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">timestamp</code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#quote_keyword">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="uuid2int"></a><span class="summary-sig-name">uuid2int</span>(<span class="summary-sig-arg">uuidv</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#uuid2int">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="int2uuid"></a><span class="summary-sig-name">int2uuid</span>(<span class="summary-sig-arg">n</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#int2uuid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cleanup"></a><span class="summary-sig-name">cleanup</span>(<span class="summary-sig-arg">text</span>)</span><br />
+      validates that the given text is clean: only contains [0-9a-zA-Z_]</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#cleanup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal-module.html#sqlhtml_validators" class="summary-sig-name" onclick="show_private();">sqlhtml_validators</a>(<span class="summary-sig-arg">field</span>)</span><br />
+      Field type validation, using web2py's validators mechanism.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#sqlhtml_validators">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bar_escape"></a><span class="summary-sig-name">bar_escape</span>(<span class="summary-sig-arg">item</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#bar_escape">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bar_encode"></a><span class="summary-sig-name">bar_encode</span>(<span class="summary-sig-arg">items</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#bar_encode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bar_decode_integer"></a><span class="summary-sig-name">bar_decode_integer</span>(<span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#bar_decode_integer">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bar_decode_string"></a><span class="summary-sig-name">bar_decode_string</span>(<span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#bar_decode_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="smart_query"></a><span class="summary-sig-name">smart_query</span>(<span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">text</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#smart_query">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DAL_unpickler"></a><span class="summary-sig-name">DAL_unpickler</span>(<span class="summary-sig-arg">db_uid</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#DAL_unpickler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DAL_pickler"></a><span class="summary-sig-name">DAL_pickler</span>(<span class="summary-sig-arg">db</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#DAL_pickler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Reference_unpickler"></a><span class="summary-sig-name">Reference_unpickler</span>(<span class="summary-sig-arg">data</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#Reference_unpickler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Reference_pickler"></a><span class="summary-sig-name">Reference_pickler</span>(<span class="summary-sig-arg">data</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#Reference_pickler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="archive_record"></a><span class="summary-sig-name">archive_record</span>(<span class="summary-sig-arg">qset</span>,
+        <span class="summary-sig-arg">fs</span>,
+        <span class="summary-sig-arg">archive_table</span>,
+        <span class="summary-sig-arg">current_record</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#archive_record">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_represent"></a><span class="summary-sig-name">list_represent</span>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">r</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#list_represent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="xorify"></a><span class="summary-sig-name">xorify</span>(<span class="summary-sig-arg">orderby</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#xorify">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="use_common_filters"></a><span class="summary-sig-name">use_common_filters</span>(<span class="summary-sig-arg">query</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#use_common_filters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="lazy_virtualfield"></a><span class="summary-sig-name">lazy_virtualfield</span>(<span class="summary-sig-arg">f</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#lazy_virtualfield">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal-module.html#test_all" class="summary-sig-name" onclick="show_private();">test_all</a>()</span><br />
+      &gt;&gt;&gt; if len(sys.argv)&lt;2: db = DAL(&quot;sqlite://test.db&quot;)
+ &gt;&gt;&gt; if len(sys.argv)&gt;1: db = DAL(sys.argv[1])
+ &gt;&gt;&gt; tmp = db.define_table('users',              Field('stringf', 'string', length=32, required=True),              Field('booleanf', 'boolean', default=False),              Field('passwordf', 'password', notnull=True),              Field('uploadf', 'upload'),              Field('blobf', 'blob'),              Field('integerf', 'integer', unique=True),              Field('doublef', 'double', unique=True,notnull=True),              Field('jsonf', 'json'),              Field('datef', 'date', default=datetime.date.today()),              Field('timef', 'time'),              Field('datetimef', 'datetime'),              migrate='test_user.table')</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#test_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="geoPoint"></a><span class="summary-sig-name">geoPoint</span>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#geoPoint">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="geoLine"></a><span class="summary-sig-name">geoLine</span>(<span class="summary-sig-arg">*line</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#geoLine">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="geoPolygon"></a><span class="summary-sig-name">geoPolygon</span>(<span class="summary-sig-arg">*line</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#geoPolygon">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#DEFAULTLENGTH" class="summary-name" onclick="show_private();">DEFAULTLENGTH</a> = <code title="{'blob': 2147483648,
+ 'password': 512,
+ 'string': 512,
+ 'text': 32768,
+ 'upload': 512}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">blob</code><code class="variable-quote">'</code><code class="variable-op">: </code>2147483648<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">password</code><code class="variable-quote">'</code><code class="variable-op">: </code>512<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">string</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TIMINGSSIZE"></a><span class="summary-name">TIMINGSSIZE</span> = <code title="100">100</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#SPATIALLIBS" class="summary-name" onclick="show_private();">SPATIALLIBS</a> = <code title="{'Darwin': 'libspatialite.dylib',
+ 'Linux': 'libspatialite.so',
+ 'Windows': 'libspatialite'}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">Darwin</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">libspatialite.dylib</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Linux</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">libs</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_URI"></a><span class="summary-name">DEFAULT_URI</span> = <code title="'sqlite://dummy.db'"><code class="variable-quote">'</code><code class="variable-string">sqlite://dummy.db</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PYTHON_VERSION"></a><span class="summary-name">PYTHON_VERSION</span> = <code title="(2, 7, 5)"><code class="variable-group">(</code>2<code class="variable-op">, </code>7<code class="variable-op">, </code>5<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#CALLABLETYPES" class="summary-name" onclick="show_private();">CALLABLETYPES</a> = <code title="(&lt;type 'function'&gt;,
+ &lt;type 'function'&gt;,
+ &lt;type 'builtin_function_or_method'&gt;,
+ &lt;type 'instancemethod'&gt;,
+ &lt;type 'builtin_function_or_method'&gt;)"><code class="variable-group">(</code>&lt;type 'function'&gt;<code class="variable-op">, </code>&lt;type 'function'&gt;<code class="variable-op">, </code>&lt;type '<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#TABLE_ARGS" class="summary-name" onclick="show_private();">TABLE_ARGS</a> = <code title="set(['common_filter',
+     'fake_migrate',
+     'fields',
+     'format',
+     'migrate',
+     'on_define',
+     'plural',
+     'polymodel',
+..."><code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">common_filter</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">fake_migrate</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">fields</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#SELECT_ARGS" class="summary-name" onclick="show_private();">SELECT_ARGS</a> = <code title="set(['cache',
+     'cacheable',
+     'distinct',
+     'for_update',
+     'groupby',
+     'having',
+     'join',
+     'left',
+..."><code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">cache</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cacheable</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">distinct</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">for_upda</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="have_portalocker"></a><span class="summary-name">have_portalocker</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="have_serializers"></a><span class="summary-name">have_serializers</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="simplejson"></a><span class="summary-name">simplejson</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LOGGER"></a><span class="summary-name">LOGGER</span> = <code title="logging.getLogger(&quot;web2py.dal&quot;)">logging.getLogger(&quot;web2py.dal&quot;)</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="GLOBAL_LOCKER"></a><span class="summary-name">GLOBAL_LOCKER</span> = <code title="&lt;_RLock owner=None count=0&gt;">&lt;_RLock owner=None count=0&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="THREAD_LOCAL"></a><span class="summary-name">THREAD_LOCAL</span> = <code title="threading.local()">threading.local()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_TYPE"></a><span class="summary-name">REGEX_TYPE</span> = <code title="re.compile(r'^([\w_:]+)')">re.compile(r'^<code class="re-group">(</code><code class="re-group">[</code>\w_:<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_DBNAME"></a><span class="summary-name">REGEX_DBNAME</span> = <code title="re.compile(r'^(\w+)(:\w+)*')">re.compile(r'^<code class="re-group">(</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>:\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-op">*</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_W"></a><span class="summary-name">REGEX_W</span> = <code title="re.compile(r'^\w+$')">re.compile(r'^\w<code class="re-op">+</code>$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_TABLE_DOT_FIELD"></a><span class="summary-name">REGEX_TABLE_DOT_FIELD</span> = <code title="re.compile(r'^(\w+)\.(\w+)$')">re.compile(r'^<code class="re-group">(</code>\w<code class="re-op">+</code><code class="re-group">)</code>\.<code class="re-group">(</code>\w<code class="re-op">+</code><code class="re-group">)</code>$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#REGEX_UPLOAD_PATTERN" class="summary-name" onclick="show_private();">REGEX_UPLOAD_PATTERN</a> = <code title="re.compile(r'(?P&lt;table&gt;[\w-]+)\.(?P&lt;field&gt;[\w-]+)\.(?P&lt;uuidkey&gt;[\w-]+)\
+(\.(?P&lt;name&gt;\w+))?\.\w+$')">re.compile(r'<code class="re-group">(?P&lt;</code><code class="re-ref">table</code><code class="re-group">&gt;</code><code class="re-group">[</code>\w-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>\.<code class="re-group">(?P&lt;</code><code class="re-ref">fie</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_CLEANUP_FN"></a><span class="summary-name">REGEX_CLEANUP_FN</span> = <code title="re.compile(r'[\'&quot;\s;]+')">re.compile(r'<code class="re-group">[</code>\'&quot;\s;<code class="re-group">]</code><code class="re-op">+</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_UNPACK"></a><span class="summary-name">REGEX_UNPACK</span> = <code title="re.compile(r'(?&lt;!\|)\|(?!\|)')">re.compile(r'<code class="re-group">(?&lt;!</code>\|<code class="re-group">)</code>\|<code class="re-group">(?!</code>\|<code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#REGEX_PYTHON_KEYWORDS" class="summary-name" onclick="show_private();">REGEX_PYTHON_KEYWORDS</a> = <code title="re.compile(r'^(and|del|from|not|while|as|elif|global|or|with|assert|el\
+se|if|pass|yield|break|except|import|print|class|exec|in|raise|continu\
+e|finally|is|return|def|for|lambda|try)$')">re.compile(r'^<code class="re-group">(</code>and<code class="re-op">|</code>del<code class="re-op">|</code>from<code class="re-op">|</code>not<code class="re-op">|</code>while<code class="re-op">|</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_SELECT_AS_PARSER"></a><span class="summary-name">REGEX_SELECT_AS_PARSER</span> = <code title="re.compile(r'\s+AS\s+(\S+)')">re.compile(r'\s<code class="re-op">+</code>AS\s<code class="re-op">+</code><code class="re-group">(</code>\S<code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_CONST_STRING"></a><span class="summary-name">REGEX_CONST_STRING</span> = <code title="re.compile(r'(&quot;[^&quot;]*?&quot;)|(\'[^\']*?\')')">re.compile(r'<code class="re-group">(</code>&quot;<code class="re-group">[^</code>&quot;<code class="re-group">]</code><code class="re-op">*?</code>&quot;<code class="re-group">)</code><code class="re-op">|</code><code class="re-group">(</code>\'<code class="re-group">[^</code>\'<code class="re-group">]</code><code class="re-op">*?</code>\'<code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#REGEX_SEARCH_PATTERN" class="summary-name" onclick="show_private();">REGEX_SEARCH_PATTERN</a> = <code title="re.compile(r'^\{[^\.]+\.[^\.]+(\.(lt|gt|le|ge|eq|ne|contains|startswit\
+h|year|month|day|hour|minute|second))?(\.not)?\}$')">re.compile(r'^\{<code class="re-group">[^</code>\.<code class="re-group">]</code><code class="re-op">+</code>\.<code class="re-group">[^</code>\.<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">(</code>\.<code class="re-group">(</code>lt<code class="re-op">|</code>gt<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_SQUARE_BRACKETS"></a><span class="summary-name">REGEX_SQUARE_BRACKETS</span> = <code title="re.compile(r'^.+\[.+\]$')">re.compile(r'^.<code class="re-op">+</code>\[.<code class="re-op">+</code>\]$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_STORE_PATTERN"></a><span class="summary-name">REGEX_STORE_PATTERN</span> = <code title="re.compile(r'\.(?P&lt;e&gt;\w{1,5})$')">re.compile(r'\.<code class="re-group">(?P&lt;</code><code class="re-ref">e</code><code class="re-group">&gt;</code>\w<code class="re-op">{1,5}</code><code class="re-group">)</code>$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_QUOTES"></a><span class="summary-name">REGEX_QUOTES</span> = <code title="re.compile(r'\'[^\']*\'')">re.compile(r'\'<code class="re-group">[^</code>\'<code class="re-group">]</code><code class="re-op">*</code>\'')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_ALPHANUMERIC"></a><span class="summary-name">REGEX_ALPHANUMERIC</span> = <code title="re.compile(r'^[0-9a-zA-Z]\w*$')">re.compile(r'^<code class="re-group">[</code>0<code class="re-op">-</code>9a<code class="re-op">-</code>zA<code class="re-op">-</code>Z<code class="re-group">]</code>\w<code class="re-op">*</code>$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_PASSWORD"></a><span class="summary-name">REGEX_PASSWORD</span> = <code title="re.compile(r'://([^:@]*):')">re.compile(r'://<code class="re-group">(</code><code class="re-group">[</code><code class="re-op">^</code>:@<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code>:')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_NOPASSWD"></a><span class="summary-name">REGEX_NOPASSWD</span> = <code title="re.compile(r'//[\w\.-]+[:/](.+)(?=@)')">re.compile(r'//<code class="re-group">[</code>\w\.-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">[</code>:/<code class="re-group">]</code><code class="re-group">(</code>.<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(?=</code>@<code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#DRIVERS" class="summary-name" onclick="show_private();">DRIVERS</a> = <code title="['SQLite(sqlite3)',
+ 'MySQL(pymysql)',
+ 'MySQL(MySQLdb)',
+ 'MySQL(mysqlconnector)',
+ 'PostgreSQL(psycopg2)',
+ 'PostgreSQL(pg8000)',
+ 'MongoDB(pymongo)',
+ 'IMAP(imaplib)']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">SQLite(sqlite3)</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">MySQL(pymysql)</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">MySQL(MySQLdb</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="zxJDBC_sqlite"></a><span class="summary-name">zxJDBC_sqlite</span> = <code title="java.sql.DriverManager">java.sql.DriverManager</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#PLURALIZE_RULES" class="summary-name" onclick="show_private();">PLURALIZE_RULES</a> = <code title="[(re.compile(r'child$'), re.compile(r'child$'), 'children'),
+ (re.compile(r'oot$'), re.compile(r'oot$'), 'eet'),
+ (re.compile(r'ooth$'), re.compile(r'ooth$'), 'eeth'),
+ (re.compile(r'l[eo]af$'), re.compile(r'l([eo])af$'), 'l\\1aves'),
+ (re.compile(r'sis$'), re.compile(r'sis$'), 'ses'),
+ (re.compile(r'man$'), re.compile(r'man$'), 'men'),
+ (re.compile(r'ife$'), re.compile(r'ife$'), 'ives'),
+ (re.compile(r'eau$'), re.compile(r'eau$'), 'eaux'),
+..."><code class="variable-group">[</code><code class="variable-group">(</code>re.compile(r'child$')<code class="variable-op">, </code>re.compile(r'child$<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="is_jdbc"></a><span class="summary-name">is_jdbc</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="INGRES_SEQNAME"></a><span class="summary-name">INGRES_SEQNAME</span> = <code title="'ii***lineitemsequence'"><code class="variable-quote">'</code><code class="variable-string">ii***lineitemsequence</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal-module.html#ADAPTERS" class="summary-name" onclick="show_private();">ADAPTERS</a> = <code title="{'couchdb': &lt;class 'gluon.dal.CouchDBAdapter'&gt;,
+ 'cubrid': &lt;class 'gluon.dal.CubridAdapter'&gt;,
+ 'db2': &lt;class 'gluon.dal.DB2Adapter'&gt;,
+ 'firebird': &lt;class 'gluon.dal.FireBirdAdapter'&gt;,
+ 'firebird_embedded': &lt;class 'gluon.dal.FireBirdAdapter'&gt;,
+ 'gae': &lt;class 'gluon.dal.GoogleDatastoreAdapter'&gt;,
+ 'google:datastore': &lt;class 'gluon.dal.GoogleDatastoreAdapter'&gt;,
+ 'google:sql': &lt;class 'gluon.dal.GoogleSQLAdapter'&gt;,
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">couchdb</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.CouchDBAdapter'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cu</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'gluon'"><code class="variable-quote">'</code><code class="variable-string">gluon</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="e"></a><span class="summary-name">e</span> = <code title="OdbcNoLibrary()">OdbcNoLibrary()</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="sqlhtml_validators"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sqlhtml_validators</span>(<span class="sig-arg">field</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#sqlhtml_validators">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Field type validation, using web2py's validators mechanism.</p>
+  <p>makes sure the content of a field is in line with the declared 
+  fieldtype</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="test_all"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">test_all</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#test_all">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+
+ &gt;&gt;&gt; if len(sys.argv)&lt;2: db = DAL(&quot;sqlite://test.db&quot;)
+ &gt;&gt;&gt; if len(sys.argv)&gt;1: db = DAL(sys.argv[1])
+ &gt;&gt;&gt; tmp = db.define_table('users',              Field('stringf', 'string', length=32, required=True),              Field('booleanf', 'boolean', default=False),              Field('passwordf', 'password', notnull=True),              Field('uploadf', 'upload'),              Field('blobf', 'blob'),              Field('integerf', 'integer', unique=True),              Field('doublef', 'double', unique=True,notnull=True),              Field('jsonf', 'json'),              Field('datef', 'date', default=datetime.date.today()),              Field('timef', 'time'),              Field('datetimef', 'datetime'),              migrate='test_user.table')
+
+Insert a field
+
+ &gt;&gt;&gt; db.users.insert(stringf='a', booleanf=True, passwordf='p', blobf='0A',                       uploadf=None, integerf=5, doublef=3.14,                       jsonf={&quot;j&quot;: True},                       datef=datetime.date(2001, 1, 1),                       timef=datetime.time(12, 30, 15),                       datetimef=datetime.datetime(2002, 2, 2, 12, 30, 15))
+ 1
+
+ Drop the table
+
+ &gt;&gt;&gt; db.users.drop()
+
+ Examples of insert, select, update, delete
+
+ &gt;&gt;&gt; tmp = db.define_table('person',              Field('name'),              Field('birth','date'),              migrate='test_person.table')
+ &gt;&gt;&gt; person_id = db.person.insert(name='Marco',birth='2005-06-22')
+ &gt;&gt;&gt; person_id = db.person.insert(name='Massimo',birth='1971-12-21')
+
+ commented len(db().select(db.person.ALL))
+ commented 2
+
+ &gt;&gt;&gt; me = db(db.person.id==person_id).select()[0] # test select
+ &gt;&gt;&gt; me.name
+ 'Massimo'
+ &gt;&gt;&gt; db.person[2].name
+ 'Massimo'
+ &gt;&gt;&gt; db.person(2).name
+ 'Massimo'
+ &gt;&gt;&gt; db.person(name='Massimo').name
+ 'Massimo'
+ &gt;&gt;&gt; db.person(db.person.name=='Massimo').name
+ 'Massimo'
+ &gt;&gt;&gt; row = db.person[2]
+ &gt;&gt;&gt; row.name == row['name'] == row['person.name'] == row('person.name')
+ True
+ &gt;&gt;&gt; db(db.person.name=='Massimo').update(name='massimo') # test update
+ 1
+ &gt;&gt;&gt; db(db.person.name=='Marco').select().first().delete_record() # test delete
+ 1
+
+ Update a single record
+
+ &gt;&gt;&gt; me.update_record(name=&quot;Max&quot;)
+ &lt;Row {'name': 'Max', 'birth': datetime.date(1971, 12, 21), 'id': 2}&gt;
+ &gt;&gt;&gt; me.name
+ 'Max'
+
+ Examples of complex search conditions
+
+ &gt;&gt;&gt; len(db((db.person.name=='Max')&amp;(db.person.birth&lt;'2003-01-01')).select())
+ 1
+ &gt;&gt;&gt; len(db((db.person.name=='Max')&amp;(db.person.birth&lt;datetime.date(2003,01,01))).select())
+ 1
+ &gt;&gt;&gt; len(db((db.person.name=='Max')|(db.person.birth&lt;'2003-01-01')).select())
+ 1
+ &gt;&gt;&gt; me = db(db.person.id==person_id).select(db.person.name)[0]
+ &gt;&gt;&gt; me.name
+ 'Max'
+
+ Examples of search conditions using extract from date/datetime/time
+
+ &gt;&gt;&gt; len(db(db.person.birth.month()==12).select())
+ 1
+ &gt;&gt;&gt; len(db(db.person.birth.year()&gt;1900).select())
+ 1
+
+ Example of usage of NULL
+
+ &gt;&gt;&gt; len(db(db.person.birth==None).select()) ### test NULL
+ 0
+ &gt;&gt;&gt; len(db(db.person.birth!=None).select()) ### test NULL
+ 1
+
+ Examples of search conditions using lower, upper, and like
+
+ &gt;&gt;&gt; len(db(db.person.name.upper()=='MAX').select())
+ 1
+ &gt;&gt;&gt; len(db(db.person.name.like('%ax')).select())
+ 1
+ &gt;&gt;&gt; len(db(db.person.name.upper().like('%AX')).select())
+ 1
+ &gt;&gt;&gt; len(db(~db.person.name.upper().like('%AX')).select())
+ 0
+
+ orderby, groupby and limitby
+
+ &gt;&gt;&gt; people = db().select(db.person.name, orderby=db.person.name)
+ &gt;&gt;&gt; order = db.person.name|~db.person.birth
+ &gt;&gt;&gt; people = db().select(db.person.name, orderby=order)
+
+ &gt;&gt;&gt; people = db().select(db.person.name, orderby=db.person.name, groupby=db.person.name)
+
+ &gt;&gt;&gt; people = db().select(db.person.name, orderby=order, limitby=(0,100))
+
+ Example of one 2 many relation
+
+ &gt;&gt;&gt; tmp = db.define_table('dog',               Field('name'),               Field('birth','date'),               Field('owner',db.person),               migrate='test_dog.table')
+ &gt;&gt;&gt; db.dog.insert(name='Snoopy', birth=None, owner=person_id)
+ 1
+
+ A simple JOIN
+
+ &gt;&gt;&gt; len(db(db.dog.owner==db.person.id).select())
+ 1
+
+ &gt;&gt;&gt; len(db().select(db.person.ALL, db.dog.name,left=db.dog.on(db.dog.owner==db.person.id)))
+ 1
+
+ Drop tables
+
+ &gt;&gt;&gt; db.dog.drop()
+ &gt;&gt;&gt; db.person.drop()
+
+ Example of many 2 many relation and Set
+
+ &gt;&gt;&gt; tmp = db.define_table('author', Field('name'),                            migrate='test_author.table')
+ &gt;&gt;&gt; tmp = db.define_table('paper', Field('title'),                            migrate='test_paper.table')
+ &gt;&gt;&gt; tmp = db.define_table('authorship',            Field('author_id', db.author),            Field('paper_id', db.paper),            migrate='test_authorship.table')
+ &gt;&gt;&gt; aid = db.author.insert(name='Massimo')
+ &gt;&gt;&gt; pid = db.paper.insert(title='QCD')
+ &gt;&gt;&gt; tmp = db.authorship.insert(author_id=aid, paper_id=pid)
+
+ Define a Set
+
+ &gt;&gt;&gt; authored_papers = db((db.author.id==db.authorship.author_id)&amp;(db.paper.id==db.authorship.paper_id))
+ &gt;&gt;&gt; rows = authored_papers.select(db.author.name, db.paper.title)
+ &gt;&gt;&gt; for row in rows: print row.author.name, row.paper.title
+ Massimo QCD
+
+ Example of search condition using  belongs
+
+ &gt;&gt;&gt; set = (1, 2, 3)
+ &gt;&gt;&gt; rows = db(db.paper.id.belongs(set)).select(db.paper.ALL)
+ &gt;&gt;&gt; print rows[0].title
+ QCD
+
+ Example of search condition using nested select
+
+ &gt;&gt;&gt; nested_select = db()._select(db.authorship.paper_id)
+ &gt;&gt;&gt; rows = db(db.paper.id.belongs(nested_select)).select(db.paper.ALL)
+ &gt;&gt;&gt; print rows[0].title
+ QCD
+
+ Example of expressions
+
+ &gt;&gt;&gt; mynumber = db.define_table('mynumber', Field('x', 'integer'))
+ &gt;&gt;&gt; db(mynumber).delete()
+ 0
+ &gt;&gt;&gt; for i in range(10): tmp = mynumber.insert(x=i)
+ &gt;&gt;&gt; db(mynumber).select(mynumber.x.sum())[0](mynumber.x.sum())
+ 45
+
+ &gt;&gt;&gt; db(mynumber.x+2==5).select(mynumber.x + 2)[0](mynumber.x + 2)
+ 5
+
+ Output in csv
+
+ &gt;&gt;&gt; print str(authored_papers.select(db.author.name, db.paper.title)).strip()
+ author.name,paper.title
+ Massimo,QCD
+
+ Delete all leftover tables
+
+ &gt;&gt;&gt; DAL.distributed_transaction_commit(db)
+
+ &gt;&gt;&gt; db.mynumber.drop()
+ &gt;&gt;&gt; db.authorship.drop()
+ &gt;&gt;&gt; db.author.drop()
+ &gt;&gt;&gt; db.paper.drop()
+ 
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="DEFAULTLENGTH"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">DEFAULTLENGTH</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">blob</code><code class="variable-quote">'</code><code class="variable-op">: </code>2147483648<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">password</code><code class="variable-quote">'</code><code class="variable-op">: </code>512<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">string</code><code class="variable-quote">'</code><code class="variable-op">: </code>512<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">text</code><code class="variable-quote">'</code><code class="variable-op">: </code>32768<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">upload</code><code class="variable-quote">'</code><code class="variable-op">: </code>512<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SPATIALLIBS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SPATIALLIBS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">Darwin</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">libspatialite.dylib</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">Linux</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">libspatialite.so</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">Windows</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">libspatialite</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CALLABLETYPES"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CALLABLETYPES</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code>&lt;type 'function'&gt;<code class="variable-op">,</code>
+ &lt;type 'function'&gt;<code class="variable-op">,</code>
+ &lt;type 'builtin_function_or_method'&gt;<code class="variable-op">,</code>
+ &lt;type 'instancemethod'&gt;<code class="variable-op">,</code>
+ &lt;type 'builtin_function_or_method'&gt;<code class="variable-group">)</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TABLE_ARGS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TABLE_ARGS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">common_filter</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">fake_migrate</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">fields</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">format</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">migrate</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">on_define</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">plural</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">polymodel</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SELECT_ARGS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SELECT_ARGS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">cache</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">cacheable</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">distinct</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">for_update</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">groupby</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">having</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">join</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+     <code class="variable-quote">'</code><code class="variable-string">left</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="REGEX_UPLOAD_PATTERN"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">REGEX_UPLOAD_PATTERN</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-group">(?P&lt;</code><code class="re-ref">table</code><code class="re-group">&gt;</code><code class="re-group">[</code>\w-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>\.<code class="re-group">(?P&lt;</code><code class="re-ref">field</code><code class="re-group">&gt;</code><code class="re-group">[</code>\w-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>\.<code class="re-group">(?P&lt;</code><code class="re-ref">uuidkey</code><code class="re-group">&gt;</code><code class="re-group">[</code>\w-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">(</code>\.<code class="re-group">(?P&lt;</code><code class="re-ref">name</code><code class="re-group">&gt;</code>\w<code class="re-op">+</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code>\.\w<code class="re-op">+</code>$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="REGEX_PYTHON_KEYWORDS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">REGEX_PYTHON_KEYWORDS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^<code class="re-group">(</code>and<code class="re-op">|</code>del<code class="re-op">|</code>from<code class="re-op">|</code>not<code class="re-op">|</code>while<code class="re-op">|</code>as<code class="re-op">|</code>elif<code class="re-op">|</code>global<code class="re-op">|</code>or<code class="re-op">|</code>with<code class="re-op">|</code>assert<code class="re-op">|</code>el<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+se<code class="re-op">|</code>if<code class="re-op">|</code>pass<code class="re-op">|</code>yield<code class="re-op">|</code>break<code class="re-op">|</code>except<code class="re-op">|</code>import<code class="re-op">|</code>print<code class="re-op">|</code>class<code class="re-op">|</code>exec<code class="re-op">|</code>in<code class="re-op">|</code>raise<code class="re-op">|</code>continu<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+e<code class="re-op">|</code>finally<code class="re-op">|</code>is<code class="re-op">|</code>return<code class="re-op">|</code>def<code class="re-op">|</code>for<code class="re-op">|</code>lambda<code class="re-op">|</code>try<code class="re-group">)</code>$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="REGEX_SEARCH_PATTERN"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">REGEX_SEARCH_PATTERN</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^\{<code class="re-group">[^</code>\.<code class="re-group">]</code><code class="re-op">+</code>\.<code class="re-group">[^</code>\.<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">(</code>\.<code class="re-group">(</code>lt<code class="re-op">|</code>gt<code class="re-op">|</code>le<code class="re-op">|</code>ge<code class="re-op">|</code>eq<code class="re-op">|</code>ne<code class="re-op">|</code>contains<code class="re-op">|</code>startswit<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+h<code class="re-op">|</code>year<code class="re-op">|</code>month<code class="re-op">|</code>day<code class="re-op">|</code>hour<code class="re-op">|</code>minute<code class="re-op">|</code>second<code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(</code>\.not<code class="re-group">)</code><code class="re-op">?</code>\}$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="DRIVERS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">DRIVERS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">SQLite(sqlite3)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">MySQL(pymysql)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">MySQL(MySQLdb)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">MySQL(mysqlconnector)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">PostgreSQL(psycopg2)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">PostgreSQL(pg8000)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">MongoDB(pymongo)</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">IMAP(imaplib)</code><code class="variable-quote">'</code><code class="variable-group">]</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PLURALIZE_RULES"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PLURALIZE_RULES</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-group">(</code>re.compile(r'child$')<code class="variable-op">, </code>re.compile(r'child$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">children</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'oot$')<code class="variable-op">, </code>re.compile(r'oot$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">eet</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'ooth$')<code class="variable-op">, </code>re.compile(r'ooth$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">eeth</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'l<code class="re-group">[</code>eo<code class="re-group">]</code>af$')<code class="variable-op">, </code>re.compile(r'l<code class="re-group">(</code><code class="re-group">[</code>eo<code class="re-group">]</code><code class="re-group">)</code>af$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">l\\1aves</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'sis$')<code class="variable-op">, </code>re.compile(r'sis$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ses</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'man$')<code class="variable-op">, </code>re.compile(r'man$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">men</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'ife$')<code class="variable-op">, </code>re.compile(r'ife$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">ives</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code>re.compile(r'eau$')<code class="variable-op">, </code>re.compile(r'eau$')<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">eaux</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ADAPTERS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ADAPTERS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">couchdb</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.CouchDBAdapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cubrid</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.CubridAdapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">db2</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.DB2Adapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">firebird</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.FireBirdAdapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">firebird_embedded</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.FireBirdAdapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">gae</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.GoogleDatastoreAdapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">google:datastore</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.GoogleDatastoreAdapter'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">google:sql</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'gluon.dal.GoogleSQLAdapter'&gt;<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:37 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

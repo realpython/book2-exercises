@@ -1,0 +1,25 @@
+# specify language
+language:
+  - python
+
+# specify python versions
+python:
+  - "2.7"
+
+# install dependencies
+install:
+  - pip install -r requirements.txt
+
+# run tests
+script:
+  - nosetests
+
+# deploy
+deploy:
+  provider: heroku
+  api_key:
+    secure: Kq95wr8v6rGlspuTt3Y8NdPse2eandSAF0DGmQm
+  app: flasktaskr
+  on:
+    branch: master
+    repo: realpython/flasktaskr_project

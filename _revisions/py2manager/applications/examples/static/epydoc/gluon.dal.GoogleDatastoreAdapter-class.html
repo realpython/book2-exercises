@@ -1,0 +1,1679 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.dal.GoogleDatastoreAdapter</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.dal-module.html" onclick="show_private();">Module&nbsp;dal</a> ::
+        Class&nbsp;GoogleDatastoreAdapter
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.dal.GoogleDatastoreAdapter-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class GoogleDatastoreAdapter</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+    object --+            
+             |            
+<a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a> --+        
+                 |        
+       <a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a> --+    
+                     |    
+          <a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a> --+
+                         |
+                        <strong class="uidshort">GoogleDatastoreAdapter</strong>
+</pre>
+
+<hr />
+<p>NDB:</p>
+  <p>You can enable NDB by using adapter_args:</p>
+  <p>db = DAL('google:datastore', 
+  adapter_args={'ndb_settings':ndb_settings, 'use_ndb':True})</p>
+  <p>ndb_settings is optional and can be used for per model caching 
+  settings. It must be a dict in this form: ndb_settings = 
+  {&lt;table_name&gt;:{&lt;variable_name&gt;:&lt;variable_value&gt;}} See: 
+  https://developers.google.com/appengine/docs/python/ndb/cache</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#file_exists" class="summary-sig-name">file_exists</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filename</span>)</span><br />
+      to be used ONLY for files that on GAE may not be on filesystem</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.file_exists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#file_open" class="summary-sig-name">file_open</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filename</span>,
+        <span class="summary-sig-arg">mode</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">rb</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">lock</span>=<span class="summary-sig-default">True</span>)</span><br />
+      to be used ONLY for files that on GAE may not be on filesystem</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.file_open">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#file_close" class="summary-sig-name">file_close</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fileobj</span>)</span><br />
+      to be used ONLY for files that on GAE may not be on filesystem</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.file_close">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>,
+        <span class="summary-sig-arg">uri</span>,
+        <span class="summary-sig-arg">pool_size</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">folder</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">db_codec</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">UTF-8</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">credential_decoder</span>=<span class="summary-sig-default">&lt;function IDENTITY at 0x31ed1b8&gt;</span>,
+        <span class="summary-sig-arg">driver_args</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">adapter_args</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">do_connect</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">after_connection</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#parse_id" class="summary-sig-name">parse_id</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">field_type</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.parse_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#create_table" class="summary-sig-name">create_table</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">migrate</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">fake_migrate</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">polymodel</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.create_table">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#expand" class="summary-sig-name">expand</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">expression</span>,
+        <span class="summary-sig-arg">field_type</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.expand">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#AND" class="summary-sig-name">AND</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.AND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#EQ" class="summary-sig-name">EQ</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.EQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#NE" class="summary-sig-name">NE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.NE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#LT" class="summary-sig-name">LT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.LT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#LE" class="summary-sig-name">LE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.LE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#GT" class="summary-sig-name">GT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.GT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#GE" class="summary-sig-name">GE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.GE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#INVERT" class="summary-sig-name">INVERT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.INVERT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#COMMA" class="summary-sig-name">COMMA</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.COMMA">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#BELONGS" class="summary-sig-name">BELONGS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.BELONGS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#CONTAINS" class="summary-sig-name">CONTAINS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>,
+        <span class="summary-sig-arg">case_sensitive</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.CONTAINS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#NOT" class="summary-sig-name">NOT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.NOT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#truncate" class="summary-sig-name">truncate</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">mode</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.truncate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="filter"></a><span class="summary-sig-name">filter</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">tableobj</span>,
+        <span class="summary-sig-arg">prop</span>,
+        <span class="summary-sig-arg">op</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.filter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="select_raw"></a><span class="summary-sig-name">select_raw</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">attributes</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.select_raw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#select" class="summary-sig-name">select</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">attributes</span>)</span><br />
+      This is the GAE version of select.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.select">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#count" class="summary-sig-name">count</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">distinct</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.count">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#delete" class="summary-sig-name">delete</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>,
+        <span class="summary-sig-arg">query</span>)</span><br />
+      This function was changed on 2010-05-04 because according to 
+      http://code.google.com/p/googleappengine/issues/detail?id=3119 GAE no
+      longer supports deleting more than 1000 records.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#update" class="summary-sig-name">update</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">update_fields</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#insert" class="summary-sig-name">insert</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">fields</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.insert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.GoogleDatastoreAdapter-class.html#bulk_insert" class="summary-sig-name">bulk_insert</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">items</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.bulk_insert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b>:
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ADD">ADD</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#AGGREGATE">AGGREGATE</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#AS">AS</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#DIV">DIV</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ENDSWITH">ENDSWITH</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#EXTRACT">EXTRACT</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ILIKE">ILIKE</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#LEFT_JOIN">LEFT_JOIN</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#LENGTH">LENGTH</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#LOWER">LOWER</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#MUL">MUL</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ON">ON</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#OR">OR</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#PRIMARY_KEY">PRIMARY_KEY</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#RANDOM">RANDOM</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#STARTSWITH">STARTSWITH</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#SUB">SUB</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#SUBSTRING">SUBSTRING</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#UPPER">UPPER</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#alias">alias</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#close_connection">close_connection</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#commit">commit</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#commit_prepared">commit_prepared</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#concat_add">concat_add</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#constraint_name">constraint_name</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#create_sequence_and_triggers">create_sequence_and_triggers</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#distributed_transaction_begin">distributed_transaction_begin</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#drop">drop</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#execute">execute</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#id_query">id_query</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#lastrowid">lastrowid</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#log_execute">log_execute</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#migrate_table">migrate_table</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#prepare">prepare</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#represent">represent</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#represent_exceptions">represent_exceptions</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#rollback">rollback</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#rollback_prepared">rollback_prepared</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#rowslice">rowslice</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b> (private):
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#_count" onclick="show_private();">_count</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#_delete" onclick="show_private();">_delete</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#_insert" onclick="show_private();">_insert</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#_select" onclick="show_private();">_select</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#_update" onclick="show_private();">_update</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b>:
+      <code><a href="gluon.dal.BaseAdapter-class.html#ALLOW_NULL">ALLOW_NULL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CASE">CASE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CAST">CAST</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COALESCE">COALESCE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COALESCE_ZERO">COALESCE_ZERO</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CONCAT">CONCAT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COUNT">COUNT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#EPOCH">EPOCH</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#JOIN">JOIN</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LIKE">LIKE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#MOD">MOD</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#NOT_NULL">NOT_NULL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#RAW">RAW</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#REGEXP">REGEXP</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#REPLACE">REPLACE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#adapt">adapt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#build_parsemap">build_parsemap</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#common_filter">common_filter</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#expand_all">expand_all</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_delete">file_delete</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#find_driver">find_driver</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#get_table">get_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#isOperationalError">isOperationalError</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#isProgrammingError">isProgrammingError</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#is_numerical_type">is_numerical_type</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#log">log</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse">parse</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_blob">parse_blob</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_boolean">parse_boolean</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_date">parse_date</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_datetime">parse_datetime</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_decimal">parse_decimal</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_double">parse_double</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_integer">parse_integer</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_json">parse_json</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_integers">parse_list_integers</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_references">parse_list_references</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_strings">parse_list_strings</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_reference">parse_reference</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_time">parse_time</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_value">parse_value</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#save_dbt">save_dbt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#select_limitby">select_limitby</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#sequence_name">sequence_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#smart_adapt">smart_adapt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#table_alias">table_alias</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#tables">tables</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#trigger_name">trigger_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#varquote">varquote</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b> (private):
+      <code><a href="gluon.dal.BaseAdapter-class.html#_drop" onclick="show_private();">_drop</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_fetchall" onclick="show_private();">_fetchall</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_insert_empty" onclick="show_private();">_insert_empty</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_select_aux" onclick="show_private();">_select_aux</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_truncate" onclick="show_private();">_truncate</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#after_connection">after_connection</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#after_connection_hook">after_connection_hook</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#close">close</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#find_or_make_work_folder">find_or_make_work_folder</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#reconnect">reconnect</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b>:
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#to_unicode">to_unicode</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#close_all_instances">close_all_instances</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#set_folder">set_folder</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="uploads_in_blob"></a><span class="summary-name">uploads_in_blob</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="types"></a><span class="summary-name">types</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="REGEX_NAMESPACE"></a><span class="summary-name">REGEX_NAMESPACE</span> = <code title="re.compile(r'.*://(?P&lt;namespace&gt;.+)')">re.compile(r'.<code class="re-op">*</code>://<code class="re-group">(?P&lt;</code><code class="re-ref">namespace</code><code class="re-group">&gt;</code>.<code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.GoogleDatastoreAdapter-class.html#GAE_FILTER_OPTIONS" class="summary-name">GAE_FILTER_OPTIONS</a> = <code title="{'=': lambda q, t, p, v: q.filter(getattr(t, p)== v), '&gt;': lambda q, t\
+, p, v: q.filter(getattr(t, p) &gt; v), '&lt;': lambda q, t, p, v: q.filter(\
+getattr(t, p) &lt; v), '&lt;=': lambda q, t, p, v: q.filter(getattr(t, p) &lt;=\
+ v), '&gt;=': lambda q, t, p, v: q.filter(getattr(t, p) &gt;= v), '!=': lamb\
+da q, t, p, v: q.filter(getattr(t, p) != v), 'in': lambda q, t, p, v: \
+q.filter(getattr(t, p).IN(v)),}">{'=': lambda q, t, p, v: q.filter(getattr<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b>:
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#can_select_for_update">can_select_for_update</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b>:
+      <code><a href="gluon.dal.BaseAdapter-class.html#FALSE">FALSE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#QUOTE_TEMPLATE">QUOTE_TEMPLATE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#TRUE">TRUE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#T_SEP">T_SEP</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#commit_on_alter_table">commit_on_alter_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#connection">connection</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#dbpath">dbpath</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#driver">driver</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#driver_name">driver_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#drivers">drivers</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#folder">folder</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#native_json">native_json</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#support_distributed_transaction">support_distributed_transaction</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#POOLS">POOLS</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#check_active_connection">check_active_connection</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="file_exists"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">file_exists</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filename</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.file_exists">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>to be used ONLY for files that on GAE may not be on filesystem</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#file_exists">BaseAdapter.file_exists</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="file_open"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">file_open</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filename</span>,
+        <span class="sig-arg">mode</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">rb</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">lock</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.file_open">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>to be used ONLY for files that on GAE may not be on filesystem</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#file_open">BaseAdapter.file_open</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="file_close"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">file_close</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fileobj</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.file_close">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>to be used ONLY for files that on GAE may not be on filesystem</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#file_close">BaseAdapter.file_close</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">db</span>,
+        <span class="sig-arg">uri</span>,
+        <span class="sig-arg">pool_size</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">folder</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">db_codec</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">UTF-8</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">credential_decoder</span>=<span class="sig-default">&lt;function IDENTITY at 0x31ed1b8&gt;</span>,
+        <span class="sig-arg">driver_args</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">adapter_args</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">do_connect</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">after_connection</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_id</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">field_type</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.parse_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#parse_id">BaseAdapter.parse_id</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="create_table"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">create_table</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">migrate</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">fake_migrate</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">polymodel</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.create_table">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#create_table">BaseAdapter.create_table</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="expand"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">expand</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">expression</span>,
+        <span class="sig-arg">field_type</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.expand">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#expand">BaseAdapter.expand</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AND"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AND</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.AND">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#AND">BaseAdapter.AND</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="EQ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">EQ</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.EQ">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#EQ">BaseAdapter.EQ</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="NE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.NE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#NE">BaseAdapter.NE</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.LT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#LT">BaseAdapter.LT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.LE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#LE">BaseAdapter.LE</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.GT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#GT">BaseAdapter.GT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.GE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#GE">BaseAdapter.GE</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="INVERT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">INVERT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.INVERT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#INVERT">BaseAdapter.INVERT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="COMMA"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">COMMA</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.COMMA">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#COMMA">BaseAdapter.COMMA</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="BELONGS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BELONGS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.BELONGS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#BELONGS">BaseAdapter.BELONGS</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CONTAINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CONTAINS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>,
+        <span class="sig-arg">case_sensitive</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.CONTAINS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#CONTAINS">BaseAdapter.CONTAINS</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="NOT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NOT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.NOT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#NOT">BaseAdapter.NOT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="truncate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">truncate</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">mode</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.truncate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#truncate">BaseAdapter.truncate</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="select"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">select</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">fields</span>,
+        <span class="sig-arg">attributes</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.select">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This is the GAE version of select.  some notes to consider:</p>
+  <ul>
+    <li>
+      db['_lastsql'] is not set because there is not SQL statement string 
+      for a GAE query
+    </li>
+    <li>
+      'nativeRef' is a magical fieldname used for self references on GAE
+    </li>
+    <li>
+      optional attribute 'projection' when set to True will trigger use of 
+      the GAE projection queries.  note that there are rules for what is 
+      accepted imposed by GAE: each field must be indexed, projection 
+      queries cannot contain blob or text fields, and you cannot use == and
+      also select that same field.  see 
+      https://developers.google.com/appengine/docs/python/datastore/queries#Query_Projection
+    </li>
+    <li>
+      optional attribute 'filterfields' when set to True web2py will only 
+      parse the explicitly listed fields into the Rows object, even though 
+      all fields are returned in the query.  This can be used to reduce 
+      memory usage in cases where true projection queries are not usable.
+    </li>
+    <li>
+      optional attribute 'reusecursor' allows use of cursor with queries 
+      that have the limitby attribute.  Set the attribute to True for the 
+      first query, set it to the value of db['_lastcursor'] to continue a 
+      previous query.  The user must save the cursor value between 
+      requests, and the filters must be identical.  It is up to the user to
+      follow google's limitations: 
+      https://developers.google.com/appengine/docs/python/datastore/queries#Query_Cursors
+    </li>
+  </ul>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#select">BaseAdapter.select</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="count"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">count</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">distinct</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.count">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#count">BaseAdapter.count</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="delete"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">delete</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tablename</span>,
+        <span class="sig-arg">query</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.delete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This function was changed on 2010-05-04 because according to 
+  http://code.google.com/p/googleappengine/issues/detail?id=3119 GAE no 
+  longer supports deleting more than 1000 records.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#delete">BaseAdapter.delete</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tablename</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">update_fields</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#update">BaseAdapter.update</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="insert"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">insert</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">fields</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.insert">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#insert">BaseAdapter.insert</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bulk_insert"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">bulk_insert</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">items</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#GoogleDatastoreAdapter.bulk_insert">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#bulk_insert">BaseAdapter.bulk_insert</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="GAE_FILTER_OPTIONS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">GAE_FILTER_OPTIONS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{'=': lambda q, t, p, v: q.filter(getattr(t, p)== v), '&gt;': lambda q, t<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+, p, v: q.filter(getattr(t, p) &gt; v), '&lt;': lambda q, t, p, v: q.filter(<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+getattr(t, p) &lt; v), '&lt;=': lambda q, t, p, v: q.filter(getattr(t, p) &lt;=<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ v), '&gt;=': lambda q, t, p, v: q.filter(getattr(t, p) &gt;= v), '!=': lamb<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+da q, t, p, v: q.filter(getattr(t, p) != v), 'in': lambda q, t, p, v: <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+q.filter(getattr(t, p).IN(v)),}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:39 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

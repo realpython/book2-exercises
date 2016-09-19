@@ -1,0 +1,8 @@
+<html>
+  <body>
+    {{numbers = [1, 2, 3]}}
+    <ul>
+      {{for n in numbers:}}<li>{{=n}}</li>{{pass}}
+    </ul>
+  </body>
+</html>

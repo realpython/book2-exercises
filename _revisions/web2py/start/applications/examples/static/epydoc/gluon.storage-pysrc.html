@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.storage</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;storage
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.storage-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.storage-module.html" onclick="show_private();">Module gluon.storage</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">Provides:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">- List; like list but returns None instead of IndexOutOfBounds</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">- Storage; like dictionary allowing also for `obj.foo` for `obj['foo']`</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">cPickle</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package gluon=gluon-module.html"><a title="gluon" class="py-name" href="#" onclick="return doclink('link-0', 'gluon', 'link-0');">gluon</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module gluon.portalocker=gluon.portalocker-module.html"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-1', 'portalocker', 'link-1');">portalocker</a></tt> <tt class="py-keyword">as</tt> <tt id="link-2" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-2', 'portalocker', 'link-1');">portalocker</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'List'</tt><tt class="py-op">,</tt> <tt class="py-string">'Storage'</tt><tt class="py-op">,</tt> <tt class="py-string">'Settings'</tt><tt class="py-op">,</tt> <tt class="py-string">'Messages'</tt><tt class="py-op">,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">           <tt class="py-string">'StorageList'</tt><tt class="py-op">,</tt> <tt class="py-string">'load_storage'</tt><tt class="py-op">,</tt> <tt class="py-string">'save_storage'</tt><tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Function gluon.dal.DEFAULT()=gluon.dal-module.html#DEFAULT,Function gluon.storage.DEFAULT()=gluon.storage-module.html#DEFAULT,Function gluon.tools.DEFAULT()=gluon.tools-module.html#DEFAULT"><a title="gluon.dal.DEFAULT
+gluon.storage.DEFAULT
+gluon.tools.DEFAULT" class="py-name" href="#" onclick="return doclink('link-3', 'DEFAULT', 'link-3');">DEFAULT</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt><tt class="py-number">0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="Storage"></a><div id="Storage-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="Storage-toggle" onclick="return toggle('Storage');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.storage.Storage-class.html">Storage</a><tt class="py-op">(</tt><tt class="py-base-class">dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Storage-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    A Storage object is like a dictionary except `obj.foo` can be used</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    in addition to `obj['foo']`, and setting obj.foo = None deletes item foo.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; o = Storage(a=1)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; print o.a</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        1</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; o['a']</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        1</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; o.a = 2</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; print o['a']</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        2</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; del o.a</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; print o.a</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        None</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">__slots__</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Method gluon.dal.DAL.__setattr__()=gluon.dal.DAL-class.html#__setattr__,Method gluon.dal.Reference.__setattr__()=gluon.dal.Reference-class.html#__setattr__,Method gluon.dal.Table.__setattr__()=gluon.dal.Table-class.html#__setattr__,Method gluon.storage.Settings.__setattr__()=gluon.storage.Settings-class.html#__setattr__"><a title="gluon.dal.DAL.__setattr__
+gluon.dal.Reference.__setattr__
+gluon.dal.Table.__setattr__
+gluon.storage.Settings.__setattr__" class="py-name" href="#" onclick="return doclink('link-4', '__setattr__', 'link-4');">__setattr__</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method gluon.compileapp.mybuiltin.__setitem__()=gluon.compileapp.mybuiltin-class.html#__setitem__,Method gluon.dal.DAL.__setitem__()=gluon.dal.DAL-class.html#__setitem__,Method gluon.dal.Reference.__setitem__()=gluon.dal.Reference-class.html#__setitem__,Method gluon.dal.Row.__setitem__()=gluon.dal.Row-class.html#__setitem__,Method gluon.dal.Table.__setitem__()=gluon.dal.Table-class.html#__setitem__,Method gluon.html.DIV.__setitem__()=gluon.html.DIV-class.html#__setitem__"><a title="gluon.compileapp.mybuiltin.__setitem__
+gluon.dal.DAL.__setitem__
+gluon.dal.Reference.__setitem__
+gluon.dal.Row.__setitem__
+gluon.dal.Table.__setitem__
+gluon.html.DIV.__setitem__" class="py-name" href="#" onclick="return doclink('link-5', '__setitem__', 'link-5');">__setitem__</a></tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-name">__delattr__</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method gluon.dal.Table.__delitem__()=gluon.dal.Table-class.html#__delitem__,Method gluon.html.DIV.__delitem__()=gluon.html.DIV-class.html#__delitem__"><a title="gluon.dal.Table.__delitem__
+gluon.html.DIV.__delitem__" class="py-name" href="#" onclick="return doclink('link-6', '__delitem__', 'link-6');">__delitem__</a></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Method gluon.compileapp.mybuiltin.__getitem__()=gluon.compileapp.mybuiltin-class.html#__getitem__,Method gluon.dal.DAL.__getitem__()=gluon.dal.DAL-class.html#__getitem__,Method gluon.dal.Expression.__getitem__()=gluon.dal.Expression-class.html#__getitem__,Method gluon.dal.Reference.__getitem__()=gluon.dal.Reference-class.html#__getitem__,Method gluon.dal.Row.__getitem__()=gluon.dal.Row-class.html#__getitem__,Method gluon.dal.Rows.__getitem__()=gluon.dal.Rows-class.html#__getitem__,Method gluon.dal.SQLCustomType.__getitem__()=gluon.dal.SQLCustomType-class.html#__getitem__,Method gluon.dal.Table.__getitem__()=gluon.dal.Table-class.html#__getitem__,Method gluon.html.DIV.__getitem__()=gluon.html.DIV-class.html#__getitem__,Method gluon.html.XML.__getitem__()=gluon.html.XML-class.html#__getitem__,Method gluon.html.__TAG__.__getitem__()=gluon.html.__TAG__-class.html#__getitem__,Method gluon.languages.lazyT.__getitem__()=gluon.languages.lazyT-class.html#__getitem__,Method gluon.storage.FastStorage.__getitem__()=gluon.storage.FastStorage-class.html#__getitem__,Method gluon.storage.StorageList.__getitem__()=gluon.storage.StorageList-class.html#__getitem__,Method gluon.utf8.Utf8.__getitem__()=gluon.utf8.Utf8-class.html#__getitem__"><a title="gluon.compileapp.mybuiltin.__getitem__
+gluon.dal.DAL.__getitem__
+gluon.dal.Expression.__getitem__
+gluon.dal.Reference.__getitem__
+gluon.dal.Row.__getitem__
+gluon.dal.Rows.__getitem__
+gluon.dal.SQLCustomType.__getitem__
+gluon.dal.Table.__getitem__
+gluon.html.DIV.__getitem__
+gluon.html.XML.__getitem__
+gluon.html.__TAG__.__getitem__
+gluon.languages.lazyT.__getitem__
+gluon.storage.FastStorage.__getitem__
+gluon.storage.StorageList.__getitem__
+gluon.utf8.Utf8.__getitem__" class="py-name" href="#" onclick="return doclink('link-7', '__getitem__', 'link-7');">__getitem__</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-8', 'get', 'link-8');">get</a></tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Method gluon.dal.DAL.__getattr__()=gluon.dal.DAL-class.html#__getattr__,Method gluon.dal.MethodAdder.__getattr__()=gluon.dal.MethodAdder-class.html#__getattr__,Method gluon.dal.Reference.__getattr__()=gluon.dal.Reference-class.html#__getattr__,Method gluon.html.__TAG__.__getattr__()=gluon.html.__TAG__-class.html#__getattr__,Method gluon.languages.lazyT.__getattr__()=gluon.languages.lazyT-class.html#__getattr__,Method gluon.storage.FastStorage.__getattr__()=gluon.storage.FastStorage-class.html#__getattr__,Method gluon.storage.Messages.__getattr__()=gluon.storage.Messages-class.html#__getattr__,Method gluon.storage.StorageList.__getattr__()=gluon.storage.StorageList-class.html#__getattr__,Method gluon.tools.PluginManager.__getattr__()=gluon.tools.PluginManager-class.html#__getattr__"><a title="gluon.dal.DAL.__getattr__
+gluon.dal.MethodAdder.__getattr__
+gluon.dal.Reference.__getattr__
+gluon.html.__TAG__.__getattr__
+gluon.languages.lazyT.__getattr__
+gluon.storage.FastStorage.__getattr__
+gluon.storage.Messages.__getattr__
+gluon.storage.StorageList.__getattr__
+gluon.tools.PluginManager.__getattr__" class="py-name" href="#" onclick="return doclink('link-9', '__getattr__', 'link-9');">__getattr__</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-10', 'get', 'link-8');">get</a></tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Method gluon.dal.DAL.__repr__()=gluon.dal.DAL-class.html#__repr__,Method gluon.dal.GAEF.__repr__()=gluon.dal.GAEF-class.html#__repr__,Method gluon.dal.LazySet.__repr__()=gluon.dal.LazySet-class.html#__repr__,Method gluon.dal.Query.__repr__()=gluon.dal.Query-class.html#__repr__,Method gluon.dal.Row.__repr__()=gluon.dal.Row-class.html#__repr__,Method gluon.dal.Rows.__repr__()=gluon.dal.Rows-class.html#__repr__,Method gluon.dal.Set.__repr__()=gluon.dal.Set-class.html#__repr__,Method gluon.dal.Table.__repr__()=gluon.dal.Table-class.html#__repr__,Method gluon.languages.lazyT.__repr__()=gluon.languages.lazyT-class.html#__repr__,Method gluon.storage.FastStorage.__repr__()=gluon.storage.FastStorage-class.html#__repr__,Method gluon.storage.Storage.__repr__()=gluon.storage.Storage-class.html#__repr__,Method gluon.template.BlockNode.__repr__()=gluon.template.BlockNode-class.html#__repr__,Method gluon.template.SuperNode.__repr__()=gluon.template.SuperNode-class.html#__repr__,Method gluon.utf8.Utf8.__repr__()=gluon.utf8.Utf8-class.html#__repr__"><a title="gluon.dal.DAL.__repr__
+gluon.dal.GAEF.__repr__
+gluon.dal.LazySet.__repr__
+gluon.dal.Query.__repr__
+gluon.dal.Row.__repr__
+gluon.dal.Rows.__repr__
+gluon.dal.Set.__repr__
+gluon.dal.Table.__repr__
+gluon.languages.lazyT.__repr__
+gluon.storage.FastStorage.__repr__
+gluon.storage.Storage.__repr__
+gluon.template.BlockNode.__repr__
+gluon.template.SuperNode.__repr__
+gluon.utf8.Utf8.__repr__" class="py-name" href="#" onclick="return doclink('link-11', '__repr__', 'link-11');">__repr__</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> <tt class="py-string">'&lt;Storage %s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="gluon.dal.DAL.__repr__
+gluon.dal.GAEF.__repr__
+gluon.dal.LazySet.__repr__
+gluon.dal.Query.__repr__
+gluon.dal.Row.__repr__
+gluon.dal.Rows.__repr__
+gluon.dal.Set.__repr__
+gluon.dal.Table.__repr__
+gluon.languages.lazyT.__repr__
+gluon.storage.FastStorage.__repr__
+gluon.storage.Storage.__repr__
+gluon.template.BlockNode.__repr__
+gluon.template.SuperNode.__repr__
+gluon.utf8.Utf8.__repr__" class="py-name" href="#" onclick="return doclink('link-12', '__repr__', 'link-11');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-comment"># http://stackoverflow.com/questions/5247250/why-does-pickle-getstate-accept-as-a-return-value-the-very-instance-it-requi</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Method gluon.storage.FastStorage.__getstate__()=gluon.storage.FastStorage-class.html#__getstate__,Method gluon.storage.Storage.__getstate__()=gluon.storage.Storage-class.html#__getstate__"><a title="gluon.storage.FastStorage.__getstate__
+gluon.storage.Storage.__getstate__" class="py-name" href="#" onclick="return doclink('link-13', '__getstate__', 'link-13');">__getstate__</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> <tt class="py-name">None</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt id="link-14" class="py-name" targets="Method gluon.dal.Row.__copy__()=gluon.dal.Row-class.html#__copy__,Method gluon.storage.Storage.__copy__()=gluon.storage.Storage-class.html#__copy__"><a title="gluon.dal.Row.__copy__
+gluon.storage.Storage.__copy__" class="py-name" href="#" onclick="return doclink('link-14', '__copy__', 'link-14');">__copy__</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> <tt id="link-15" class="py-name" targets="Class gluon.storage.Storage=gluon.storage.Storage-class.html"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-15', 'Storage', 'link-15');">Storage</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="Storage.getlist"></a><div id="Storage.getlist-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="Storage.getlist-toggle" onclick="return toggle('Storage.getlist');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.Storage-class.html#getlist">getlist</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.getlist-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Storage.getlist-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">        Return a Storage value as a list.</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">        If the value is a list it will be returned as-is.</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">        If object is None, an empty list will be returned.</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        Otherwise, [value] will be returned.</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        Example output for a query string of ?x=abc&amp;y=abc&amp;y=def</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request = Storage()</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars = Storage()</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.x = 'abc'</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.y = ['abc', 'def']</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getlist('x')</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        ['abc']</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getlist('y')</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        ['abc', 'def']</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getlist('z')</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        []</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-16', 'get', 'link-8');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">value</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">,</tt> <tt class="py-name">tuple</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="Storage.getfirst"></a><div id="Storage.getfirst-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="Storage.getfirst-toggle" onclick="return toggle('Storage.getfirst');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.Storage-class.html#getfirst">getfirst</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.getfirst-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Storage.getfirst-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        Return the first or only value when given a request.vars-style key.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        If the value is a list, its first item will be returned;</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        otherwise, the value will be returned as-is.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">        Example output for a query string of ?x=abc&amp;y=abc&amp;y=def</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request = Storage()</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars = Storage()</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.x = 'abc'</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.y = ['abc', 'def']</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getfirst('x')</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        'abc'</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getfirst('y')</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        'abc'</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getfirst('z')</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt id="link-17" class="py-name" targets="Method gluon.dal.Row.values()=gluon.dal.Row-class.html#values"><a title="gluon.dal.Row.values" class="py-name" href="#" onclick="return doclink('link-17', 'values', 'link-17');">values</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method gluon.storage.Storage.getlist()=gluon.storage.Storage-class.html#getlist"><a title="gluon.storage.Storage.getlist" class="py-name" href="#" onclick="return doclink('link-18', 'getlist', 'link-18');">getlist</a></tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-19" class="py-name"><a title="gluon.dal.Row.values" class="py-name" href="#" onclick="return doclink('link-19', 'values', 'link-17');">values</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-keyword">if</tt> <tt id="link-20" class="py-name"><a title="gluon.dal.Row.values" class="py-name" href="#" onclick="return doclink('link-20', 'values', 'link-17');">values</a></tt> <tt class="py-keyword">else</tt> <tt class="py-name">default</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="Storage.getlast"></a><div id="Storage.getlast-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="Storage.getlast-toggle" onclick="return toggle('Storage.getlast');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.Storage-class.html#getlast">getlast</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.getlast-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Storage.getlast-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        Returns the last or only single value when</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        given a request.vars-style key.</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">        If the value is a list, the last item will be returned;</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">        otherwise, the value will be returned as-is.</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        Simulated output with a query string of ?x=abc&amp;y=abc&amp;y=def</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request = Storage()</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars = Storage()</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.x = 'abc'</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.y = ['abc', 'def']</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getlast('x')</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        'abc'</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getlast('y')</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        'def'</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; request.vars.getlast('z')</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt id="link-21" class="py-name"><a title="gluon.dal.Row.values" class="py-name" href="#" onclick="return doclink('link-21', 'values', 'link-17');">values</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="gluon.storage.Storage.getlist" class="py-name" href="#" onclick="return doclink('link-22', 'getlist', 'link-18');">getlist</a></tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-23" class="py-name"><a title="gluon.dal.Row.values" class="py-name" href="#" onclick="return doclink('link-23', 'values', 'link-17');">values</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">if</tt> <tt id="link-24" class="py-name"><a title="gluon.dal.Row.values" class="py-name" href="#" onclick="return doclink('link-24', 'values', 'link-17');">values</a></tt> <tt class="py-keyword">else</tt> <tt class="py-name">default</tt> </tt>
+</div></div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable gluon.storage.PICKABLE=gluon.storage-module.html#PICKABLE"><a title="gluon.storage.PICKABLE" class="py-name" href="#" onclick="return doclink('link-25', 'PICKABLE', 'link-25');">PICKABLE</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name" targets="Class int=int-class.html"><a title="int" class="py-name" href="#" onclick="return doclink('link-26', 'int', 'link-26');">int</a></tt><tt class="py-op">,</tt> <tt class="py-name">long</tt><tt class="py-op">,</tt> <tt class="py-name">float</tt><tt class="py-op">,</tt> <tt class="py-name">bool</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">,</tt> <tt class="py-name">dict</tt><tt class="py-op">,</tt> <tt class="py-name">tuple</tt><tt class="py-op">,</tt> <tt class="py-name">set</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="StorageList"></a><div id="StorageList-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="StorageList-toggle" onclick="return toggle('StorageList');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.storage.StorageList-class.html">StorageList</a><tt class="py-op">(</tt><tt class="py-base-class">Storage</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StorageList-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="StorageList-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    like Storage but missing elements default to [] instead of None</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="StorageList.__getitem__"></a><div id="StorageList.__getitem__-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="StorageList.__getitem__-toggle" onclick="return toggle('StorageList.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.StorageList-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StorageList.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StorageList.__getitem__-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="gluon.dal.DAL.__getattr__
+gluon.dal.MethodAdder.__getattr__
+gluon.dal.Reference.__getattr__
+gluon.html.__TAG__.__getattr__
+gluon.languages.lazyT.__getattr__
+gluon.storage.FastStorage.__getattr__
+gluon.storage.Messages.__getattr__
+gluon.storage.StorageList.__getattr__
+gluon.tools.PluginManager.__getattr__" class="py-name" href="#" onclick="return doclink('link-27', '__getattr__', 'link-9');">__getattr__</a></tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="StorageList.__getattr__"></a><div id="StorageList.__getattr__-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="StorageList.__getattr__-toggle" onclick="return toggle('StorageList.__getattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.StorageList-class.html#__getattr__">__getattr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StorageList.__getattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StorageList.__getattr__-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt class="py-name">setattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">r</tt> </tt>
+</div></div><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="load_storage"></a><div id="load_storage-def"><a name="L141"></a><tt class="py-lineno">141</tt> <a class="py-toggle" href="#" id="load_storage-toggle" onclick="return toggle('load_storage');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage-module.html#load_storage">load_storage</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="load_storage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="load_storage-expanded"><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-name">fp</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">fp</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-28', 'portalocker', 'link-1');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Class gluon.portalocker.LockedFile=gluon.portalocker.LockedFile-class.html"><a title="gluon.portalocker.LockedFile" class="py-name" href="#" onclick="return doclink('link-29', 'LockedFile', 'link-29');">LockedFile</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'rb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt id="link-30" class="py-name" targets="Module gluon.storage=gluon.storage-module.html"><a title="gluon.storage" class="py-name" href="#" onclick="return doclink('link-30', 'storage', 'link-30');">storage</a></tt> <tt class="py-op">=</tt> <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method gluon.restricted.RestrictedError.load()=gluon.restricted.RestrictedError-class.html#load,Method gluon.restricted.TicketStorage.load()=gluon.restricted.TicketStorage-class.html#load,Function gluon.rewrite.load()=gluon.rewrite-module.html#load"><a title="gluon.restricted.RestrictedError.load
+gluon.restricted.TicketStorage.load
+gluon.rewrite.load" class="py-name" href="#" onclick="return doclink('link-31', 'load', 'link-31');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">fp</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">fp</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">            <tt class="py-name">fp</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method gluon.dal.ConnectionPool.close()=gluon.dal.ConnectionPool-class.html#close,Method gluon.dal.DAL.close()=gluon.dal.DAL-class.html#close,Method gluon.dal.DatabaseStoredFile.close()=gluon.dal.DatabaseStoredFile-class.html#close,Method gluon.dal.TeradataAdapter.close()=gluon.dal.TeradataAdapter-class.html#close,Method gluon.portalocker.LockedFile.close()=gluon.portalocker.LockedFile-class.html#close,Method gluon.rocket.Connection.close()=gluon.rocket.Connection-class.html#close,Method gluon.rocket.FileLikeSocket.close()=gluon.rocket.FileLikeSocket-class.html#close"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-32', 'close', 'link-32');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-33" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-33', 'Storage', 'link-15');">Storage</a></tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="gluon.storage" class="py-name" href="#" onclick="return doclink('link-34', 'storage', 'link-30');">storage</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="save_storage"></a><div id="save_storage-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="save_storage-toggle" onclick="return toggle('save_storage');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage-module.html#save_storage">save_storage</a><tt class="py-op">(</tt><tt class="py-param">storage</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="save_storage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="save_storage-expanded"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt class="py-name">fp</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-name">fp</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="gluon.portalocker" class="py-name" href="#" onclick="return doclink('link-35', 'portalocker', 'link-1');">portalocker</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="gluon.portalocker.LockedFile" class="py-name" href="#" onclick="return doclink('link-36', 'LockedFile', 'link-29');">LockedFile</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'wb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt class="py-name">dump</tt><tt class="py-op">(</tt><tt class="py-name">dict</tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="gluon.storage" class="py-name" href="#" onclick="return doclink('link-37', 'storage', 'link-30');">storage</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">fp</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">fp</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">            <tt class="py-name">fp</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="gluon.dal.ConnectionPool.close
+gluon.dal.DAL.close
+gluon.dal.DatabaseStoredFile.close
+gluon.dal.TeradataAdapter.close
+gluon.portalocker.LockedFile.close
+gluon.rocket.Connection.close
+gluon.rocket.FileLikeSocket.close" class="py-name" href="#" onclick="return doclink('link-38', 'close', 'link-32');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="Settings"></a><div id="Settings-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="Settings-toggle" onclick="return toggle('Settings');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.storage.Settings-class.html">Settings</a><tt class="py-op">(</tt><tt class="py-base-class">Storage</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Settings-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Settings-expanded"><a name="Settings.__setattr__"></a><div id="Settings.__setattr__-def"><a name="L163"></a><tt class="py-lineno">163</tt> <a class="py-toggle" href="#" id="Settings.__setattr__-toggle" onclick="return toggle('Settings.__setattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.Settings-class.html#__setattr__">__setattr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Settings.__setattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Settings.__setattr__-expanded"><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">key</tt> <tt class="py-op">!=</tt> <tt class="py-string">'lock_keys'</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-string">'lock_keys'</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">key</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">SyntaxError</tt><tt class="py-op">(</tt><tt class="py-string">'setting key \'%s\' does not exist'</tt> <tt class="py-op">%</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">key</tt> <tt class="py-op">!=</tt> <tt class="py-string">'lock_values'</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-string">'lock_values'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">SyntaxError</tt><tt class="py-op">(</tt><tt class="py-string">'setting value cannot be changed: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+</div></div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt>
+<a name="Messages"></a><div id="Messages-def"><a name="L171"></a><tt class="py-lineno">171</tt> <a class="py-toggle" href="#" id="Messages-toggle" onclick="return toggle('Messages');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.storage.Messages-class.html">Messages</a><tt class="py-op">(</tt><tt class="py-base-class">Settings</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Messages-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Messages-expanded"><a name="Messages.__init__"></a><div id="Messages.__init__-def"><a name="L172"></a><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="Messages.__init__-toggle" onclick="return toggle('Messages.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.Messages-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">T</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Messages.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Messages.__init__-expanded"><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt id="link-39" class="py-name"><a title="gluon.storage.Storage" class="py-name" href="#" onclick="return doclink('link-39', 'Storage', 'link-15');">Storage</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method gluon.cache.Cache.__init__()=gluon.cache.Cache-class.html#__init__,Method gluon.cache.CacheAbstract.__init__()=gluon.cache.CacheAbstract-class.html#__init__,Method gluon.cache.CacheAction.__init__()=gluon.cache.CacheAction-class.html#__init__,Method gluon.cache.CacheInRam.__init__()=gluon.cache.CacheInRam-class.html#__init__,Method gluon.cache.CacheOnDisk.__init__()=gluon.cache.CacheOnDisk-class.html#__init__,Method gluon.compileapp.LoadFactory.__init__()=gluon.compileapp.LoadFactory-class.html#__init__,Method gluon.custom_import.TrackImporter.__init__()=gluon.custom_import.TrackImporter-class.html#__init__,Method gluon.dal.BaseAdapter.__init__()=gluon.dal.BaseAdapter-class.html#__init__,Method gluon.dal.CouchDBAdapter.__init__()=gluon.dal.CouchDBAdapter-class.html#__init__,Method gluon.dal.CubridAdapter.__init__()=gluon.dal.CubridAdapter-class.html#__init__,Method gluon.dal.DAL.__init__()=gluon.dal.DAL-class.html#__init__,Method gluon.dal.DB2Adapter.__init__()=gluon.dal.DB2Adapter-class.html#__init__,Method gluon.dal.DatabaseStoredFile.__init__()=gluon.dal.DatabaseStoredFile-class.html#__init__,Method gluon.dal.Expression.__init__()=gluon.dal.Expression-class.html#__init__,Method gluon.dal.Field.__init__()=gluon.dal.Field-class.html#__init__,Method gluon.dal.FieldMethod.__init__()=gluon.dal.FieldMethod-class.html#__init__,Method gluon.dal.FieldVirtual.__init__()=gluon.dal.FieldVirtual-class.html#__init__,Method gluon.dal.FireBirdAdapter.__init__()=gluon.dal.FireBirdAdapter-class.html#__init__,Method gluon.dal.FireBirdEmbeddedAdapter.__init__()=gluon.dal.FireBirdEmbeddedAdapter-class.html#__init__,Method gluon.dal.GAEDecimalProperty.__init__()=gluon.dal.GAEDecimalProperty-class.html#__init__,Method gluon.dal.GAEF.__init__()=gluon.dal.GAEF-class.html#__init__,Method gluon.dal.GoogleDatastoreAdapter.__init__()=gluon.dal.GoogleDatastoreAdapter-class.html#__init__,Method gluon.dal.GoogleSQLAdapter.__init__()=gluon.dal.GoogleSQLAdapter-class.html#__init__,Method gluon.dal.IMAPAdapter.__init__()=gluon.dal.IMAPAdapter-class.html#__init__,Method gluon.dal.InformixAdapter.__init__()=gluon.dal.InformixAdapter-class.html#__init__,Method gluon.dal.IngresAdapter.__init__()=gluon.dal.IngresAdapter-class.html#__init__,Method gluon.dal.JDBCPostgreSQLAdapter.__init__()=gluon.dal.JDBCPostgreSQLAdapter-class.html#__init__,Method gluon.dal.JDBCSQLiteAdapter.__init__()=gluon.dal.JDBCSQLiteAdapter-class.html#__init__,Method gluon.dal.LazyReferenceGetter.__init__()=gluon.dal.LazyReferenceGetter-class.html#__init__,Method gluon.dal.LazySet.__init__()=gluon.dal.LazySet-class.html#__init__,Method gluon.dal.MSSQLAdapter.__init__()=gluon.dal.MSSQLAdapter-class.html#__init__,Method gluon.dal.MethodAdder.__init__()=gluon.dal.MethodAdder-class.html#__init__,Method gluon.dal.MongoDBAdapter.__init__()=gluon.dal.MongoDBAdapter-class.html#__init__,Method gluon.dal.MySQLAdapter.__init__()=gluon.dal.MySQLAdapter-class.html#__init__,Method gluon.dal.NDBDecimalProperty.__init__()=gluon.dal.NDBDecimalProperty-class.html#__init__,Method gluon.dal.OracleAdapter.__init__()=gluon.dal.OracleAdapter-class.html#__init__,Method gluon.dal.PostgreSQLAdapter.__init__()=gluon.dal.PostgreSQLAdapter-class.html#__init__,Method gluon.dal.Query.__init__()=gluon.dal.Query-class.html#__init__,Method gluon.dal.RecordDeleter.__init__()=gluon.dal.RecordDeleter-class.html#__init__,Method gluon.dal.RecordUpdater.__init__()=gluon.dal.RecordUpdater-class.html#__init__,Method gluon.dal.Row.__init__()=gluon.dal.Row-class.html#__init__,Method gluon.dal.Rows.__init__()=gluon.dal.Rows-class.html#__init__,Method gluon.dal.SAPDBAdapter.__init__()=gluon.dal.SAPDBAdapter-class.html#__init__,Method gluon.dal.SQLALL.__init__()=gluon.dal.SQLALL-class.html#__init__,Method gluon.dal.SQLCustomType.__init__()=gluon.dal.SQLCustomType-class.html#__init__,Method gluon.dal.SQLiteAdapter.__init__()=gluon.dal.SQLiteAdapter-class.html#__init__,Method gluon.dal.Set.__init__()=gluon.dal.Set-class.html#__init__,Method gluon.dal.SpatiaLiteAdapter.__init__()=gluon.dal.SpatiaLiteAdapter-class.html#__init__,Method gluon.dal.SybaseAdapter.__init__()=gluon.dal.SybaseAdapter-class.html#__init__,Method gluon.dal.Table.__init__()=gluon.dal.Table-class.html#__init__,Method gluon.dal.TeradataAdapter.__init__()=gluon.dal.TeradataAdapter-class.html#__init__,Method gluon.dal.VirtualCommand.__init__()=gluon.dal.VirtualCommand-class.html#__init__,Method gluon.debug.Pipe.__init__()=gluon.debug.Pipe-class.html#__init__,Method gluon.debug.WebDebugger.__init__()=gluon.debug.WebDebugger-class.html#__init__,Method gluon.globals.Request.__init__()=gluon.globals.Request-class.html#__init__,Method gluon.globals.Response.__init__()=gluon.globals.Response-class.html#__init__,Method gluon.highlight.Highlighter.__init__()=gluon.highlight.Highlighter-class.html#__init__,Method gluon.html.BEAUTIFY.__init__()=gluon.html.BEAUTIFY-class.html#__init__,Method gluon.html.DIV.__init__()=gluon.html.DIV-class.html#__init__,Method gluon.html.FORM.__init__()=gluon.html.FORM-class.html#__init__,Method gluon.html.MARKMIN.__init__()=gluon.html.MARKMIN-class.html#__init__,Method gluon.html.MENU.__init__()=gluon.html.MENU-class.html#__init__,Method gluon.html.XML.__init__()=gluon.html.XML-class.html#__init__,Method gluon.html.__tag_div__.__init__()=gluon.html.__tag_div__-class.html#__init__,Method gluon.html.web2pyHTMLParser.__init__()=gluon.html.web2pyHTMLParser-class.html#__init__,Method gluon.http.HTTP.__init__()=gluon.http.HTTP-class.html#__init__,Method gluon.languages.lazyT.__init__()=gluon.languages.lazyT-class.html#__init__,Method gluon.languages.translator.__init__()=gluon.languages.translator-class.html#__init__,Method gluon.main.HttpServer.__init__()=gluon.main.HttpServer-class.html#__init__,Method gluon.main.LazyWSGI.__init__()=gluon.main.LazyWSGI-class.html#__init__,Method gluon.messageboxhandler.MessageBoxHandler.__init__()=gluon.messageboxhandler.MessageBoxHandler-class.html#__init__,Method gluon.messageboxhandler.NotifySendHandler.__init__()=gluon.messageboxhandler.NotifySendHandler-class.html#__init__,Method gluon.newcron.Token.__init__()=gluon.newcron.Token-class.html#__init__,Method gluon.newcron.cronlauncher.__init__()=gluon.newcron.cronlauncher-class.html#__init__,Method gluon.newcron.extcron.__init__()=gluon.newcron.extcron-class.html#__init__,Method gluon.newcron.hardcron.__init__()=gluon.newcron.hardcron-class.html#__init__,Method gluon.newcron.softcron.__init__()=gluon.newcron.softcron-class.html#__init__,Method gluon.portalocker.LockedFile.__init__()=gluon.portalocker.LockedFile-class.html#__init__,Method gluon.restricted.RestrictedError.__init__()=gluon.restricted.RestrictedError-class.html#__init__,Method gluon.restricted.TicketStorage.__init__()=gluon.restricted.TicketStorage-class.html#__init__,Method gluon.rewrite.MapUrlIn.__init__()=gluon.rewrite.MapUrlIn-class.html#__init__,Method gluon.rewrite.MapUrlOut.__init__()=gluon.rewrite.MapUrlOut-class.html#__init__,Method gluon.rocket.ChunkedReader.__init__()=gluon.rocket.ChunkedReader-class.html#__init__,Method gluon.rocket.Connection.__init__()=gluon.rocket.Connection-class.html#__init__,Method gluon.rocket.FileLikeSocket.__init__()=gluon.rocket.FileLikeSocket-class.html#__init__,Method gluon.rocket.FuturesMiddleware.__init__()=gluon.rocket.FuturesMiddleware-class.html#__init__,Method gluon.rocket.Listener.__init__()=gluon.rocket.Listener-class.html#__init__,Method gluon.rocket.Monitor.__init__()=gluon.rocket.Monitor-class.html#__init__,Method gluon.rocket.Rocket.__init__()=gluon.rocket.Rocket-class.html#__init__,Method gluon.rocket.ThreadPool.__init__()=gluon.rocket.ThreadPool-class.html#__init__,Method gluon.rocket.WSGIExecutor.__init__()=gluon.rocket.WSGIExecutor-class.html#__init__,Method gluon.rocket.WSGIFuture.__init__()=gluon.rocket.WSGIFuture-class.html#__init__,Method gluon.rocket.WSGIWorker.__init__()=gluon.rocket.WSGIWorker-class.html#__init__,Method gluon.rocket.Worker.__init__()=gluon.rocket.Worker-class.html#__init__,Method gluon.rocket._WorkItem.__init__()=gluon.rocket._WorkItem-class.html#__init__,Method gluon.sanitizer.XssCleaner.__init__()=gluon.sanitizer.XssCleaner-class.html#__init__,Method gluon.scheduler.MetaScheduler.__init__()=gluon.scheduler.MetaScheduler-class.html#__init__,Method gluon.scheduler.Scheduler.__init__()=gluon.scheduler.Scheduler-class.html#__init__,Method gluon.scheduler.TYPE.__init__()=gluon.scheduler.TYPE-class.html#__init__,Method gluon.scheduler.Task.__init__()=gluon.scheduler.Task-class.html#__init__,Method gluon.scheduler.TaskReport.__init__()=gluon.scheduler.TaskReport-class.html#__init__,Method gluon.sqlhtml.AutocompleteWidget.__init__()=gluon.sqlhtml.AutocompleteWidget-class.html#__init__,Method gluon.sqlhtml.ExportClass.__init__()=gluon.sqlhtml.ExportClass-class.html#__init__,Method gluon.sqlhtml.ExporterCSV.__init__()=gluon.sqlhtml.ExporterCSV-class.html#__init__,Method gluon.sqlhtml.ExporterHTML.__init__()=gluon.sqlhtml.ExporterHTML-class.html#__init__,Method gluon.sqlhtml.ExporterJSON.__init__()=gluon.sqlhtml.ExporterJSON-class.html#__init__,Method gluon.sqlhtml.ExporterTSV.__init__()=gluon.sqlhtml.ExporterTSV-class.html#__init__,Method gluon.sqlhtml.ExporterXML.__init__()=gluon.sqlhtml.ExporterXML-class.html#__init__,Method gluon.sqlhtml.SQLFORM.__init__()=gluon.sqlhtml.SQLFORM-class.html#__init__,Method gluon.sqlhtml.SQLTABLE.__init__()=gluon.sqlhtml.SQLTABLE-class.html#__init__,Method gluon.storage.FastStorage.__init__()=gluon.storage.FastStorage-class.html#__init__,Method gluon.storage.Messages.__init__()=gluon.storage.Messages-class.html#__init__,Method gluon.template.BlockNode.__init__()=gluon.template.BlockNode-class.html#__init__,Method gluon.template.Content.__init__()=gluon.template.Content-class.html#__init__,Method gluon.template.DummyResponse.__init__()=gluon.template.DummyResponse-class.html#__init__,Method gluon.template.NOESCAPE.__init__()=gluon.template.NOESCAPE-class.html#__init__,Method gluon.template.Node.__init__()=gluon.template.Node-class.html#__init__,Method gluon.template.SuperNode.__init__()=gluon.template.SuperNode-class.html#__init__,Method gluon.template.TemplateParser.__init__()=gluon.template.TemplateParser-class.html#__init__,Method gluon.tools.Auth.__init__()=gluon.tools.Auth-class.html#__init__,Method gluon.tools.Config.__init__()=gluon.tools.Config-class.html#__init__,Method gluon.tools.Crud.__init__()=gluon.tools.Crud-class.html#__init__,Method gluon.tools.Expose.__init__()=gluon.tools.Expose-class.html#__init__,Method gluon.tools.Mail.Attachment.__init__()=gluon.tools.Mail.Attachment-class.html#__init__,Method gluon.tools.Mail.__init__()=gluon.tools.Mail-class.html#__init__,Method gluon.tools.PluginManager.__init__()=gluon.tools.PluginManager-class.html#__init__,Method gluon.tools.Recaptcha.__init__()=gluon.tools.Recaptcha-class.html#__init__,Method gluon.tools.Service.JsonRpcException.__init__()=gluon.tools.Service.JsonRpcException-class.html#__init__,Method gluon.tools.Service.__init__()=gluon.tools.Service-class.html#__init__,Method gluon.tools.Wiki.__init__()=gluon.tools.Wiki-class.html#__init__,Method gluon.validators.ANY_OF.__init__()=gluon.validators.ANY_OF-class.html#__init__,Method gluon.validators.CLEANUP.__init__()=gluon.validators.CLEANUP-class.html#__init__,Method gluon.validators.CRYPT.__init__()=gluon.validators.CRYPT-class.html#__init__,Method gluon.validators.IS_ALPHANUMERIC.__init__()=gluon.validators.IS_ALPHANUMERIC-class.html#__init__,Method gluon.validators.IS_DATE.__init__()=gluon.validators.IS_DATE-class.html#__init__,Method gluon.validators.IS_DATETIME.__init__()=gluon.validators.IS_DATETIME-class.html#__init__,Method gluon.validators.IS_DATETIME_IN_RANGE.__init__()=gluon.validators.IS_DATETIME_IN_RANGE-class.html#__init__,Method gluon.validators.IS_DATE_IN_RANGE.__init__()=gluon.validators.IS_DATE_IN_RANGE-class.html#__init__,Method gluon.validators.IS_DECIMAL_IN_RANGE.__init__()=gluon.validators.IS_DECIMAL_IN_RANGE-class.html#__init__,Method gluon.validators.IS_EMAIL.__init__()=gluon.validators.IS_EMAIL-class.html#__init__,Method gluon.validators.IS_EMPTY_OR.__init__()=gluon.validators.IS_EMPTY_OR-class.html#__init__,Method gluon.validators.IS_EQUAL_TO.__init__()=gluon.validators.IS_EQUAL_TO-class.html#__init__,Method gluon.validators.IS_EXPR.__init__()=gluon.validators.IS_EXPR-class.html#__init__,Method gluon.validators.IS_FLOAT_IN_RANGE.__init__()=gluon.validators.IS_FLOAT_IN_RANGE-class.html#__init__,Method gluon.validators.IS_GENERIC_URL.__init__()=gluon.validators.IS_GENERIC_URL-class.html#__init__,Method gluon.validators.IS_HTTP_URL.__init__()=gluon.validators.IS_HTTP_URL-class.html#__init__,Method gluon.validators.IS_IMAGE.__init__()=gluon.validators.IS_IMAGE-class.html#__init__,Method gluon.validators.IS_INT_IN_RANGE.__init__()=gluon.validators.IS_INT_IN_RANGE-class.html#__init__,Method gluon.validators.IS_IN_DB.__init__()=gluon.validators.IS_IN_DB-class.html#__init__,Method gluon.validators.IS_IN_SET.__init__()=gluon.validators.IS_IN_SET-class.html#__init__,Method gluon.validators.IS_IN_SUBSET.__init__()=gluon.validators.IS_IN_SUBSET-class.html#__init__,Method gluon.validators.IS_IPADDRESS.__init__()=gluon.validators.IS_IPADDRESS-class.html#__init__,Method gluon.validators.IS_IPV4.__init__()=gluon.validators.IS_IPV4-class.html#__init__,Method gluon.validators.IS_IPV6.__init__()=gluon.validators.IS_IPV6-class.html#__init__,Method gluon.validators.IS_JSON.__init__()=gluon.validators.IS_JSON-class.html#__init__,Method gluon.validators.IS_LENGTH.__init__()=gluon.validators.IS_LENGTH-class.html#__init__,Method gluon.validators.IS_LIST_OF.__init__()=gluon.validators.IS_LIST_OF-class.html#__init__,Method gluon.validators.IS_LIST_OF_EMAILS.__init__()=gluon.validators.IS_LIST_OF_EMAILS-class.html#__init__,Method gluon.validators.IS_MATCH.__init__()=gluon.validators.IS_MATCH-class.html#__init__,Method gluon.validators.IS_NOT_EMPTY.__init__()=gluon.validators.IS_NOT_EMPTY-class.html#__init__,Method gluon.validators.IS_NOT_IN_DB.__init__()=gluon.validators.IS_NOT_IN_DB-class.html#__init__,Method gluon.validators.IS_SLUG.__init__()=gluon.validators.IS_SLUG-class.html#__init__,Method gluon.validators.IS_STRONG.__init__()=gluon.validators.IS_STRONG-class.html#__init__,Method gluon.validators.IS_TIME.__init__()=gluon.validators.IS_TIME-class.html#__init__,Method gluon.validators.IS_UPLOAD_FILENAME.__init__()=gluon.validators.IS_UPLOAD_FILENAME-class.html#__init__,Method gluon.validators.IS_URL.__init__()=gluon.validators.IS_URL-class.html#__init__,Method gluon.validators.LazyCrypt.__init__()=gluon.validators.LazyCrypt-class.html#__init__,Method gluon.widget.IO.__init__()=gluon.widget.IO-class.html#__init__,Method gluon.widget.web2pyDialog.__init__()=gluon.widget.web2pyDialog-class.html#__init__"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-40', '__init__', 'link-40');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-41" class="py-name" targets="Variable gluon.T=gluon-module.html#T,Variable gluon.languages.lazyT.T=gluon.languages.lazyT-class.html#T"><a title="gluon.T
+gluon.languages.lazyT.T" class="py-name" href="#" onclick="return doclink('link-41', 'T', 'link-41');">T</a></tt><tt class="py-op">=</tt><tt id="link-42" class="py-name"><a title="gluon.T
+gluon.languages.lazyT.T" class="py-name" href="#" onclick="return doclink('link-42', 'T', 'link-41');">T</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="Messages.__getattr__"></a><div id="Messages.__getattr__-def"><a name="L175"></a><tt class="py-lineno">175</tt> <a class="py-toggle" href="#" id="Messages.__getattr__-toggle" onclick="return toggle('Messages.__getattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.Messages-class.html#__getattr__">__getattr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Messages.__getattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Messages.__getattr__-expanded"><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="gluon.T
+gluon.languages.lazyT.T" class="py-name" href="#" onclick="return doclink('link-43', 'T', 'link-41');">T</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> </tt>
+</div></div><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage"></a><div id="FastStorage-def"><a name="L181"></a><tt class="py-lineno">181</tt> <a class="py-toggle" href="#" id="FastStorage-toggle" onclick="return toggle('FastStorage');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html">FastStorage</a><tt class="py-op">(</tt><tt class="py-base-class">dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="FastStorage-expanded"><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">    Eventually this should replace class Storage but causes memory leak</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">    because of http://bugs.python.org/issue1469629</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s = FastStorage()</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s.a = 1</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s.a</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s['a']</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s.b</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s['b']</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s['b']=2</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s['b']</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s.b</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; isinstance(s,dict)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">    True</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; dict(s)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">    {'a': 1, 'b': 2}</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; dict(FastStorage(s))</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">    {'a': 1, 'b': 2}</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; import pickle</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s = pickle.loads(pickle.dumps(s))</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; dict(s)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring">    {'a': 1, 'b': 2}</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; del s.b</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; del s.a</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s.a</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s.b</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s['a']</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; s['b']</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="FastStorage.__init__"></a><div id="FastStorage.__init__-def"><a name="L216"></a><tt class="py-lineno">216</tt> <a class="py-toggle" href="#" id="FastStorage.__init__-toggle" onclick="return toggle('FastStorage.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.__init__-expanded"><a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-44', '__init__', 'link-40');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__dict__</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.__getattr__"></a><div id="FastStorage.__getattr__-def"><a name="L220"></a><tt class="py-lineno">220</tt> <a class="py-toggle" href="#" id="FastStorage.__getattr__-toggle" onclick="return toggle('FastStorage.__getattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#__getattr__">__getattr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.__getattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.__getattr__-expanded"><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt> <tt class="py-keyword">else</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.__getitem__"></a><div id="FastStorage.__getitem__-def"><a name="L223"></a><tt class="py-lineno">223</tt> <a class="py-toggle" href="#" id="FastStorage.__getitem__-toggle" onclick="return toggle('FastStorage.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.__getitem__-expanded"><a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-45', 'get', 'link-8');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.copy"></a><div id="FastStorage.copy-def"><a name="L226"></a><tt class="py-lineno">226</tt> <a class="py-toggle" href="#" id="FastStorage.copy-toggle" onclick="return toggle('FastStorage.copy');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#copy">copy</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.copy-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.copy-expanded"><a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__dict__</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">        <tt id="link-46" class="py-name" targets="Variable gluon.languages.lazyT.s=gluon.languages.lazyT-class.html#s"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-46', 's', 'link-46');">s</a></tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name" targets="Class gluon.storage.FastStorage=gluon.storage.FastStorage-class.html"><a title="gluon.storage.FastStorage" class="py-name" href="#" onclick="return doclink('link-47', 'FastStorage', 'link-47');">FastStorage</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__dict__</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-48" class="py-name"><a title="gluon.languages.lazyT.s" class="py-name" href="#" onclick="return doclink('link-48', 's', 'link-46');">s</a></tt> </tt>
+</div><a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.__repr__"></a><div id="FastStorage.__repr__-def"><a name="L232"></a><tt class="py-lineno">232</tt> <a class="py-toggle" href="#" id="FastStorage.__repr__-toggle" onclick="return toggle('FastStorage.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.__repr__-expanded"><a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'&lt;Storage %s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="gluon.dal.DAL.__repr__
+gluon.dal.GAEF.__repr__
+gluon.dal.LazySet.__repr__
+gluon.dal.Query.__repr__
+gluon.dal.Row.__repr__
+gluon.dal.Rows.__repr__
+gluon.dal.Set.__repr__
+gluon.dal.Table.__repr__
+gluon.languages.lazyT.__repr__
+gluon.storage.FastStorage.__repr__
+gluon.storage.Storage.__repr__
+gluon.template.BlockNode.__repr__
+gluon.template.SuperNode.__repr__
+gluon.utf8.Utf8.__repr__" class="py-name" href="#" onclick="return doclink('link-49', '__repr__', 'link-11');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.__getstate__"></a><div id="FastStorage.__getstate__-def"><a name="L235"></a><tt class="py-lineno">235</tt> <a class="py-toggle" href="#" id="FastStorage.__getstate__-toggle" onclick="return toggle('FastStorage.__getstate__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#__getstate__">__getstate__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.__getstate__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.__getstate__-expanded"><a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.__setstate__"></a><div id="FastStorage.__setstate__-def"><a name="L238"></a><tt class="py-lineno">238</tt> <a class="py-toggle" href="#" id="FastStorage.__setstate__-toggle" onclick="return toggle('FastStorage.__setstate__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#__setstate__">__setstate__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sdict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.__setstate__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.__setstate__-expanded"><a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">        <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-50', '__init__', 'link-40');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">sdict</tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__dict__</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line"> </tt>
+<a name="FastStorage.update"></a><div id="FastStorage.update-def"><a name="L242"></a><tt class="py-lineno">242</tt> <a class="py-toggle" href="#" id="FastStorage.update-toggle" onclick="return toggle('FastStorage.update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.FastStorage-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FastStorage.update-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FastStorage.update-expanded"><a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-name">dict</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="gluon.cache.Cache.__init__
+gluon.cache.CacheAbstract.__init__
+gluon.cache.CacheAction.__init__
+gluon.cache.CacheInRam.__init__
+gluon.cache.CacheOnDisk.__init__
+gluon.compileapp.LoadFactory.__init__
+gluon.custom_import.TrackImporter.__init__
+gluon.dal.BaseAdapter.__init__
+gluon.dal.CouchDBAdapter.__init__
+gluon.dal.CubridAdapter.__init__
+gluon.dal.DAL.__init__
+gluon.dal.DB2Adapter.__init__
+gluon.dal.DatabaseStoredFile.__init__
+gluon.dal.Expression.__init__
+gluon.dal.Field.__init__
+gluon.dal.FieldMethod.__init__
+gluon.dal.FieldVirtual.__init__
+gluon.dal.FireBirdAdapter.__init__
+gluon.dal.FireBirdEmbeddedAdapter.__init__
+gluon.dal.GAEDecimalProperty.__init__
+gluon.dal.GAEF.__init__
+gluon.dal.GoogleDatastoreAdapter.__init__
+gluon.dal.GoogleSQLAdapter.__init__
+gluon.dal.IMAPAdapter.__init__
+gluon.dal.InformixAdapter.__init__
+gluon.dal.IngresAdapter.__init__
+gluon.dal.JDBCPostgreSQLAdapter.__init__
+gluon.dal.JDBCSQLiteAdapter.__init__
+gluon.dal.LazyReferenceGetter.__init__
+gluon.dal.LazySet.__init__
+gluon.dal.MSSQLAdapter.__init__
+gluon.dal.MethodAdder.__init__
+gluon.dal.MongoDBAdapter.__init__
+gluon.dal.MySQLAdapter.__init__
+gluon.dal.NDBDecimalProperty.__init__
+gluon.dal.OracleAdapter.__init__
+gluon.dal.PostgreSQLAdapter.__init__
+gluon.dal.Query.__init__
+gluon.dal.RecordDeleter.__init__
+gluon.dal.RecordUpdater.__init__
+gluon.dal.Row.__init__
+gluon.dal.Rows.__init__
+gluon.dal.SAPDBAdapter.__init__
+gluon.dal.SQLALL.__init__
+gluon.dal.SQLCustomType.__init__
+gluon.dal.SQLiteAdapter.__init__
+gluon.dal.Set.__init__
+gluon.dal.SpatiaLiteAdapter.__init__
+gluon.dal.SybaseAdapter.__init__
+gluon.dal.Table.__init__
+gluon.dal.TeradataAdapter.__init__
+gluon.dal.VirtualCommand.__init__
+gluon.debug.Pipe.__init__
+gluon.debug.WebDebugger.__init__
+gluon.globals.Request.__init__
+gluon.globals.Response.__init__
+gluon.highlight.Highlighter.__init__
+gluon.html.BEAUTIFY.__init__
+gluon.html.DIV.__init__
+gluon.html.FORM.__init__
+gluon.html.MARKMIN.__init__
+gluon.html.MENU.__init__
+gluon.html.XML.__init__
+gluon.html.__tag_div__.__init__
+gluon.html.web2pyHTMLParser.__init__
+gluon.http.HTTP.__init__
+gluon.languages.lazyT.__init__
+gluon.languages.translator.__init__
+gluon.main.HttpServer.__init__
+gluon.main.LazyWSGI.__init__
+gluon.messageboxhandler.MessageBoxHandler.__init__
+gluon.messageboxhandler.NotifySendHandler.__init__
+gluon.newcron.Token.__init__
+gluon.newcron.cronlauncher.__init__
+gluon.newcron.extcron.__init__
+gluon.newcron.hardcron.__init__
+gluon.newcron.softcron.__init__
+gluon.portalocker.LockedFile.__init__
+gluon.restricted.RestrictedError.__init__
+gluon.restricted.TicketStorage.__init__
+gluon.rewrite.MapUrlIn.__init__
+gluon.rewrite.MapUrlOut.__init__
+gluon.rocket.ChunkedReader.__init__
+gluon.rocket.Connection.__init__
+gluon.rocket.FileLikeSocket.__init__
+gluon.rocket.FuturesMiddleware.__init__
+gluon.rocket.Listener.__init__
+gluon.rocket.Monitor.__init__
+gluon.rocket.Rocket.__init__
+gluon.rocket.ThreadPool.__init__
+gluon.rocket.WSGIExecutor.__init__
+gluon.rocket.WSGIFuture.__init__
+gluon.rocket.WSGIWorker.__init__
+gluon.rocket.Worker.__init__
+gluon.rocket._WorkItem.__init__
+gluon.sanitizer.XssCleaner.__init__
+gluon.scheduler.MetaScheduler.__init__
+gluon.scheduler.Scheduler.__init__
+gluon.scheduler.TYPE.__init__
+gluon.scheduler.Task.__init__
+gluon.scheduler.TaskReport.__init__
+gluon.sqlhtml.AutocompleteWidget.__init__
+gluon.sqlhtml.ExportClass.__init__
+gluon.sqlhtml.ExporterCSV.__init__
+gluon.sqlhtml.ExporterHTML.__init__
+gluon.sqlhtml.ExporterJSON.__init__
+gluon.sqlhtml.ExporterTSV.__init__
+gluon.sqlhtml.ExporterXML.__init__
+gluon.sqlhtml.SQLFORM.__init__
+gluon.sqlhtml.SQLTABLE.__init__
+gluon.storage.FastStorage.__init__
+gluon.storage.Messages.__init__
+gluon.template.BlockNode.__init__
+gluon.template.Content.__init__
+gluon.template.DummyResponse.__init__
+gluon.template.NOESCAPE.__init__
+gluon.template.Node.__init__
+gluon.template.SuperNode.__init__
+gluon.template.TemplateParser.__init__
+gluon.tools.Auth.__init__
+gluon.tools.Config.__init__
+gluon.tools.Crud.__init__
+gluon.tools.Expose.__init__
+gluon.tools.Mail.Attachment.__init__
+gluon.tools.Mail.__init__
+gluon.tools.PluginManager.__init__
+gluon.tools.Recaptcha.__init__
+gluon.tools.Service.JsonRpcException.__init__
+gluon.tools.Service.__init__
+gluon.tools.Wiki.__init__
+gluon.validators.ANY_OF.__init__
+gluon.validators.CLEANUP.__init__
+gluon.validators.CRYPT.__init__
+gluon.validators.IS_ALPHANUMERIC.__init__
+gluon.validators.IS_DATE.__init__
+gluon.validators.IS_DATETIME.__init__
+gluon.validators.IS_DATETIME_IN_RANGE.__init__
+gluon.validators.IS_DATE_IN_RANGE.__init__
+gluon.validators.IS_DECIMAL_IN_RANGE.__init__
+gluon.validators.IS_EMAIL.__init__
+gluon.validators.IS_EMPTY_OR.__init__
+gluon.validators.IS_EQUAL_TO.__init__
+gluon.validators.IS_EXPR.__init__
+gluon.validators.IS_FLOAT_IN_RANGE.__init__
+gluon.validators.IS_GENERIC_URL.__init__
+gluon.validators.IS_HTTP_URL.__init__
+gluon.validators.IS_IMAGE.__init__
+gluon.validators.IS_INT_IN_RANGE.__init__
+gluon.validators.IS_IN_DB.__init__
+gluon.validators.IS_IN_SET.__init__
+gluon.validators.IS_IN_SUBSET.__init__
+gluon.validators.IS_IPADDRESS.__init__
+gluon.validators.IS_IPV4.__init__
+gluon.validators.IS_IPV6.__init__
+gluon.validators.IS_JSON.__init__
+gluon.validators.IS_LENGTH.__init__
+gluon.validators.IS_LIST_OF.__init__
+gluon.validators.IS_LIST_OF_EMAILS.__init__
+gluon.validators.IS_MATCH.__init__
+gluon.validators.IS_NOT_EMPTY.__init__
+gluon.validators.IS_NOT_IN_DB.__init__
+gluon.validators.IS_SLUG.__init__
+gluon.validators.IS_STRONG.__init__
+gluon.validators.IS_TIME.__init__
+gluon.validators.IS_UPLOAD_FILENAME.__init__
+gluon.validators.IS_URL.__init__
+gluon.validators.LazyCrypt.__init__
+gluon.widget.IO.__init__
+gluon.widget.web2pyDialog.__init__" class="py-name" href="#" onclick="return doclink('link-51', '__init__', 'link-40');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__dict__</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+</div></div><a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"> </tt>
+<a name="List"></a><div id="List-def"><a name="L247"></a><tt class="py-lineno">247</tt> <a class="py-toggle" href="#" id="List-toggle" onclick="return toggle('List');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="gluon.storage.List-class.html">List</a><tt class="py-op">(</tt><tt class="py-base-class">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="List-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="List-expanded"><a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"><tt class="py-docstring">    Like a regular python list but a[i] if i is out of bounds return None</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-docstring">    instead of IndexOutOfBounds</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line"> </tt>
+<a name="List.__call__"></a><div id="List.__call__-def"><a name="L253"></a><tt class="py-lineno">253</tt> <a class="py-toggle" href="#" id="List.__call__-toggle" onclick="return toggle('List.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.storage.List-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">i</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt id="link-52" class="py-name"><a title="gluon.dal.DEFAULT
+gluon.storage.DEFAULT
+gluon.tools.DEFAULT" class="py-name" href="#" onclick="return doclink('link-52', 'DEFAULT', 'link-3');">DEFAULT</a></tt><tt class="py-op">,</tt> <tt class="py-param">cast</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">otherwise</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="List.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="List.__call__-expanded"><a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-docstring">        request.args(0,default=0,cast=int,otherwise='http://error_url')</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-docstring">        request.args(0,default=0,cast=int,otherwise=lambda:...)</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">        <tt class="py-name">n</tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name" targets="Method gluon.dal.Expression.len()=gluon.dal.Expression-class.html#len"><a title="gluon.dal.Expression.len" class="py-name" href="#" onclick="return doclink('link-53', 'len', 'link-53');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-number">0</tt> <tt class="py-op">&lt;=</tt> <tt id="link-54" class="py-name" targets="Variable gluon.utf8.i=gluon.utf8-module.html#i"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-54', 'i', 'link-54');">i</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-name">n</tt> <tt class="py-keyword">or</tt> <tt class="py-op">-</tt><tt class="py-name">n</tt> <tt class="py-op">&lt;=</tt> <tt id="link-55" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-55', 'i', 'link-54');">i</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">            <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt id="link-56" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-56', 'i', 'link-54');">i</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">default</tt> <tt class="py-keyword">is</tt> <tt id="link-57" class="py-name"><a title="gluon.dal.DEFAULT
+gluon.storage.DEFAULT
+gluon.tools.DEFAULT" class="py-name" href="#" onclick="return doclink('link-57', 'DEFAULT', 'link-3');">DEFAULT</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">            <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">            <tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">cast</tt> <tt class="py-op">=</tt> <tt class="py-name">default</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">cast</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">                <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">cast</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">TypeError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">                <tt class="py-keyword">from</tt> <tt id="link-58" class="py-name" targets="Module gluon.http=gluon.http-module.html"><a title="gluon.http" class="py-name" href="#" onclick="return doclink('link-58', 'http', 'link-58');">http</a></tt> <tt class="py-keyword">import</tt> <tt id="link-59" class="py-name" targets="Class gluon.http.HTTP=gluon.http.HTTP-class.html"><a title="gluon.http.HTTP" class="py-name" href="#" onclick="return doclink('link-59', 'HTTP', 'link-59');">HTTP</a></tt><tt class="py-op">,</tt> <tt id="link-60" class="py-name" targets="Function gluon.http.redirect()=gluon.http-module.html#redirect"><a title="gluon.http.redirect" class="py-name" href="#" onclick="return doclink('link-60', 'redirect', 'link-60');">redirect</a></tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">otherwise</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-61" class="py-name"><a title="gluon.http.HTTP" class="py-name" href="#" onclick="return doclink('link-61', 'HTTP', 'link-59');">HTTP</a></tt><tt class="py-op">(</tt><tt class="py-number">404</tt><tt class="py-op">)</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">otherwise</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">                    <tt id="link-62" class="py-name"><a title="gluon.http.redirect" class="py-name" href="#" onclick="return doclink('link-62', 'redirect', 'link-60');">redirect</a></tt><tt class="py-op">(</tt><tt class="py-name">otherwise</tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">otherwise</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt class="py-name">otherwise</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt class="py-name">RuntimeError</tt><tt class="py-op">(</tt><tt class="py-string">"invalid otherwise"</tt><tt class="py-op">)</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> </tt>
+</div></div><a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">    <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">testmod</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:53 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
