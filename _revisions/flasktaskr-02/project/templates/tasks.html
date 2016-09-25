@@ -6,15 +6,24 @@
 <a href="/logout">Logout</a>
 <div class="add-task">
   <h3>Add a new task:</h3>
-    <form action="{{ url_for('new_task') }}" method="post">
-      {{ form.csrf_token }}
-      <p>
-          {{ form.name.label }}: {{ form.name }}<br>
-          {{ form.due_date.label }}: {{ form.due_date }}<br>
-          {{ form.priority.label }}: {{ form.priority }}
-      </p>
-      <p><input type="submit" value="Submit"></p>
-    </form>
+  <form action="{{ url_for('new_task') }}" method="post" class="inline-form">
+    {{ form.csrf_token }}
+    <div class="input-group">
+      {{ form.name.label }}
+      {{ form.name }}
+    </div>
+    <div class="input-group">
+      {{ form.due_date.label }}
+      {{ form.due_date }}
+    </div>
+    <div class="input-group">
+      {{ form.priority.label }}
+      {{ form.priority }}
+    </div>
+    <div class="input-group">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
 </div>
 <div class="entries">
   <br>
