@@ -9,23 +9,23 @@
   {{ form.csrf_token }}
     <p>
     {{ form.name(placeholder="email address") }}
-    <span class="error">
-      {% if form.name.errors %}
+    {% if form.name.errors %}
+      <span class="error">
         {% for error in form.name.errors %}
           {{ error }}
         {% endfor %}
-      {% endif %}
-    </span>
+      </span>
+    {% endif %}
     </p>
     <p>
     {{ form.password(placeholder="password") }}
-    <span class="error">
-      {% if form.password.errors %}
+    {% if form.password.errors %}
+      <span class="error">
         {% for error in form.password.errors %}
           {{ error }}
         {% endfor %}
-      {% endif %}
-    </span>
+      </span>
+    {% endif %}
     </p>
   <button class="btn btn-sm btn-success" type="submit">Sign in</button>
   <br>
