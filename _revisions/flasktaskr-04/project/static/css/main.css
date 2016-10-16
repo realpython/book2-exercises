@@ -11,3 +11,7 @@ body {
   color: red;
   font-size: .8em;
 }
+
+.input-group {
+  margin: 15px 0;
+}
