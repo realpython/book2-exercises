@@ -9,21 +9,21 @@
       <div class="input-group">
         {{ form.name(placeholder="name") }}
         {% if form.name.errors %}
-        <span class="error">
-          {% for error in form.name.errors %}
-          {{error}}
-          {% endfor %}
-        </span>
+          <span class="error">
+            {% for error in form.name.errors %}
+              {{error}}
+            {% endfor %}
+          </span>
         {% endif %}
       </div>
       <div class="input-group">
         {{ form.password(placeholder="password") }}
         {% if form.password.errors %}
-        <span class="error">
-          {% for error in form.password.errors %}
-          {{error}}
-          {% endfor %}
-        </span>
+          <span class="error">
+            {% for error in form.password.errors %}
+              {{error}}
+            {% endfor %}
+          </span>
         {% endif %}
       </div>
       <div>

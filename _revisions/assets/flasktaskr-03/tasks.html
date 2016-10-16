@@ -11,31 +11,31 @@
     <div class="input-group">
       {{ form.name(placeholder="name") }}
       {% if form.name.errors %}
-      <div class="error">
-        {% for error in form.name.errors %}
-        {{error}}
-        {% endfor %}
-      </div>
+        <div class="error">
+          {% for error in form.name.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
     <div class="input-group">
       {{ form.due_date(placeholder="due date") }}
       {% if form.due_date.errors %}
-      <div class="error">
-        {% for error in form.due_date.errors %}
-        {{error}}
-        {% endfor %}
-      </div>
+        <div class="error">
+          {% for error in form.due_date.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
     <div class="input-group">
       {{ form.priority(placeholder="priority") }}
       {% if form.priority.errors %}
-      <div class="error">
-        {% for error in form.priority.errors %}
-        {{error}}
-        {% endfor %}
-      </div>
+        <div class="error">
+          {% for error in form.priority.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
     <div class="input-group">

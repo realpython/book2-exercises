@@ -3,44 +3,44 @@
 
 <h1>Welcome to FlaskTaskr</h1>
 <br>
-<a href="/logout">Logout</a>
+<a href="{{ url_for('logout') }}">Logout</a>
 <div class="add-task">
   <h3>Add a new task:</h3>
-    <form action="{{ url_for('new_task') }}" method="post">
-      {{ form.csrf_token }}
-      <p>
+  <form action="{{ url_for('new_task') }}" method="post" class="inline-form">
+    {{ form.csrf_token }}
+    <div class="input-group">
       {{ form.name(placeholder="name") }}
-      <span class="error">
-        {% if form.name.errors %}
+      {% if form.name.errors %}
+        <div class="error">
           {% for error in form.name.errors %}
-            {{ error }}
+            {{error}}
           {% endfor %}
-        {% endif %}
-      </span>
-      </p>
-      <p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="input-group">
       {{ form.due_date(placeholder="due date") }}
-      <span class="error">
-        {% if form.due_date.errors %}
+      {% if form.due_date.errors %}
+        <div class="error">
           {% for error in form.due_date.errors %}
-            {{ error }}
+            {{error}}
           {% endfor %}
-        {% endif %}
-      </span>
-      </p>
-      <p>
-      {{ form.priority.label }}
-      {{ form.priority }}
-      <span class="error">
-        {% if form.priority.errors %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="input-group">
+      {{ form.priority(placeholder="priority") }}
+      {% if form.priority.errors %}
+        <div class="error">
           {% for error in form.priority.errors %}
-            {{ error }}
+            {{error}}
           {% endfor %}
-        {% endif %}
-      </span>
-      </p>
-      <p><input type="submit" value="Submit"></p>
-    </form>
+        </div>
+      {% endif %}
+    </div>
+    <div class="input-group">
+      <button class="button" type="submit">Submit</button>
+    </div>
 </div>
 <div class="entries">
   <br>
