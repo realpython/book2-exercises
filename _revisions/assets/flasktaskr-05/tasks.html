@@ -3,7 +3,7 @@
 
 <h1>Welcome to FlaskTaskr</h1>
 <br>
-<a href="{{ url_for('logout') }}">Logout</a>
+<a href="{{ url_for('users.logout') }}">Logout</a>
 <div class="add-task">
   <h3>Add a new task:</h3>
     <form action="{{ url_for('tasks.new_task') }}" method="post">
