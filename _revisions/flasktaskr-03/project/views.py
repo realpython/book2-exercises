@@ -12,7 +12,7 @@ from functools import wraps
 from flask import Flask, flash, redirect, render_template, \
     request, session, url_for
 from sqlalchemy.exc import IntegrityError
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 
 ################
