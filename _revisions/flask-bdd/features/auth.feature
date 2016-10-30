@@ -18,7 +18,7 @@ Feature: flaskr is secure in that users must login and logout to access certain 
   Scenario: successful logout
     Given flaskr is setup
     and we login with "admin" and "admin"
-      When we logout
+      When we log out
       Then we should see the alert "You were logged out"
 
   Scenario: successful post
