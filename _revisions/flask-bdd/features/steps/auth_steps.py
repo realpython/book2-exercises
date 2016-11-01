@@ -1,6 +1,6 @@
 from behave import *
 
-@given(u'flaskr is setup')
+@given(u'flaskr is set up')
 def flask_is_setup(context):
     assert context.client and context.db
 
@@ -19,7 +19,7 @@ def login(context, username, password):
     )
     assert context.page
 
-@when(u'we logout')
+@when(u'we log out')
 def logout(context):
     context.page = context.client.get('/logout', follow_redirects=True)
     assert context.page
@@ -35,9 +35,8 @@ def add(context, title, text):
 
 @then(u'we should see the alert "{message}"')
 def message(context, message):
-    assert message in context.page.data
+    assert str.encode(message) in context.page.data
 
 @then(u'we should see the post with "{title}" and "{text}" as the title and text')
 def entry(context, title, text):
     assert title and text in context.page.data
-    
