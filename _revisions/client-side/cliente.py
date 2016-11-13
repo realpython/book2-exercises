@@ -7,4 +7,4 @@ from xml.etree import ElementTree as et
 doc = et.parse("cars.xml")
 
 # outputs the first MODEL in the file
-print doc.find("CAR/MODEL").text
+print(doc.find("CAR/MODEL").text)
