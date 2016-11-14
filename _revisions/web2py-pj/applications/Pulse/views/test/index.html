@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+<h1>AJAX Test</h1>
+<form>
+  <input type="number" id="key" name ="key">
+  <input type="button" value="submit"
+    onclick="ajax('{{=URL('data')}}',['key'],'target')">
+</form>
+<br>
+<div id="target"></div>

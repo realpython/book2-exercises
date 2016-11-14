@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+  <title>AJAX Test</title>
+  <script src="{{=URL('static','js/modernizr.custom.js')}}"></script>
+  <!-- include stylesheets -->
+  {{
+  response.files.insert(0,URL('static','css/web2py.css'))
+  response.files.insert(1,URL('static','css/bootstrap.min.css'))
+  response.files.insert(2,URL('static','css/bootstrap-responsive.min.css'))
+  response.files.insert(3,URL('static','css/web2py_bootstrap.css'))
+  }}
+  {{include 'web2py_ajax.html'}}
+  {{
+  middle_columns = {0:'span12',1:'span9',2:'span6'}
+  }}
+  <link href="http://maxcdn.bootstrapcdn.com/
+      bootswatch/3.2.0/yeti/bootstrap.min.css" rel="stylesheet">
+  <noscript><link href="{{=URL('static', 'css/web2py_bootstrap_nojs.css')}}" rel="stylesheet" type="text/css" /></noscript>
+  {{block head}}{{end}}
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <div class="{{=middle_columns}}">
+        {{block center}}
+        {{include}}
+        {{end}}
+      </div>
+    </div>
+  </div> <!-- /container -->
+  <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
+  <script src="{{=URL('static','js/web2py_bootstrap.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+import requests
+import json
+
+def index():
+    return dict()
+
+def grab_movies():
+    session.m = []
+    YOUR_OWN_KEY = 'GET_YOUR_OWN_KEY'
+    requests.get('http://api.myapifilms.com/imdb/inTheaters?token=\
+        {0}&format=json&language=en-us'.format(TOKEN))    
+    binary = url.content
+    output = json.loads(binary)
+    movies = output['movies']
+    for movie in movies:
+        session.m.append(movie["title"])
+    session.m.sort()
+    return TABLE(*[TR(v) for v in session.m]).xml()
