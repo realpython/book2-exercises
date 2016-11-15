@@ -14,6 +14,6 @@ doc = et.parse("test.xml")
 
 # outputs the album, artist and year of each CD to the screen
 for element in doc.findall("CD"):
-    print "Album: ", element.find("TITLE").text
-    print "Artist: ", element.find("ARTIST").text
-    print "Year: ", element.find("YEAR").text, "\n"
+    print("Album: ", element.find("TITLE").text)
+    print("Artist: ", element.find("ARTIST").text)
+    print("Year: ", element.find("YEAR").text, "\n")

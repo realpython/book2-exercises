@@ -1,7 +1,7 @@
 # POST JSON Payload
 
 
-import json 
+import json
 import requests
 
 url = "http://httpbin.org/post"
@@ -20,4 +20,4 @@ headers = {"content-type": "application/json"}
 response = requests.post(url, data=json.dumps(payload), headers=headers)
 
 # output response to screen
-print response.status_code
+print(response.status_code)
