@@ -1,0 +1,58 @@
+(dp0
+S'group_id'
+p1
+(dp2
+S'length'
+p3
+I512
+sS'unique'
+p4
+I00
+sS'sortable'
+p5
+I3
+sS'sql'
+p6
+S'INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  '
+p7
+sS'notnull'
+p8
+I00
+sS'type'
+p9
+S'reference auth_group'
+p10
+ssS'user_id'
+p11
+(dp12
+g3
+I512
+sg4
+I00
+sg5
+I2
+sg6
+S'INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  '
+p13
+sg8
+I00
+sg9
+S'reference auth_user'
+p14
+ssS'id'
+p15
+(dp16
+g3
+I512
+sg4
+I00
+sg5
+I1
+sg6
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
+p17
+sg8
+I00
+sg9
+g15
+ss.
