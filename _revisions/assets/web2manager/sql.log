@@ -1,0 +1,85 @@
+timestamp: 2016-11-24T17:01:44.585330
+CREATE TABLE "special_users"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "name" CHAR(512),
+    "email" CHAR(512)
+);
+success!
+DROP TABLE "special_users";
+success!
+timestamp: 2016-11-26T13:01:06.909775
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(128),
+    "last_name" CHAR(128),
+    "email" CHAR(512),
+    "password" CHAR(512),
+    "registration_key" CHAR(512),
+    "reset_password_key" CHAR(512),
+    "registration_id" CHAR(512)
+);
+success!
+timestamp: 2016-11-26T13:01:06.914649
+CREATE TABLE "auth_group"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "role" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2016-11-26T13:01:06.917083
+CREATE TABLE "auth_membership"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE
+);
+success!
+timestamp: 2016-11-26T13:01:06.919984
+CREATE TABLE "auth_permission"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  ,
+    "name" CHAR(512),
+    "table_name" CHAR(512),
+    "record_id" INTEGER
+);
+success!
+timestamp: 2016-11-26T13:01:06.922668
+CREATE TABLE "auth_event"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "time_stamp" TIMESTAMP,
+    "client_ip" CHAR(512),
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "origin" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2016-11-26T13:01:06.924889
+CREATE TABLE "auth_cas"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "created_on" TIMESTAMP,
+    "service" CHAR(512),
+    "ticket" CHAR(512),
+    "renew" CHAR(1)
+);
+success!
+timestamp: 2016-11-26T13:01:06.927276
+CREATE TABLE "company"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "company_name" CHAR(512) NOT NULL UNIQUE,
+    "email" CHAR(512),
+    "phone" CHAR(512) NOT NULL,
+    "url" CHAR(512)
+);
+success!
+timestamp: 2016-11-26T13:01:06.929647
+CREATE TABLE "project"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "name" CHAR(512) NOT NULL,
+    "employee_name" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "company_name" INTEGER REFERENCES "company" ("id") ON DELETE CASCADE  NOT NULL ,
+    "description" TEXT NOT NULL,
+    "start_date" DATE NOT NULL,
+    "due_date" DATE NOT NULL,
+    "completed" CHAR(1) NOT NULL
+);
+success!
