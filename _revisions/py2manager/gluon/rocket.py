@@ -33,7 +33,7 @@ PY3K = sys.version_info[0] > 2
 
 
 class NullHandler(logging.Handler):
-    "A Logging handler to prevent library errors."
+    """A Logging handler to prevent library errors."""
     def emit(self, record):
         pass
 
@@ -93,7 +93,7 @@ except ImportError:
 # Import Package Modules
 # package imports removed in monolithic build
 # TODO - This part is still very experimental.
-#from .filelike import FileLikeSocket
+# from .filelike import FileLikeSocket
 
 
 class Connection(object):
@@ -403,7 +403,7 @@ class WSGIExecutor(ThreadPoolExecutor):
 
 
 class FuturesMiddleware(object):
-    "Futures middleware that adds a Futures Executor to the environment"
+    """Futures middleware that adds a Futures Executor to the environment"""
     def __init__(self, app, threads=5):
         self.app = app
         self.executor = WSGIExecutor(threads)
@@ -1087,10 +1087,10 @@ class ThreadPool:
             self.app_info['executor'].shutdown(wait=False)
 
         # Give them the gun
-        #active_threads = [t for t in self.threads if t.isAlive()]
-        #while active_threads:
-        #    t = active_threads.pop()
-        #    t.kill()
+        # active_threads = [t for t in self.threads if t.isAlive()]
+        # while active_threads:
+        #     t = active_threads.pop()
+        #     t.kill()
 
         # Wait until they pull the trigger
         for t in self.threads:
@@ -1515,17 +1515,17 @@ class Worker(Thread):
 
 
 class SocketTimeout(Exception):
-    "Exception for when a socket times out between requests."
+    """Exception for when a socket times out between requests."""
     pass
 
 
 class BadRequest(Exception):
-    "Exception for when a client sends an incomprehensible request."
+    """Exception for when a client sends an incomprehensible request."""
     pass
 
 
 class SocketClosed(Exception):
-    "Exception for when a socket is closed by the client."
+    """Exception for when a socket is closed by the client."""
     pass
 
 
@@ -1850,12 +1850,13 @@ class WSGIWorker(Worker):
                 if data:
                     self.write(data, sections)
 
-            if self.chunked:
-                # If chunked, send our final chunk length
-                self.conn.sendall(b('0\r\n\r\n'))
-            elif not self.headers_sent:
+            if not self.headers_sent:
                 # Send headers if the body was empty
                 self.send_headers('', sections)
+
+            if self.chunked and self.request_method != 'HEAD':
+                # If chunked, send our final chunk length
+                self.conn.sendall(b('0\r\n\r\n'))
 
         # Don't capture exceptions here.  The Worker class handles
         # them appropriately.
@@ -1869,3 +1870,46 @@ class WSGIWorker(Worker):
             sock_file.close()
 
 # Monolithic build...end of module: rocket/methods/wsgi.py
+def demo_app(environ, start_response):
+    global static_folder
+    import os
+    types = {'htm': 'text/html','html': 'text/html','gif': 'image/gif',
+             'jpg': 'image/jpeg','png': 'image/png','pdf': 'applications/pdf'}
+    if static_folder:
+        if not static_folder.startswith('/'):
+            static_folder = os.path.join(os.getcwd(),static_folder)
+        path = os.path.join(static_folder, environ['PATH_INFO'][1:] or 'index.html')
+        type = types.get(path.split('.')[-1],'text')
+        if os.path.exists(path):
+            try:
+                data = open(path,'rb').read()
+                start_response('200 OK', [('Content-Type', type)])
+            except IOError:
+                start_response('404 NOT FOUND', [])
+                data = '404 NOT FOUND'
+        else:
+            start_response('500 INTERNAL SERVER ERROR', [])
+            data = '500 INTERNAL SERVER ERROR'
+    else:
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        data = '<html><body><h1>Hello from Rocket Web Server</h1></body></html>'
+    return [data]
+
+def demo():
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("-i", "--ip", dest="ip",default="127.0.0.1",
+                      help="ip address of the network interface")
+    parser.add_option("-p", "--port", dest="port",default="8000",
+                      help="post where to run web server")
+    parser.add_option("-s", "--static", dest="static",default=None,
+                      help="folder containing static files")
+    (options, args) = parser.parse_args()
+    global static_folder
+    static_folder = options.static
+    print 'Rocket running on %s:%s' % (options.ip, options.port)
+    r=Rocket((options.ip,int(options.port)),'wsgi', {'wsgi_app':demo_app})
+    r.start()
+
+if __name__=='__main__':
+    demo()

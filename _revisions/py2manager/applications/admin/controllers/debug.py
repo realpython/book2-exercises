@@ -54,9 +54,13 @@ def interact():
     filename = web_debugger.filename
     lineno = web_debugger.lineno
     if filename:
+        # prevent IOError 2 on some circuntances (EAFP instead of os.access)
+        try:
+            lines = open(filename).readlines()
+        except:
+            lines = ""
         lines = dict([(i + 1, l) for (i, l) in enumerate(
-            [l.strip("\n").strip("\r") for l
-             in open(filename).readlines()])])
+            [l.strip("\n").strip("\r") for l in lines])])
         filename = os.path.basename(filename)
     else:
         lines = {}
@@ -68,8 +72,7 @@ def interact():
         f_globals = {}
         for name, value in env['globals'].items():
             if name not in gluon.html.__all__ and \
-                name not in gluon.validators.__all__ and \
-                    name not in gluon.dal.__all__:
+                name not in gluon.validators.__all__:
                 f_globals[name] = pydoc.text.repr(value)
     else:
         f_locals = {}
@@ -217,7 +220,7 @@ def list_breakpoints():
     "Return a list of linenumbers for current breakpoints"
 
     breakpoints = []
-    ok = None
+    ok = False
     try:
         filename = os.path.join(request.env['applications_parent'],
                                 'applications', request.vars.filename)
@@ -232,5 +235,4 @@ def list_breakpoints():
         ok = True
     except Exception, e:
         session.flash = str(e)
-        ok = False
     return response.json({'ok': ok, 'breakpoints': breakpoints})
