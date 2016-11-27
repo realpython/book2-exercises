@@ -93,7 +93,7 @@ def video(url):
 
 
 def googledoc_viewer(url):
-    return '<iframe src="http://docs.google.com/viewer?url=%s&embedded=true" style="max-width:100%%"></iframe>' % urllib.quote(url)
+    return '<iframe src="https://docs.google.com/viewer?url=%s&embedded=true" style="max-width:100%%"></iframe>' % urllib.quote(url)
 
 
 def web2py_component(url):
@@ -159,6 +159,8 @@ def extension(url):
 
 def expand_one(url, cdict):
     # try ombed but first check in cache
+    if '@' in url and not '://'in url:
+        return '<a href="mailto:%s">%s</a>' % (url, url)
     if cdict and url in cdict:
         r = cdict[url]
     else:
