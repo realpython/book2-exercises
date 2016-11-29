@@ -1,11 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+| This file is part of the web2py Web Framework
+| Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
+| License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
 
+Support for smart import syntax for web2py applications
+-------------------------------------------------------
+"""
 import __builtin__
 import os
 import sys
 import threading
-import traceback
 from gluon import current
 
 NATIVE_IMPORTER = __builtin__.__import__
@@ -35,11 +41,14 @@ class CustomImportException(ImportError):
 
 def custom_importer(name, globals=None, locals=None, fromlist=None, level=-1):
     """
-    The web2py custom importer. Like the standard Python importer but it
-    tries to transform import statements as something like
+    web2py's custom importer. It behaves like the standard Python importer but
+    it tries to transform import statements as something like
     "import applications.app_name.modules.x".
-    If the import failed, fall back on naive_importer
+    If the import fails, it falls back on naive_importer
     """
+
+    if isinstance(name, unicode):
+        name = name.encode('utf8')
 
     globals = globals or {}
     locals = locals or {}
@@ -75,7 +84,7 @@ def custom_importer(name, globals=None, locals=None, fromlist=None, level=-1):
                         new_mod = base_importer(
                             modules_prefix, globals, locals, [itemname], level)
                         try:
-                            result = result or new_mod.__dict__[itemname]
+                            result = result or sys.modules[modules_prefix+'.'+itemname]
                         except KeyError, e:
                             raise ImportError, 'Cannot import module %s' % str(e)
                         modules_prefix += "." + itemname
@@ -91,7 +100,7 @@ def custom_importer(name, globals=None, locals=None, fromlist=None, level=-1):
             except ImportError, e3:
                 raise ImportError, e1, import_tb  # there an import error in the module
         except Exception, e2:
-            raise e2  # there is an error in the module
+            raise  # there is an error in the module
         finally:
             if import_tb:
                 import_tb = None
@@ -102,7 +111,7 @@ def custom_importer(name, globals=None, locals=None, fromlist=None, level=-1):
 class TrackImporter(object):
     """
     An importer tracking the date of the module files and reloading them when
-    they have changed.
+    they are changed.
     """
 
     THREAD_LOCAL = threading.local()
@@ -143,7 +152,7 @@ class TrackImporter(object):
     def _reload_check(self, name, globals, locals, level):
         """
         Update the date associated to the module and reload the module if
-        the file has changed.
+        the file changed.
         """
         module = sys.modules.get(name)
         file = self._get_module_file(module)
