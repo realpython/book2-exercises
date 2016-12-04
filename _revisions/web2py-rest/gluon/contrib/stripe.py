@@ -4,7 +4,24 @@ from hashlib import sha1
 
 class Stripe:
     """
-    Usage:
+    Use in WEB2PY (guaranteed PCI compliant)
+
+def pay():
+    from gluon.contrib.stripe import StripeForm
+    form = StripeForm(
+        pk=STRIPE_PUBLISHABLE_KEY,
+        sk=STRIPE_SECRET_KEY,
+        amount=150, # $1.5 (amount is in cents)
+        description="Nothing").process()
+    if form.accepted:
+        payment_id = form.response['id']
+        redirect(URL('thank_you'))
+    elif form.errors:
+        redirect(URL('pay_error'))
+    return dict(form=form)
+
+Low level API:
+
     key='<api key>'
     d = Stripe(key).charge(
                amount=100, # 1 dollar!!!!
@@ -22,22 +39,6 @@ class Stripe:
     {u'fee': 0, u'description': u'test charge', u'created': 1321242072, u'refunded': False, u'livemode': False, u'object': u'charge', u'currency': u'usd', u'amount': 100, u'paid': True, u'id': u'ch_sdjasgfga83asf', u'card': {u'exp_month': 5, u'country': u'US', u'object': u'card', u'last4': u'4242', u'exp_year': 2012, u'type': u'Visa'}}
     if paid is True than transaction was processed
 
-    Use in WEB2PY (guaranteed PCI compliant)
-
-def pay():
-    from gluon.contrib.stripe import StripeForm
-    form = StripeForm(
-        pk=STRIPE_PUBLISHABLE_KEY,
-        sk=STRIPE_SECRET_KEY,
-        amount=150, # $1.5 (amount is in cents)
-        description="Nothing").process()
-    if form.accepted:
-        payment_id = form.response['id']
-        redirect(URL('thank_you'))
-    elif form.errors:
-        redirect(URL('pay_error'))
-    return dict(form=form)
-    
     """
 
     URL_CHARGE = 'https://%s:@api.stripe.com/v1/charges'
@@ -114,7 +115,7 @@ class StripeForm(object):
 
     def process(self):
         from gluon import current
-        request = current.request        
+        request = current.request
         if request.post_vars:
             if self.signature == request.post_vars.signature:
                 self.response = Stripe(self.sk).charge(
@@ -127,7 +128,7 @@ class StripeForm(object):
                     return self
             self.errors = True
         return self
-        
+
     def xml(self):
         from gluon.template import render
         if self.accepted:
@@ -135,8 +136,8 @@ class StripeForm(object):
         elif self.errors:
             return "There was an processing error"
         else:
-            context = dict(amount=self.amount, 
-                           signature=self.signature, pk=self.pk, 
+            context = dict(amount=self.amount,
+                           signature=self.signature, pk=self.pk,
                            currency_symbol=self.currency_symbol,
                            security_notice=self.security_notice,
                            disclosure_notice=self.disclosure_notice)
@@ -145,14 +146,14 @@ class StripeForm(object):
 
 TEMPLATE = """
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script> 
+<script>
 jQuery(function(){
     // This identifies your website in the createToken call below
     Stripe.setPublishableKey('{{=pk}}');
- 
+
     var stripeResponseHandler = function(status, response) {
       var jQueryform = jQuery('#payment-form');
- 
+
       if (response.error) {
         // Show the errors on the form
         jQuery('.payment-errors').text(response.error.message).show();
@@ -167,17 +168,17 @@ jQuery(function(){
         jQueryform.get(0).submit();
       }
     };
- 
+
     jQuery(function(jQuery) {
       jQuery('#payment-form').submit(function(e) {
 
         var jQueryform = jQuery(this);
- 
+
         // Disable the submit button to prevent repeated clicks
         jQueryform.find('button').prop('disabled', true);
- 
+
         Stripe.createToken(jQueryform, stripeResponseHandler);
- 
+
         // Prevent the form from submitting with the default action
         return false;
       });
@@ -188,37 +189,36 @@ jQuery(function(){
 <h3>Payment Amount: {{=currency_symbol}} {{="%.2f" % (0.01*amount)}}</h3>
 <form action="" method="POST" id="payment-form" class="form-horizontal">
 
-  <div class="form-row control-group">
-    <label class="control-label">Card Number</label>	
-    <div class="controls">
+  <div class="form-row form-group">
+    <label class="col-sm-2 control-label">Card Number</label>
+    <div class="controls col-sm-10">
       <input type="text" size="20" data-stripe="number"
-	     placeholder="4242424242424242"/>
+             placeholder="4242424242424242" class="form-control"/>
     </div>
   </div>
-  
-  <div class="form-row control-group">
-    <label class="control-label">CVC</label>	
-    <div class="controls">
+
+  <div class="form-row form-group">
+    <label class="col-sm-2 control-label">CVC</label>
+    <div class="controls col-sm-10">
       <input type="text" size="4" style="width:80px" data-stripe="cvc"
-	     placeholder="XXX"/>
+             placeholder="XXX" class="form-control"/>
       <a href="http://en.wikipedia.org/wiki/Card_Verification_Code" target="_blank">What is this?</a>
     </div>
   </div>
-  
-  <div class="form-row control-group">
-    <label class="control-label">Expiration</label>	
-    <div class="controls">
-      <input type="text" size="2" style="width:40px" data-stripe="exp-month"
-	     placeholder="MM"/>
+
+  <div class="form-row form-group">
+    <label class="col-sm-2 control-label">Expiration</label>
+    <div class="controls col-sm-10">
+      <input type="text" size="2" style="width:40px; display:inline-block" 
+             data-stripe="exp-month" placeholder="MM" class="form-control"/>
       /
-      <input type="text" size="4" style="width:80px" data-stripe="exp-year"
-	     placeholder="YYYY"/>
+      <input type="text" size="4" style="width:80px; display:inline-block" 
+             data-stripe="exp-year" placeholder="YYYY" class="form-control"/>
     </div>
   </div>
-  
 
-  <div class="control-group">
-    <div class="controls">
+  <div class="form-row form-group">
+    <div class="controls col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Submit Payment</button>
       <div class="payment-errors error hidden"></div>
     </div>

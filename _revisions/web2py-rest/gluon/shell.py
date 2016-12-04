@@ -2,11 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """
-This file is part of the web2py Web Framework
-Developed by Massimo Di Pierro <mdipierro@cs.depaul.edu>,
-limodou <limodou@gmail.com> and srackham <srackham@gmail.com>.
-License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+| This file is part of the web2py Web Framework
+| Developed by Massimo Di Pierro <mdipierro@cs.depaul.edu>,
+| limodou <limodou@gmail.com> and srackham <srackham@gmail.com>.
+| License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
 
+Web2py environment in the shell
+--------------------------------
 """
 
 import os
@@ -26,11 +28,12 @@ from gluon.restricted import RestrictedError
 from gluon.globals import Request, Response, Session
 from gluon.storage import Storage, List
 from gluon.admin import w2p_unpack
-from gluon.dal import BaseAdapter
+from pydal.base import BaseAdapter
 
 logger = logging.getLogger("web2py")
 
-def enable_autocomplete_and_history(adir,env):
+
+def enable_autocomplete_and_history(adir, env):
     try:
         import rlcompleter
         import atexit
@@ -38,10 +41,8 @@ def enable_autocomplete_and_history(adir,env):
     except ImportError:
         pass
     else:
-        readline.parse_and_bind("bind ^I rl_complete"
-                                if sys.platform == 'darwin'
-                                else "tab: complete")
-        history_file = os.path.join(adir,'.pythonhistory')
+        readline.parse_and_bind("tab: complete")
+        history_file = os.path.join(adir, '.pythonhistory')
         try:
             readline.read_history_file(history_file)
         except IOError:
@@ -56,17 +57,13 @@ def exec_environment(
     response=None,
     session=None,
 ):
-    """
-    .. function:: gluon.shell.exec_environment([pyfile=''[, request=Request()
-        [, response=Response[, session=Session()]]]])
+    """Environment builder and module loader.
 
-        Environment builder and module loader.
+    Builds a web2py environment and optionally executes a Python file into
+    the environment.
 
-
-        Builds a web2py environment and optionally executes a Python
-        file into the environment.
-        A Storage dictionary containing the resulting environment is returned.
-        The working directory must be web2py root -- this is the web2py default.
+    A Storage dictionary containing the resulting environment is returned.
+    The working directory must be web2py root -- this is the web2py default.
 
     """
 
@@ -103,17 +100,15 @@ def env(
     extra_request={},
 ):
     """
-    Return web2py execution environment for application (a), controller (c),
+    Returns web2py execution environment for application (a), controller (c),
     function (f).
     If import_models is True the exec all application models into the
     environment.
 
-    extra_request allows you to pass along any extra
-    variables to the request object before your models
-    get executed. This was mainly done to support
-    web2py_utils.test_runner, however you can use it
-    with any wrapper scripts that need access to the
-    web2py environment.
+    extra_request allows you to pass along any extra variables to the request
+    object before your models get executed. This was mainly done to support
+    web2py_utils.test_runner, however you can use it with any wrapper scripts
+    that need access to the web2py environment.
     """
 
     request = Request({})
@@ -133,10 +128,12 @@ def env(
                                     request.function)
     if global_settings.cmd_options:
         ip = global_settings.cmd_options.ip
-        port = global_settings.cmd_options.port 
+        port = global_settings.cmd_options.port
+        request.is_shell = global_settings.cmd_options.shell is not None
+        request.is_scheduler = global_settings.cmd_options.scheduler is not None
     else:
         ip, port = '127.0.0.1', '8000'
-    request.env.http_host = '%s:%s' % (ip,port)
+    request.env.http_host = '%s:%s' % (ip, port)
     request.env.remote_addr = '127.0.0.1'
     request.env.web2py_runtime_gae = global_settings.web2py_runtime_gae
 
@@ -147,8 +144,8 @@ def env(
     if request.args:
         path_info = '%s/%s' % (path_info, '/'.join(request.args))
     if request.vars:
-        vars = ['%s=%s' % (k,v) if v else '%s' % k
-                for (k,v) in request.vars.iteritems()]
+        vars = ['%s=%s' % (k, v) if v else '%s' % k
+                for (k, v) in request.vars.iteritems()]
         path_info = '%s?%s' % (path_info, '&'.join(vars))
     request.env.path_info = path_info
 
@@ -197,8 +194,8 @@ def run(
     Start interactive shell or run Python script (startfile) in web2py
     controller environment. appname is formatted like:
 
-    a      web2py application name
-    a/c    exec the controller c into the application environment
+    - a : web2py application name
+    - a/c : exec the controller c into the application environment
     """
 
     (a, c, f, args, vars) = parse_path_info(appname, av=True)
@@ -317,14 +314,14 @@ def run(
                 except:
                     logger.warning(
                         'import IPython error; use default python shell')
-        enable_autocomplete_and_history(adir,_env)
+        enable_autocomplete_and_history(adir, _env)
         code.interact(local=_env)
 
 
 def parse_path_info(path_info, av=False):
     """
-    Parse path info formatted like a/c/f where c and f are optional
-    and a leading / accepted.
+    Parses path info formatted like a/c/f where c and f are optional
+    and a leading `/` is accepted.
     Return tuple (a, c, f). If invalid path_info a is set to None.
     If c or f are omitted they are set to None.
     If av=True, parse args and vars
@@ -358,9 +355,9 @@ def test(testpath, import_models=True, verbose=False):
     """
     Run doctests in web2py environment. testpath is formatted like:
 
-    a      tests all controllers in application a
-    a/c    tests controller c in application a
-    a/c/f  test function f in controller c, application a
+    - a: tests all controllers in application a
+    - a/c: tests controller c in application a
+    - a/c/f  test function f in controller c, application a
 
     Where a, c and f are application, controller and function names
     respectively. If the testpath is a file name the file is tested.

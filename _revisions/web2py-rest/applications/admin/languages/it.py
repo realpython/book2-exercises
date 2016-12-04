@@ -1,4 +1,4 @@
-# coding: utf8
+# -*- coding: utf-8 -*-
 {
 '!langcode!': 'it',
 '!langname!': 'Italiano',
@@ -113,7 +113,9 @@
 'docs': 'docs',
 'done!': 'fatto!',
 'download layouts': 'download layouts',
+'Download layouts from repository': 'Download layouts from repository',
 'download plugins': 'download plugins',
+'Download plugins from repository': 'Download plugins from repository',
 'EDIT': 'MODIFICA',
 'Edit': 'modifica',
 'Edit application': 'Modifica applicazione',
@@ -303,6 +305,7 @@
 'to  previous version.': 'torna a versione precedente',
 'To create a plugin, name a file/folder plugin_[name]': 'Per creare un plugin, chiamare un file o cartella plugin_[nome]',
 'toggle breakpoint': 'toggle breakpoint',
+'Toggle comment': 'Toggle comment',
 'Toggle Fullscreen': 'Toggle Fullscreen',
 'Traceback': 'Traceback',
 'translation strings for the application': "stringhe di traduzioni per l'applicazione",
@@ -322,7 +325,7 @@
 'unable to uninstall "%s"': 'impossibile disinstallare "%s"',
 'unable to upgrade because "%s"': 'impossibile aggiornare perché "%s"',
 'uncheck all': 'smarca tutti',
-'Uninstall': 'disinstalla',
+'Uninstall': 'Disinstalla',
 'update': 'aggiorna',
 'update all languages': 'aggiorna tutti i linguaggi',
 'Update:': 'Aggiorna:',
@@ -345,7 +348,7 @@
 'Versioning': 'Versioning',
 'View': 'Vista',
 'view': 'vista',
-'Views': 'viste',
+'Views': 'Viste',
 'views': 'viste',
 'Web Framework': 'Web Framework',
 'web2py is up to date': 'web2py è aggiornato',

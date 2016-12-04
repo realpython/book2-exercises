@@ -77,10 +77,10 @@ function doClickSave() {
       t.attr('disabled', '');
 	  var flash = xhr.getResponseHeader('web2py-component-flash');
       if(flash) {
-        $('.flash').html(decodeURIComponent(flash))
+        $('.w2p_flash').html(decodeURIComponent(flash))
           .append('<a href="#" class="close">&times;</a>')
           .slideDown();
-      } else $('.flash').hide();
+      } else $('.w2p_flash').hide();
       try {
         if(json.error) {
           window.location.href = json.redirect;
@@ -158,10 +158,10 @@ function doToggleBreakpoint(filename, url, sel) {
       // show flash message (if any)
       var flash = xhr.getResponseHeader('web2py-component-flash');
       if(flash) {
-        $('.flash').html(decodeURIComponent(flash))
+        $('.w2p_flash').html(decodeURIComponent(flash))
           .append('<a href="#" class="close">&times;</a>')
           .slideDown();
-      } else $('.flash').hide();
+      } else $('.w2p_flash').hide();
       try {
         if(json.error) {
           window.location.href = json.redirect;
@@ -248,34 +248,26 @@ function keepalive(url) {
   });
 }
 
-function load_file(url) {
-  $.ajax({
-    type: "GET",
-    contentType: 'application/json',
-    cache: false,
-    dataType: 'json',
-    url: url,
-    timeout: 1000,
-    success: function (json) {
+function load_file(url, lineno) {
+  $.getJSON(url, function (json) {
       if(typeof (json['plain_html']) !== undefined) {
         if($('#' + json['id']).length === 0 || json['force'] === true) {
           // Create a tab and put the code in it
-          var tab_header = '<li><a title="'+ json['filename'] +'" href="#' + json['id'] + '" data-toggle="tab"><button type="button" class="close">&times;</button>' + json['realfilename'] + '</a></li>';
+          var tab_header = '<li><a title="'+ json['filename'] +'" data-path="' + json['filename'] + '" href="#' + json['id'] + '" data-toggle="tab"><button type="button" class="close">&times;</button>' + json['realfilename'] + '</a></li>';
           var tab_body = '<div id="' + json['id'] + '" class="tab-pane fade in " >' + json['plain_html'] + '</div>';
           if(json['force'] === false) {
-            $('#filesTab').append($(tab_header));
-            $('#myTabContent').append($(tab_body));
+            $('#myTabContent').append($(tab_body)); // First load the body
+            $('#filesTab').append($(tab_header));   // Then load the header which trigger the shown event
           } else {
             $('#' + json['id']).html($(tab_body));
           }
         }
-        $("a[href='#" + json['id'] + "']").click();
+        $("a[href='#" + json['id'] + "']").trigger('click', lineno);
       }
-    },
-    error: function (x) {
+  }).fail(function() {
       on_error();
-    }
   });
+  return false;
 }
 
 function set_font(editor, incr) {
