@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+      <div class="row">
+        <div class="span6 columns">
+        </div>
+      </div>
+      <h1>Welcome to Django-Stripe.</h1>
+      <br/>
+      <p>Use this project/app to integrate Django and Stripe with a simple user registration.</p><br/><br/>
+      <a class="btn btn-large btn-success" href="{% url 'register' %}">Register today to get started!</a><br/><br/>
+      <P><strong>Please Note:</strong> This app is running in test mode, use the following credit card information to make a purchase:
+        <ul>
+          <li>Credit card number: 4242424242424242</li>
+          <li>CVC: any 3-digit number</li>
+          <li>Expiration date: any date in the future (MM-YYYY)</li>
+        </ul>
+{% endblock %}
