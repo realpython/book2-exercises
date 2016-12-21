@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """
-::
+| From http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/496942
+| Submitter: Josh Goldfoot (other recipes)
+| Last Updated: 2006/08/05
+| Version: 1.0
 
-    # from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/496942
-    # Title: Cross-site scripting (XSS) defense
-    # Submitter: Josh Goldfoot (other recipes)
-    # Last Updated: 2006/08/05
-    # Version no: 1.0
-
+Cross-site scripting (XSS) defense
+-----------------------------------
 """
 
-
-from htmllib import HTMLParser
+from HTMLParser import HTMLParser
 from cgi import escape
 from urlparse import urlparse
 from formatter import AbstractFormatter
@@ -50,11 +47,10 @@ class XssCleaner(HTMLParser):
         ],
         allowed_attributes={'a': ['href', 'title'], 'img': ['src', 'alt'
                                                             ], 'blockquote': ['type']},
-        fmt=AbstractFormatter,
         strip_disallowed=False
     ):
 
-        HTMLParser.__init__(self, fmt)
+        HTMLParser.__init__(self)
         self.result = ''
         self.open_tags = []
         self.permitted_tags = [i for i in permitted_tags if i[-1] != '/']
@@ -70,22 +66,23 @@ class XssCleaner(HTMLParser):
 
         #to strip or escape disallowed tags?
         self.strip_disallowed = strip_disallowed
-        self.in_disallowed = False
+        # there might be data after final closing tag, that is to be ignored
+        self.in_disallowed = [False]
 
     def handle_data(self, data):
-        if data and not self.in_disallowed:
+        if data and not self.in_disallowed[-1]:
             self.result += xssescape(data)
 
     def handle_charref(self, ref):
-        if self.in_disallowed:
+        if self.in_disallowed[-1]:
             return
-        elif len(ref) < 7 and ref.isdigit():
+        elif len(ref) < 7 and (ref.isdigit() or ref == 'x27'): # x27 is a special case for apostrophe
             self.result += '&#%s;' % ref
         else:
             self.result += xssescape('&#%s' % ref)
 
     def handle_entityref(self, ref):
-        if self.in_disallowed:
+        if self.in_disallowed[-1]:
             return
         elif ref in entitydefs:
             self.result += '&%s;' % ref
@@ -93,7 +90,7 @@ class XssCleaner(HTMLParser):
             self.result += xssescape('&%s' % ref)
 
     def handle_comment(self, comment):
-        if self.in_disallowed:
+        if self.in_disallowed[-1]:
             return
         elif comment:
             self.result += xssescape('<!--%s-->' % comment)
@@ -101,15 +98,14 @@ class XssCleaner(HTMLParser):
     def handle_starttag(
         self,
         tag,
-        method,
-        attrs,
+        attrs
     ):
         if tag not in self.permitted_tags:
-            if self.strip_disallowed:
-                self.in_disallowed = True
-            else:
+            self.in_disallowed.append(True)
+            if (not self.strip_disallowed):
                 self.result += xssescape('<%s>' % tag)
         else:
+            self.in_disallowed.append(False)
             bt = '<' + tag
             if tag in self.allowed_attributes:
                 attrs = dict(attrs)
@@ -124,40 +120,37 @@ class XssCleaner(HTMLParser):
                     else:
                         bt += ' %s=%s' % (xssescape(attribute),
                                           quoteattr(attrs[attribute]))
+            # deal with <a> without href and <img> without src
             if bt == '<a' or bt == '<img':
                 return
             if tag in self.requires_no_close:
                 bt += ' /'
             bt += '>'
             self.result += bt
-            self.open_tags.insert(0, tag)
+            if tag not in self.requires_no_close: self.open_tags.insert(0, tag)
 
-    def handle_endtag(self, tag, attrs):
+    def handle_endtag(self, tag):
         bracketed = '</%s>' % tag
+        self.in_disallowed.pop()
         if tag not in self.permitted_tags:
-            if self.strip_disallowed:
-                self.in_disallowed = False
-            else:
+            if (not self.strip_disallowed):
                 self.result += xssescape(bracketed)
         elif tag in self.open_tags:
             self.result += bracketed
             self.open_tags.remove(tag)
-
-    def unknown_starttag(self, tag, attributes):
-        self.handle_starttag(tag, None, attributes)
-
-    def unknown_endtag(self, tag):
-        self.handle_endtag(tag, None)
 
     def url_is_acceptable(self, url):
         """
         Accepts relative, absolute, and mailto urls
         """
 
-        parsed = urlparse(url)
-        return (parsed[0] in self.allowed_schemes and '.' in parsed[1]) \
-            or (parsed[0] in self.allowed_schemes and '@' in parsed[2]) \
-            or (parsed[0] == '' and parsed[2].startswith('/'))
+        if url.startswith('#'):
+            return True
+        else:
+            parsed = urlparse(url)
+            return ((parsed[0] in self.allowed_schemes and '.' in parsed[1]) or
+                    (parsed[0] in self.allowed_schemes and '@' in parsed[2]) or
+                    (parsed[0] == '' and parsed[2].startswith('/')))
 
     def strip(self, rawstring, escape=True):
         """

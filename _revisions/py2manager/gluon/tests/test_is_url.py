@@ -4,42 +4,14 @@
 Unit tests for IS_URL()
 """
 
-import sys
-import os
 import unittest
+from fix_path import fix_sys_path
+
+fix_sys_path(__file__)
 
 
-def fix_sys_path():
-    """
-    logic to have always the correct sys.path
-     '', web2py/gluon, web2py/site-packages, web2py/ ...
-    """
-
-    def add_path_first(path):
-        sys.path = [path] + [p for p in sys.path if (
-            not p == path and not p == (path + '/'))]
-
-    path = os.path.dirname(os.path.abspath(__file__))
-
-    if not os.path.isfile(os.path.join(path,'web2py.py')):
-        i = 0
-        while i<10:
-            i += 1
-            if os.path.exists(os.path.join(path,'web2py.py')):
-                break
-            path = os.path.abspath(os.path.join(path, '..'))
-
-    paths = [path,
-             os.path.abspath(os.path.join(path, 'site-packages')),
-             os.path.abspath(os.path.join(path, 'gluon')),
-             '']
-    [add_path_first(path) for path in paths]
-
-fix_sys_path()
-
-
-from validators import IS_URL, IS_HTTP_URL, IS_GENERIC_URL, \
-    unicode_to_ascii_authority
+from validators import IS_URL, IS_HTTP_URL, IS_GENERIC_URL
+from validators import unicode_to_ascii_authority
 
 
 class TestIsUrl(unittest.TestCase):
@@ -55,10 +27,10 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('google.ca:80'), ('http://google.ca:80',
                          None))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
-        self.assertEqual(x('google..ca'), ('google..ca', 'enter a valid URL'))
+                         'Enter a valid URL'))
+        self.assertEqual(x('google..ca'), ('google..ca', 'Enter a valid URL'))
         self.assertEqual(
-            x('google.ca..'), ('google.ca..', 'enter a valid URL'))
+            x('google.ca..'), ('google.ca..', 'Enter a valid URL'))
 
         # explicit use of 'http' mode
 
@@ -69,7 +41,7 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('google.ca:80'), ('http://google.ca:80',
                          None))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # prepends 'https' instead of 'http'
 
@@ -80,7 +52,7 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('google.ca:80'), ('https://google.ca:80',
                          None))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # prepending disabled
 
@@ -90,7 +62,7 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('google.ca'), ('google.ca', None))
         self.assertEqual(x('google.ca:80'), ('google.ca:80', None))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # custom allowed_schemes
 
@@ -98,12 +70,12 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('http://google.ca'), ('http://google.ca',
                          None))
         self.assertEqual(x('https://google.ca'), ('https://google.ca',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
         self.assertEqual(x('google.ca'), ('http://google.ca', None))
         self.assertEqual(x('google.ca:80'), ('http://google.ca:80',
                          None))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # custom allowed_schemes, excluding None
 
@@ -111,32 +83,32 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('http://google.ca'), ('http://google.ca',
                          None))
         self.assertEqual(x('https://google.ca'), ('https://google.ca',
-                         'enter a valid URL'))
-        self.assertEqual(x('google.ca'), ('google.ca', 'enter a valid URL'))
+                         'Enter a valid URL'))
+        self.assertEqual(x('google.ca'), ('google.ca', 'Enter a valid URL'))
         self.assertEqual(x('google.ca:80'), ('google.ca:80',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # custom allowed_schemes and prepend_scheme
 
         x = IS_URL(allowed_schemes=[None, 'https'],
                    prepend_scheme='https')
         self.assertEqual(x('http://google.ca'), ('http://google.ca',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
         self.assertEqual(x('https://google.ca'), ('https://google.ca',
                          None))
         self.assertEqual(x('google.ca'), ('https://google.ca', None))
         self.assertEqual(x('google.ca:80'), ('https://google.ca:80',
                          None))
         self.assertEqual(x('unreal.blargg'), ('unreal.blargg',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # Now any URL requiring prepending will fail, but prepending is still
         # enabled!
 
         x = IS_URL(allowed_schemes=['http'])
-        self.assertEqual(x('google.ca'), ('google.ca', 'enter a valid URL'))
+        self.assertEqual(x('google.ca'), ('google.ca', 'Enter a valid URL'))
 
     def testModeGeneric(self):
 
@@ -147,7 +119,7 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('google.ca'), ('google.ca', None))
         self.assertEqual(x('google.ca:80'), ('http://google.ca:80', None))
         self.assertEqual(x('blargg://unreal'), ('blargg://unreal',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # 'generic' mode with custom allowed_schemes that still includes
         # 'http' (the default for prepend_scheme)
@@ -156,10 +128,10 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('http://google.ca'), ('http://google.ca',
                          None))
         self.assertEqual(x('ftp://google.ca'), ('ftp://google.ca',
-                         'enter a valid URL'))
-        self.assertEqual(x('google.ca'), ('google.ca', 'enter a valid URL'))
+                         'Enter a valid URL'))
+        self.assertEqual(x('google.ca'), ('google.ca', 'Enter a valid URL'))
         self.assertEqual(x('google.ca:80'), ('google.ca:80',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
         self.assertEqual(x('blargg://unreal'), ('blargg://unreal',
                          None))
 
@@ -174,27 +146,27 @@ class TestIsUrl(unittest.TestCase):
         self.assertEqual(x('google.ca:80'), ('ftp://google.ca:80',
                          None))
         self.assertEqual(x('blargg://unreal'), ('blargg://unreal',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # 'generic' mode with overriden allowed_schemes and prepend_scheme
 
         x = IS_URL(mode='generic', allowed_schemes=[None, 'ftp', 'ftps'
                                                     ], prepend_scheme='ftp')
         self.assertEqual(x('http://google.ca'), ('http://google.ca',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
         self.assertEqual(x('google.ca'), ('google.ca', None))
         self.assertEqual(x('ftp://google.ca'), ('ftp://google.ca',
                          None))
         self.assertEqual(x('google.ca:80'), ('ftp://google.ca:80',
                          None))
         self.assertEqual(x('blargg://unreal'), ('blargg://unreal',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
         # Now any URL requiring prepending will fail, but prepending is still
         # enabled!
 
         x = IS_URL(mode='generic', allowed_schemes=['http'])
-        self.assertEqual(x('google.ca'), ('google.ca', 'enter a valid URL'))
+        self.assertEqual(x('google.ca'), ('google.ca', 'Enter a valid URL'))
 
     def testExceptionalUse(self):
 
@@ -305,14 +277,14 @@ class TestIsUrl(unittest.TestCase):
         # prepend_scheme has the invalid value 'http', we don't care!
 
         x = IS_URL(allowed_schemes=['https'], prepend_scheme='https')
-        self.assertEqual(x('google.ca'), ('google.ca', 'enter a valid URL'))
+        self.assertEqual(x('google.ca'), ('google.ca', 'Enter a valid URL'))
 
         # Not inluding None in the allowed_schemes essentially disabled prepending, so even though
         # prepend_scheme has the invalid value 'http', we don't care!
 
         x = IS_URL(mode='generic', allowed_schemes=['https'],
                    prepend_scheme='https')
-        self.assertEqual(x('google.ca'), ('google.ca', 'enter a valid URL'))
+        self.assertEqual(x('google.ca'), ('google.ca', 'Enter a valid URL'))
 
 
 # ##############################################################################
@@ -434,7 +406,7 @@ class TestIsGenericUrl(unittest.TestCase):
 
         y = IS_GENERIC_URL(allowed_schemes=['http', 'blargg'],
                            prepend_scheme='http')
-        self.assertEqual(y('google.ca'), ('google.ca', 'enter a valid URL'))
+        self.assertEqual(y('google.ca'), ('google.ca', 'Enter a valid URL'))
 
 
 # ##############################################################################
@@ -526,7 +498,7 @@ class TestIsHttpUrl(unittest.TestCase):
             'http://1234567890.com.',
             'http://1234567890.com./path',
             'http://google.com./path',
-            'http://domain.xn--0zwm56d',
+            'http://domain.xn--d1acj3b',
             'http://127.123.0.256',
             'http://127.123.0.256/document/drawer',
             '127.123.0.256/document/',
@@ -605,9 +577,9 @@ class TestIsHttpUrl(unittest.TestCase):
         # Does not prepend if None type is not specified in allowed_scheme, because a scheme is required
 
         a = IS_HTTP_URL(allowed_schemes=['http'])
-        self.assertEqual(a('google.ca'), ('google.ca', 'enter a valid URL'))
+        self.assertEqual(a('google.ca'), ('google.ca', 'Enter a valid URL'))
         self.assertEqual(a('google.ca:80'), ('google.ca:80',
-                         'enter a valid URL'))
+                         'Enter a valid URL'))
 
 
 class TestUnicode(unittest.TestCase):
@@ -667,35 +639,61 @@ class TestUnicode(unittest.TestCase):
 
     def testInvalidUrls(self):
         self.assertEquals(
-            self.x(u'://ABC.com'), (u'://ABC.com', 'enter a valid URL'))
+            self.x(u'://ABC.com'), (u'://ABC.com', 'Enter a valid URL'))
         self.assertEquals(self.x(u'http://\u4e2d\u4fd4.dne'), (
-            u'http://\u4e2d\u4fd4.dne', 'enter a valid URL'))
+            u'http://\u4e2d\u4fd4.dne', 'Enter a valid URL'))
         self.assertEquals(self.x(u'https://google.dne'), (
-            u'https://google.dne', 'enter a valid URL'))
+            u'https://google.dne', 'Enter a valid URL'))
         self.assertEquals(self.x(u'https://google..ca'), (
-            u'https://google..ca', 'enter a valid URL'))
+            u'https://google..ca', 'Enter a valid URL'))
         self.assertEquals(
-            self.x(u'google..ca'), (u'google..ca', 'enter a valid URL'))
+            self.x(u'google..ca'), (u'google..ca', 'Enter a valid URL'))
         self.assertEquals(self.x(u'http://' + u'\u4e2d' * 1000 + u'.com'), (
-            u'http://' + u'\u4e2d' * 1000 + u'.com', 'enter a valid URL'))
+            u'http://' + u'\u4e2d' * 1000 + u'.com', 'Enter a valid URL'))
 
         self.assertEquals(self.x(u'http://google.com#fragment_\u4e86'), (
-            u'http://google.com#fragment_\u4e86', 'enter a valid URL'))
+            u'http://google.com#fragment_\u4e86', 'Enter a valid URL'))
         self.assertEquals(self.x(u'http\u4e86://google.com'), (
-            u'http\u4e86://google.com', 'enter a valid URL'))
+            u'http\u4e86://google.com', 'Enter a valid URL'))
         self.assertEquals(self.x(u'http\u4e86://google.com#fragment_\u4e86'), (
-            u'http\u4e86://google.com#fragment_\u4e86', 'enter a valid URL'))
+            u'http\u4e86://google.com#fragment_\u4e86', 'Enter a valid URL'))
 
         self.assertEquals(self.y(u'http://\u4e2d\u4fd4.com/\u4e86'), (
-            u'http://\u4e2d\u4fd4.com/\u4e86', 'enter a valid URL'))
-        #self.assertEquals(self.y(u'google.ca'), (u'google.ca', 'enter a valid URL'))
+            u'http://\u4e2d\u4fd4.com/\u4e86', 'Enter a valid URL'))
+        #self.assertEquals(self.y(u'google.ca'), (u'google.ca', 'Enter a valid URL'))
 
         self.assertEquals(self.z(u'invalid.domain..com'), (
-            u'invalid.domain..com', 'enter a valid URL'))
+            u'invalid.domain..com', 'Enter a valid URL'))
         self.assertEquals(self.z(u'invalid.\u4e2d\u4fd4.blargg'), (
-            u'invalid.\u4e2d\u4fd4.blargg', 'enter a valid URL'))
+            u'invalid.\u4e2d\u4fd4.blargg', 'Enter a valid URL'))
 
 # ##############################################################################
+
+
+class TestSimple(unittest.TestCase):
+
+    def test_IS_URL(self):
+        rtn = IS_URL()('abc.com')
+        self.assertEqual(rtn, ('http://abc.com', None))
+        rtn = IS_URL(mode='generic')('abc.com')
+        self.assertEqual(rtn, ('abc.com', None))
+        rtn = IS_URL(allowed_schemes=['https'], prepend_scheme='https')('https://abc.com')
+        self.assertEqual(rtn, ('https://abc.com', None))
+        rtn = IS_URL(prepend_scheme='https')('abc.com')
+        self.assertEqual(rtn, ('https://abc.com', None))
+        rtn = IS_URL(mode='generic', allowed_schemes=['ftps', 'https'], prepend_scheme='https')('https://abc.com')
+        self.assertEqual(rtn, ('https://abc.com', None))
+        rtn = IS_URL(mode='generic', allowed_schemes=['ftps', 'https', None], prepend_scheme='https')('abc.com')
+        self.assertEqual(rtn, ('abc.com', None))
+        # regression test for issue 773
+        rtn = IS_URL()('domain.ninja')
+        self.assertEqual(rtn, ('http://domain.ninja', None))
+        # addition of allowed_tlds
+        rtn = IS_URL(allowed_tlds=['com', 'net', 'org'])('domain.ninja')
+        self.assertEqual(rtn, ('domain.ninja', 'Enter a valid URL'))
+        # mode = 'generic' doesn't consider allowed_tlds
+        rtn = IS_URL(mode='generic', allowed_tlds=['com', 'net', 'org'])('domain.ninja')
+        self.assertEqual(rtn, ('domain.ninja', None))
 
 if __name__ == '__main__':
     unittest.main()

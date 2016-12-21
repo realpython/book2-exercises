@@ -2,14 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-This file is part of the web2py Web Framework
-Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
-License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+| This file is part of the web2py Web Framework
+| Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
+| License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
 
-Contains:
-
-- wsgibase: the gluon wsgi application
-
+The gluon wsgi application
+---------------------------
 """
 
 if False: import import_all # DO NOT REMOVE PART OF FREEZE PROCESS
@@ -82,10 +80,9 @@ locale.setlocale(locale.LC_CTYPE, "C") # IMPORTANT, web2py requires locale "C"
 exists = os.path.exists
 pjoin = os.path.join
 
-logpath = abspath("logging.conf")
-if exists(logpath):
+try:
     logging.config.fileConfig(abspath("logging.conf"))
-else:
+except: # fails on GAE or when logfile is missing
     logging.basicConfig()
 logger = logging.getLogger("web2py")
 
@@ -95,11 +92,11 @@ from gluon.globals import Request, Response, Session
 from gluon.compileapp import build_environment, run_models_in, \
     run_controller_in, run_view_in
 from gluon.contenttype import contenttype
-from gluon.dal import BaseAdapter
+from pydal.base import BaseAdapter
 from gluon.validators import CRYPT
 from gluon.html import URL, xmlescape
 from gluon.utils import is_valid_ip_address, getipaddrinfo
-from gluon.rewrite import load, url_in, THREAD_LOCAL as rwthread, \
+from gluon.rewrite import load as load_routes, url_in, THREAD_LOCAL as rwthread, \
     try_rewrite_on_error, fixup_missing_path_info
 from gluon import newcron
 
@@ -128,16 +125,16 @@ except:
     if not global_settings.web2py_runtime_gae:
         logger.warn('unable to import Rocket')
 
-load()
+load_routes()
 
 HTTPS_SCHEMES = set(('https', 'HTTPS'))
 
 
 def get_client(env):
     """
-    guess the client address from the environment variables
+    Guesses the client address from the environment variables
 
-    first tries 'http_x_forwarded_for', secondly 'remote_addr'
+    First tries 'http_x_forwarded_for', secondly 'remote_addr'
     if all fails, assume '127.0.0.1' or '::1' (running locally)
     """
     eget = env.get
@@ -156,11 +153,9 @@ def get_client(env):
     return client
 
 
-
-
 def serve_controller(request, response, session):
     """
-    this function is used to generate a dynamic page.
+    This function is used to generate a dynamic page.
     It first runs all models, then runs the function in the controller,
     and then tries to render the output using a view/template.
     this function must run from the [application] folder.
@@ -224,17 +219,19 @@ class LazyWSGI(object):
         self.wsgi_environ = environ
         self.request = request
         self.response = response
+
     @property
     def environ(self):
-        if not hasattr(self,'_environ'):
+        if not hasattr(self, '_environ'):
             new_environ = self.wsgi_environ
             new_environ['wsgi.input'] = self.request.body
             new_environ['wsgi.version'] = 1
             self._environ = new_environ
         return self._environ
-    def start_response(self,status='200', headers=[], exec_info=None):
+
+    def start_response(self, status='200', headers=[], exec_info=None):
         """
-        in controller you can use::
+        in controller you can use:
 
         - request.wsgi.environ
         - request.wsgi.start_response
@@ -245,11 +242,12 @@ class LazyWSGI(object):
         self.response.headers = dict(headers)
         return lambda *args, **kargs: \
             self.response.write(escape=False, *args, **kargs)
-    def middleware(self,*middleware_apps):
+
+    def middleware(self, *middleware_apps):
         """
         In you controller use::
 
-        @request.wsgi.middleware(middleware1, middleware2, ...)
+            @request.wsgi.middleware(middleware1, middleware2, ...)
 
         to decorate actions with WSGI middleware. actions must return strings.
         uses a simulated environment so it may have weird behavior in some cases
@@ -269,11 +267,12 @@ class LazyWSGI(object):
             return lambda caller=caller, app=app: caller(app)
         return middleware
 
+
 def wsgibase(environ, responder):
     """
-    this is the gluon wsgi application. the first function called when a page
-    is requested (static or dynamic). it can be called by paste.httpserver
-    or by apache mod_wsgi.
+    The gluon wsgi application. The first function called when a page
+    is requested (static or dynamic). It can be called by paste.httpserver
+    or by apache mod_wsgi (or any WSGI-compatible server).
 
       - fills request with info
       - the environment variables, replacing '.' with '_'
@@ -290,13 +289,11 @@ def wsgibase(environ, responder):
     2. for dynamic pages:
 
       - /<application>[/<controller>[/<function>[/<sub>]]][.<extension>]
-      - (sub may go several levels deep, currently 3 levels are supported:
-         sub1/sub2/sub3)
 
     The naming conventions are:
 
       - application, controller, function and extension may only contain
-        [a-zA-Z0-9_]
+        `[a-zA-Z0-9_]`
       - file and sub may also contain '-', '=', '.' and '/'
     """
     eget = environ.get
@@ -363,18 +360,21 @@ def wsgibase(environ, responder):
                     local_hosts = global_settings.local_hosts
                 client = get_client(env)
                 x_req_with = str(env.http_x_requested_with).lower()
+                cmd_opts = global_settings.cmd_options
 
                 request.update(
                     client = client,
                     folder = abspath('applications', app) + os.sep,
                     ajax = x_req_with == 'xmlhttprequest',
                     cid = env.http_web2py_component_element,
-                    is_local = env.remote_addr in local_hosts,
+                    is_local = (env.remote_addr in local_hosts and
+                                client == env.remote_addr),
+                    is_shell = False,
+                    is_scheduler = False,
                     is_https = env.wsgi_url_scheme in HTTPS_SCHEMES or \
                         request.env.http_x_forwarded_proto in HTTPS_SCHEMES \
                         or env.https == 'on'
                     )
-                request.compute_uuid()  # requires client
                 request.url = environ['PATH_INFO']
 
                 # ##################################################
@@ -422,10 +422,13 @@ def wsgibase(environ, responder):
                 # ##################################################
 
                 if env.http_cookie:
-                    try:
-                        request.cookies.load(env.http_cookie)
-                    except Cookie.CookieError, e:
-                        pass  # invalid cookies
+                    for single_cookie in env.http_cookie.split(';'):
+                        single_cookie = single_cookie.strip()
+                        if single_cookie:
+                            try:
+                                request.cookies.load(single_cookie)
+                            except Cookie.CookieError:
+                                pass  # single invalid cookie ignore
 
                 # ##################################################
                 # try load session or create new session file
@@ -453,7 +456,7 @@ def wsgibase(environ, responder):
                 if request.body:
                     request.body.close()
 
-                if hasattr(current,'request'):
+                if hasattr(current, 'request'):
 
                     # ##################################################
                     # on success, try store session in database
@@ -486,11 +489,10 @@ def wsgibase(environ, responder):
                     if request.ajax:
                         if response.flash:
                             http_response.headers['web2py-component-flash'] = \
-                                urllib2.quote(xmlescape(response.flash)\
-                                                  .replace('\n',''))
+                                urllib2.quote(xmlescape(response.flash).replace('\n', ''))
                         if response.js:
                             http_response.headers['web2py-component-command'] = \
-                                urllib2.quote(response.js.replace('\n',''))
+                                urllib2.quote(response.js.replace('\n', ''))
 
                     # ##################################################
                     # store cookies in headers
@@ -567,14 +569,14 @@ def wsgibase(environ, responder):
 
 def save_password(password, port):
     """
-    used by main() to save the password in the parameters_port.py file.
+    Used by main() to save the password in the parameters_port.py file.
     """
 
     password_file = abspath('parameters_%i.py' % port)
     if password == '<random>':
         # make up a new password
         chars = string.letters + string.digits
-        password = ''.join([random.choice(chars) for i in range(8)])
+        password = ''.join([random.choice(chars) for _ in range(8)])
         cpassword = CRYPT()(password)[0]
         print '******************* IMPORTANT!!! ************************'
         print 'your admin password is "%s"' % password
@@ -607,10 +609,10 @@ def appfactory(wsgiapp=wsgibase,
     generates a wsgi application that does logging and profiling and calls
     wsgibase
 
-    .. function:: gluon.main.appfactory(
-            [wsgiapp=wsgibase
-            [, logfilename='httpserver.log'
-            [, profilerfilename='profiler.log']]])
+    Args:
+        wsgiapp: the base application
+        logfilename: where to store apache-compatible requests log
+        profiler_dir: where to store profile files
 
     """
     if profilerfilename is not None:
@@ -680,6 +682,7 @@ def appfactory(wsgiapp=wsgibase,
 
     return app_with_logging
 
+
 class HttpServer(object):
     """
     the web2py web server (Rocket)
@@ -729,7 +732,9 @@ class HttpServer(object):
             web2py_path = path
             global_settings.applications_parent = path
             os.chdir(path)
-            [add_path_first(p) for p in (path, abspath('site-packages'), "")]
+            load_routes()
+            for p in (path, abspath('site-packages'), ""):
+                add_path_first(p)
             if exists("logging.conf"):
                 logging.config.fileConfig("logging.conf")
 

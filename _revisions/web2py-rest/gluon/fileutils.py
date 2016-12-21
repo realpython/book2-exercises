@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-This file is part of the web2py Web Framework
-Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
-License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+| This file is part of the web2py Web Framework
+| Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
+| License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+
+File operations
+---------------
 """
 
 import storage
@@ -17,7 +20,7 @@ import datetime
 import logging
 from http import HTTP
 from gzip import open as gzopen
-
+from recfile import generate
 
 __all__ = [
     'parse_version',
@@ -45,7 +48,15 @@ __all__ = [
 
 
 def parse_semantic(version="Version 1.99.0-rc.1+timestamp.2011.09.19.08.23.26"):
-    "http://semver.org/"
+    """Parses a version string according to http://semver.org/ rules
+
+    Args:
+        version(str): the SemVer string
+
+    Returns:
+        tuple: Major, Minor, Patch, Release, Build Date
+
+    """
     re_version = re.compile('(\d+)\.(\d+)\.(\d+)(\-(?P<pre>[^\s+]*))?(\+(?P<build>\S*))')
     m = re_version.match(version.strip().split()[-1])
     if not m:
@@ -54,10 +65,20 @@ def parse_semantic(version="Version 1.99.0-rc.1+timestamp.2011.09.19.08.23.26"):
     pre_release = m.group('pre') or ''
     build = m.group('build') or ''
     if build.startswith('timestamp'):
-        build = datetime.datetime.strptime(build.split('.',1)[1], '%Y.%m.%d.%H.%M.%S')
+        build = datetime.datetime.strptime(build.split('.', 1)[1], '%Y.%m.%d.%H.%M.%S')
     return (a, b, c, pre_release, build)
 
+
 def parse_legacy(version="Version 1.99.0 (2011-09-19 08:23:26)"):
+    """Parses "legacy" version string
+
+    Args:
+        version(str): the version string
+
+    Returns:
+        tuple: Major, Minor, Patch, Release, Build Date
+
+    """
     re_version = re.compile('[^\d]+ (\d+)\.(\d+)\.(\d+)\s*\((?P<datetime>.+?)\)\s*(?P<type>[a-z]+)?')
     m = re_version.match(version)
     a, b, c = int(m.group(1)), int(m.group(2)), int(m.group(3)),
@@ -65,14 +86,20 @@ def parse_legacy(version="Version 1.99.0 (2011-09-19 08:23:26)"):
     build = datetime.datetime.strptime(m.group('datetime'), '%Y-%m-%d %H:%M:%S')
     return (a, b, c, pre_release, build)
 
+
 def parse_version(version):
+    """Attempts to parse SemVer, fallbacks on legacy
+    """
     version_tuple = parse_semantic(version)
     if not version_tuple:
         version_tuple = parse_legacy(version)
     return version_tuple
 
+
 def read_file(filename, mode='r'):
-    "returns content from filename, making sure to close the file explicitly on exit."
+    """Returns content from filename, making sure to close the file explicitly
+    on exit.
+    """
     f = open(filename, mode)
     try:
         return f.read()
@@ -81,7 +108,9 @@ def read_file(filename, mode='r'):
 
 
 def write_file(filename, value, mode='w'):
-    "writes <value> to filename, making sure to close the file explicitly on exit."
+    """Writes <value> to filename, making sure to close the file
+    explicitly on exit.
+    """
     f = open(filename, mode)
     try:
         return f.write(value)
@@ -90,7 +119,8 @@ def write_file(filename, value, mode='w'):
 
 
 def readlines_file(filename, mode='r'):
-    "applies .split('\n') to the output of read_file()"
+    """Applies .split('\n') to the output of `read_file()`
+    """
     return read_file(filename, mode).split('\n')
 
 
@@ -103,18 +133,20 @@ def mktree(path):
             os.mkdir(head)
 
 
-def listdir(
-    path,
-    expression='^.+$',
-    drop=True,
-    add_dirs=False,
-    sort=True,
-    maxnum = None,
-):
+def listdir(path,
+            expression='^.+$',
+            drop=True,
+            add_dirs=False,
+            sort=True,
+            maxnum=None,
+            exclude_content_from=None
+            ):
     """
-    like os.listdir() but you can specify a regex pattern to filter files.
-    if add_dirs is True, the returned items will have the full path.
+    Like `os.listdir()` but you can specify a regex pattern to filter files.
+    If `add_dirs` is True, the returned items will have the full path.
     """
+    if exclude_content_from is None:
+        exclude_content_from = []
     if path[-1:] != os.path.sep:
         path = path + os.path.sep
     if drop:
@@ -122,7 +154,7 @@ def listdir(
     else:
         n = 0
     regex = re.compile(expression)
-    items = []    
+    items = []
     for (root, dirs, files) in os.walk(path, topdown=True):
         for dir in dirs[:]:
             if dir.startswith('.'):
@@ -131,8 +163,9 @@ def listdir(
             items.append(root[n:])
         for file in sorted(files):
             if regex.match(file) and not file.startswith('.'):
-                items.append(os.path.join(root, file)[n:])
-            if maxnum and len(items)>=maxnum:
+                if root not in exclude_content_from:
+                    items.append(os.path.join(root, file)[n:])
+            if maxnum and len(items) >= maxnum:
                 break
     if sort:
         return sorted(items)
@@ -141,6 +174,8 @@ def listdir(
 
 
 def recursive_unlink(f):
+    """Deletes `f`. If it's a folder, also its contents will be deleted
+    """
     if os.path.isdir(f):
         for s in os.listdir(f):
             recursive_unlink(os.path.join(f, s))
@@ -150,8 +185,7 @@ def recursive_unlink(f):
 
 
 def cleanpath(path):
-    """
-    turns any expression/path into a valid filename. replaces / with _ and
+    """Turns any expression/path into a valid filename. replaces / with _ and
     removes special characters.
     """
 
@@ -165,102 +199,60 @@ def cleanpath(path):
 
 
 def _extractall(filename, path='.', members=None):
-    if not hasattr(tarfile.TarFile, 'extractall'):
-        from tarfile import ExtractError
-
-        class TarFile(tarfile.TarFile):
-
-            def extractall(self, path='.', members=None):
-                """Extract all members from the archive to the current working
-             directory and set owner, modification time and permissions on
-             directories afterwards. `path' specifies a different directory
-             to extract to. `members' is optional and must be a subset of the
-             list returned by getmembers().
-                """
-
-                directories = []
-                if members is None:
-                    members = self
-                for tarinfo in members:
-                    if tarinfo.isdir():
-
-                        # Extract directory with a safe mode, so that
-                        # all files below can be extracted as well.
-
-                        try:
-                            os.makedirs(os.path.join(path,
-                                                     tarinfo.name), 0777)
-                        except EnvironmentError:
-                            pass
-                        directories.append(tarinfo)
-                    else:
-                        self.extract(tarinfo, path)
-
-                # Reverse sort directories.
-
-                directories.sort(lambda a, b: cmp(a.name, b.name))
-                directories.reverse()
-
-                # Set correct owner, mtime and filemode on directories.
-
-                for tarinfo in directories:
-                    path = os.path.join(path, tarinfo.name)
-                    try:
-                        self.chown(tarinfo, path)
-                        self.utime(tarinfo, path)
-                        self.chmod(tarinfo, path)
-                    except ExtractError, e:
-                        if self.errorlevel > 1:
-                            raise
-                        else:
-                            self._dbg(1, 'tarfile: %s' % e)
-
-        _cls = TarFile
-    else:
-        _cls = tarfile.TarFile
-
-    tar = _cls(filename, 'r')
+    tar = tarfile.TarFile(filename, 'r')
     ret = tar.extractall(path, members)
     tar.close()
     return ret
 
 
-def tar(file, dir, expression='^.+$', filenames=None):
-    """
-    tars dir into file, only tars file that match expression
+def tar(file, dir, expression='^.+$',
+        filenames=None, exclude_content_from=None):
+    """Tars dir into file, only tars file that match expression
     """
 
     tar = tarfile.TarFile(file, 'w')
     try:
         if filenames is None:
-            filenames = listdir(dir, expression, add_dirs=True)
+            filenames = listdir(dir, expression, add_dirs=True,
+                exclude_content_from=exclude_content_from)
         for file in filenames:
             tar.add(os.path.join(dir, file), file, False)
     finally:
         tar.close()
 
+
 def untar(file, dir):
-    """
-    untar file into dir
+    """Untar file into dir
     """
 
     _extractall(file, dir)
 
 
 def w2p_pack(filename, path, compiled=False, filenames=None):
+    """Packs a web2py application.
+
+    Args:
+        filename(str): path to the resulting archive
+        path(str): path to the application
+        compiled(bool): if `True` packs the compiled version
+        filenames(list): adds filenames to the archive
+    """
     filename = abspath(filename)
     path = abspath(path)
     tarname = filename + '.tar'
     if compiled:
-        tar_compiled(tarname, path, '^[\w\.\-]+$')
+        tar_compiled(tarname, path, '^[\w\.\-]+$',
+                     exclude_content_from=['cache', 'sessions', 'errors'])
     else:
-        tar(tarname, path, '^[\w\.\-]+$', filenames=filenames)
+        tar(tarname, path, '^[\w\.\-]+$', filenames=filenames,
+            exclude_content_from=['cache', 'sessions', 'errors'])
     w2pfp = gzopen(filename, 'wb')
     tarfp = open(tarname, 'rb')
     w2pfp.write(tarfp.read())
     w2pfp.close()
     tarfp.close()
     os.unlink(tarname)
+
 
 def create_welcome_w2p():
     if not os.path.exists('welcome.w2p') or os.path.exists('NEWINSTALL'):
@@ -274,7 +266,7 @@ def create_welcome_w2p():
 
 def w2p_unpack(filename, path, delete_tar=True):
 
-    if filename=='welcome.w2p':
+    if filename == 'welcome.w2p':
         create_welcome_w2p()
     filename = abspath(filename)
     path = abspath(path)
@@ -296,10 +288,12 @@ def w2p_unpack(filename, path, delete_tar=True):
 
 
 def w2p_pack_plugin(filename, path, plugin_name):
-    """Pack the given plugin into a w2p file.
-    Will match files at:
+    """Packs the given plugin into a w2p file.
+    Will match files at::
+
         <path>/*/plugin_[name].*
         <path>/*/plugin_[name]/*
+
     """
     filename = abspath(filename)
     path = abspath(path)
@@ -328,14 +322,15 @@ def w2p_unpack_plugin(filename, path, delete_tar=True):
     w2p_unpack(filename, path, delete_tar)
 
 
-def tar_compiled(file, dir, expression='^.+$'):
-    """
-    used to tar a compiled application.
-    the content of models, views, controllers is not stored in the tar file.
+def tar_compiled(file, dir, expression='^.+$',
+                 exclude_content_from=None):
+    """Used to tar a compiled application.
+    The content of models, views, controllers is not stored in the tar file.
     """
 
     tar = tarfile.TarFile(file, 'w')
-    for file in listdir(dir, expression, add_dirs=True):
+    for file in listdir(dir, expression, add_dirs=True,
+                        exclude_content_from=exclude_content_from):
         filename = os.path.join(dir, file)
         if os.path.islink(filename):
             continue
@@ -357,30 +352,34 @@ def up(path):
 
 
 def get_session(request, other_application='admin'):
-    """ checks that user is authorized to access other_application"""
+    """Checks that user is authorized to access other_application"""
     if request.application == other_application:
         raise KeyError
     try:
         session_id = request.cookies['session_id_' + other_application].value
         session_filename = os.path.join(
             up(request.folder), other_application, 'sessions', session_id)
+        if not os.path.exists(session_filename):
+            session_filename = generate(session_filename)
         osession = storage.load_storage(session_filename)
     except Exception, e:
         osession = storage.Storage()
     return osession
 
+
 def set_session(request, session, other_application='admin'):
-    """ checks that user is authorized to access other_application"""
+    """Checks that user is authorized to access other_application"""
     if request.application == other_application:
         raise KeyError
     session_id = request.cookies['session_id_' + other_application].value
     session_filename = os.path.join(
         up(request.folder), other_application, 'sessions', session_id)
-    storage.save_storage(session,session_filename)
+    storage.save_storage(session, session_filename)
+
 
 def check_credentials(request, other_application='admin',
                       expiration=60 * 60, gae_login=True):
-    """ checks that user is authorized to access other_application"""
+    """Checks that user is authorized to access other_application"""
     if request.env.web2py_runtime_gae:
         from google.appengine.api import users
         if users.is_current_user_admin():
@@ -398,7 +397,7 @@ def check_credentials(request, other_application='admin',
         r = (s.authorized and s.last_time and s.last_time > dt)
         if r:
             s.last_time = t0
-            set_session(request,s,other_application)
+            set_session(request, s, other_application)
         return r
 
 
@@ -451,11 +450,13 @@ def make_fake_file_like_object():
 
 
 from settings import global_settings  # we need to import settings here because
-                                     # settings imports fileutils too
+                                      # settings imports fileutils too
 
 
 def abspath(*relpath, **base):
-    "convert relative path to absolute path based (by default) on applications_parent"
+    """Converts relative path to absolute path based (by default) on
+    applications_parent
+    """
     path = os.path.join(*relpath)
     gluon = base.get('gluon', False)
     if os.path.isabs(path):

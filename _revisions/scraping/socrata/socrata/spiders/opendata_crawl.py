@@ -15,11 +15,11 @@ class OpendataSpider(CrawlSpider):
              callback='parse_item', follow=True)
     ]
 
-    def parse(self, response):
-        titles = response.xpath('//tr[@itemscope="itemscope"]')
+    def parse_item(self, response):
+        titles = Selector(response).xpath('//div[@itemscope="itemscope"]')
         for title in titles:
             item = SocrataItem()
-            item["text"] = title.select("td[2]/div/span/text()").extract()
-            item["url"] = title.select("td[2]/div/a/@href").extract()
-            item["views"] = title.select("td[3]/span/text()").extract()
+            item["text"] = title.xpath('.//div[@class="browse2-result-title"]/h2/a/text()').extract()[0]
+            item["url"] = title.xpath('.//div[@class="browse2-result-title"]/h2/a/@href').extract()[0]
+            item["views"] = title.xpath('.//div[@class="browse2-result-view-count-value"]/text()').extract()[0].strip()
             yield item

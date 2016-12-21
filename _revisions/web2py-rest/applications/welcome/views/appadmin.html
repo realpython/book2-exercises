@@ -12,35 +12,45 @@
 {{if request.function=='index':}}
 <h2>{{=T("Available Databases and Tables")}}</h2>
   {{if not databases:}}{{=T("No databases in this application")}}{{pass}}
-<table>
-  {{for db in sorted(databases):}}
-    {{for table in databases[db].tables:}}
-      {{qry='%s.%s.id>0'%(db,table)}}
-      {{tbl=databases[db][table]}}
-      {{if hasattr(tbl,'_primarykey'):}}
-        {{if tbl._primarykey:}}
-            {{firstkey=tbl[tbl._primarykey[0]]}}
-            {{if firstkey.type in ['string','text']:}}
-              {{qry='%s.%s.%s!=""'%(db,table,firstkey.name)}}
-            {{else:}}
-              {{qry='%s.%s.%s>0'%(db,table,firstkey.name)}}
-            {{pass}}
-        {{else:}}
-             {{qry=''}}
-        {{pass}}
-      {{pass}}
-  <tr>
-    <th style="font-size: 1.75em;">
-      {{=A("%s.%s" % (db,table),_href=URL('select',args=[db],vars=dict(query=qry)))}}
-    </th>
-    <td>
-      {{=A(str(T('New Record')),_href=URL('insert',args=[db,table]),_class="btn")}}
-    </td>
-  </tr>
-  {{pass}}
-  {{pass}}
-</table>
-
+  <ul class="nav nav-tabs" id="myTab">
+  <li class="active" ><a href="#alltables" data-toggle="tab">Tables</a></li>
+  <li><a href="#hooks" data-toggle="tab">Hooks</a></li>
+  </ul>
+  <div class="tab-content">
+      <div class="tab-pane active" id="alltables">
+        <table class="table">
+          {{for db in sorted(databases):}}
+            {{for table in databases[db].tables:}}
+              {{qry='%s.%s.id>0'%(db,table)}}
+              {{tbl=databases[db][table]}}
+              {{if hasattr(tbl,'_primarykey'):}}
+                {{if tbl._primarykey:}}
+                    {{firstkey=tbl[tbl._primarykey[0]]}}
+                    {{if firstkey.type in ['string','text']:}}
+                      {{qry='%s.%s.%s!=""'%(db,table,firstkey.name)}}
+                    {{else:}}
+                      {{qry='%s.%s.%s>0'%(db,table,firstkey.name)}}
+                    {{pass}}
+                {{else:}}
+                     {{qry=''}}
+                {{pass}}
+              {{pass}}
+          <tr>
+            <th style="font-size: 1.75em;">
+              {{=A("%s.%s" % (db,table),_href=URL('select',args=[db],vars=dict(query=qry)))}}
+            </th>
+            <td>
+              {{=A(str(T('New Record')),_href=URL('insert',args=[db,table]),_class="btn btn-default")}}
+            </td>
+          </tr>
+          {{pass}}
+          {{pass}}
+        </table>
+      </div>
+      <div class="tab-pane" id="hooks">
+      {{=LOAD('appadmin', 'hooks', ajax=True)}}
+      </div>
+  </div>
 {{elif request.function=='select':}}
   <h2>{{=XML(str(T("Database %s select"))%A(request.args[0],_href=URL('index'))) }}
   </h2>
@@ -51,7 +61,7 @@
   </pre>
   {{pass}}
   {{if table:}}
-  {{=A(str(T('New Record')),_href=URL('insert',args=[request.args[0],table]),_class="btn")}}<br/><br/>
+  {{=A(str(T('New Record')),_href=URL('insert',args=[request.args[0],table]),_class="btn btn-default")}}<br/><br/>
     <h3>{{=T("Rows in Table")}}</h3><br/>
    {{else:}}
     <h3>{{=T("Rows selected")}}</h3><br/>
@@ -62,17 +72,17 @@
       {{=T('"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN')}}</p>
     <br/><br/>
     <h4>{{=T("%s selected", nrows)}}</h4>
-    {{if start>0:}}{{=A(T('previous %s rows') % step,_href=URL('select',args=request.args[0],vars=dict(start=start-step)),_class="btn")}}{{pass}}
-    {{if stop<nrows:}}{{=A(T('next %s rows') % step,_href=URL('select',args=request.args[0],vars=dict(start=start+step)),_class="btn")}}{{pass}}
+    {{if start>0:}}{{=A(T('previous %s rows') % step,_href=URL('select',args=request.args[0],vars=dict(start=start-step)),_class="btn btn-default")}}{{pass}}
+    {{if stop<nrows:}}{{=A(T('next %s rows') % step,_href=URL('select',args=request.args[0],vars=dict(start=start+step)),_class="btn btn-default")}}{{pass}}
     {{if rows:}}
-       <div style="overflow: auto;" width="80%">
+       <div style="overflow:auto; width:80%;">
        {{linkto = lambda f, t, r: URL('update', args=[request.args[0], r, f]) if f else "#"}}
        {{upload=URL('download',args=request.args[0])}}
        {{=SQLTABLE(rows,linkto,upload,orderby=True,_class='sortable')}}
        </div>
     {{pass}}
     <br/><br/><h3>{{=T("Import/Export")}}</h3><br/>
-    <a href="{{=URL('csv',args=request.args[0],vars=dict(query=query))}}" class="btn">{{=T("export as csv file")}}</a>
+    <a href="{{=URL('csv',args=request.args[0],vars=dict(query=query))}}" class="btn btn-default">{{=T("export as csv file")}}</a>
   {{=formcsv or ''}}
 
 {{elif request.function=='insert':}}
@@ -127,9 +137,9 @@
     <h4>{{=T("Overview")}}</h4>
     <p>{{=T.M("Number of entries: **%s**", total['entries'])}}</p>
     {{if total['entries'] > 0:}}
-      <p>{{=T.M("Hit Ratio: **%(ratio)s%%** (**%(hits)s** %%{hit(hits)} and **%(misses)s** %%{miss(misses})",
-              dict(ratio=total['ratio'], hits=total['hits'], misses=total['misses']))}}
-     </p>
+    <p>{{=T.M("Hit Ratio: **%(ratio)s%%** (**%(hits)s** %%{hit(hits)} and **%(misses)s** %%{miss(misses)})",
+             dict( ratio=total['ratio'], hits=total['hits'], misses=total['misses']))}}
+    </p>
     <p>
       {{=T("Size of cache:")}}
       {{if object_stats:}}
@@ -145,8 +155,8 @@
       {{=T.M("Cache contains items up to **%(hours)02d** %%{hour(hours)} **%(min)02d** %%{minute(min)} **%(sec)02d** %%{second(sec)} old.",
               dict(hours=total['oldest'][0], min=total['oldest'][1], sec=total['oldest'][2]))}}
     </p>
-    {{=BUTTON(T('Cache Keys'), _onclick='jQuery("#all_keys").toggle();')}}
-    <div class="hidden" id="all_keys">
+    {{=BUTTON(T('Cache Keys'), _onclick='jQuery("#all_keys").toggle().toggleClass( "w2p_hidden" );')}}
+    <div class="w2p_hidden" id="all_keys">
       {{=total['keys']}}
     </div>
     <br />
@@ -173,8 +183,8 @@
       {{=T.M("RAM contains items up to **%(hours)02d** %%{hour(hours)} **%(min)02d** %%{minute(min)} **%(sec)02d** %%{second(sec)} old.",
               dict(hours=ram['oldest'][0], min=ram['oldest'][1], sec=ram['oldest'][2]))}}
     </p>
-    {{=BUTTON(T('RAM Cache Keys'), _onclick='jQuery("#ram_keys").toggle();')}}
-    <div class="hidden" id="ram_keys">
+    {{=BUTTON(T('RAM Cache Keys'), _onclick='jQuery("#ram_keys").toggle().toggleClass( "w2p_hidden" );')}}
+    <div class="w2p_hidden" id="ram_keys">
       {{=ram['keys']}}
     </div>
     <br />
@@ -202,8 +212,8 @@
       {{=T.M("DISK contains items up to **%(hours)02d** %%{hour(hours)} **%(min)02d** %%{minute(min)} **%(sec)02d** %%{second(sec)} old.",
                 dict(hours=disk['oldest'][0], min=disk['oldest'][1], sec=disk['oldest'][2]))}}
       </p>
-      {{=BUTTON(T('Disk Cache Keys'), _onclick='jQuery("#disk_keys").toggle();')}}
-      <div class="hidden" id="disk_keys">
+      {{=BUTTON(T('Disk Cache Keys'), _onclick='jQuery("#disk_keys").toggle().toggleClass( "w2p_hidden" );')}}
+      <div class="w2p_hidden" id="disk_keys">
       {{=disk['keys']}}
       </div>
       <br />
@@ -239,8 +249,8 @@
           <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['png'])}}">png</a></li>
           <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['svg'])}}">svg</a></li>
           <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['pdf'])}}">pdf</a></li>
-          <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['ps'])}}">ps</a></li>          
-          <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['dot'])}}">dot</a></li>                                   
+          <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['ps'])}}">ps</a></li>
+          <li><a href="{{=URL('appadmin', 'bg_graph_model', args=['dot'])}}">dot</a></li>
       </ul>
     </div>
     <br />

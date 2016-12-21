@@ -3,10 +3,10 @@ db.define_table('company',
      Field('email'),
      Field('phone', notnull=True),
      Field('url'),
-     format = '%(company_name)s')  
+     format = '%(company_name)s')
 
 db.company.email.requires=IS_EMAIL()
-db.company.url.requires=IS_EMPTY_OR(IS_URL())        
+db.company.url.requires=IS_EMPTY_OR(IS_URL())
 
 db.define_table('project',
      Field('name', notnull=True),
@@ -18,6 +18,15 @@ db.define_table('project',
      Field('completed', 'boolean', notnull=True),
      format = '%(company_name)s')
 
+db.project.employee_name.readable = db.project.employee_name.writable = False
+
+db.project.start_date.requires = IS_DATE(format=T('%m-%d-%Y'),
+           error_message='Must be MM-DD-YYYY!')
+
+db.project.due_date.requires = IS_DATE(format=T('%m-%d-%Y'),
+           error_message='Must be MM-DD-YYYY!')
+
+
 db.define_table('note',
      Field('post_id', 'reference project', writable=False),
      Field('post', 'text', notnull=True),
@@ -28,11 +37,4 @@ db.note.post_id.readable = db.note.post_id.writable = False
 db.note.created_on.readable = db.note.created_on.writable = False
 db.note.created_on.requires = IS_DATE(format=T('%m-%d-%Y'),
             error_message='Must be MM-DD-YYYY!')
-db.note.created_by.readable = db.note.created_by.writable = False 
-
-db.project.employee_name.readable = db.project.employee_name.writable = False
-db.project.start_date.requires = IS_DATE(format=T('%m-%d-%Y'),
-        error_message='Must be MM-DD-YYYY!')
-
-db.project.due_date.requires = IS_DATE(format=T('%m-%d-%Y'),
-        error_message='Must be MM-DD-YYYY!')
+db.note.created_by.readable = db.note.created_by.writable = False

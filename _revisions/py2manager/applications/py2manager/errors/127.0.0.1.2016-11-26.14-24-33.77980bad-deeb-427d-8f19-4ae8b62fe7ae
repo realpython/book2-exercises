@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'NoneType' object has no attribute 'id'"
+p3
+sS'layer'
+p4
+S'/Users/peterjeffryes/Documents/real-python/web2manager/applications/py2manager/controllers/default.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n# this file is released under public domain and you can use without limitations\n\n# -------------------------------------------------------------------------\n# This is a sample controller\n# - index is the default action of any application\n# - user is required for authentication and authorization\n# - download is for downloading files uploaded in the db (does streaming)\n# -------------------------------------------------------------------------\n\n@auth.requires_login()\ndef index():\n  response.flash = T(\'Welcome!\')\n  notes = [lambda project: A(\'Notes\', _class="btn", _href=URL("default","note",args=[project.id]))]\n  grid = SQLFORM.grid(db.project, create=False, links=notes,\n    fields=[db.project.name, db.project.employee_name, db.project.company_name,\n    db.project.start_date, db.project.due_date, db.project.completed], deletable=False, maxtextlength=50)\n  return locals()\n\n\n\ndef user():\n    """\n    exposes:\n    http://..../[app]/default/user/login\n    http://..../[app]/default/user/logout\n    http://..../[app]/default/user/register\n    http://..../[app]/default/user/profile\n    http://..../[app]/default/user/retrieve_password\n    http://..../[app]/default/user/change_password\n    http://..../[app]/default/user/bulk_register\n    use @auth.requires_login()\n        @auth.requires_membership(\'group name\')\n        @auth.requires_permission(\'read\',\'table name\',record_id)\n    to decorate functions that need access control\n    also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users\n    """\n    return dict(form=auth())\n\n\n@cache.action()\ndef download():\n    """\n    allows downloading of uploaded files\n    http://..../[app]/default/download/[filename]\n    """\n    return response.download(request, db)\n\n\ndef call():\n    """\n    exposes services. for example:\n    http://..../[app]/default/call/jsonrpc\n    decorate with @services.jsonrpc the functions to expose\n    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv\n    """\n    return service()\n\n@auth.requires_login()\ndef add():\n    project_form = SQLFORM(db.project).process()\n    return dict(project_form=project_form)\n\n@auth.requires_login()\ndef company():\n    company_form = SQLFORM(db.company).process()\n    grid = SQLFORM.grid(db.company, create=False, deletable=False, editable=False,\n    maxtextlength=50, orderby=db.company.company_name)\n    return locals()\n\n@auth.requires_login()\ndef employee():\n    employee_form = SQLFORM(db.auth_user).process()\n    grid = SQLFORM.grid(db.auth_user, create=False, fields=[db.auth_user.first_name, db.auth_user.last_name, db.auth_user.email], deletable=False, editable=False, maxtextlength=50)\n    return locals()\n\n@auth.requires_login()\ndef note():\n    project = db.project(request.args(0))\n    db.note.post_id.default = project.id\n    grid = SQLFORM.grid(db.note, create=False, deletable=False,\n    maxtextlength=50, fields=[db.note.post]) if auth.user else "Login to Post to the Project"\n    allnotes = db(db.note.post_id==project.id).select()\n    return locals()\n\nresponse._vars=response._caller(note)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/Users/peterjeffryes/Documents/real-python/web2manager/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/Users/peterjeffryes/Documents/real-python/web2manager/applications/py2manager/controllers/default.py", line 86, in <module>\n  File "/Users/peterjeffryes/Documents/real-python/web2manager/gluon/globals.py", line 417, in <lambda>\n    self._caller = lambda f: f()\n  File "/Users/peterjeffryes/Documents/real-python/web2manager/gluon/tools.py", line 4241, in f\n    return action(*a, **b)\n  File "/Users/peterjeffryes/Documents/real-python/web2manager/applications/py2manager/controllers/default.py", line 80, in note\n    db.note.post_id.default = project.id\nAttributeError: \'NoneType\' object has no attribute \'id\'\n'
+p11
+s.

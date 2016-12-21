@@ -1,6 +1,6 @@
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 def mail(fromaddr, toaddr, sub, text, smtp_host, smtp_port, user, password):
 
@@ -12,8 +12,7 @@ def mail(fromaddr, toaddr, sub, text, smtp_host, smtp_port, user, password):
     msg.attach(MIMEText(text))
 
     # connect to the server
-    server = smtplib.SMTP()
-    server.connect(smtp_host,smtp_port)
+    server = smtplib.SMTP(smtp_host,smtp_port)
 
     # initiate communication with server
     server.ehlo()
