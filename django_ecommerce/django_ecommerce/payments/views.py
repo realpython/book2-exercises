@@ -33,7 +33,7 @@ def sign_in(request):
     else:
         form = SigninForm()
 
-    print form.non_field_errors()
+    # print(form.non_field_errors())
 
     return render_to_response(
         'sign_in.html',
@@ -56,7 +56,7 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
 
-            #update based on your billing method (subscription vs one time)
+            # # update based on your billing method (subscription vs one time)
             # customer = stripe.Customer.create(
             #     email=form.cleaned_data['email'],
             #     description=form.cleaned_data['name'],
@@ -78,7 +78,7 @@ def register(request):
                 stripe_id=customer.id,
             )
 
-            #ensure encrypted password
+            # ensure encrypted password
             user.set_password(form.cleaned_data['password'])
 
             try:

@@ -1,14 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render_to_response
 from payments.models import User
 
 
 def index(request):
     uid = request.session.get('user')
     if uid is None:
-        return render(request, 'index.html')
+        return render_to_response('index.html')
     else:
-        return render(
-            request,
+        return render_to_response(
             'user.html',
             {'user': User.objects.get(pk=uid)}
         )
