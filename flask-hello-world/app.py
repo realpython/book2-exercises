@@ -22,19 +22,19 @@ def search(search_query):
 # dynamic route with an int type
 @app.route("/integer/<int:value>")
 def int_type(value):
-    print value + 1
+    print(value + 1)
     return "correct"
 
 # dynamic route with an float type
 @app.route("/float/<float:value>")
 def float_type(value):
-    print value + 1
+    print(value + 1)
     return "correct"
 
 # dynamic route that accepts slashes
 @app.route("/path/<path:value>")
 def path_type(value):
-    print value
+    print(value)
     return "correct"
 
 

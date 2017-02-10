@@ -5,7 +5,7 @@
 This file is part of web2py Web Framework (Copyrighted, 2007-2009).
 Developed by Massimo Di Pierro <mdipierro@cs.depaul.edu> and
 Robin B <robi123@gmail.com>.
-License: GPL v2
+License: LGPLv3
 """
 
 __all__ = ['MEMDB', 'Field']
@@ -254,12 +254,12 @@ class Table(DALStorage):
         self._db(self.id > 0).delete()
 
 
-    def insert(self, **fields): 
-        # Checks 3 times that the id is new. 3 times is enough! 
-        for i in range(3): 
-            id = self._create_id() 
-            if self.get(id) is None and self.update(id, **fields): 
-                return long(id) 
+    def insert(self, **fields):
+        # Checks 3 times that the id is new. 3 times is enough!
+        for i in range(3):
+            id = self._create_id()
+            if self.get(id) is None and self.update(id, **fields):
+                return long(id)
         else:
             raise RuntimeError("Too many ID conflicts")
 
@@ -292,8 +292,13 @@ class Table(DALStorage):
     def __str__(self):
         return self._tablename
 
-    def __call__(self, id):
-        return self.get(id)
+    def __call__(self, id, **kwargs):
+        record = self.get(id)
+        if record is None:
+          return None
+        if kwargs and any(record[key]!=kwargs[key] for key in kwargs):
+            return None
+        return record
 
 class Expression(object):
 

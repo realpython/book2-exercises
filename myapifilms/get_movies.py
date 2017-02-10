@@ -13,7 +13,7 @@ url = requests.get('http://api.myapifilms.com/imdb/inTheaters?token={0}&format=j
 binary = url.content
 
 # decode the json feed
-output = json.loads(binary)
+output = json.loads(str(binary, "utf-8"))
 
 # grab the list of movies
 movies = output['data']['inTheaters']
@@ -39,4 +39,4 @@ with sqlite3.connect("movies.db") as connection:
 
     # output the rows to the screen, row by row
     for r in rows:
-        print r[0], r[1], r[2], r[3], r[4], r[5]
+        print(r[0], r[1], r[2], r[3], r[4], r[5])

@@ -3,9 +3,9 @@ import sys
 import tempfile
 
 # add module to syspath
-pwd = os.path.abspath(os.path.dirname(__file__))
-project = os.path.basename(pwd)
-new_path = pwd.strip(project)
+cwd = os.path.abspath(os.path.dirname(__file__))
+project = os.path.basename(cwd)
+new_path = cwd.strip(project)
 full_path = os.path.join(new_path,'flaskr')
 
 try:

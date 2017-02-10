@@ -13,7 +13,7 @@ url = requests.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/i
 binary = url.content
 
 # decode the json feed
-output = json.loads(binary)
+output = json.loads(str(binary, "utf-8"))
 
 # grab the list of movies
 movies = output["movies"]

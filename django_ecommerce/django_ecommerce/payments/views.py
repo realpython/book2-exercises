@@ -1,12 +1,13 @@
+import stripe
+import datetime
+
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+
+from django.shortcuts import render, redirect
 from payments.forms import SigninForm, CardForm, UserForm
 from payments.models import User
 import django_ecommerce.settings as settings
-import stripe
-import datetime
 
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -25,7 +26,7 @@ def sign_in(request):
             if len(results) == 1:
                 if results[0].check_password(form.cleaned_data['password']):
                     request.session['user'] = results[0].pk
-                    return HttpResponseRedirect('/')
+                    return redirect('/')
                 else:
                     form.addError('Incorrect email address or password')
             else:
@@ -33,43 +34,46 @@ def sign_in(request):
     else:
         form = SigninForm()
 
-    # print(form.non_field_errors())
+    print(form.non_field_errors())
 
-    return render_to_response(
+    return render(
+        request,
         'sign_in.html',
         {
             'form': form,
             'user': user
-        },
-        context_instance=RequestContext(request)
+        }
     )
 
 
 def sign_out(request):
     del request.session['user']
-    return HttpResponseRedirect('/')
+    return redirect('/')
 
 
 def register(request):
     user = None
     if request.method == 'POST':
         form = UserForm(request.POST)
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        print(request)
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        print(form)
         if form.is_valid():
-
-            # # update based on your billing method (subscription vs one time)
-            # customer = stripe.Customer.create(
-            #     email=form.cleaned_data['email'],
-            #     description=form.cleaned_data['name'],
-            #     card=form.cleaned_data['stripe_token'],
-            #     plan="gold",
-            # )
-
-            customer = stripe.Charge.create(
-                description=form.cleaned_data['email'],
+            # update based on your billing method (subscription vs one time)
+            customer = stripe.Customer.create(
+                email=form.cleaned_data['email'],
+                description=form.cleaned_data['name'],
                 card=form.cleaned_data['stripe_token'],
-                amount="5000",
-                currency="usd"
+                plan="gold",
+
             )
+            # customer = stripe.Charge.create(
+            #     description = form.cleaned_data['email'],
+            #     card = form.cleaned_data['stripe_token'],
+            #     amount="5000",
+            #     currency="usd"
+            # )
 
             user = User(
                 name=form.cleaned_data['name'],
@@ -87,12 +91,13 @@ def register(request):
                 form.addError(user.email + ' is already a member')
             else:
                 request.session['user'] = user.pk
-                return HttpResponseRedirect('/')
+                return redirect('/')
 
     else:
         form = UserForm()
 
-    return render_to_response(
+    return render(
+        request,
         'register.html',
         {
             'form': form,
@@ -102,7 +107,6 @@ def register(request):
             'user': user,
             'years': range(2011, 2036),
         },
-        context_instance=RequestContext(request)
     )
 
 
@@ -126,12 +130,13 @@ def edit(request):
             user.stripe_id = customer.id
             user.save()
 
-            return HttpResponseRedirect('/')
+            return redirect('/')
 
     else:
         form = CardForm()
 
-    return render_to_response(
+    return render(
+        request,
         'edit.html',
         {
             'form': form,
@@ -140,5 +145,4 @@ def edit(request):
             'months': range(1, 12),
             'years': range(2011, 2036)
         },
-        context_instance=RequestContext(request)
     )

@@ -1,3 +1,0 @@
-Django==1.10.4
-requests==2.12.4
-stripe==1.44.0

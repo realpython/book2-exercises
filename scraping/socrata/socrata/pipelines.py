@@ -9,7 +9,7 @@ class SocrataPipeline(object):
     def process_item(self, item, spider):
         self.cur.execute(
             "insert into data (text, url, views) values(?,?,?)",
-            (item['text'][0], item['url'][0], item['views'][0])
+            (item['text'], item['url'], item['views'])
         )
         self.conn.commit()
         return item

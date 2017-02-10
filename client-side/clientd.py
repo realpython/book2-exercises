@@ -10,4 +10,4 @@ data = {'fname': 'Michael', 'lname': 'Herman'}
 r = requests.post(url, data=data)
 
 # display the response to screen
-print r.content
+print(r.content)

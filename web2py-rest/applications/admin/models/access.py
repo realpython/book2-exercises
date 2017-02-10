@@ -4,6 +4,7 @@ import time
 from gluon import portalocker
 from gluon.admin import apath
 from gluon.fileutils import read_file
+from gluon.utils import web2py_uuid
 # ###########################################################
 # ## make sure administrator is on localhost or https
 # ###########################################################
@@ -19,7 +20,7 @@ if request.env.web2py_runtime_gae:
 else:
     is_gae = False
 
-if request.env.http_x_forwarded_for or request.is_https:
+if request.is_https:
     session.secure()
 elif not request.is_local and not DEMO_MODE:
     raise HTTP(200, T('Admin is disabled because insecure channel'))
@@ -49,15 +50,18 @@ except IOError:
 def verify_password(password):
     session.pam_user = None
     if DEMO_MODE:
-        return True
+        ret = True
     elif not _config.get('password'):
-        return False
+        ret - False
     elif _config['password'].startswith('pam_user:'):
         session.pam_user = _config['password'][9:].strip()
         import gluon.contrib.pam
-        return gluon.contrib.pam.authenticate(session.pam_user, password)
+        ret = gluon.contrib.pam.authenticate(session.pam_user, password)
     else:
-        return _config['password'] == CRYPT()(password)[0]
+        ret = _config['password'] == CRYPT()(password)[0]
+    if ret:
+        session.hmac_key = web2py_uuid()
+    return ret
 
 
 # ###########################################################
@@ -100,13 +104,12 @@ def write_hosts_deny(denied_hosts):
     portalocker.unlock(f)
     f.close()
 
-
 def login_record(success=True):
     denied_hosts = read_hosts_deny()
     val = (0, 0)
     if success and request.client in denied_hosts:
         del denied_hosts[request.client]
-    elif not success and not request.is_local:
+    elif not success:
         val = denied_hosts.get(request.client, (0, 0))
         if time.time() - val[1] < expiration_failed_logins \
             and val[0] >= allowed_number_of_attempts:
@@ -115,6 +118,11 @@ def login_record(success=True):
         val = (val[0] + 1, int(time.time()))
         denied_hosts[request.client] = val
     write_hosts_deny(denied_hosts)
+    return val[0]
+
+def failed_login_count():
+    denied_hosts = read_hosts_deny()
+    val = denied_hosts.get(request.client, (0, 0))
     return val[0]
 
 
@@ -144,7 +152,7 @@ if session.is_mobile == 'true':
 elif session.is_mobile == 'false':
     is_mobile = False
 else:
-    is_mobile = request.user_agent().is_mobile
+    is_mobile = request.user_agent().get('is_mobile',False)
 
 if DEMO_MODE:
     session.authorized = True

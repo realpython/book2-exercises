@@ -5,7 +5,7 @@
 <h3>Please register to access the task list.</h3>
 <form method="POST" action="/register/">
   {{ form.csrf_token }}
-  <p>
+  <div class="input-group">
     {{ form.name(placeholder="name") }}
     {% if form.name.errors %}
       <span class="error">
@@ -14,8 +14,8 @@
         {% endfor %}
       </span>
     {% endif %}
-  </p>
-  <p>
+  </div>
+  <div class="input-group">
     {{ form.email(placeholder="email address") }}
     {% if form.email.errors %}
       <span class="error">
@@ -24,8 +24,8 @@
         {% endfor %}
       </span>
     {% endif %}
-  </p>
-  <p>
+  </div>
+  <div class="input-group">
     {{ form.password(placeholder="password") }}
     {% if form.password.errors %}
       <span class="error">
@@ -34,8 +34,8 @@
         {% endfor %}
       </span>
     {% endif %}
-  </p>
-  <p>
+  </div>
+  <div class="input-group">
     {{ form.confirm(placeholder="confirm password") }}
     {% if form.confirm.errors %}
       <span class="error">
@@ -44,7 +44,7 @@
         {% endfor %}
       </span>
     {% endif %}
-  </p>
+  </div>
   <button class="btn btn-sm btn-success" type="submit">Register</button>
   <br>
   <p><em>Already registered?</em> Click <a href="/">here</a> to login.</p>

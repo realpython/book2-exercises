@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-This file is part of the web2py Web Framework
-Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
-License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+| This file is part of the web2py Web Framework
+| Copyrighted by Massimo Di Pierro <mdipierro@cs.depaul.edu>
+| License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+
+Template helpers
+--------------------------------------------
 """
 
 import cgi
@@ -18,7 +21,10 @@ import sanitizer
 import itertools
 import decoder
 import copy_reg
-import cPickle
+try:
+    import cPickle as pickle
+except:
+    import pickle
 import marshal
 
 from HTMLParser import HTMLParser
@@ -27,6 +33,7 @@ from htmlentitydefs import name2codepoint
 from gluon.storage import Storage
 from gluon.utils import web2py_uuid, simple_hash, compare
 from gluon.highlight import highlight
+
 
 regex_crlf = re.compile('\r|\n')
 
@@ -40,6 +47,7 @@ entitydefs.setdefault('apos', u"'".encode('utf-8'))
 
 __all__ = [
     'A',
+    'ASSIGNJS',
     'B',
     'BEAUTIFY',
     'BODY',
@@ -106,13 +114,16 @@ __all__ = [
     'embed64',
 ]
 
+DEFAULT_PASSWORD_DISPLAY = '*' * 8
+
 
 def xmlescape(data, quote=True):
     """
-    returns an escaped string of the provided data
+    Returns an escaped string of the provided data
 
-    :param data: the data to be escaped
-    :param quote: optional (default False)
+    Args:
+        data: the data to be escaped
+        quote: optional (default False)
     """
 
     # first try the xml function
@@ -129,11 +140,13 @@ def xmlescape(data, quote=True):
     data = cgi.escape(data, quote).replace("'", "&#x27;")
     return data
 
-def call_as_list(f,*a,**b):
-    if not isinstance(f, (list,tuple)):
+
+def call_as_list(f, *a, **b):
+    if not isinstance(f, (list, tuple)):
         f = [f]
     for item in f:
-        item(*a,**b)
+        item(*a, **b)
+
 
 def truncate_string(text, length, dots='...'):
     text = text.decode('utf-8')
@@ -142,101 +155,109 @@ def truncate_string(text, length, dots='...'):
     return text
 
 
-def URL(
-    a=None,
-    c=None,
-    f=None,
-    r=None,
-    args=None,
-    vars=None,
-    anchor='',
-    extension=None,
-    env=None,
-    hmac_key=None,
-    hash_vars=True,
-    salt=None,
-    user_signature=None,
-    scheme=None,
-    host=None,
-    port=None,
-    encode_embedded_slash=False,
-    url_encode=True
-):
+def URL(a=None,
+        c=None,
+        f=None,
+        r=None,
+        args=None,
+        vars=None,
+        anchor='',
+        extension=None,
+        env=None,
+        hmac_key=None,
+        hash_vars=True,
+        salt=None,
+        user_signature=None,
+        scheme=None,
+        host=None,
+        port=None,
+        encode_embedded_slash=False,
+        url_encode=True,
+        language=None
+        ):
     """
-    generate a URL
-
-    example::
-
-        >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
-        ...     vars={'p':1, 'q':2}, anchor='1'))
-        '/a/c/f/x/y/z?p=1&q=2#1'
-
-        >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
-        ...     vars={'p':(1,3), 'q':2}, anchor='1'))
-        '/a/c/f/x/y/z?p=1&p=3&q=2#1'
-
-        >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
-        ...     vars={'p':(3,1), 'q':2}, anchor='1'))
-        '/a/c/f/x/y/z?p=3&p=1&q=2#1'
-
-        >>> str(URL(a='a', c='c', f='f', anchor='1+2'))
-        '/a/c/f#1%2B2'
-
-        >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
-        ...     vars={'p':(1,3), 'q':2}, anchor='1', hmac_key='key'))
-        '/a/c/f/x/y/z?p=1&p=3&q=2&_signature=a32530f0d0caa80964bb92aad2bedf8a4486a31f#1'
-
-        >>> str(URL(a='a', c='c', f='f', args=['w/x', 'y/z']))
-        '/a/c/f/w/x/y/z'
-
-        >>> str(URL(a='a', c='c', f='f', args=['w/x', 'y/z'], encode_embedded_slash=True))
-        '/a/c/f/w%2Fx/y%2Fz'
-
-        >>> str(URL(a='a', c='c', f='f', args=['%(id)d'], url_encode=False))
-        '/a/c/f/%(id)d'
-
-        >>> str(URL(a='a', c='c', f='f', args=['%(id)d'], url_encode=True))
-        '/a/c/f/%25%28id%29d'
-
-        >>> str(URL(a='a', c='c', f='f', vars={'id' : '%(id)d' }, url_encode=False))
-        '/a/c/f?id=%(id)d'
-
-        >>> str(URL(a='a', c='c', f='f', vars={'id' : '%(id)d' }, url_encode=True))
-        '/a/c/f?id=%25%28id%29d'
-
-        >>> str(URL(a='a', c='c', f='f', anchor='%(id)d', url_encode=False))
-        '/a/c/f#%(id)d'
-
-        >>> str(URL(a='a', c='c', f='f', anchor='%(id)d', url_encode=True))
-        '/a/c/f#%25%28id%29d'
-
     generates a url '/a/c/f' corresponding to application a, controller c
     and function f. If r=request is passed, a, c, f are set, respectively,
     to r.application, r.controller, r.function.
 
     The more typical usage is:
 
-    URL(r=request, f='index') that generates a url for the index function
+        URL('index')
+
+    that generates a url for the index function
     within the present application and controller.
 
-    :param a: application (default to current if r is given)
-    :param c: controller (default to current if r is given)
-    :param f: function (default to current if r is given)
-    :param r: request (optional)
-    :param args: any arguments (optional)
-    :param vars: any variables (optional)
-    :param anchor: anchorname, without # (optional)
-    :param hmac_key: key to use when generating hmac signature (optional)
-    :param hash_vars: which of the vars to include in our hmac signature
-        True (default) - hash all vars, False - hash none of the vars,
-        iterable - hash only the included vars ['key1','key2']
-    :param scheme: URI scheme (True, 'http' or 'https', etc); forces absolute URL (optional)
-    :param host: string to force absolute URL with host (True means http_host)
-    :param port: optional port number (forces absolute URL)
+    Args:
+        a: application (default to current if r is given)
+        c: controller (default to current if r is given)
+        f: function (default to current if r is given)
+        r: request (optional)
+        args: any arguments (optional). Additional "path" elements
+        vars: any variables (optional). Querystring elements
+        anchor: anchorname, without # (optional)
+        extension: force an extension
+        hmac_key: key to use when generating hmac signature (optional)
+        hash_vars: which of the vars to include in our hmac signature
+            True (default) - hash all vars, False - hash none of the vars,
+            iterable - hash only the included vars ['key1','key2']
+        salt: salt hashing with this string
+        user_signature: signs automatically the URL in such way that only the
+            user can access the URL (use with `URL.verify` or
+            `auth.requires_signature()`)
+        scheme: URI scheme (True, 'http' or 'https', etc); forces absolute URL (optional)
+        host: string to force absolute URL with host (True means http_host)
+        port: optional port number (forces absolute URL)
+        encode_embedded_slash: encode slash characters included in args
+        url_encode: encode characters included in vars
 
-    :raises SyntaxError: when no application, controller or function is
-        available
-    :raises SyntaxError: when a CRLF is found in the generated url
+    Raises:
+        SyntaxError: when no application, controller or function is available
+            or when a CRLF is found in the generated url
+
+    Examples:
+
+    >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
+    ...     vars={'p':1, 'q':2}, anchor='1'))
+    '/a/c/f/x/y/z?p=1&q=2#1'
+
+    >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
+    ...     vars={'p':(1,3), 'q':2}, anchor='1'))
+    '/a/c/f/x/y/z?p=1&p=3&q=2#1'
+
+    >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
+    ...     vars={'p':(3,1), 'q':2}, anchor='1'))
+    '/a/c/f/x/y/z?p=3&p=1&q=2#1'
+
+    >>> str(URL(a='a', c='c', f='f', anchor='1+2'))
+    '/a/c/f#1%2B2'
+
+    >>> str(URL(a='a', c='c', f='f', args=['x', 'y', 'z'],
+    ...     vars={'p':(1,3), 'q':2}, anchor='1', hmac_key='key'))
+    '/a/c/f/x/y/z?p=1&p=3&q=2&_signature=a32530f0d0caa80964bb92aad2bedf8a4486a31f#1'
+
+    >>> str(URL(a='a', c='c', f='f', args=['w/x', 'y/z']))
+    '/a/c/f/w/x/y/z'
+
+    >>> str(URL(a='a', c='c', f='f', args=['w/x', 'y/z'], encode_embedded_slash=True))
+    '/a/c/f/w%2Fx/y%2Fz'
+
+    >>> str(URL(a='a', c='c', f='f', args=['%(id)d'], url_encode=False))
+    '/a/c/f/%(id)d'
+
+    >>> str(URL(a='a', c='c', f='f', args=['%(id)d'], url_encode=True))
+    '/a/c/f/%25%28id%29d'
+
+    >>> str(URL(a='a', c='c', f='f', vars={'id' : '%(id)d' }, url_encode=False))
+    '/a/c/f?id=%(id)d'
+
+    >>> str(URL(a='a', c='c', f='f', vars={'id' : '%(id)d' }, url_encode=True))
+    '/a/c/f?id=%25%28id%29d'
+
+    >>> str(URL(a='a', c='c', f='f', anchor='%(id)d', url_encode=False))
+    '/a/c/f#%(id)d'
+
+    >>> str(URL(a='a', c='c', f='f', anchor='%(id)d', url_encode=True))
+    '/a/c/f#%25%28id%29d'
     """
 
     from rewrite import url_out  # done here in case used not-in web2py
@@ -287,9 +308,16 @@ def URL(
         else:
             function = f
 
-        # if the url gets a static resource, don't force extention
+        # if the url gets a static resource, don't force extension
         if controller == 'static':
             extension = None
+            # add static version to url
+            from globals import current
+            if hasattr(current, 'response'):
+                response = current.response
+                if response.static_version and response.static_version_urls:
+                    args = [function] + args
+                    function = '_' + str(response.static_version)
 
         if '.' in function:
             function, extension = function.rsplit('.', 1)
@@ -302,18 +330,16 @@ def URL(
     if args:
         if url_encode:
             if encode_embedded_slash:
-                other = '/' + '/'.join([urllib.quote(str(
-                    x), '') for x in args])
+                other = '/' + '/'.join([urllib.quote(str(x), '') for x in args])
             else:
-                other = args and urllib.quote(
-                    '/' + '/'.join([str(x) for x in args]))
+                other = args and urllib.quote('/' + '/'.join([str(x) for x in args]))
         else:
             other = args and ('/' + '/'.join([str(x) for x in args]))
     else:
         other = ''
 
     if other.endswith('/'):
-        other += '/'    # add trailing slash to make last trailing empty arg explicit
+        other += '/'  # add trailing slash to make last trailing empty arg explicit
 
     list_vars = []
     for (key, vals) in sorted(vars.items()):
@@ -336,11 +362,11 @@ def URL(
         h_args = '/%s/%s/%s%s' % (application, controller, function2, other)
 
         # how many of the vars should we include in our hash?
-        if hash_vars is True:       # include them all
+        if hash_vars is True:  # include them all
             h_vars = list_vars
-        elif hash_vars is False:    # include none of them
+        elif hash_vars is False:  # include none of them
             h_vars = ''
-        else:                       # include just those specified
+        else:  # include just those specified
             if hash_vars and not isinstance(hash_vars, (list, tuple)):
                 hash_vars = [hash_vars]
             h_vars = [(k, v) for (k, v) in list_vars if k in hash_vars]
@@ -369,7 +395,7 @@ def URL(
         raise SyntaxError('CRLF Injection Detected')
 
     url = url_out(r, env, application, controller, function,
-                  args, other, scheme, host, port)
+                  args, other, scheme, host, port, language=language)
     return url
 
 
@@ -409,7 +435,7 @@ def verifyURL(request, hmac_key=None, hash_vars=True, salt=None, user_signature=
 
     """
 
-    if not '_signature' in request.get_vars:
+    if '_signature' not in request.get_vars:
         return False  # no signature in the request URL
 
     # check if user_signature requires
@@ -509,25 +535,30 @@ class XmlComponent(object):
         return CAT(*components)
 
     def add_class(self, name):
-        """ add a class to _class attribute """
+        """
+        add a class to _class attribute
+        """
         c = self['_class']
         classes = (set(c.split()) if c else set()) | set(name.split())
         self['_class'] = ' '.join(classes) if classes else None
         return self
 
     def remove_class(self, name):
-        """ remove a class from _class attribute """
+        """
+        remove a class from _class attribute
+        """
         c = self['_class']
         classes = (set(c.split()) if c else set()) - set(name.split())
         self['_class'] = ' '.join(classes) if classes else None
         return self
+
 
 class XML(XmlComponent):
     """
     use it to wrap a string that contains XML/HTML so that it will not be
     escaped by the template
 
-    example:
+    Examples:
 
     >>> XML('<h1>Hello</h1>').xml()
     '<h1>Hello</h1>'
@@ -553,7 +584,7 @@ class XML(XmlComponent):
             'img/',
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
             'table', 'tr', 'td', 'div',
-            'strong','span',
+            'strong', 'span',
         ],
         allowed_attributes={
             'a': ['href', 'title', 'target'],
@@ -563,19 +594,19 @@ class XML(XmlComponent):
         },
     ):
         """
-        :param text: the XML text
-        :param sanitize: sanitize text using the permitted tags and allowed
-            attributes (default False)
-        :param permitted_tags: list of permitted tags (default: simple list of
-            tags)
-        :param allowed_attributes: dictionary of allowed attributed (default
-            for A, IMG and BlockQuote).
-            The key is the tag; the value is a list of allowed attributes.
+        Args:
+            text: the XML text
+            sanitize: sanitize text using the permitted tags and allowed
+                attributes (default False)
+            permitted_tags: list of permitted tags (default: simple list of
+                tags)
+            allowed_attributes: dictionary of allowed attributed (default
+                for A, IMG and BlockQuote).
+                The key is the tag; the value is a list of allowed attributes.
         """
 
         if sanitize:
-            text = sanitizer.sanitize(text, permitted_tags,
-                                      allowed_attributes)
+            text = sanitizer.sanitize(text, permitted_tags, allowed_attributes)
         if isinstance(text, unicode):
             text = text.encode('utf8', 'xmlcharrefreplace')
         elif not isinstance(text, str):
@@ -619,7 +650,8 @@ class XML(XmlComponent):
 
     def flatten(self, render=None):
         """
-        return the text stored by the XML object rendered by the render function
+        returns the text stored by the XML object rendered
+        by the `render` function
         """
         if render:
             return render(self.text, None, {})
@@ -627,16 +659,17 @@ class XML(XmlComponent):
 
     def elements(self, *args, **kargs):
         """
-        to be considered experimental since the behavior of this method is questionable
-        another options could be TAG(self.text).elements(*args,**kargs)
+        to be considered experimental since the behavior of this method
+        is questionable
+        another option could be `TAG(self.text).elements(*args, **kwargs)`
         """
         return []
 
-### important to allow safe session.flash=T(....)
+# ## important to allow safe session.flash=T(....)
 
 
 def XML_unpickle(data):
-    return marshal.loads(data)
+    return XML(marshal.loads(data))
 
 
 def XML_pickle(data):
@@ -652,15 +685,15 @@ class DIV(XmlComponent):
     Behaves like a dictionary regarding updating of attributes.
     Behaves like a list regarding inserting/appending components.
 
-    example::
+    Examples:
 
-        >>> DIV('hello', 'world', _style='color:red;').xml()
-        '<div style=\"color:red;\">helloworld</div>'
+    >>> DIV('hello', 'world', _style='color:red;').xml()
+    '<div style=\"color:red;\">helloworld</div>'
 
-    all other HTML helpers are derived from DIV.
+    All other HTML helpers are derived from `DIV`.
 
-    _something=\"value\" attributes are transparently translated into
-    something=\"value\" HTML attributes
+    `_something="value"` attributes are transparently translated into
+    `something="value"` HTML attributes
     """
 
     # name of the tag, subclasses should update this
@@ -670,10 +703,12 @@ class DIV(XmlComponent):
 
     def __init__(self, *components, **attributes):
         """
-        :param *components: any components that should be nested in this element
-        :param **attributes: any attributes you want to give to this element
+        Args:
+            components: any components that should be nested in this element
+            attributes: any attributes you want to give to this element
 
-        :raises SyntaxError: when a stand alone tag receives components
+        Raises:
+            SyntaxError: when a stand alone tag receives components
         """
 
         if self.tag[-1:] == '/' and components:
@@ -704,6 +739,8 @@ class DIV(XmlComponent):
         """
         list style appending of components
 
+        Examples:
+
         >>> a=DIV()
         >>> a.append(SPAN('x'))
         >>> print a
@@ -716,10 +753,12 @@ class DIV(XmlComponent):
 
     def insert(self, i, value):
         """
-        list style inserting of components
+        List-style inserting of components
+
+        Examples:
 
         >>> a=DIV()
-        >>> a.insert(0,SPAN('x'))
+        >>> a.insert(0, SPAN('x'))
         >>> print a
         <div><span>x</span></div>
         """
@@ -730,12 +769,12 @@ class DIV(XmlComponent):
 
     def __getitem__(self, i):
         """
-        gets attribute with name 'i' or component #i.
+        Gets attribute with name 'i' or component #i.
         If attribute 'i' is not found returns None
 
-        :param i: index
-           if i is a string: the name of the attribute
-           otherwise references to number of the component
+        Args:
+            i: index. If i is a string: the name of the attribute
+                otherwise references to number of the component
         """
 
         if isinstance(i, str):
@@ -746,14 +785,17 @@ class DIV(XmlComponent):
         else:
             return self.components[i]
 
+    def get(self, i):
+        return self.attributes.get(i)
+
     def __setitem__(self, i, value):
         """
-        sets attribute with name 'i' or component #i.
+        Sets attribute with name 'i' or component #i.
 
-        :param i: index
-           if i is a string: the name of the attribute
-           otherwise references to number of the component
-        :param value: the new value
+        Args:
+            i: index. If i is a string: the name of the attribute
+                otherwise references to number of the component
+            value: the new value
         """
         self._setnode(value)
         if isinstance(i, (str, unicode)):
@@ -763,11 +805,11 @@ class DIV(XmlComponent):
 
     def __delitem__(self, i):
         """
-        deletes attribute with name 'i' or component #i.
+        Deletes attribute with name 'i' or component #i.
 
-        :param i: index
-           if i is a string: the name of the attribute
-           otherwise references to number of the component
+        Args:
+            i: index. If i is a string: the name of the attribute
+                otherwise references to number of the component
         """
 
         if isinstance(i, str):
@@ -777,13 +819,13 @@ class DIV(XmlComponent):
 
     def __len__(self):
         """
-        returns the number of included components
+        Returns the number of included components
         """
         return len(self.components)
 
     def __nonzero__(self):
         """
-        always return True
+        Always returns True
         """
         return True
 
@@ -803,15 +845,16 @@ class DIV(XmlComponent):
         helper for _fixup. Checks if a component is in allowed_parents,
         otherwise wraps it in wrap_parent
 
-        :param allowed_parents: (tuple) classes that the component should be an
-            instance of
-        :param wrap_parent: the class to wrap the component in, if needed
-        :param wrap_lambda: lambda to use for wrapping, if needed
+        Args:
+            allowed_parents: (tuple) classes that the component should be an
+                instance of
+            wrap_parent: the class to wrap the component in, if needed
+            wrap_lambda: lambda to use for wrapping, if needed
 
         """
         components = []
         for c in self.components:
-            if isinstance(c, allowed_parents):
+            if isinstance(c, (allowed_parents, CAT)):
                 pass
             elif wrap_lambda:
                 c = wrap_lambda(c)
@@ -874,7 +917,7 @@ class DIV(XmlComponent):
 
     def _xml(self):
         """
-        helper for xml generation. Returns separately:
+        Helper for xml generation. Returns separately:
         - the component attributes
         - the generated xml of the inner components
 
@@ -882,7 +925,8 @@ class DIV(XmlComponent):
         do not have a False or None value. The underscore is removed.
         A value of True is replaced with the attribute name.
 
-        :returns: tuple: (attributes, components)
+        Returns:
+            tuple: (attributes, components)
         """
 
         # get the attributes for this component
@@ -897,19 +941,18 @@ class DIV(XmlComponent):
             elif value is False or value is None:
                 continue
             attr.append((name, value))
-        data = self.attributes.get('data',{})
+        data = self.attributes.get('data', {})
         for key, value in data.iteritems():
             name = 'data-' + key
             value = data[key]
-            attr.append((name,value))
+            attr.append((name, value))
         attr.sort()
         fa = ''
-        for name,value in attr:
+        for name, value in attr:
             fa += ' %s="%s"' % (name, xmlescape(value, True))
         # get the xml for the inner components
         co = join([xmlescape(component) for component in
                    self.components])
-
         return (fa, co)
 
     def xml(self):
@@ -931,18 +974,20 @@ class DIV(XmlComponent):
 
     def __str__(self):
         """
-        str(COMPONENT) returns equals COMPONENT.xml()
+        str(COMPONENT) returns COMPONENT.xml()
         """
 
         return self.xml()
 
     def flatten(self, render=None):
         """
-        return the text stored by the DIV object rendered by the render function
+        Returns the text stored by the DIV object rendered by the render function
         the render function must take text, tagname, and attributes
-        render=None is equivalent to render=lambda text, tag, attr: text
+        `render=None` is equivalent to `render=lambda text, tag, attr: text`
 
-        >>> markdown = lambda text,tag=None,attributes={}: \
+        Examples:
+
+        >>> markdown = lambda text, tag=None, attributes={}: \
                         {None: re.sub('\s+',' ',text), \
                          'h1':'#'+text+'\\n\\n', \
                          'p':text+'\\n'}.get(tag,text)
@@ -971,13 +1016,15 @@ class DIV(XmlComponent):
 
     def elements(self, *args, **kargs):
         """
-        find all component that match the supplied attribute dictionary,
+        Find all components that match the supplied attribute dictionary,
         or None if nothing could be found
 
         All components of the components are searched.
 
+        Examples:
+
         >>> a = DIV(DIV(SPAN('x'),3,DIV(SPAN('y'))))
-        >>> for c in a.elements('span',first_only=True): c[0]='z'
+        >>> for c in a.elements('span', first_only=True): c[0]='z'
         >>> print a
         <div><div><span>z</span>3<div><span>y</span></div></div></div>
         >>> for c in a.elements('span'): c[0]='z'
@@ -985,6 +1032,8 @@ class DIV(XmlComponent):
         <div><div><span>z</span>3<div><span>z</span></div></div></div>
 
         It also supports a syntax compatible with jQuery
+
+        Examples:
 
         >>> a=TAG('<div><span><a id="1-1" u:v=$>hello</a></span><p class="this is a test">world</p></div>')
         >>> for e in a.elements('div a#1-1, p.is'): print e.flatten()
@@ -994,7 +1043,6 @@ class DIV(XmlComponent):
         hello
         >>> a.elements('a[u:v=$]')[0].xml()
         '<a id="1-1" u:v="$">hello</a>'
-
         >>> a=FORM( INPUT(_type='text'), SELECT(range(1)), TEXTAREA() )
         >>> for c in a.elements('input, select, textarea'): c['_disabled'] = 'disabled'
         >>> a.xml()
@@ -1004,13 +1052,17 @@ class DIV(XmlComponent):
         a "replace" argument (note, a list of the original matching elements
         is still returned as usual).
 
+        Examples:
+
         >>> a = DIV(DIV(SPAN('x', _class='abc'), DIV(SPAN('y', _class='abc'), SPAN('z', _class='abc'))))
         >>> b = a.elements('span.abc', replace=P('x', _class='xyz'))
-        >>> print a
+        >>> print a  # We should .xml() here instead of print
         <div><div><p class="xyz">x</p><div><p class="xyz">x</p><p class="xyz">x</p></div></div></div>
 
         "replace" can be a callable, which will be passed the original element and
         should return a new element to replace it.
+
+        Examples:
 
         >>> a = DIV(DIV(SPAN('x', _class='abc'), DIV(SPAN('y', _class='abc'), SPAN('z', _class='abc'))))
         >>> b = a.elements('span.abc', replace=lambda el: P(el[0], _class='xyz'))
@@ -1018,6 +1070,8 @@ class DIV(XmlComponent):
         <div><div><p class="xyz">x</p><div><p class="xyz">y</p><p class="xyz">z</p></div></div></div>
 
         If replace=None, matching elements will be removed completely.
+
+        Examples:
 
         >>> a = DIV(DIV(SPAN('x', _class='abc'), DIV(SPAN('y', _class='abc'), SPAN('z', _class='abc'))))
         >>> b = a.elements('span', find='y', replace=None)
@@ -1029,6 +1083,8 @@ class DIV(XmlComponent):
         replaced (find_text is ignored if "replace" is not also specified).
         Like the "find" argument, "find_text" can be a string or a compiled regex.
 
+        Examples:
+
         >>> a = DIV(DIV(SPAN('x', _class='abc'), DIV(SPAN('y', _class='abc'), SPAN('z', _class='abc'))))
         >>> b = a.elements(find_text=re.compile('x|y|z'), replace='hello')
         >>> print a
@@ -1036,6 +1092,8 @@ class DIV(XmlComponent):
 
         If other attributes are specified along with find_text, then only components
         that match the specified attributes will be searched for find_text.
+
+        Examples:
 
         >>> a = DIV(DIV(SPAN('x', _class='abc'), DIV(SPAN('y', _class='efg'), SPAN('z', _class='abc'))))
         >>> b = a.elements('span.efg', find_text=re.compile('x|y|z'), replace='hello')
@@ -1080,7 +1138,7 @@ class DIV(XmlComponent):
         for (key, value) in kargs.iteritems():
             if key not in ['first_only', 'replace', 'find_text']:
                 if isinstance(value, (str, int)):
-                    if self[key] != str(value):
+                    if str(self[key]) != str(value):
                         check = False
                 elif key in self.attributes:
                     if not value.search(str(self[key])):
@@ -1110,13 +1168,13 @@ class DIV(XmlComponent):
                 return i
             else:
                 self[i] = replace(self[i]) if callable(replace) else replace
-                return i+1
+                return i + 1
         # loop the components
         if find_text or find_components:
             i = 0
-            while i<len(self.components):
+            while i < len(self.components):
                 c = self[i]
-                j = i+1
+                j = i + 1
                 if check and find_text and isinstance(c, str) and \
                         ((is_regex and find_text.search(c)) or (str(find_text) in c)):
                     j = replace_component(i)
@@ -1133,7 +1191,7 @@ class DIV(XmlComponent):
 
     def element(self, *args, **kargs):
         """
-        find the first component that matches the supplied attribute dictionary,
+        Finds the first component that matches the supplied attribute dictionary,
         or None if nothing could be found
 
         Also the components of the components are searched.
@@ -1147,7 +1205,7 @@ class DIV(XmlComponent):
 
     def siblings(self, *args, **kargs):
         """
-        find all sibling components that match the supplied argument list
+        Finds all sibling components that match the supplied argument list
         and attribute dictionary, or None if nothing could be found
         """
         sibs = [s for s in self.parent.components if not s == self]
@@ -1174,7 +1232,7 @@ class DIV(XmlComponent):
 
     def sibling(self, *args, **kargs):
         """
-        find the first sibling component that match the supplied argument list
+        Finds the first sibling component that match the supplied argument list
         and attribute dictionary, or None if nothing could be found
         """
         kargs['first_only'] = True
@@ -1190,30 +1248,33 @@ class CAT(DIV):
 
 
 def TAG_unpickler(data):
-    return cPickle.loads(data)
+    return pickle.loads(data)
 
 
 def TAG_pickler(data):
     d = DIV()
     d.__dict__ = data.__dict__
-    marshal_dump = cPickle.dumps(d)
+    marshal_dump = pickle.dumps(d, pickle.HIGHEST_PROTOCOL)
     return (TAG_unpickler, (marshal_dump,))
 
 
 class __tag_div__(DIV):
-    def __init__(self,name,*a,**b):
-        DIV.__init__(self,*a,**b)
+    def __init__(self, name, *a, **b):
+        DIV.__init__(self, *a, **b)
         self.tag = name
 
 copy_reg.pickle(__tag_div__, TAG_pickler, TAG_unpickler)
 
+
 class __TAG__(XmlComponent):
 
     """
-    TAG factory example::
+    TAG factory
 
-        >>> print TAG.first(TAG.second('test'), _key = 3)
-        <first key=\"3\"><second>test</second></first>
+    Examples:
+
+    >>> print TAG.first(TAG.second('test'), _key = 3)
+    <first key=\"3\"><second>test</second></first>
 
     """
 
@@ -1225,7 +1286,7 @@ class __TAG__(XmlComponent):
             name = name[:-1] + '/'
         if isinstance(name, unicode):
             name = name.encode('utf-8')
-        return lambda *a,**b: __tag_div__(name,*a,**b)
+        return lambda *a, **b: __tag_div__(name, *a, **b)
 
     def __call__(self, html):
         return web2pyHTMLParser(decoder.decoder(html)).tree
@@ -1238,16 +1299,16 @@ class HTML(DIV):
     There are four predefined document type definitions.
     They can be specified in the 'doctype' parameter:
 
-    -'strict' enables strict doctype
-    -'transitional' enables transitional doctype (default)
-    -'frameset' enables frameset doctype
-    -'html5' enables HTML 5 doctype
-    -any other string will be treated as user's own doctype
+    - 'strict' enables strict doctype
+    - 'transitional' enables transitional doctype (default)
+    - 'frameset' enables frameset doctype
+    - 'html5' enables HTML 5 doctype
+    - any other string will be treated as user's own doctype
 
     'lang' parameter specifies the language of the document.
     Defaults to 'en'.
 
-    See also :class:`DIV`
+    See also `DIV`
     """
 
     tag = 'html'
@@ -1288,10 +1349,10 @@ class XHTML(DIV):
     There are three predefined document type definitions.
     They can be specified in the 'doctype' parameter:
 
-    -'strict' enables strict doctype
-    -'transitional' enables transitional doctype (default)
-    -'frameset' enables frameset doctype
-    -any other string will be treated as user's own doctype
+    - 'strict' enables strict doctype
+    - 'transitional' enables transitional doctype (default)
+    - 'frameset' enables frameset doctype
+    - any other string will be treated as user's own doctype
 
     'lang' parameter specifies the language of the document and the xml document.
     Defaults to 'en'.
@@ -1299,7 +1360,7 @@ class XHTML(DIV):
     'xmlns' parameter specifies the xml namespace.
     Defaults to 'http://www.w3.org/1999/xhtml'.
 
-    See also :class:`DIV`
+    See also `DIV`
     """
 
     tag = 'html'
@@ -1442,7 +1503,7 @@ class P(DIV):
     """
     Will replace ``\\n`` by ``<br />`` if the `cr2br` attribute is provided.
 
-    see also :class:`DIV`
+    see also `DIV`
     """
 
     tag = 'p'
@@ -1475,14 +1536,34 @@ class HR(DIV):
 
 
 class A(DIV):
+    """
+    Generates an A() link.
+    A() in web2py is really important and with the included web2py.js
+    allows lots of Ajax interactions in the page
+
+    On top of "usual" `_attributes`, it takes
+
+    Args:
+        callback: an url to call but not redirect to
+        cid: if you want to load the _href into an element of the page (component)
+            pass its id (without the #) here
+        delete: element to delete after calling callback
+        target: same thing as cid
+        confirm: text to display upon a callback with a delete
+        noconfirm: don't display alert upon a callback with delete
+
+    """
 
     tag = 'a'
 
     def xml(self):
         if not self.components and self['_href']:
             self.append(self['_href'])
-        if not self['_disable_with']:
-            self['_data-w2p_disable_with'] = 'default'
+        disable_needed = ['callback', 'cid', 'delete', 'component', 'target']
+        disable_needed = any((self[attr] for attr in disable_needed))
+        if disable_needed:
+            self['_data-w2p_disable_with'] = self['_disable_with'] or 'default'
+            self['_disable_with'] = None
         if self['callback'] and not self['_id']:
             self['_id'] = web2py_uuid()
         if self['delete']:
@@ -1508,6 +1589,7 @@ class A(DIV):
             if self['pre_call']:
                 self['_data-w2p_pre_call'] = self['pre_call']
         return DIV.xml(self)
+
 
 class BUTTON(DIV):
 
@@ -1542,24 +1624,25 @@ class CENTER(DIV):
 class CODE(DIV):
 
     """
-    displays code in HTML with syntax highlighting.
+    Displays code in HTML with syntax highlighting.
 
-    :param attributes: optional attributes:
+    Args:
+        language: indicates the language, otherwise PYTHON is assumed
+        link: can provide a link
+        styles: for styles
 
-        - language: indicates the language, otherwise PYTHON is assumed
-        - link: can provide a link
-        - styles: for styles
+    Examples:
 
-    Example::
-
-        {{=CODE(\"print 'hello world'\", language='python', link=None,
-            counter=1, styles={}, highlight_line=None)}}
+    {{=CODE(\"print 'hello world'\", language='python', link=None,
+        counter=1, styles={}, highlight_line=None)}}
 
 
-    supported languages are \"python\", \"html_plain\", \"c\", \"cpp\",
-    \"web2py\", \"html\".
-    The \"html\" language interprets {{ and }} tags as \"web2py\" code,
-    \"html_plain\" doesn't.
+    supported languages are
+
+        "python", "html_plain", "c", "cpp", "web2py", "html"
+
+    The "html" language interprets {{ and }} tags as "web2py" code,
+    "html_plain" doesn't.
 
     if a link='/examples/global/vars/' is provided web2py keywords are linked to
     the online docs.
@@ -1603,7 +1686,6 @@ class UL(DIV):
 
     If subcomponents are not LI-components they will be wrapped in a LI
 
-    see also :class:`DIV`
     """
 
     tag = 'ul'
@@ -1633,7 +1715,6 @@ class TR(DIV):
 
     If subcomponents are not TD/TH-components they will be wrapped in a TD
 
-    see also :class:`DIV`
     """
 
     tag = 'tr'
@@ -1648,7 +1729,6 @@ class __TRHEAD__(DIV):
 
     If subcomponents are not TD/TH-components they will be wrapped in a TH
 
-    see also :class:`DIV`
     """
 
     tag = 'tr'
@@ -1683,7 +1763,7 @@ class TFOOT(DIV):
 
 class COL(DIV):
 
-    tag = 'col'
+    tag = 'col/'
 
 
 class COLGROUP(DIV):
@@ -1698,7 +1778,6 @@ class TABLE(DIV):
     If subcomponents are not TR/TBODY/THEAD/TFOOT-components
     they will be wrapped in a TR
 
-    see also :class:`DIV`
     """
 
     tag = 'table'
@@ -1720,34 +1799,36 @@ class IFRAME(DIV):
 class INPUT(DIV):
 
     """
-        INPUT Component
+    INPUT Component
 
-        examples::
+    Takes two special attributes value= and requires=.
 
-            >>> INPUT(_type='text', _name='name', value='Max').xml()
-            '<input name=\"name\" type=\"text\" value=\"Max\" />'
-
-            >>> INPUT(_type='checkbox', _name='checkbox', value='on').xml()
-            '<input checked=\"checked\" name=\"checkbox\" type=\"checkbox\" value=\"on\" />'
-
-            >>> INPUT(_type='radio', _name='radio', _value='yes', value='yes').xml()
-            '<input checked=\"checked\" name=\"radio\" type=\"radio\" value=\"yes\" />'
-
-            >>> INPUT(_type='radio', _name='radio', _value='no', value='yes').xml()
-            '<input name=\"radio\" type=\"radio\" value=\"no\" />'
-
-        the input helper takes two special attributes value= and requires=.
-
-        :param value: used to pass the initial value for the input field.
+    Args:
+        value: used to pass the initial value for the input field.
             value differs from _value because it works for checkboxes, radio,
             textarea and select/option too.
+            For a checkbox value should be '' or 'on'.
+            For a radio or select/option value should be the _value
+            of the checked/selected item.
 
-            - for a checkbox value should be '' or 'on'.
-            - for a radio or select/option value should be the _value
-                of the checked/selected item.
-
-        :param requires: should be None, or a validator or a list of validators
+        requires: should be None, or a validator or a list of validators
             for the value of the field.
+
+    Examples:
+
+    >>> INPUT(_type='text', _name='name', value='Max').xml()
+    '<input name=\"name\" type=\"text\" value=\"Max\" />'
+
+    >>> INPUT(_type='checkbox', _name='checkbox', value='on').xml()
+    '<input checked=\"checked\" name=\"checkbox\" type=\"checkbox\" value=\"on\" />'
+
+    >>> INPUT(_type='radio', _name='radio', _value='yes', value='yes').xml()
+    '<input checked=\"checked\" name=\"radio\" type=\"radio\" value=\"yes\" />'
+
+    >>> INPUT(_type='radio', _name='radio', _value='no', value='yes').xml()
+    '<input name=\"radio\" type=\"radio\" value=\"no\" />'
+
+
         """
 
     tag = 'input/'
@@ -1764,7 +1845,7 @@ class INPUT(DIV):
         if self['_type'] != 'checkbox':
             self['old_value'] = self['value'] or self['_value'] or ''
             value = request_vars_get(name, '')
-            self['value'] = value if not hasattr(value,'file') else None
+            self['value'] = value if not hasattr(value, 'file') else None
         else:
             self['old_value'] = self['value'] or False
             value = request_vars_get(name)
@@ -1776,13 +1857,19 @@ class INPUT(DIV):
         if requires:
             if not isinstance(requires, (list, tuple)):
                 requires = [requires]
-            for validator in requires:
-                (value, errors) = validator(value)
-                if not errors is None:
+            for k, validator in enumerate(requires):
+                try:
+                    (value, errors) = validator(value)
+                except:
+                    import traceback
+                    print traceback.format_exc()
+                    msg = "Validation error, field:%s %s" % (name,validator)
+                    raise Exception(msg)
+                if errors is not None:
                     self.vars[name] = value
                     self.errors[name] = errors
                     break
-        if not name in self.errors:
+        if name not in self.errors:
             self.vars[name] = value
             return True
         return False
@@ -1793,11 +1880,11 @@ class INPUT(DIV):
             t = self['_type'] = 'text'
         t = t.lower()
         value = self['value']
-        if self['_value'] is None or isinstance(self['_value'],cgi.FieldStorage):
+        if self['_value'] is None or isinstance(self['_value'], cgi.FieldStorage):
             _value = None
         else:
             _value = str(self['_value'])
-        if '_checked' in self.attributes and not 'value' in self.attributes:
+        if '_checked' in self.attributes and 'value' not in self.attributes:
             pass
         elif t == 'checkbox':
             if not _value:
@@ -1814,6 +1901,8 @@ class INPUT(DIV):
                 self['_checked'] = 'checked'
             else:
                 self['_checked'] = None
+        elif t == 'password' and value != DEFAULT_PASSWORD_DISPLAY:
+            self['value'] = ''
         elif not t == 'submit':
             if value is None:
                 self['value'] = _value
@@ -1825,8 +1914,7 @@ class INPUT(DIV):
         if name and hasattr(self, 'errors') \
                 and self.errors.get(name, None) \
                 and self['hideerror'] != True:
-            self['_class'] = (self['_class'] and self['_class']
-                              + ' ' or '') + 'invalidinput'
+            self['_class'] = (self['_class'] and self['_class'] + ' ' or '') + 'invalidinput'
             return DIV.xml(self) + DIV(
                 DIV(
                     self.errors[name], _class='error',
@@ -1843,21 +1931,22 @@ class INPUT(DIV):
 class TEXTAREA(INPUT):
 
     """
-    example::
+    Examples::
 
-        TEXTAREA(_name='sometext', value='blah '*100, requires=IS_NOT_EMPTY())
+        TEXTAREA(_name='sometext', value='blah ' * 100, requires=IS_NOT_EMPTY())
 
     'blah blah blah ...' will be the content of the textarea field.
+
     """
 
     tag = 'textarea'
 
     def _postprocessing(self):
-        if not '_rows' in self.attributes:
+        if '_rows' not in self.attributes:
             self['_rows'] = 10
-        if not '_cols' in self.attributes:
+        if '_cols' not in self.attributes:
             self['_cols'] = 40
-        if not self['value'] is None:
+        if self['value'] is not None:
             self.components = [self['value']]
         elif self.components:
             self['value'] = self.components[0]
@@ -1868,7 +1957,7 @@ class OPTION(DIV):
     tag = 'option'
 
     def _fixup(self):
-        if not '_value' in self.attributes:
+        if '_value' not in self.attributes:
             self.attributes['_value'] = str(self.components[0])
 
 
@@ -1894,12 +1983,12 @@ class OPTGROUP(DIV):
 class SELECT(INPUT):
 
     """
-    example::
+    Examples:
 
-        >>> from validators import IS_IN_SET
-        >>> SELECT('yes', 'no', _name='selector', value='yes',
-        ...    requires=IS_IN_SET(['yes', 'no'])).xml()
-        '<select name=\"selector\"><option selected=\"selected\" value=\"yes\">yes</option><option value=\"no\">no</option></select>'
+    >>> from validators import IS_IN_SET
+    >>> SELECT('yes', 'no', _name='selector', value='yes',
+    ...    requires=IS_IN_SET(['yes', 'no'])).xml()
+    '<select name=\"selector\"><option selected=\"selected\" value=\"yes\">yes</option><option value=\"no\">no</option></select>'
 
     """
 
@@ -1924,11 +2013,10 @@ class SELECT(INPUT):
         options = itertools.chain(*component_list)
 
         value = self['value']
-        if not value is None:
+        if value is not None:
             if not self['_multiple']:
                 for c in options:  # my patch
-                    if ((value is not None) and
-                        (str(c['_value']) == str(value))):
+                    if ((value is not None) and (str(c['_value']) == str(value))):
                         c['_selected'] = 'selected'
                     else:
                         c['_selected'] = None
@@ -1938,8 +2026,7 @@ class SELECT(INPUT):
                 else:
                     values = [str(value)]
                 for c in options:  # my patch
-                    if ((value is not None) and
-                        (str(c['_value']) in values)):
+                    if ((value is not None) and (str(c['_value']) in values)):
                         c['_selected'] = 'selected'
                     else:
                         c['_selected'] = None
@@ -1958,12 +2045,13 @@ class LEGEND(DIV):
 class FORM(DIV):
 
     """
-    example::
+    Examples:
 
-        >>> from validators import IS_NOT_EMPTY
-        >>> form=FORM(INPUT(_name="test", requires=IS_NOT_EMPTY()))
-        >>> form.xml()
-        '<form action=\"#\" enctype=\"multipart/form-data\" method=\"post\"><input name=\"test\" type=\"text\" /></form>'
+    >>> from validators import IS_NOT_EMPTY
+    >>> form=FORM(INPUT(_name="test", requires=IS_NOT_EMPTY()))
+    >>> form.xml()
+    '<form action=\"#\" enctype=\"multipart/form-data\" method=\"post\"><input name=\"test\" type=\"text\" /></form>'
+
 
     a FORM is container for INPUT, TEXTAREA, SELECT and other helpers
 
@@ -1988,16 +2076,15 @@ class FORM(DIV):
     def assert_status(self, status, request_vars):
         return status
 
-    def accepts(
-        self,
-        request_vars,
-        session=None,
-        formname='default',
-        keepvalues=False,
-        onvalidation=None,
-        hideerror=False,
-        **kwargs
-    ):
+    def accepts(self,
+                request_vars,
+                session=None,
+                formname='default',
+                keepvalues=False,
+                onvalidation=None,
+                hideerror=False,
+                **kwargs
+                ):
         """
         kwargs is not used but allows to specify the same interface for FORM and SQLFORM
         """
@@ -2029,7 +2116,7 @@ class FORM(DIV):
             status = False
         if status and session:
             # check if editing a record that has been modified by the server
-            if hasattr(self, 'record_hash') and self.record_hash != formkey:
+            if hasattr(self, 'record_hash') and self.record_hash != formkey.split(':')[0]:
                 status = False
                 self.record_changed = changed = True
         status = self._traverse(status, hideerror)
@@ -2039,55 +2126,51 @@ class FORM(DIV):
                 onsuccess = onvalidation.get('onsuccess', None)
                 onfailure = onvalidation.get('onfailure', None)
                 onchange = onvalidation.get('onchange', None)
-                if [k for k in onvalidation if not k in (
-                        'onsuccess','onfailure','onchange')]:
+                if [k for k in onvalidation if k not in ('onsuccess', 'onfailure', 'onchange')]:
                     raise RuntimeError('Invalid key in onvalidate dict')
                 if onsuccess and status:
-                    call_as_list(onsuccess,self)
+                    call_as_list(onsuccess, self)
                 if onfailure and request_vars and not status:
-                    call_as_list(onfailure,self)
+                    call_as_list(onfailure, self)
                     status = len(self.errors) == 0
                 if changed:
                     if onchange and self.record_changed and \
                             self.detect_record_change:
-                        call_as_list(onchange,self)
+                        call_as_list(onchange, self)
             elif status:
                 call_as_list(onvalidation, self)
         if self.errors:
             status = False
-        if not session is None:
+        if session is not None:
             if hasattr(self, 'record_hash'):
-                formkey = self.record_hash
+                formkey = self.record_hash + ':' + web2py_uuid()
             else:
                 formkey = web2py_uuid()
             self.formkey = formkey
             keyname = '_formkey[%s]' % formname
-            session[keyname] = list(session.get(keyname,[]))[-9:] + [formkey]
+            session[keyname] = list(session.get(keyname, []))[-9:] + [formkey]
         if status and not keepvalues:
             self._traverse(False, hideerror)
         self.accepted = status
         return status
 
     def _postprocessing(self):
-        if not '_action' in self.attributes:
+        if '_action' not in self.attributes:
             self['_action'] = '#'
-        if not '_method' in self.attributes:
+        if '_method' not in self.attributes:
             self['_method'] = 'post'
-        if not '_enctype' in self.attributes:
+        if '_enctype' not in self.attributes:
             self['_enctype'] = 'multipart/form-data'
 
     def hidden_fields(self):
         c = []
         attr = self.attributes.get('hidden', {})
         if 'hidden' in self.attributes:
-            c = [INPUT(_type='hidden', _name=key, _value=value)
-                 for (key, value) in attr.iteritems()]
+            c = [INPUT(_type='hidden', _name=key, _value=value) for (key, value) in attr.iteritems()]
         if hasattr(self, 'formkey') and self.formkey:
-            c.append(INPUT(_type='hidden', _name='_formkey',
-                     _value=self.formkey))
+            c.append(INPUT(_type='hidden', _name='_formkey', _value=self.formkey))
         if hasattr(self, 'formname') and self.formname:
-            c.append(INPUT(_type='hidden', _name='_formname',
-                     _value=self.formname))
+            c.append(INPUT(_type='hidden', _name='_formname', _value=self.formname))
         return DIV(c, _style="display:none;")
 
     def xml(self):
@@ -2103,12 +2186,12 @@ class FORM(DIV):
         you can use it instead of directly form.accepts.
 
         Usage:
-        In controller
+        In controller::
 
-        def action():
-            form=FORM(INPUT(_name=\"test\", requires=IS_NOT_EMPTY()))
-            form.validate() #you can pass some args here - see below
-            return dict(form=form)
+            def action():
+                form=FORM(INPUT(_name=\"test\", requires=IS_NOT_EMPTY()))
+                form.validate() #you can pass some args here - see below
+                return dict(form=form)
 
         This can receive a bunch of arguments
 
@@ -2132,8 +2215,7 @@ class FORM(DIV):
         kwargs['request_vars'] = kwargs.get(
             'request_vars', current.request.post_vars)
         kwargs['session'] = kwargs.get('session', current.session)
-        kwargs['dbio'] = kwargs.get('dbio', False)
-                                    # necessary for SQLHTML forms
+        kwargs['dbio'] = kwargs.get('dbio', False)  # necessary for SQLHTML forms
 
         onsuccess = kwargs.get('onsuccess', 'flash')
         onfailure = kwargs.get('onfailure', 'flash')
@@ -2186,44 +2268,46 @@ class FORM(DIV):
         """
         Perform the .validate() method but returns the form
 
-        Usage in controllers:
-        # directly on return
-        def action():
-            #some code here
-            return dict(form=FORM(...).process(...))
+        Usage in controllers::
 
-        You can use it with FORM, SQLFORM or FORM based plugins
+            # directly on return
+            def action():
+                #some code here
+                return dict(form=FORM(...).process(...))
 
-        Examples:
-        #response.flash messages
-        def action():
-            form = SQLFORM(db.table).process(message_onsuccess='Sucess!')
-            retutn dict(form=form)
+        You can use it with FORM, SQLFORM or FORM based plugins::
 
-        # callback function
-        # callback receives True or False as first arg, and a list of args.
-        def my_callback(status, msg):
-           response.flash = "Success! "+msg if status else "Errors occured"
+            # response.flash messages
+            def action():
+                form = SQLFORM(db.table).process(message_onsuccess='Sucess!')
+                return dict(form=form)
 
-        # after argument can be 'flash' to response.flash messages
-        # or a function name to use as callback or None to do nothing.
-        def action():
-            return dict(form=SQLFORM(db.table).process(onsuccess=my_callback)
+            # callback function
+            # callback receives True or False as first arg, and a list of args.
+            def my_callback(status, msg):
+                response.flash = "Success! "+msg if status else "Errors occured"
+
+            # after argument can be 'flash' to response.flash messages
+            # or a function name to use as callback or None to do nothing.
+            def action():
+                return dict(form=SQLFORM(db.table).process(onsuccess=my_callback)
+
+
         """
-        kwargs['dbio'] = kwargs.get('dbio', True)
-                                    # necessary for SQLHTML forms
+        kwargs['dbio'] = kwargs.get('dbio', True)  # necessary for SQLHTML forms
         self.validate(**kwargs)
         return self
 
     REDIRECT_JS = "window.location='%s';return false"
 
     def add_button(self, value, url, _class=None):
-        submit = self.element('input[type=submit]')
+        submit = self.element(_type='submit')
+        _class = "%s w2p-form-button" % _class if _class else "w2p-form-button"
         submit.parent.append(
-            INPUT(_type="button", _value=value, _class=_class,
-                  _onclick=url if url.startswith('javascript:') else
-                      self.REDIRECT_JS % url))
-        
+            TAG['button'](value, _class=_class,
+                          _onclick=url if url.startswith('javascript:') else
+                          self.REDIRECT_JS % url))
+
     @staticmethod
     def confirm(text='OK', buttons=None, hidden=None):
         if not buttons:
@@ -2256,10 +2340,9 @@ class FORM(DIV):
         def sanitizer(obj):
             if isinstance(obj, dict):
                 for k in obj.keys():
-                    if any([unsafe in str(k).upper() for
-                           unsafe in UNSAFE]):
-                       # erease unsafe pair
-                       obj.pop(k)
+                    if any([unsafe in str(k).upper() for unsafe in UNSAFE]):
+                        # erease unsafe pair
+                        obj.pop(k)
             else:
                 # not implemented
                 pass
@@ -2285,8 +2368,10 @@ class FORM(DIV):
                         return [flatten(item) for item in newobj]
                     else:
                         return newobj
-                else: return str(newobj)
-            else: return newobj
+                else:
+                    return str(newobj)
+            else:
+                return newobj
         return flatten(d)
 
     def as_json(self, sanitize=True):
@@ -2308,16 +2393,20 @@ class FORM(DIV):
 class BEAUTIFY(DIV):
 
     """
-    example::
+    Turns any list, dictionary, etc into decent looking html.
 
-        >>> BEAUTIFY(['a', 'b', {'hello': 'world'}]).xml()
-        '<div><table><tr><td><div>a</div></td></tr><tr><td><div>b</div></td></tr><tr><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">hello</td><td style="vertical-align:top;">:</td><td><div>world</div></td></tr></table></div></td></tr></table></div>'
-
-    turns any list, dictionary, etc into decent looking html.
     Two special attributes are
-    :sorted: a function that takes the dict and returned sorted keys
-    :keyfilter: a funciton that takes a key and returns its representation
-                or None if the key is to be skipped. By default key[:1]=='_' is skipped.
+
+    - sorted: a function that takes the dict and returned sorted keys
+    - keyfilter: a function that takes a key and returns its representation or
+      None if the key is to be skipped.
+      By default key[:1]=='_' is skipped.
+
+    Examples:
+
+    >>> BEAUTIFY(['a', 'b', {'hello': 'world'}]).xml()
+    '<div><table><tr><td><div>a</div></td></tr><tr><td><div>b</div></td></tr><tr><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">hello</td><td style="vertical-align:top;">:</td><td><div>world</div></td></tr></table></div></td></tr></table></div>'
+
     """
 
     tag = 'div'
@@ -2389,16 +2478,18 @@ class MENU(DIV):
     """
     Used to build menus
 
-    Optional arguments
-      _class: defaults to 'web2py-menu web2py-menu-vertical'
-      ul_class: defaults to 'web2py-menu-vertical'
-      li_class: defaults to 'web2py-menu-expand'
-      li_first: defaults to 'web2py-menu-first'
-      li_last: defaults to 'web2py-menu-last'
+    Args:
+        _class: defaults to 'web2py-menu web2py-menu-vertical'
+        ul_class: defaults to 'web2py-menu-vertical'
+        li_class: defaults to 'web2py-menu-expand'
+        li_first: defaults to 'web2py-menu-first'
+        li_last: defaults to 'web2py-menu-last'
 
-    Example:
+    Use like::
+
         menu = MENU([['name', False, URL(...), [submenu]], ...])
         {{=menu}}
+
     """
 
     tag = 'ul'
@@ -2407,19 +2498,19 @@ class MENU(DIV):
         self.data = data
         self.attributes = args
         self.components = []
-        if not '_class' in self.attributes:
+        if '_class' not in self.attributes:
             self['_class'] = 'web2py-menu web2py-menu-vertical'
-        if not 'ul_class' in self.attributes:
+        if 'ul_class' not in self.attributes:
             self['ul_class'] = 'web2py-menu-vertical'
-        if not 'li_class' in self.attributes:
+        if 'li_class' not in self.attributes:
             self['li_class'] = 'web2py-menu-expand'
-        if not 'li_first' in self.attributes:
+        if 'li_first' not in self.attributes:
             self['li_first'] = 'web2py-menu-first'
-        if not 'li_last' in self.attributes:
+        if 'li_last' not in self.attributes:
             self['li_last'] = 'web2py-menu-last'
-        if not 'li_active' in self.attributes:
+        if 'li_active' not in self.attributes:
             self['li_active'] = 'web2py-menu-active'
-        if not 'mobile' in self.attributes:
+        if 'mobile' not in self.attributes:
             self['mobile'] = False
 
     def serialize(self, data, level=0):
@@ -2428,7 +2519,7 @@ class MENU(DIV):
         else:
             ul = UL(_class=self['ul_class'])
         for item in data:
-            if isinstance(item,LI):
+            if isinstance(item, LI):
                 ul.append(item)
             else:
                 (name, active, link) = item[:3]
@@ -2436,7 +2527,7 @@ class MENU(DIV):
                     li = LI(link)
                 elif 'no_link_url' in self.attributes and self['no_link_url'] == link:
                     li = LI(DIV(name))
-                elif isinstance(link,dict):
+                elif isinstance(link, dict):
                     li = LI(A(name, **link))
                 elif link:
                     li = LI(A(name, _href=link))
@@ -2468,8 +2559,8 @@ class MENU(DIV):
         for item in data:
             # Custom item aren't serialized as mobile
             if len(item) >= 3 and (not item[0]) or (isinstance(item[0], DIV) and not (item[2])):
-            # ex: ('', False,A('title',_href=URL(...),_title="title"))
-            # ex: (A('title',_href=URL(...),_title="title"), False, None)
+                # ex: ('', False, A('title', _href=URL(...), _title="title"))
+                # ex: (A('title', _href=URL(...), _title="title"), False, None)
                 custom_items.append(item)
             elif len(item) <= 4 or item[4] == True:
                 select.append(OPTION(CAT(prefix, item[0]),
@@ -2479,7 +2570,7 @@ class MENU(DIV):
                         item[3], select, prefix=CAT(prefix, item[0], '/'))
         select['_onchange'] = 'window.location=this.value'
         # avoid to wrap the select if no custom items are present
-        html = DIV(select,  self.serialize(custom_items)) if len( custom_items) else select
+        html = DIV(select, self.serialize(custom_items)) if len(custom_items) else select
         return html
 
     def xml(self):
@@ -2489,18 +2580,18 @@ class MENU(DIV):
             return self.serialize(self.data, 0).xml()
 
 
-def embed64(
-    filename=None,
-    file=None,
-    data=None,
-    extension='image/gif',
-):
+def embed64(filename=None,
+            file=None,
+            data=None,
+            extension='image/gif'
+            ):
     """
     helper to encode the provided (binary) data into base64.
 
-    :param filename: if provided, opens and reads this file in 'rb' mode
-    :param file: if provided, reads this file
-    :param data: if provided, uses the provided data
+    Args:
+        filename: if provided, opens and reads this file in 'rb' mode
+        file: if provided, reads this file
+        data: if provided, uses the provided data
     """
 
     if filename and os.path.exists(file):
@@ -2511,13 +2602,14 @@ def embed64(
     return 'data:%s;base64,%s' % (extension, data)
 
 
+# TODO: Check if this test() is still relevant now that we have gluon/tests/test_html.py
 def test():
     """
     Example:
 
     >>> from validators import *
     >>> print DIV(A('click me', _href=URL(a='a', c='b', f='c')), BR(), HR(), DIV(SPAN("World"), _class='unknown')).xml()
-    <div><a data-w2p_disable_with="default" href="/a/b/c">click me</a><br /><hr /><div class=\"unknown\"><span>World</span></div></div>
+    <div><a href="/a/b/c">click me</a><br /><hr /><div class=\"unknown\"><span>World</span></div></div>
     >>> print DIV(UL("doc","cat","mouse")).xml()
     <div><ul><li>doc</li><li>cat</li><li>mouse</li></ul></div>
     >>> print DIV(UL("doc", LI("cat", _class='feline'), 18)).xml()
@@ -2530,7 +2622,7 @@ def test():
     >>> print form.accepts({'myvar':'34'}, formname=None)
     False
     >>> print form.xml()
-    <form action="#" enctype="multipart/form-data" method="post"><input class="invalidinput" name="myvar" type="text" value="34" /><div class="error_wrapper"><div class="error" id="myvar__error">invalid expression</div></div></form>
+    <form action="#" enctype="multipart/form-data" method="post"><input class="invalidinput" name="myvar" type="text" value="34" /><div class="error_wrapper"><div class="error" id="myvar__error">Invalid expression</div></div></form>
     >>> print form.accepts({'myvar':'4'}, formname=None, keepvalues=True)
     True
     >>> print form.xml()
@@ -2549,7 +2641,7 @@ def test():
     >>> form=FORM(INPUT(value="Hello World", _name="var", requires=IS_MATCH('^\w+$')))
     >>> isinstance(form.as_dict(), dict)
     True
-    >>> form.as_dict(flat=True).has_key("vars")
+    >>> "vars" in form.as_dict(flat=True)
     True
     >>> isinstance(form.as_json(), basestring) and len(form.as_json(sanitize=False)) > 0
     True
@@ -2698,50 +2790,63 @@ class MARKMIN(XmlComponent):
     """
     For documentation: http://web2py.com/examples/static/markmin.html
     """
-    def __init__(self, text, extra=None, allowed=None, sep='p',
+    def __init__(self,
+                 text, extra=None, allowed=None, sep='p',
                  url=None, environment=None, latex='google',
                  autolinks='default',
                  protolinks='default',
                  class_prefix='',
-                 id_prefix='markmin_'):
+                 id_prefix='markmin_',
+                 **kwargs):
         self.text = text
         self.extra = extra or {}
         self.allowed = allowed or {}
         self.sep = sep
-        self.url = URL if url == True else url
+        self.url = URL if url is True else url
         self.environment = environment
         self.latex = latex
         self.autolinks = autolinks
         self.protolinks = protolinks
         self.class_prefix = class_prefix
         self.id_prefix = id_prefix
+        self.kwargs = kwargs
+
+    def flatten(self):
+        return self.text
 
     def xml(self):
-        """
-        calls the gluon.contrib.markmin render function to convert the wiki syntax
-        """
         from gluon.contrib.markmin.markmin2html import render
-        return render(self.text, extra=self.extra,
+        html = render(self.text, extra=self.extra,
                       allowed=self.allowed, sep=self.sep, latex=self.latex,
                       URL=self.url, environment=self.environment,
                       autolinks=self.autolinks, protolinks=self.protolinks,
                       class_prefix=self.class_prefix, id_prefix=self.id_prefix)
+        return html if not self.kwargs else DIV(XML(html), **self.kwargs).xml()
 
     def __str__(self):
         return self.xml()
 
-    def flatten(self, render=None):
-        """
-        return the text stored by the MARKMIN object rendered by the render function
-        """
-        return self.text
 
-    def elements(self, *args, **kargs):
-        """
-        to be considered experimental since the behavior of this method is questionable
-        another options could be TAG(self.text).elements(*args,**kargs)
-        """
-        return [self.text]
+def ASSIGNJS(**kargs):
+    """
+    Example:
+        ASSIGNJS(var1='1', var2='2') will return the following javascript variables assignations :
+
+            var var1 = "1";
+            var var2 = "2";
+
+    Args:
+        **kargs: Any keywords arguments and assigned values.
+
+    Returns:
+        Javascript vars assignations for the key/value passed.
+
+    """
+    from gluon.serializers import json
+    s = ""
+    for key, value in kargs.items():
+        s += 'var %s = %s;\n' % (key, json(value))
+    return XML(s)
 
 
 if __name__ == '__main__':

@@ -16,4 +16,4 @@ with open("test.xml", "wb") as code:
 doc = et.parse("test.xml")
 
 for element in doc.findall("route/leg/step"):
-    print element.find("html_instructions").text
+    print(element.find("html_instructions").text)

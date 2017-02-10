@@ -7,30 +7,30 @@
 
 <form class="form-signin" role="form" method="post" action="/">
   {{ form.csrf_token }}
-    <p>
-    {{ form.name(placeholder="name") }}
-    <span class="error">
-      {% if form.name.errors %}
+  <div class="input-group">
+    {{ form.name(placeholder="user name") }}
+    {% if form.name.errors %}
+      <span class="error">
         {% for error in form.name.errors %}
           {{ error }}
         {% endfor %}
-      {% endif %}
-    </span>
-    </p>
-    <p>
+      </span>
+    {% endif %}
+  </div>
+  <div class="input-group">
     {{ form.password(placeholder="password") }}
-    <span class="error">
-      {% if form.password.errors %}
+    {% if form.password.errors %}
+      <span class="error">
         {% for error in form.password.errors %}
           {{ error }}
         {% endfor %}
-      {% endif %}
-    </span>
-    </p>
+      </span>
+    {% endif %}
+  </div>
   <button class="btn btn-sm btn-success" type="submit">Sign in</button>
   <br>
   <br>
-  <p><em>Need an account? </em><a href="/register">Signup!!</a></p>
+  <p><em>Need an account?</em><a href="/register">Signup!!</a></p>
 </form>
 
 {% endblock %}

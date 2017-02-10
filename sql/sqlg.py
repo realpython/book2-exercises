@@ -13,4 +13,4 @@ with sqlite3.connect("new.db") as connection:
 
     # output the rows to the screen, row by row
     for r in rows:
-        print r[0], r[1]
+        print(r[0], r[1])

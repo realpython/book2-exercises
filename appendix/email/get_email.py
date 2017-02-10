@@ -20,6 +20,6 @@ status, num = server.select('Inbox')
 status, data = server.fetch(num[0], '(BODY[TEXT])')
 
 # print the results
-print data[0][1]
+print(data[0][1].decode("utf-8", "ignore"))
 server.close()
 server.logout()

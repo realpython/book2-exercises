@@ -2,7 +2,6 @@ from django.db import models
 
 from uuslug import uuslug
 
-
 class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
@@ -12,7 +11,7 @@ class Post(models.Model):
     views = models.IntegerField(default=0)
     slug = models.CharField(max_length=100, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):

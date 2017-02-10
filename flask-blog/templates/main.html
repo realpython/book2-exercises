@@ -4,11 +4,17 @@
   <p><a href="/logout">Logout</a></p>
     <h3>Add a new post:</h3>
     <form action="{{ url_for('add') }}" method="post" class="add">
-        <label><strong>Title:</strong></label>
-        <input name="title" type="text">
-        <p><label><strong>Post:</strong></label><br>
-        <textarea name="post" rows="5" cols="40"></textarea></p>
-        <input class="button" type="submit" value="Save">
+        <div>
+          <label><strong>Title:</strong></label>
+          <input name="title" type="text">
+        </div>
+        <div>
+          <label><strong>Post:</strong></label>
+          <textarea name="post" rows="5" cols="40"></textarea>
+        </div>
+        <div class="">
+          <input class="button" type="submit" value="Save">
+        </div>
     </form>
   <br>
   <br>
