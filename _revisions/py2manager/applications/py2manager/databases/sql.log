@@ -1,0 +1,103 @@
+timestamp: 2014-03-04T00:44:44.436419
+CREATE TABLE special_users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512),
+    email CHAR(512)
+);
+success!
+DROP TABLE special_users;
+success!
+timestamp: 2014-03-04T01:01:27.408170
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2014-03-04T01:01:27.411689
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-03-04T01:01:27.413847
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-03-04T01:01:27.416469
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-03-04T01:01:27.419046
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-03-04T01:01:27.421675
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2014-03-04T01:01:27.424647
+CREATE TABLE company(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company_name CHAR(512) NOT NULL UNIQUE,
+    email CHAR(512),
+    phone CHAR(512) NOT NULL,
+    url CHAR(512)
+);
+success!
+timestamp: 2014-03-04T01:01:27.427338
+CREATE TABLE project(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512) NOT NULL,
+    employee_name INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    company_name INTEGER REFERENCES company (id) ON DELETE CASCADE,
+    description TEXT NOT NULL,
+    start_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    completed CHAR(1) NOT NULL
+);
+success!
+timestamp: 2014-03-04T20:48:52.715575
+ALTER TABLE auth_user ADD city CHAR(512);
+timestamp: 2014-03-04T20:48:52.765950
+ALTER TABLE auth_user ADD zip CHAR(512);
+timestamp: 2014-03-04T20:48:52.793685
+ALTER TABLE auth_user ADD image CHAR(512);
+timestamp: 2014-03-04T20:48:52.797324
+ALTER TABLE auth_user ADD address CHAR(512);
+success!
+timestamp: 2014-03-04T22:10:40.174913
+CREATE TABLE note(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id INTEGER REFERENCES project (id) ON DELETE CASCADE,
+    post TEXT NOT NULL,
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!

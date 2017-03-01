@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.decoder</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;decoder
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.decoder-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.decoder-module.html" onclick="show_private();">Module gluon.decoder</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">codecs</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-string">"""Caller will hand this library a buffer and ask it to either convert</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-string">it or auto-detect the type.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-string">Based on http://code.activestate.com/recipes/52257/</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-string">Licensed under the PSF License</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"># None represents a potentially variable byte. "##" in the XML spec...</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable gluon.decoder.autodetect_dict=gluon.decoder-module.html#autodetect_dict"><a title="gluon.decoder.autodetect_dict" class="py-name" href="#" onclick="return doclink('link-0', 'autodetect_dict', 'link-0');">autodetect_dict</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt>  <tt class="py-comment"># bytepattern     : ("name",</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                                         <tt class="py-op">(</tt><tt class="py-number">0x00</tt><tt class="py-op">,</tt> <tt class="py-number">0x00</tt><tt class="py-op">,</tt> <tt class="py-number">0xFE</tt><tt class="py-op">,</tt> <tt class="py-number">0xFF</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"ucs4_be"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0xFF</tt><tt class="py-op">,</tt> <tt class="py-number">0xFE</tt><tt class="py-op">,</tt> <tt class="py-number">0x00</tt><tt class="py-op">,</tt> <tt class="py-number">0x00</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"ucs4_le"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0xFE</tt><tt class="py-op">,</tt> <tt class="py-number">0xFF</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"utf_16_be"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0xFF</tt><tt class="py-op">,</tt> <tt class="py-number">0xFE</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"utf_16_le"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0x00</tt><tt class="py-op">,</tt> <tt class="py-number">0x3C</tt><tt class="py-op">,</tt> <tt class="py-number">0x00</tt><tt class="py-op">,</tt> <tt class="py-number">0x3F</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"utf_16_be"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0x3C</tt><tt class="py-op">,</tt> <tt class="py-number">0x00</tt><tt class="py-op">,</tt> <tt class="py-number">0x3F</tt><tt class="py-op">,</tt> <tt class="py-number">0x00</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"utf_16_le"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0x3C</tt><tt class="py-op">,</tt> <tt class="py-number">0x3F</tt><tt class="py-op">,</tt> <tt class="py-number">0x78</tt><tt class="py-op">,</tt> <tt class="py-number">0x6D</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"utf_8"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-number">0x4C</tt><tt class="py-op">,</tt> <tt class="py-number">0x6F</tt><tt class="py-op">,</tt> <tt class="py-number">0xA7</tt><tt class="py-op">,</tt> <tt class="py-number">0x94</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-string">"EBCDIC"</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-op">}</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="autoDetectXMLEncoding"></a><div id="autoDetectXMLEncoding-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="autoDetectXMLEncoding-toggle" onclick="return toggle('autoDetectXMLEncoding');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.decoder-module.html#autoDetectXMLEncoding">autoDetectXMLEncoding</a><tt class="py-op">(</tt><tt class="py-param">buffer</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="autoDetectXMLEncoding-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="autoDetectXMLEncoding-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-docstring">""" buffer -&gt; encoding_name</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">    The buffer should be at least 4 bytes long.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">        Returns None if encoding cannot be detected.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">        Note that encoding_name might not have an installed</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">        decoder (e.g. EBCDIC)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-comment"># a more efficient implementation would not decode the whole</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-comment"># buffer at once but otherwise we'd have to decode a character at</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-comment"># a time looking for the quote character...that's a pain</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt class="py-string">"utf_8"</tt>  <tt class="py-comment"># according to the XML spec, this is the default</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                          <tt class="py-comment"># this code successively tries to refine the default</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                          <tt class="py-comment"># whenever it fails to refine, it falls back to</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                          <tt class="py-comment"># the last place encoding was set.</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-1" class="py-name" targets="Method gluon.dal.Expression.len()=gluon.dal.Expression-class.html#len"><a title="gluon.dal.Expression.len" class="py-name" href="#" onclick="return doclink('link-1', 'len', 'link-1');">len</a></tt><tt class="py-op">(</tt><tt class="py-name">buffer</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">bytes</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">byte1</tt><tt class="py-op">,</tt> <tt class="py-name">byte2</tt><tt class="py-op">,</tt> <tt class="py-name">byte3</tt><tt class="py-op">,</tt> <tt class="py-name">byte4</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name" targets="Function gluon.utf8.ord()=gluon.utf8-module.html#ord"><a title="gluon.utf8.ord" class="py-name" href="#" onclick="return doclink('link-2', 'ord', 'link-2');">ord</a></tt><tt class="py-op">,</tt> <tt class="py-name">buffer</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">4</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">enc_info</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="gluon.decoder.autodetect_dict" class="py-name" href="#" onclick="return doclink('link-3', 'autodetect_dict', 'link-0');">autodetect_dict</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-4', 'get', 'link-4');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">bytes</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">enc_info</tt><tt class="py-op">:</tt>  <tt class="py-comment"># try autodetection again removing potentially</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-comment"># variable bytes</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-name">bytes</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">byte1</tt><tt class="py-op">,</tt> <tt class="py-name">byte2</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-name">enc_info</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="gluon.decoder.autodetect_dict" class="py-name" href="#" onclick="return doclink('link-5', 'autodetect_dict', 'link-0');">autodetect_dict</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-6', 'get', 'link-4');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">bytes</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-name">enc_info</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">enc_info</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt class="py-name">enc_info</tt>  <tt class="py-comment"># we've got a guess... these are</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                            <tt class="py-comment">#the new defaults</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-comment"># try to find a more precise encoding using xml declaration</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">secret_decoder_ring</tt> <tt class="py-op">=</tt> <tt class="py-name">codecs</tt><tt class="py-op">.</tt><tt class="py-name">lookup</tt><tt class="py-op">(</tt><tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">decoded</tt><tt class="py-op">,</tt> <tt class="py-name">length</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">secret_decoder_ring</tt><tt class="py-op">(</tt><tt class="py-name">buffer</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-name">first_line</tt> <tt class="py-op">=</tt> <tt class="py-name">decoded</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method gluon.utf8.Utf8.split()=gluon.utf8.Utf8-class.html#split"><a title="gluon.utf8.Utf8.split" class="py-name" href="#" onclick="return doclink('link-7', 'split', 'link-7');">split</a></tt><tt class="py-op">(</tt><tt class="py-string">"\n"</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">first_line</tt> <tt class="py-keyword">and</tt> <tt class="py-name">first_line</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method gluon.dal.Expression.startswith()=gluon.dal.Expression-class.html#startswith,Method gluon.dal.SQLCustomType.startswith()=gluon.dal.SQLCustomType-class.html#startswith,Method gluon.utf8.Utf8.startswith()=gluon.utf8.Utf8-class.html#startswith"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-8', 'startswith', 'link-8');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">u"&lt;?xml"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">            <tt class="py-name">encoding_pos</tt> <tt class="py-op">=</tt> <tt class="py-name">first_line</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method gluon.dal.Rows.find()=gluon.dal.Rows-class.html#find,Method gluon.utf8.Utf8.find()=gluon.utf8.Utf8-class.html#find"><a title="gluon.dal.Rows.find
+gluon.utf8.Utf8.find" class="py-name" href="#" onclick="return doclink('link-9', 'find', 'link-9');">find</a></tt><tt class="py-op">(</tt><tt class="py-string">u"encoding"</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">encoding_pos</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">                <tt class="py-comment"># look for double quote</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                <tt class="py-name">quote_pos</tt> <tt class="py-op">=</tt> <tt class="py-name">first_line</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="gluon.dal.Rows.find
+gluon.utf8.Utf8.find" class="py-name" href="#" onclick="return doclink('link-10', 'find', 'link-9');">find</a></tt><tt class="py-op">(</tt><tt class="py-string">'"'</tt><tt class="py-op">,</tt> <tt class="py-name">encoding_pos</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">quote_pos</tt> <tt class="py-op">==</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt>                 <tt class="py-comment"># look for single quote</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">                    <tt class="py-name">quote_pos</tt> <tt class="py-op">=</tt> <tt class="py-name">first_line</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="gluon.dal.Rows.find
+gluon.utf8.Utf8.find" class="py-name" href="#" onclick="return doclink('link-11', 'find', 'link-9');">find</a></tt><tt class="py-op">(</tt><tt class="py-string">"'"</tt><tt class="py-op">,</tt> <tt class="py-name">encoding_pos</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">quote_pos</tt> <tt class="py-op">&gt;</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">                    <tt class="py-name">quote_char</tt><tt class="py-op">,</tt> <tt class="py-name">rest</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">first_line</tt><tt class="py-op">[</tt><tt class="py-name">quote_pos</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">                                        <tt class="py-name">first_line</tt><tt class="py-op">[</tt><tt class="py-name">quote_pos</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                    <tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt class="py-name">rest</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">rest</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="gluon.dal.Rows.find
+gluon.utf8.Utf8.find" class="py-name" href="#" onclick="return doclink('link-12', 'find', 'link-9');">find</a></tt><tt class="py-op">(</tt><tt class="py-name">quote_char</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">encoding</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt>
+<a name="decoder"></a><div id="decoder-def"><a name="L75"></a><tt class="py-lineno">75</tt> <a class="py-toggle" href="#" id="decoder-toggle" onclick="return toggle('decoder');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.decoder-module.html#decoder">decoder</a><tt class="py-op">(</tt><tt class="py-param">buffer</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="decoder-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="decoder-expanded"><a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">    <tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name" targets="Function gluon.decoder.autoDetectXMLEncoding()=gluon.decoder-module.html#autoDetectXMLEncoding"><a title="gluon.decoder.autoDetectXMLEncoding" class="py-name" href="#" onclick="return doclink('link-13', 'autoDetectXMLEncoding', 'link-13');">autoDetectXMLEncoding</a></tt><tt class="py-op">(</tt><tt class="py-name">buffer</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">buffer</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method gluon.languages.lazyT.decode()=gluon.languages.lazyT-class.html#decode,Method gluon.utf8.Utf8.decode()=gluon.utf8.Utf8-class.html#decode"><a title="gluon.languages.lazyT.decode
+gluon.utf8.Utf8.decode" class="py-name" href="#" onclick="return doclink('link-14', 'decode', 'link-14');">decode</a></tt><tt class="py-op">(</tt><tt class="py-name">encoding</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method gluon.languages.lazyT.encode()=gluon.languages.lazyT-class.html#encode,Method gluon.utf8.Utf8.encode()=gluon.utf8.Utf8-class.html#encode"><a title="gluon.languages.lazyT.encode
+gluon.utf8.Utf8.encode" class="py-name" href="#" onclick="return doclink('link-15', 'encode', 'link-15');">encode</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf8'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:51 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

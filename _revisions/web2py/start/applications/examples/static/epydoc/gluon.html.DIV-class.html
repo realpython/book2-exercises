@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.html.DIV</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.html-module.html" onclick="show_private();">Module&nbsp;html</a> ::
+        Class&nbsp;DIV
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.html.DIV-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class DIV</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.html-pysrc.html#DIV">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+  object --+    
+           |    
+<a href="gluon.html.XmlComponent-class.html" onclick="show_private();">XmlComponent</a> --+
+               |
+              <strong class="uidshort">DIV</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="gluon.html.A-class.html">A</a></li><li>, <a href="gluon.html.B-class.html">B</a></li><li>, <a href="gluon.html.BEAUTIFY-class.html">BEAUTIFY</a></li><li>, <a href="gluon.html.BODY-class.html">BODY</a></li><li>, <a href="gluon.html.BR-class.html">BR</a></li><li>, <a href="gluon.html.CAT-class.html">CAT</a></li><li>, <a href="gluon.html.CENTER-class.html">CENTER</a></li><li>, <a href="gluon.html.CODE-class.html">CODE</a></li><li>, <a href="gluon.html.EM-class.html">EM</a></li><li>, <a href="gluon.html.EMBED-class.html">EMBED</a></li><li>, <a href="gluon.html.FIELDSET-class.html">FIELDSET</a></li><li>, <a href="gluon.html.FORM-class.html">FORM</a></li><li>, <a href="gluon.html.H1-class.html">H1</a></li><li>, <a href="gluon.html.H2-class.html">H2</a></li><li>, <a href="gluon.html.H3-class.html">H3</a></li><li>, <a href="gluon.html.H4-class.html">H4</a></li><li>, <a href="gluon.html.H5-class.html">H5</a></li><li>, <a href="gluon.html.H6-class.html">H6</a></li><li>, <a href="gluon.html.HEAD-class.html">HEAD</a></li><li>, <a href="gluon.html.HR-class.html">HR</a></li><li>, <a href="gluon.html.HTML-class.html">HTML</a></li><li>, <a href="gluon.html.I-class.html">I</a></li><li>, <a href="gluon.html.IFRAME-class.html">IFRAME</a></li><li>, <a href="gluon.html.IMG-class.html">IMG</a></li><li>, <a href="gluon.html.INPUT-class.html">INPUT</a></li><li>, <a href="gluon.html.LABEL-class.html">LABEL</a></li><li>, <a href="gluon.html.LEGEND-class.html">LEGEND</a></li><li>, <a href="gluon.html.LI-class.html">LI</a></li><li>, <a href="gluon.html.LINK-class.html">LINK</a></li><li>, <a href="gluon.html.MENU-class.html">MENU</a></li><li>, <a href="gluon.html.META-class.html">META</a></li><li>, <a href="gluon.html.OBJECT-class.html">OBJECT</a></li><li>, <a href="gluon.html.UL-class.html">UL</a></li><li>, <a href="gluon.html.OPTGROUP-class.html">OPTGROUP</a></li><li>, <a href="gluon.html.OPTION-class.html">OPTION</a></li><li>, <a href="gluon.html.P-class.html">P</a></li><li>, <a href="gluon.html.PRE-class.html">PRE</a></li><li>, <a href="gluon.html.SCRIPT-class.html">SCRIPT</a></li><li>, <a href="gluon.html.SPAN-class.html">SPAN</a></li><li>, <a href="gluon.html.TABLE-class.html">TABLE</a></li><li>, <a href="gluon.html.STRONG-class.html">STRONG</a></li><li>, <a href="gluon.html.STYLE-class.html">STYLE</a></li><li>, <a href="gluon.html.TBODY-class.html">TBODY</a></li><li>, <a href="gluon.html.TD-class.html">TD</a></li><li>, <a href="gluon.html.TFOOT-class.html">TFOOT</a></li><li>, <a href="gluon.html.TH-class.html">TH</a></li><li>, <a href="gluon.html.THEAD-class.html">THEAD</a></li><li>, <a href="gluon.html.TITLE-class.html">TITLE</a></li><li>, <a href="gluon.html.TR-class.html">TR</a></li><li>, <a href="gluon.html.TT-class.html">TT</a></li><li>, <a href="gluon.html.XHTML-class.html">XHTML</a></li><li>, <a href="gluon.html.BUTTON-class.html">BUTTON</a></li><li>, <a href="gluon.html.COL-class.html">COL</a></li><li>, <a href="gluon.html.COLGROUP-class.html">COLGROUP</a></li><li class="private">, <a href="gluon.html.__TRHEAD__-class.html" onclick="show_private();">__TRHEAD__</a></li><li class="private">, <a href="gluon.html.__tag_div__-class.html" onclick="show_private();">__tag_div__</a></li><li>, <a href="gluon.tools.Recaptcha-class.html">tools.Recaptcha</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>HTML helper, for easy generating and manipulating a DOM structure. 
+  Little or no validation is done.</p>
+  <p>Behaves like a dictionary regarding updating of attributes. Behaves 
+  like a list regarding inserting/appending components.</p>
+  <p>example:</p>
+<pre class="literalblock">
+   &gt;&gt;&gt; DIV('hello', 'world', _style='color:red;').xml()
+   '&lt;div style=&quot;color:red;&quot;&gt;helloworld&lt;/div&gt;'
+</pre>
+  <p>all other HTML helpers are derived from DIV.</p>
+  <p>_something=&quot;value&quot; attributes are transparently translated 
+  into something=&quot;value&quot; HTML attributes</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#__delitem__" class="summary-sig-name">__delitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      deletes attribute with name 'i' or component #i.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__delitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#__getitem__" class="summary-sig-name">__getitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      gets attribute with name 'i' or component #i.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*components</span>,
+        <span class="summary-sig-arg">**attributes</span>)</span><br />
+      :param *components: any components that should be nested in this 
+      element :param **attributes: any attributes you want to give to this 
+      element</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns the number of included components</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__nonzero__"></a><span class="summary-sig-name">__nonzero__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      always return True</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__nonzero__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#__setitem__" class="summary-sig-name">__setitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      sets attribute with name 'i' or component #i.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__setitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(COMPONENT) returns equals COMPONENT.xml()</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#_fixup" class="summary-sig-name" onclick="show_private();">_fixup</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Handling of provided components.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._fixup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#_postprocessing" class="summary-sig-name" onclick="show_private();">_postprocessing</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Handling of attributes (normally the ones not prefixed with '_').</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._postprocessing">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_setnode"></a><span class="summary-sig-name">_setnode</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._setnode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_traverse"></a><span class="summary-sig-name">_traverse</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">status</span>,
+        <span class="summary-sig-arg">hideerror</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._traverse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#_validate" class="summary-sig-name" onclick="show_private();">_validate</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      nothing to validate yet.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._validate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#_wrap_components" class="summary-sig-name" onclick="show_private();">_wrap_components</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">allowed_parents</span>,
+        <span class="summary-sig-arg">wrap_parent</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">wrap_lambda</span>=<span class="summary-sig-default">None</span>)</span><br />
+      helper for _fixup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._wrap_components">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#_xml" class="summary-sig-name" onclick="show_private();">_xml</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      helper for xml generation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV._xml">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#append" class="summary-sig-name">append</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      list style appending of components</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.append">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#element" class="summary-sig-name">element</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      find the first component that matches the supplied attribute 
+      dictionary, or None if nothing could be found</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.element">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#elements" class="summary-sig-name">elements</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      find all component that match the supplied attribute dictionary, or 
+      None if nothing could be found</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.elements">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#flatten" class="summary-sig-name">flatten</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">render</span>=<span class="summary-sig-default">None</span>)</span><br />
+      return the text stored by the DIV object rendered by the render 
+      function the render function must take text, tagname, and attributes 
+      render=None is equivalent to render=lambda text, tag, attr: text</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.flatten">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#insert" class="summary-sig-name">insert</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      list style inserting of components</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.insert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="sibling"></a><span class="summary-sig-name">sibling</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      find the first sibling component that match the supplied argument 
+      list and attribute dictionary, or None if nothing could be found</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.sibling">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="siblings"></a><span class="summary-sig-name">siblings</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      find all sibling components that match the supplied argument list and
+      attribute dictionary, or None if nothing could be found</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.siblings">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="update"></a><span class="summary-sig-name">update</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kargs</span>)</span><br />
+      dictionary like updating of the tag attributes</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.html.DIV-class.html#xml" class="summary-sig-name">xml</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      generates the xml for this component.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.html-pysrc.html#DIV.xml">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.XmlComponent-class.html" onclick="show_private();">XmlComponent</a></code></b>:
+      <code><a href="gluon.html.XmlComponent-class.html#__add__">__add__</a></code>,
+      <code><a href="gluon.html.XmlComponent-class.html#__mul__">__mul__</a></code>,
+      <code><a href="gluon.html.XmlComponent-class.html#add_class">add_class</a></code>,
+      <code><a href="gluon.html.XmlComponent-class.html#remove_class">remove_class</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_attr"></a><span class="summary-name">regex_attr</span> = <code title="re.compile(r'\[([\w-:]+)=(.*?)\]')">re.compile(r'\[<code class="re-group">(</code><code class="re-group">[</code>\w-:<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>=<code class="re-group">(</code>.<code class="re-op">*?</code><code class="re-group">)</code>\]')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_class"></a><span class="summary-name">regex_class</span> = <code title="re.compile(r'\.([\w-]+)')">re.compile(r'\.<code class="re-group">(</code><code class="re-group">[</code>\w-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_id"></a><span class="summary-name">regex_id</span> = <code title="re.compile(r'#([\w-]+)')">re.compile(r'#<code class="re-group">(</code><code class="re-group">[</code>\w-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="regex_tag"></a><span class="summary-name">regex_tag</span> = <code title="re.compile(r'^[\w-:]+')">re.compile(r'^<code class="re-group">[</code>\w-:<code class="re-group">]</code><code class="re-op">+</code>')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tag"></a><span class="summary-name">tag</span> = <code title="'div'"><code class="variable-quote">'</code><code class="variable-string">div</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__delitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__delitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>)</span>
+    <br /><em class="fname">(Index deletion operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.__delitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+deletes attribute with name 'i' or component #i.
+
+:param i: index
+   if i is a string: the name of the attribute
+   otherwise references to number of the component
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__getitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__getitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>)</span>
+    <br /><em class="fname">(Indexing operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.__getitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+gets attribute with name 'i' or component #i.
+If attribute 'i' is not found returns None
+
+:param i: index
+   if i is a string: the name of the attribute
+   otherwise references to number of the component
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*components</span>,
+        <span class="sig-arg">**attributes</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param *components: any components that should be nested in this 
+  element :param **attributes: any attributes you want to give to this 
+  element</p>
+  <p>:raises SyntaxError: when a stand alone tag receives components</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__setitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__setitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>,
+        <span class="sig-arg">value</span>)</span>
+    <br /><em class="fname">(Index assignment operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.__setitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+sets attribute with name 'i' or component #i.
+
+:param i: index
+   if i is a string: the name of the attribute
+   otherwise references to number of the component
+:param value: the new value
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(COMPONENT) returns equals COMPONENT.xml()</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_fixup"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_fixup</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV._fixup">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Handling of provided components.</p>
+  <p>Nothing to fixup yet. May be overridden by subclasses, eg for wrapping
+  some components in another component or blocking them.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_postprocessing"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_postprocessing</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV._postprocessing">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Handling of attributes (normally the ones not prefixed with '_').</p>
+  <p>Nothing to postprocess yet. May be overridden by subclasses</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_validate"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_validate</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV._validate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>nothing to validate yet. May be overridden by subclasses</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_wrap_components"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_wrap_components</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">allowed_parents</span>,
+        <span class="sig-arg">wrap_parent</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">wrap_lambda</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV._wrap_components">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+helper for _fixup. Checks if a component is in allowed_parents,
+otherwise wraps it in wrap_parent
+
+:param allowed_parents: (tuple) classes that the component should be an
+    instance of
+:param wrap_parent: the class to wrap the component in, if needed
+:param wrap_lambda: lambda to use for wrapping, if needed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_xml"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_xml</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV._xml">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+helper for xml generation. Returns separately:
+- the component attributes
+- the generated xml of the inner components
+
+Component attributes start with an underscore ('_') and
+do not have a False or None value. The underscore is removed.
+A value of True is replaced with the attribute name.
+
+:returns: tuple: (attributes, components)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="append"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">append</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.append">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>list style appending of components</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a=DIV()
+<span class="py-prompt">&gt;&gt;&gt; </span>a.append(SPAN(<span class="py-string">'x'</span>))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;span&gt;x&lt;/span&gt;&lt;/div&gt;</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="element"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">element</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.element">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>find the first component that matches the supplied attribute 
+  dictionary, or None if nothing could be found</p>
+  <p>Also the components of the components are searched.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="elements"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">elements</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.elements">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>find all component that match the supplied attribute dictionary, or 
+  None if nothing could be found</p>
+  <p>All components of the components are searched.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a = DIV(DIV(SPAN(<span class="py-string">'x'</span>),3,DIV(SPAN(<span class="py-string">'y'</span>))))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> c <span class="py-keyword">in</span> a.elements(<span class="py-string">'span'</span>,first_only=True): c[0]=<span class="py-string">'z'</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;span&gt;z&lt;/span&gt;3&lt;div&gt;&lt;span&gt;y&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> c <span class="py-keyword">in</span> a.elements(<span class="py-string">'span'</span>): c[0]=<span class="py-string">'z'</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;span&gt;z&lt;/span&gt;3&lt;div&gt;&lt;span&gt;z&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span></pre>
+  <p>It also supports a syntax compatible with jQuery</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a=TAG(<span class="py-string">'&lt;div&gt;&lt;span&gt;&lt;a id=&quot;1-1&quot; u:v=$&gt;hello&lt;/a&gt;&lt;/span&gt;&lt;p class=&quot;this is a test&quot;&gt;world&lt;/p&gt;&lt;/div&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> e <span class="py-keyword">in</span> a.elements(<span class="py-string">'div a#1-1, p.is'</span>): <span class="py-keyword">print</span> e.flatten()
+<span class="py-output">hello</span>
+<span class="py-output">world</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> e <span class="py-keyword">in</span> a.elements(<span class="py-string">'#1-1'</span>): <span class="py-keyword">print</span> e.flatten()
+<span class="py-output">hello</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>a.elements(<span class="py-string">'a[u:v=$]'</span>)[0].xml()
+<span class="py-output">'&lt;a id=&quot;1-1&quot; u:v=&quot;$&quot;&gt;hello&lt;/a&gt;'</span></pre>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a=FORM( INPUT(_type=<span class="py-string">'text'</span>), SELECT(range(1)), TEXTAREA() )
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> c <span class="py-keyword">in</span> a.elements(<span class="py-string">'input, select, textarea'</span>): c[<span class="py-string">'_disabled'</span>] = <span class="py-string">'disabled'</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>a.xml()
+<span class="py-output">'&lt;form action=&quot;#&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;&lt;input disabled=&quot;disabled&quot; type=&quot;text&quot; /&gt;&lt;select disabled=&quot;disabled&quot;&gt;&lt;option value=&quot;0&quot;&gt;0&lt;/option&gt;&lt;/select&gt;&lt;textarea cols=&quot;40&quot; disabled=&quot;disabled&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;&lt;/form&gt;'</span></pre>
+  <p>Elements that are matched can also be replaced or removed by 
+  specifying a &quot;replace&quot; argument (note, a list of the original 
+  matching elements is still returned as usual).</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a = DIV(DIV(SPAN(<span class="py-string">'x'</span>, _class=<span class="py-string">'abc'</span>), DIV(SPAN(<span class="py-string">'y'</span>, _class=<span class="py-string">'abc'</span>), SPAN(<span class="py-string">'z'</span>, _class=<span class="py-string">'abc'</span>))))
+<span class="py-prompt">&gt;&gt;&gt; </span>b = a.elements(<span class="py-string">'span.abc'</span>, replace=P(<span class="py-string">'x'</span>, _class=<span class="py-string">'xyz'</span>))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;p class=&quot;xyz&quot;&gt;x&lt;/p&gt;&lt;div&gt;&lt;p class=&quot;xyz&quot;&gt;x&lt;/p&gt;&lt;p class=&quot;xyz&quot;&gt;x&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span></pre>
+  <p>&quot;replace&quot; can be a callable, which will be passed the 
+  original element and should return a new element to replace it.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a = DIV(DIV(SPAN(<span class="py-string">'x'</span>, _class=<span class="py-string">'abc'</span>), DIV(SPAN(<span class="py-string">'y'</span>, _class=<span class="py-string">'abc'</span>), SPAN(<span class="py-string">'z'</span>, _class=<span class="py-string">'abc'</span>))))
+<span class="py-prompt">&gt;&gt;&gt; </span>b = a.elements(<span class="py-string">'span.abc'</span>, replace=<span class="py-keyword">lambda</span> el: P(el[0], _class=<span class="py-string">'xyz'</span>))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;p class=&quot;xyz&quot;&gt;x&lt;/p&gt;&lt;div&gt;&lt;p class=&quot;xyz&quot;&gt;y&lt;/p&gt;&lt;p class=&quot;xyz&quot;&gt;z&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span></pre>
+  <p>If replace=None, matching elements will be removed completely.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a = DIV(DIV(SPAN(<span class="py-string">'x'</span>, _class=<span class="py-string">'abc'</span>), DIV(SPAN(<span class="py-string">'y'</span>, _class=<span class="py-string">'abc'</span>), SPAN(<span class="py-string">'z'</span>, _class=<span class="py-string">'abc'</span>))))
+<span class="py-prompt">&gt;&gt;&gt; </span>b = a.elements(<span class="py-string">'span'</span>, find=<span class="py-string">'y'</span>, replace=None)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;span class=&quot;abc&quot;&gt;x&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;abc&quot;&gt;z&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span></pre>
+  <p>If a &quot;find_text&quot; argument is specified, elements will be 
+  searched for text components that match find_text, and any matching text 
+  components will be replaced (find_text is ignored if &quot;replace&quot; 
+  is not also specified). Like the &quot;find&quot; argument, 
+  &quot;find_text&quot; can be a string or a compiled regex.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a = DIV(DIV(SPAN(<span class="py-string">'x'</span>, _class=<span class="py-string">'abc'</span>), DIV(SPAN(<span class="py-string">'y'</span>, _class=<span class="py-string">'abc'</span>), SPAN(<span class="py-string">'z'</span>, _class=<span class="py-string">'abc'</span>))))
+<span class="py-prompt">&gt;&gt;&gt; </span>b = a.elements(find_text=re.compile(<span class="py-string">'x|y|z'</span>), replace=<span class="py-string">'hello'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;span class=&quot;abc&quot;&gt;hello&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;abc&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;abc&quot;&gt;hello&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span></pre>
+  <p>If other attributes are specified along with find_text, then only 
+  components that match the specified attributes will be searched for 
+  find_text.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a = DIV(DIV(SPAN(<span class="py-string">'x'</span>, _class=<span class="py-string">'abc'</span>), DIV(SPAN(<span class="py-string">'y'</span>, _class=<span class="py-string">'efg'</span>), SPAN(<span class="py-string">'z'</span>, _class=<span class="py-string">'abc'</span>))))
+<span class="py-prompt">&gt;&gt;&gt; </span>b = a.elements(<span class="py-string">'span.efg'</span>, find_text=re.compile(<span class="py-string">'x|y|z'</span>), replace=<span class="py-string">'hello'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;div&gt;&lt;span class=&quot;abc&quot;&gt;x&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;efg&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;abc&quot;&gt;z&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="flatten"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flatten</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">render</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.flatten">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>return the text stored by the DIV object rendered by the render 
+  function the render function must take text, tagname, and attributes 
+  render=None is equivalent to render=lambda text, tag, attr: text</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>markdown = <span class="py-keyword">lambda</span> text,tag=None,attributes={}:                         {None: re.sub(<span class="py-string">'\s+'</span>,<span class="py-string">' '</span>,text),                          <span class="py-string">'h1'</span>:<span class="py-string">'#'</span>+text+<span class="py-string">'\n\n'</span>,                          <span class="py-string">'p'</span>:text+<span class="py-string">'\n'</span>}.get(tag,text)
+<span class="py-prompt">&gt;&gt;&gt; </span>a=TAG(<span class="py-string">'&lt;h1&gt;Header&lt;/h1&gt;&lt;p&gt;this is a     test&lt;/p&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>a.flatten(markdown)
+<span class="py-output">'#Header\n\nthis is a test\n'</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="insert"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">insert</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.insert">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>list style inserting of components</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>a=DIV()
+<span class="py-prompt">&gt;&gt;&gt; </span>a.insert(0,SPAN(<span class="py-string">'x'</span>))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> a
+<span class="py-output">&lt;div&gt;&lt;span&gt;x&lt;/span&gt;&lt;/div&gt;</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="xml"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">xml</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.html-pysrc.html#DIV.xml">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>generates the xml for this component.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.html.XmlComponent-class.html#xml">XmlComponent.xml</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:41 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

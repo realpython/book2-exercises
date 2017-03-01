@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.contenttype</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        Module&nbsp;contenttype
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.contenttype-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="gluon.contenttype-module.html" onclick="show_private();">Module gluon.contenttype</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">This file is part of the web2py Web Framework</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Copyrighted by Massimo Di Pierro &lt;mdipierro@cs.depaul.edu&gt;</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">CONTENT_TYPE dictionary created against freedesktop.org' shared mime info</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">database version 1.1.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">Deviations from official standards:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">- '.md': 'application/x-genesis-rom' --&gt; 'text/x-markdown'</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">- '.png': 'image/x-apple-ios-png' --&gt; 'image/png'</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">Additions:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">- '.load': 'text/html'</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">- '.json': 'application/json'</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">- '.jsonp': 'application/jsonp'</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">- '.pickle': 'application/python-pickle'</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">- '.w2p': 'application/w2p'</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'contenttype'</tt><tt class="py-op">]</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable gluon.contenttype.CONTENT_TYPE=gluon.contenttype-module.html#CONTENT_TYPE"><a title="gluon.contenttype.CONTENT_TYPE" class="py-name" href="#" onclick="return doclink('link-0', 'CONTENT_TYPE', 'link-0');">CONTENT_TYPE</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-string">'.123'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.lotus-1-2-3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-string">'.3ds'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-3ds'</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-string">'.3g2'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/3gpp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-string">'.3ga'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/3gpp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-string">'.3gp'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/3gpp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-string">'.3gp2'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/3gpp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-string">'.3gpp'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/3gpp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-string">'.3gpp2'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/3gpp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-string">'.602'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-t602'</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-string">'.669'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-string">'.7z'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-7z-compressed'</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-string">'.a'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-archive'</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-string">'.aac'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/aac'</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-string">'.abw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-abiword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-string">'.abw.crashed'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-abiword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-string">'.abw.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-abiword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-string">'.ac3'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/ac3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-string">'.ace'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ace'</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-string">'.adb'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-adasrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-string">'.ads'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-adasrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-string">'.afm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-afm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-string">'.ag'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-applix-graphics'</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-string">'.ai'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/illustrator'</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-string">'.aif'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-aiff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-string">'.aifc'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-aifc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-string">'.aiff'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-aiff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-string">'.aiffc'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-aifc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-string">'.al'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-perl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-string">'.alz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-alz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-string">'.amr'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/amr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-string">'.amz'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-amzxml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-string">'.ani'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-navi-animation'</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-string">'.anim[1-9j]'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-anim'</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-string">'.anx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/annodex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-string">'.ape'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-ape'</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-string">'.apk'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.android.package-archive'</tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-string">'.ar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-archive'</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-string">'.arj'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-arj'</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-string">'.arw'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-sony-arw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-string">'.as'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-applix-spreadsheet'</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-string">'.asc'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/plain'</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-string">'.asf'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-ms-asf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-string">'.asp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-asp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-string">'.ass'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ssa'</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-string">'.asx'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-ms-asx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-string">'.atom'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/atom+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-string">'.au'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/basic'</tt><tt class="py-op">,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-string">'.avf'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-msvideo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-string">'.avi'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-msvideo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-string">'.aw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-applix-word'</tt><tt class="py-op">,</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-string">'.awb'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/amr-wb'</tt><tt class="py-op">,</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-string">'.awk'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-awk'</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-string">'.axa'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/annodex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-string">'.axv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/annodex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-string">'.bak'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-trash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-string">'.bcpio'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bcpio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-string">'.bdf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-bdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-string">'.bdm'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-string">'.bdmv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-string">'.bib'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-bibtex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-string">'.bin'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/octet-stream'</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-string">'.blend'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-blender'</tt><tt class="py-op">,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-string">'.blender'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-blender'</tt><tt class="py-op">,</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-string">'.bmp'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/bmp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-string">'.bz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-string">'.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-string">'.c'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-csrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-string">'.c++'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++src'</tt><tt class="py-op">,</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-string">'.cab'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-cab-compressed'</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-string">'.cap'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.tcpdump.pcap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-string">'.cb7'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cb7'</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-string">'.cbl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-cobol'</tt><tt class="py-op">,</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-string">'.cbr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cbr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-string">'.cbt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cbt'</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-string">'.cbz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cbz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-string">'.cc'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++src'</tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-string">'.ccmx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ccmx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-string">'.cdf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-netcdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-string">'.cdr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.corel-draw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-string">'.cer'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkix-cert'</tt><tt class="py-op">,</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-string">'.cert'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-x509-ca-cert'</tt><tt class="py-op">,</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-string">'.cgm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/cgm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-string">'.chm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-htmlhelp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-string">'.chrt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kchart'</tt><tt class="py-op">,</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-string">'.class'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java'</tt><tt class="py-op">,</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-string">'.clpi'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-string">'.cls'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-string">'.cmake'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-cmake'</tt><tt class="py-op">,</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-string">'.cob'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-cobol'</tt><tt class="py-op">,</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">    <tt class="py-string">'.cpi'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-string">'.cpio'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cpio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-string">'.cpio.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cpio-compressed'</tt><tt class="py-op">,</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-string">'.cpp'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++src'</tt><tt class="py-op">,</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-string">'.cr2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-canon-cr2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-string">'.crl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkix-crl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-string">'.crt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-x509-ca-cert'</tt><tt class="py-op">,</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-string">'.crw'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-canon-crw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-string">'.cs'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-csharp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-string">'.csh'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-csh'</tt><tt class="py-op">,</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-string">'.css'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/css'</tt><tt class="py-op">,</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-string">'.cssl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/css'</tt><tt class="py-op">,</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-string">'.csv'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/csv'</tt><tt class="py-op">,</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-string">'.cue'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cue'</tt><tt class="py-op">,</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-string">'.cur'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-win-bitmap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-string">'.cxx'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++src'</tt><tt class="py-op">,</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-string">'.d'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-dsrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-string">'.dar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-dar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-string">'.dbf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-dbf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-string">'.dc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-dc-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt class="py-string">'.dcl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-dcl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">    <tt class="py-string">'.dcm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/dicom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-string">'.dcr'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-kodak-dcr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">    <tt class="py-string">'.dds'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-dds'</tt><tt class="py-op">,</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-string">'.deb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-deb'</tt><tt class="py-op">,</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-string">'.der'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-x509-ca-cert'</tt><tt class="py-op">,</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-string">'.desktop'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-desktop'</tt><tt class="py-op">,</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-string">'.di'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-dsrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt class="py-string">'.dia'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-dia-diagram'</tt><tt class="py-op">,</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-string">'.diff'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-patch'</tt><tt class="py-op">,</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-string">'.divx'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-msvideo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-string">'.djv'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.djvu'</tt><tt class="py-op">,</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-string">'.djvu'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.djvu'</tt><tt class="py-op">,</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">    <tt class="py-string">'.dmg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-apple-diskimage'</tt><tt class="py-op">,</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-string">'.dmp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.tcpdump.pcap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">    <tt class="py-string">'.dng'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-adobe-dng'</tt><tt class="py-op">,</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">    <tt class="py-string">'.doc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/msword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-string">'.docbook'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-docbook+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt class="py-string">'.docm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-word.document.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-string">'.docx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.wordprocessingml.document'</tt><tt class="py-op">,</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-string">'.dot'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vnd.graphviz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-string">'.dotm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-word.template.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-string">'.dotx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.wordprocessingml.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-string">'.dsl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-dsl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-string">'.dtd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xml-dtd'</tt><tt class="py-op">,</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-string">'.dts'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/vnd.dts'</tt><tt class="py-op">,</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-string">'.dtshd'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/vnd.dts.hd'</tt><tt class="py-op">,</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-string">'.dtx'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-string">'.dv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/dv'</tt><tt class="py-op">,</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-string">'.dvi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-dvi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-string">'.dvi.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzdvi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-string">'.dvi.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gzdvi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-string">'.dwg'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.dwg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-string">'.dxf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.dxf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-string">'.e'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-eiffel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-string">'.egon'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-egon'</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-string">'.eif'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-eiffel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-string">'.el'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-emacs-lisp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-string">'.emf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-emf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-string">'.eml'</tt><tt class="py-op">:</tt> <tt class="py-string">'message/rfc822'</tt><tt class="py-op">,</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">    <tt class="py-string">'.emp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.emusic-emusic_package'</tt><tt class="py-op">,</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">    <tt class="py-string">'.ent'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xml-external-parsed-entity'</tt><tt class="py-op">,</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-string">'.eps'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-eps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">    <tt class="py-string">'.eps.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-bzeps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">    <tt class="py-string">'.eps.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-gzeps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">    <tt class="py-string">'.epsf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-eps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-string">'.epsf.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-bzeps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-string">'.epsf.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-gzeps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">    <tt class="py-string">'.epsi'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-eps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">    <tt class="py-string">'.epsi.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-bzeps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-string">'.epsi.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-gzeps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt class="py-string">'.epub'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/epub+zip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-string">'.erl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-erlang'</tt><tt class="py-op">,</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-string">'.es'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/ecmascript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">    <tt class="py-string">'.etheme'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-e-theme'</tt><tt class="py-op">,</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">    <tt class="py-string">'.etx'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-setext'</tt><tt class="py-op">,</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-string">'.exe'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ms-dos-executable'</tt><tt class="py-op">,</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">    <tt class="py-string">'.exr'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-exr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">    <tt class="py-string">'.ez'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/andrew-inset'</tt><tt class="py-op">,</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-string">'.f'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-fortran'</tt><tt class="py-op">,</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-string">'.f4a'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/mp4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">    <tt class="py-string">'.f4b'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-m4b'</tt><tt class="py-op">,</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">    <tt class="py-string">'.f4v'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt class="py-string">'.f90'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-fortran'</tt><tt class="py-op">,</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-string">'.f95'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-fortran'</tt><tt class="py-op">,</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">    <tt class="py-string">'.fb2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-fictionbook+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">    <tt class="py-string">'.fig'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-xfig'</tt><tt class="py-op">,</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">    <tt class="py-string">'.fits'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/fits'</tt><tt class="py-op">,</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">    <tt class="py-string">'.fl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-fluid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-string">'.flac'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/flac'</tt><tt class="py-op">,</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">    <tt class="py-string">'.flc'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-flic'</tt><tt class="py-op">,</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">    <tt class="py-string">'.fli'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-flic'</tt><tt class="py-op">,</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">    <tt class="py-string">'.flv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-flv'</tt><tt class="py-op">,</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt class="py-string">'.flw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kivio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-string">'.fo'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-xslfo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">    <tt class="py-string">'.fodg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.graphics-flat-xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">    <tt class="py-string">'.fodp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.presentation-flat-xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-string">'.fods'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.spreadsheet-flat-xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-string">'.fodt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.text-flat-xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">    <tt class="py-string">'.for'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-fortran'</tt><tt class="py-op">,</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">    <tt class="py-string">'.fxm'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-javafx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-string">'.g3'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/fax-g3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">    <tt class="py-string">'.gb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gameboy-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">    <tt class="py-string">'.gba'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gba-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">    <tt class="py-string">'.gcrd'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vcard'</tt><tt class="py-op">,</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">    <tt class="py-string">'.ged'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gedcom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-string">'.gedcom'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gedcom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt class="py-string">'.gem'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">    <tt class="py-string">'.gen'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-genesis-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">    <tt class="py-string">'.gf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tex-gf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">    <tt class="py-string">'.gg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sms-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">    <tt class="py-string">'.gif'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/gif'</tt><tt class="py-op">,</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt class="py-string">'.glade'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-glade'</tt><tt class="py-op">,</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">    <tt class="py-string">'.gml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/gml+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">    <tt class="py-string">'.gmo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gettext-translation'</tt><tt class="py-op">,</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">    <tt class="py-string">'.gnc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnucash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">    <tt class="py-string">'.gnd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/gnunet-directory'</tt><tt class="py-op">,</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">    <tt class="py-string">'.gnucash'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnucash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">    <tt class="py-string">'.gnumeric'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnumeric'</tt><tt class="py-op">,</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">    <tt class="py-string">'.gnuplot'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnuplot'</tt><tt class="py-op">,</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-string">'.go'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-go'</tt><tt class="py-op">,</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">    <tt class="py-string">'.gp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnuplot'</tt><tt class="py-op">,</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">    <tt class="py-string">'.gpg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pgp-encrypted'</tt><tt class="py-op">,</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">    <tt class="py-string">'.gplt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnuplot'</tt><tt class="py-op">,</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-string">'.gra'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-graphite'</tt><tt class="py-op">,</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">    <tt class="py-string">'.gsf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-type1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-string">'.gsm'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-gsm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-string">'.gtar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">    <tt class="py-string">'.gv'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vnd.graphviz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">    <tt class="py-string">'.gvp'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-google-video-pointer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">    <tt class="py-string">'.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/gzip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">    <tt class="py-string">'.h'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-chdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">    <tt class="py-string">'.h++'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++hdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">    <tt class="py-string">'.h4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">    <tt class="py-string">'.h5'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">    <tt class="py-string">'.hdf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">    <tt class="py-string">'.hdf4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">    <tt class="py-string">'.hdf5'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">    <tt class="py-string">'.hh'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++hdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">    <tt class="py-string">'.hlp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/winhlp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">    <tt class="py-string">'.hp'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++hdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">    <tt class="py-string">'.hpgl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.hp-hpgl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">    <tt class="py-string">'.hpp'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++hdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">    <tt class="py-string">'.hs'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-haskell'</tt><tt class="py-op">,</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">    <tt class="py-string">'.htm'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/html'</tt><tt class="py-op">,</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">    <tt class="py-string">'.html'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/html'</tt><tt class="py-op">,</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">    <tt class="py-string">'.hwp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hwp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">    <tt class="py-string">'.hwt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-hwt'</tt><tt class="py-op">,</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">    <tt class="py-string">'.hxx'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-c++hdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">    <tt class="py-string">'.ica'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ica'</tt><tt class="py-op">,</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">    <tt class="py-string">'.icb'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-tga'</tt><tt class="py-op">,</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">    <tt class="py-string">'.icc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.iccprofile'</tt><tt class="py-op">,</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">    <tt class="py-string">'.icm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.iccprofile'</tt><tt class="py-op">,</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">    <tt class="py-string">'.icns'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-icns'</tt><tt class="py-op">,</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">    <tt class="py-string">'.ico'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.microsoft.icon'</tt><tt class="py-op">,</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">    <tt class="py-string">'.ics'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/calendar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">    <tt class="py-string">'.idl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-idl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">    <tt class="py-string">'.ief'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/ief'</tt><tt class="py-op">,</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">    <tt class="py-string">'.iff'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-ilbm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">    <tt class="py-string">'.ilbm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-ilbm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">    <tt class="py-string">'.ime'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-imelody'</tt><tt class="py-op">,</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">    <tt class="py-string">'.imy'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-imelody'</tt><tt class="py-op">,</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">    <tt class="py-string">'.ins'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">    <tt class="py-string">'.iptables'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-iptables'</tt><tt class="py-op">,</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">    <tt class="py-string">'.iso'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cd-image'</tt><tt class="py-op">,</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">    <tt class="py-string">'.iso9660'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cd-image'</tt><tt class="py-op">,</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">    <tt class="py-string">'.it'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-it'</tt><tt class="py-op">,</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">    <tt class="py-string">'.it87'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-it87'</tt><tt class="py-op">,</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">    <tt class="py-string">'.j2k'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">    <tt class="py-string">'.jad'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vnd.sun.j2me.app-descriptor'</tt><tt class="py-op">,</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">    <tt class="py-string">'.jar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java-archive'</tt><tt class="py-op">,</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">    <tt class="py-string">'.java'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-java'</tt><tt class="py-op">,</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">    <tt class="py-string">'.jceks'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java-jce-keystore'</tt><tt class="py-op">,</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">    <tt class="py-string">'.jks'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java-keystore'</tt><tt class="py-op">,</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">    <tt class="py-string">'.jng'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-jng'</tt><tt class="py-op">,</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">    <tt class="py-string">'.jnlp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java-jnlp-file'</tt><tt class="py-op">,</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">    <tt class="py-string">'.jp2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">    <tt class="py-string">'.jpc'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">    <tt class="py-string">'.jpe'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">    <tt class="py-string">'.jpeg'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">    <tt class="py-string">'.jpf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">    <tt class="py-string">'.jpg'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">    <tt class="py-string">'.jpr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-jbuilder-project'</tt><tt class="py-op">,</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">    <tt class="py-string">'.jpx'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/jp2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">    <tt class="py-string">'.js'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/javascript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">    <tt class="py-string">'.json'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/json'</tt><tt class="py-op">,</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">    <tt class="py-string">'.jsonp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/jsonp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">    <tt class="py-string">'.k25'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-kodak-k25'</tt><tt class="py-op">,</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">    <tt class="py-string">'.kar'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/midi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">    <tt class="py-string">'.karbon'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-karbon'</tt><tt class="py-op">,</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">    <tt class="py-string">'.kdc'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-kodak-kdc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">    <tt class="py-string">'.kdelnk'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-desktop'</tt><tt class="py-op">,</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">    <tt class="py-string">'.kexi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kexiproject-sqlite3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">    <tt class="py-string">'.kexic'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kexi-connectiondata'</tt><tt class="py-op">,</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">    <tt class="py-string">'.kexis'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kexiproject-shortcut'</tt><tt class="py-op">,</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">    <tt class="py-string">'.kfo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kformula'</tt><tt class="py-op">,</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">    <tt class="py-string">'.kil'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-killustrator'</tt><tt class="py-op">,</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">    <tt class="py-string">'.kino'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/smil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">    <tt class="py-string">'.kml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.google-earth.kml+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">    <tt class="py-string">'.kmz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.google-earth.kmz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">    <tt class="py-string">'.kon'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kontour'</tt><tt class="py-op">,</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">    <tt class="py-string">'.kpm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kpovmodeler'</tt><tt class="py-op">,</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">    <tt class="py-string">'.kpr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kpresenter'</tt><tt class="py-op">,</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">    <tt class="py-string">'.kpt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kpresenter'</tt><tt class="py-op">,</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">    <tt class="py-string">'.kra'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-krita'</tt><tt class="py-op">,</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">    <tt class="py-string">'.ks'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java-keystore'</tt><tt class="py-op">,</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">    <tt class="py-string">'.ksp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kspread'</tt><tt class="py-op">,</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">    <tt class="py-string">'.kud'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kugar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">    <tt class="py-string">'.kwd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">    <tt class="py-string">'.kwt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-kword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">    <tt class="py-string">'.la'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-shared-library-la'</tt><tt class="py-op">,</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line">    <tt class="py-string">'.latex'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">    <tt class="py-string">'.lbm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-ilbm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line">    <tt class="py-string">'.ldif'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ldif'</tt><tt class="py-op">,</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">    <tt class="py-string">'.lha'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lha'</tt><tt class="py-op">,</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">    <tt class="py-string">'.lhs'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-literate-haskell'</tt><tt class="py-op">,</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">    <tt class="py-string">'.lhz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lhz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">    <tt class="py-string">'.load'</tt> <tt class="py-op">:</tt> <tt class="py-string">'text/html'</tt><tt class="py-op">,</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">    <tt class="py-string">'.log'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-log'</tt><tt class="py-op">,</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">    <tt class="py-string">'.lrz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lrzip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">    <tt class="py-string">'.ltx'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">    <tt class="py-string">'.lua'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-lua'</tt><tt class="py-op">,</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">    <tt class="py-string">'.lwo'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-lwo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">    <tt class="py-string">'.lwob'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-lwo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line">    <tt class="py-string">'.lwp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.lotus-wordpro'</tt><tt class="py-op">,</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">    <tt class="py-string">'.lws'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-lws'</tt><tt class="py-op">,</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line">    <tt class="py-string">'.ly'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-lilypond'</tt><tt class="py-op">,</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">    <tt class="py-string">'.lyx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lyx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">    <tt class="py-string">'.lz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lzip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">    <tt class="py-string">'.lzh'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lha'</tt><tt class="py-op">,</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">    <tt class="py-string">'.lzma'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lzma'</tt><tt class="py-op">,</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">    <tt class="py-string">'.lzo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lzop'</tt><tt class="py-op">,</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">    <tt class="py-string">'.m'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-matlab'</tt><tt class="py-op">,</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">    <tt class="py-string">'.m15'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">    <tt class="py-string">'.m1u'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vnd.mpegurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">    <tt class="py-string">'.m2t'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line">    <tt class="py-string">'.m2ts'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line">    <tt class="py-string">'.m3u'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.apple.mpegurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line">    <tt class="py-string">'.m3u8'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.apple.mpegurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">    <tt class="py-string">'.m4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-m4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line">    <tt class="py-string">'.m4a'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/mp4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line">    <tt class="py-string">'.m4b'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-m4b'</tt><tt class="py-op">,</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line">    <tt class="py-string">'.m4u'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vnd.mpegurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line">    <tt class="py-string">'.m4v'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line">    <tt class="py-string">'.mab'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-markaby'</tt><tt class="py-op">,</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line">    <tt class="py-string">'.mak'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-makefile'</tt><tt class="py-op">,</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line">    <tt class="py-string">'.man'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-troff-man'</tt><tt class="py-op">,</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line">    <tt class="py-string">'.manifest'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/cache-manifest'</tt><tt class="py-op">,</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line">    <tt class="py-string">'.markdown'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-markdown'</tt><tt class="py-op">,</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line">    <tt class="py-string">'.mbox'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/mbox'</tt><tt class="py-op">,</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line">    <tt class="py-string">'.md'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-markdown'</tt><tt class="py-op">,</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line">    <tt class="py-string">'.mdb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-access'</tt><tt class="py-op">,</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line">    <tt class="py-string">'.mdi'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.ms-modi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line">    <tt class="py-string">'.me'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-troff-me'</tt><tt class="py-op">,</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line">    <tt class="py-string">'.med'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line">    <tt class="py-string">'.meta4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/metalink4+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line">    <tt class="py-string">'.metalink'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/metalink+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line">    <tt class="py-string">'.mgp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-magicpoint'</tt><tt class="py-op">,</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line">    <tt class="py-string">'.mht'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-mimearchive'</tt><tt class="py-op">,</tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line">    <tt class="py-string">'.mhtml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-mimearchive'</tt><tt class="py-op">,</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line">    <tt class="py-string">'.mid'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/midi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line">    <tt class="py-string">'.midi'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/midi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">    <tt class="py-string">'.mif'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-mif'</tt><tt class="py-op">,</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">    <tt class="py-string">'.minipsf'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-minipsf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">    <tt class="py-string">'.mk'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-makefile'</tt><tt class="py-op">,</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">    <tt class="py-string">'.mka'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-matroska'</tt><tt class="py-op">,</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">    <tt class="py-string">'.mkd'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-markdown'</tt><tt class="py-op">,</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line">    <tt class="py-string">'.mkv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-matroska'</tt><tt class="py-op">,</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line">    <tt class="py-string">'.ml'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ocaml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">    <tt class="py-string">'.mli'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ocaml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">    <tt class="py-string">'.mm'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-troff-mm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">    <tt class="py-string">'.mmf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-smaf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">    <tt class="py-string">'.mml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/mathml+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line">    <tt class="py-string">'.mng'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-mng'</tt><tt class="py-op">,</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">    <tt class="py-string">'.mo'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-modelica'</tt><tt class="py-op">,</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line">    <tt class="py-string">'.mo3'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mo3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line">    <tt class="py-string">'.mobi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-mobipocket-ebook'</tt><tt class="py-op">,</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line">    <tt class="py-string">'.moc'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-moc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line">    <tt class="py-string">'.mod'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line">    <tt class="py-string">'.mof'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-mof'</tt><tt class="py-op">,</tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line">    <tt class="py-string">'.moov'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/quicktime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line">    <tt class="py-string">'.mov'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/quicktime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line">    <tt class="py-string">'.movie'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-sgi-movie'</tt><tt class="py-op">,</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line">    <tt class="py-string">'.mp+'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-musepack'</tt><tt class="py-op">,</tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line">    <tt class="py-string">'.mp2'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">    <tt class="py-string">'.mp3'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line">    <tt class="py-string">'.mp4'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line">    <tt class="py-string">'.mpc'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-musepack'</tt><tt class="py-op">,</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">    <tt class="py-string">'.mpe'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line">    <tt class="py-string">'.mpeg'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line">    <tt class="py-string">'.mpg'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line">    <tt class="py-string">'.mpga'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">    <tt class="py-string">'.mpl'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">    <tt class="py-string">'.mpls'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line">    <tt class="py-string">'.mpp'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-musepack'</tt><tt class="py-op">,</tt> </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line">    <tt class="py-string">'.mrl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-mrml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line">    <tt class="py-string">'.mrml'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-mrml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line">    <tt class="py-string">'.mrw'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-minolta-mrw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line">    <tt class="py-string">'.ms'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-troff-ms'</tt><tt class="py-op">,</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line">    <tt class="py-string">'.msi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-msi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line">    <tt class="py-string">'.msod'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-msod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line">    <tt class="py-string">'.msx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-msx-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">    <tt class="py-string">'.mtm'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line">    <tt class="py-string">'.mts'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line">    <tt class="py-string">'.mup'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-mup'</tt><tt class="py-op">,</tt> </tt>
+<a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line">    <tt class="py-string">'.mxf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/mxf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line">    <tt class="py-string">'.mxu'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vnd.mpegurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line">    <tt class="py-string">'.n64'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-n64-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line">    <tt class="py-string">'.nb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/mathematica'</tt><tt class="py-op">,</tt> </tt>
+<a name="L424"></a><tt class="py-lineno">424</tt>  <tt class="py-line">    <tt class="py-string">'.nc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-netcdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L425"></a><tt class="py-lineno">425</tt>  <tt class="py-line">    <tt class="py-string">'.nds'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-nintendo-ds-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line">    <tt class="py-string">'.nef'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-nikon-nef'</tt><tt class="py-op">,</tt> </tt>
+<a name="L427"></a><tt class="py-lineno">427</tt>  <tt class="py-line">    <tt class="py-string">'.nes'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-nes-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L428"></a><tt class="py-lineno">428</tt>  <tt class="py-line">    <tt class="py-string">'.nfo'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-nfo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L429"></a><tt class="py-lineno">429</tt>  <tt class="py-line">    <tt class="py-string">'.not'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-mup'</tt><tt class="py-op">,</tt> </tt>
+<a name="L430"></a><tt class="py-lineno">430</tt>  <tt class="py-line">    <tt class="py-string">'.nsc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-netshow-channel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L431"></a><tt class="py-lineno">431</tt>  <tt class="py-line">    <tt class="py-string">'.nsv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-nsv'</tt><tt class="py-op">,</tt> </tt>
+<a name="L432"></a><tt class="py-lineno">432</tt>  <tt class="py-line">    <tt class="py-string">'.nzb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-nzb'</tt><tt class="py-op">,</tt> </tt>
+<a name="L433"></a><tt class="py-lineno">433</tt>  <tt class="py-line">    <tt class="py-string">'.o'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-object'</tt><tt class="py-op">,</tt> </tt>
+<a name="L434"></a><tt class="py-lineno">434</tt>  <tt class="py-line">    <tt class="py-string">'.obj'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tgif'</tt><tt class="py-op">,</tt> </tt>
+<a name="L435"></a><tt class="py-lineno">435</tt>  <tt class="py-line">    <tt class="py-string">'.ocl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ocl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L436"></a><tt class="py-lineno">436</tt>  <tt class="py-line">    <tt class="py-string">'.oda'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/oda'</tt><tt class="py-op">,</tt> </tt>
+<a name="L437"></a><tt class="py-lineno">437</tt>  <tt class="py-line">    <tt class="py-string">'.odb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.database'</tt><tt class="py-op">,</tt> </tt>
+<a name="L438"></a><tt class="py-lineno">438</tt>  <tt class="py-line">    <tt class="py-string">'.odc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.chart'</tt><tt class="py-op">,</tt> </tt>
+<a name="L439"></a><tt class="py-lineno">439</tt>  <tt class="py-line">    <tt class="py-string">'.odf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.formula'</tt><tt class="py-op">,</tt> </tt>
+<a name="L440"></a><tt class="py-lineno">440</tt>  <tt class="py-line">    <tt class="py-string">'.odg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.graphics'</tt><tt class="py-op">,</tt> </tt>
+<a name="L441"></a><tt class="py-lineno">441</tt>  <tt class="py-line">    <tt class="py-string">'.odi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.image'</tt><tt class="py-op">,</tt> </tt>
+<a name="L442"></a><tt class="py-lineno">442</tt>  <tt class="py-line">    <tt class="py-string">'.odm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.text-master'</tt><tt class="py-op">,</tt> </tt>
+<a name="L443"></a><tt class="py-lineno">443</tt>  <tt class="py-line">    <tt class="py-string">'.odp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.presentation'</tt><tt class="py-op">,</tt> </tt>
+<a name="L444"></a><tt class="py-lineno">444</tt>  <tt class="py-line">    <tt class="py-string">'.ods'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.spreadsheet'</tt><tt class="py-op">,</tt> </tt>
+<a name="L445"></a><tt class="py-lineno">445</tt>  <tt class="py-line">    <tt class="py-string">'.odt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.text'</tt><tt class="py-op">,</tt> </tt>
+<a name="L446"></a><tt class="py-lineno">446</tt>  <tt class="py-line">    <tt class="py-string">'.oga'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/ogg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L447"></a><tt class="py-lineno">447</tt>  <tt class="py-line">    <tt class="py-string">'.ogg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/ogg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L448"></a><tt class="py-lineno">448</tt>  <tt class="py-line">    <tt class="py-string">'.ogm'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-ogm+ogg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L449"></a><tt class="py-lineno">449</tt>  <tt class="py-line">    <tt class="py-string">'.ogv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/ogg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L450"></a><tt class="py-lineno">450</tt>  <tt class="py-line">    <tt class="py-string">'.ogx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/ogg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L451"></a><tt class="py-lineno">451</tt>  <tt class="py-line">    <tt class="py-string">'.old'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-trash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L452"></a><tt class="py-lineno">452</tt>  <tt class="py-line">    <tt class="py-string">'.oleo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-oleo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L453"></a><tt class="py-lineno">453</tt>  <tt class="py-line">    <tt class="py-string">'.ooc'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ooc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L454"></a><tt class="py-lineno">454</tt>  <tt class="py-line">    <tt class="py-string">'.opml'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-opml+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L455"></a><tt class="py-lineno">455</tt>  <tt class="py-line">    <tt class="py-string">'.oprc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.palm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L456"></a><tt class="py-lineno">456</tt>  <tt class="py-line">    <tt class="py-string">'.ora'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/openraster'</tt><tt class="py-op">,</tt> </tt>
+<a name="L457"></a><tt class="py-lineno">457</tt>  <tt class="py-line">    <tt class="py-string">'.orf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-olympus-orf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L458"></a><tt class="py-lineno">458</tt>  <tt class="py-line">    <tt class="py-string">'.otc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.chart-template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L459"></a><tt class="py-lineno">459</tt>  <tt class="py-line">    <tt class="py-string">'.otf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-otf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L460"></a><tt class="py-lineno">460</tt>  <tt class="py-line">    <tt class="py-string">'.otg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.graphics-template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L461"></a><tt class="py-lineno">461</tt>  <tt class="py-line">    <tt class="py-string">'.oth'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.text-web'</tt><tt class="py-op">,</tt> </tt>
+<a name="L462"></a><tt class="py-lineno">462</tt>  <tt class="py-line">    <tt class="py-string">'.otp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.presentation-template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L463"></a><tt class="py-lineno">463</tt>  <tt class="py-line">    <tt class="py-string">'.ots'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.spreadsheet-template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L464"></a><tt class="py-lineno">464</tt>  <tt class="py-line">    <tt class="py-string">'.ott'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.oasis.opendocument.text-template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L465"></a><tt class="py-lineno">465</tt>  <tt class="py-line">    <tt class="py-string">'.owl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/rdf+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L466"></a><tt class="py-lineno">466</tt>  <tt class="py-line">    <tt class="py-string">'.oxps'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/oxps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L467"></a><tt class="py-lineno">467</tt>  <tt class="py-line">    <tt class="py-string">'.oxt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openofficeorg.extension'</tt><tt class="py-op">,</tt> </tt>
+<a name="L468"></a><tt class="py-lineno">468</tt>  <tt class="py-line">    <tt class="py-string">'.p'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-pascal'</tt><tt class="py-op">,</tt> </tt>
+<a name="L469"></a><tt class="py-lineno">469</tt>  <tt class="py-line">    <tt class="py-string">'.p10'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkcs10'</tt><tt class="py-op">,</tt> </tt>
+<a name="L470"></a><tt class="py-lineno">470</tt>  <tt class="py-line">    <tt class="py-string">'.p12'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pkcs12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L471"></a><tt class="py-lineno">471</tt>  <tt class="py-line">    <tt class="py-string">'.p7b'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pkcs7-certificates'</tt><tt class="py-op">,</tt> </tt>
+<a name="L472"></a><tt class="py-lineno">472</tt>  <tt class="py-line">    <tt class="py-string">'.p7c'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkcs7-mime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L473"></a><tt class="py-lineno">473</tt>  <tt class="py-line">    <tt class="py-string">'.p7m'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkcs7-mime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L474"></a><tt class="py-lineno">474</tt>  <tt class="py-line">    <tt class="py-string">'.p7s'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkcs7-signature'</tt><tt class="py-op">,</tt> </tt>
+<a name="L475"></a><tt class="py-lineno">475</tt>  <tt class="py-line">    <tt class="py-string">'.p8'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkcs8'</tt><tt class="py-op">,</tt> </tt>
+<a name="L476"></a><tt class="py-lineno">476</tt>  <tt class="py-line">    <tt class="py-string">'.pack'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-java-pack200'</tt><tt class="py-op">,</tt> </tt>
+<a name="L477"></a><tt class="py-lineno">477</tt>  <tt class="py-line">    <tt class="py-string">'.pak'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pak'</tt><tt class="py-op">,</tt> </tt>
+<a name="L478"></a><tt class="py-lineno">478</tt>  <tt class="py-line">    <tt class="py-string">'.par2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-par2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L479"></a><tt class="py-lineno">479</tt>  <tt class="py-line">    <tt class="py-string">'.pas'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-pascal'</tt><tt class="py-op">,</tt> </tt>
+<a name="L480"></a><tt class="py-lineno">480</tt>  <tt class="py-line">    <tt class="py-string">'.patch'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-patch'</tt><tt class="py-op">,</tt> </tt>
+<a name="L481"></a><tt class="py-lineno">481</tt>  <tt class="py-line">    <tt class="py-string">'.pbm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-portable-bitmap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L482"></a><tt class="py-lineno">482</tt>  <tt class="py-line">    <tt class="py-string">'.pcap'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.tcpdump.pcap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L483"></a><tt class="py-lineno">483</tt>  <tt class="py-line">    <tt class="py-string">'.pcd'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-photo-cd'</tt><tt class="py-op">,</tt> </tt>
+<a name="L484"></a><tt class="py-lineno">484</tt>  <tt class="py-line">    <tt class="py-string">'.pcf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cisco-vpn-settings'</tt><tt class="py-op">,</tt> </tt>
+<a name="L485"></a><tt class="py-lineno">485</tt>  <tt class="py-line">    <tt class="py-string">'.pcf.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-pcf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L486"></a><tt class="py-lineno">486</tt>  <tt class="py-line">    <tt class="py-string">'.pcf.z'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-pcf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L487"></a><tt class="py-lineno">487</tt>  <tt class="py-line">    <tt class="py-string">'.pcl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.hp-pcl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L488"></a><tt class="py-lineno">488</tt>  <tt class="py-line">    <tt class="py-string">'.pct'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-pict'</tt><tt class="py-op">,</tt> </tt>
+<a name="L489"></a><tt class="py-lineno">489</tt>  <tt class="py-line">    <tt class="py-string">'.pcx'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-pcx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L490"></a><tt class="py-lineno">490</tt>  <tt class="py-line">    <tt class="py-string">'.pdb'</tt><tt class="py-op">:</tt> <tt class="py-string">'chemical/x-pdb'</tt><tt class="py-op">,</tt> </tt>
+<a name="L491"></a><tt class="py-lineno">491</tt>  <tt class="py-line">    <tt class="py-string">'.pdc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-aportisdoc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L492"></a><tt class="py-lineno">492</tt>  <tt class="py-line">    <tt class="py-string">'.pdf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L493"></a><tt class="py-lineno">493</tt>  <tt class="py-line">    <tt class="py-string">'.pdf.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzpdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L494"></a><tt class="py-lineno">494</tt>  <tt class="py-line">    <tt class="py-string">'.pdf.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gzpdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L495"></a><tt class="py-lineno">495</tt>  <tt class="py-line">    <tt class="py-string">'.pdf.xz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xzpdf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L496"></a><tt class="py-lineno">496</tt>  <tt class="py-line">    <tt class="py-string">'.pef'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-pentax-pef'</tt><tt class="py-op">,</tt> </tt>
+<a name="L497"></a><tt class="py-lineno">497</tt>  <tt class="py-line">    <tt class="py-string">'.pem'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-x509-ca-cert'</tt><tt class="py-op">,</tt> </tt>
+<a name="L498"></a><tt class="py-lineno">498</tt>  <tt class="py-line">    <tt class="py-string">'.perl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-perl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L499"></a><tt class="py-lineno">499</tt>  <tt class="py-line">    <tt class="py-string">'.pfa'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-type1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L500"></a><tt class="py-lineno">500</tt>  <tt class="py-line">    <tt class="py-string">'.pfb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-type1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L501"></a><tt class="py-lineno">501</tt>  <tt class="py-line">    <tt class="py-string">'.pfx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pkcs12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L502"></a><tt class="py-lineno">502</tt>  <tt class="py-line">    <tt class="py-string">'.pgm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-portable-graymap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L503"></a><tt class="py-lineno">503</tt>  <tt class="py-line">    <tt class="py-string">'.pgn'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-chess-pgn'</tt><tt class="py-op">,</tt> </tt>
+<a name="L504"></a><tt class="py-lineno">504</tt>  <tt class="py-line">    <tt class="py-string">'.pgp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pgp-encrypted'</tt><tt class="py-op">,</tt> </tt>
+<a name="L505"></a><tt class="py-lineno">505</tt>  <tt class="py-line">    <tt class="py-string">'.php'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-php'</tt><tt class="py-op">,</tt> </tt>
+<a name="L506"></a><tt class="py-lineno">506</tt>  <tt class="py-line">    <tt class="py-string">'.php3'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-php'</tt><tt class="py-op">,</tt> </tt>
+<a name="L507"></a><tt class="py-lineno">507</tt>  <tt class="py-line">    <tt class="py-string">'.php4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-php'</tt><tt class="py-op">,</tt> </tt>
+<a name="L508"></a><tt class="py-lineno">508</tt>  <tt class="py-line">    <tt class="py-string">'.php5'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-php'</tt><tt class="py-op">,</tt> </tt>
+<a name="L509"></a><tt class="py-lineno">509</tt>  <tt class="py-line">    <tt class="py-string">'.phps'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-php'</tt><tt class="py-op">,</tt> </tt>
+<a name="L510"></a><tt class="py-lineno">510</tt>  <tt class="py-line">    <tt class="py-string">'.pict'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-pict'</tt><tt class="py-op">,</tt> </tt>
+<a name="L511"></a><tt class="py-lineno">511</tt>  <tt class="py-line">    <tt class="py-string">'.pict1'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-pict'</tt><tt class="py-op">,</tt> </tt>
+<a name="L512"></a><tt class="py-lineno">512</tt>  <tt class="py-line">    <tt class="py-string">'.pict2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-pict'</tt><tt class="py-op">,</tt> </tt>
+<a name="L513"></a><tt class="py-lineno">513</tt>  <tt class="py-line">    <tt class="py-string">'.pk'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tex-pk'</tt><tt class="py-op">,</tt> </tt>
+<a name="L514"></a><tt class="py-lineno">514</tt>  <tt class="py-line">    <tt class="py-string">'.pkipath'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pkix-pkipath'</tt><tt class="py-op">,</tt> </tt>
+<a name="L515"></a><tt class="py-lineno">515</tt>  <tt class="py-line">    <tt class="py-string">'.pkr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pgp-keys'</tt><tt class="py-op">,</tt> </tt>
+<a name="L516"></a><tt class="py-lineno">516</tt>  <tt class="py-line">    <tt class="py-string">'.pl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-perl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L517"></a><tt class="py-lineno">517</tt>  <tt class="py-line">    <tt class="py-string">'.pla'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-iriver-pla'</tt><tt class="py-op">,</tt> </tt>
+<a name="L518"></a><tt class="py-lineno">518</tt>  <tt class="py-line">    <tt class="py-string">'.pln'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-planperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L519"></a><tt class="py-lineno">519</tt>  <tt class="py-line">    <tt class="py-string">'.pls'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-scpls'</tt><tt class="py-op">,</tt> </tt>
+<a name="L520"></a><tt class="py-lineno">520</tt>  <tt class="py-line">    <tt class="py-string">'.pm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-perl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L521"></a><tt class="py-lineno">521</tt>  <tt class="py-line">    <tt class="py-string">'.png'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/png'</tt><tt class="py-op">,</tt> </tt>
+<a name="L522"></a><tt class="py-lineno">522</tt>  <tt class="py-line">    <tt class="py-string">'.pnm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-portable-anymap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L523"></a><tt class="py-lineno">523</tt>  <tt class="py-line">    <tt class="py-string">'.pntg'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-macpaint'</tt><tt class="py-op">,</tt> </tt>
+<a name="L524"></a><tt class="py-lineno">524</tt>  <tt class="py-line">    <tt class="py-string">'.po'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-gettext-translation'</tt><tt class="py-op">,</tt> </tt>
+<a name="L525"></a><tt class="py-lineno">525</tt>  <tt class="py-line">    <tt class="py-string">'.por'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-spss-por'</tt><tt class="py-op">,</tt> </tt>
+<a name="L526"></a><tt class="py-lineno">526</tt>  <tt class="py-line">    <tt class="py-string">'.pot'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-gettext-translation-template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L527"></a><tt class="py-lineno">527</tt>  <tt class="py-line">    <tt class="py-string">'.potm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint.template.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L528"></a><tt class="py-lineno">528</tt>  <tt class="py-line">    <tt class="py-string">'.potx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.presentationml.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L529"></a><tt class="py-lineno">529</tt>  <tt class="py-line">    <tt class="py-string">'.ppam'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint.addin.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L530"></a><tt class="py-lineno">530</tt>  <tt class="py-line">    <tt class="py-string">'.ppm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-portable-pixmap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L531"></a><tt class="py-lineno">531</tt>  <tt class="py-line">    <tt class="py-string">'.pps'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint'</tt><tt class="py-op">,</tt> </tt>
+<a name="L532"></a><tt class="py-lineno">532</tt>  <tt class="py-line">    <tt class="py-string">'.ppsm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint.slideshow.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L533"></a><tt class="py-lineno">533</tt>  <tt class="py-line">    <tt class="py-string">'.ppsx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.presentationml.slideshow'</tt><tt class="py-op">,</tt> </tt>
+<a name="L534"></a><tt class="py-lineno">534</tt>  <tt class="py-line">    <tt class="py-string">'.ppt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint'</tt><tt class="py-op">,</tt> </tt>
+<a name="L535"></a><tt class="py-lineno">535</tt>  <tt class="py-line">    <tt class="py-string">'.pptm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint.presentation.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L536"></a><tt class="py-lineno">536</tt>  <tt class="py-line">    <tt class="py-string">'.pptx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.presentationml.presentation'</tt><tt class="py-op">,</tt> </tt>
+<a name="L537"></a><tt class="py-lineno">537</tt>  <tt class="py-line">    <tt class="py-string">'.ppz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint'</tt><tt class="py-op">,</tt> </tt>
+<a name="L538"></a><tt class="py-lineno">538</tt>  <tt class="py-line">    <tt class="py-string">'.pqa'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.palm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L539"></a><tt class="py-lineno">539</tt>  <tt class="py-line">    <tt class="py-string">'.prc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.palm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L540"></a><tt class="py-lineno">540</tt>  <tt class="py-line">    <tt class="py-string">'.ps'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/postscript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L541"></a><tt class="py-lineno">541</tt>  <tt class="py-line">    <tt class="py-string">'.ps.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzpostscript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L542"></a><tt class="py-lineno">542</tt>  <tt class="py-line">    <tt class="py-string">'.ps.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gzpostscript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L543"></a><tt class="py-lineno">543</tt>  <tt class="py-line">    <tt class="py-string">'.psd'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.adobe.photoshop'</tt><tt class="py-op">,</tt> </tt>
+<a name="L544"></a><tt class="py-lineno">544</tt>  <tt class="py-line">    <tt class="py-string">'.psf'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-psf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L545"></a><tt class="py-lineno">545</tt>  <tt class="py-line">    <tt class="py-string">'.psf.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gz-font-linux-psf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L546"></a><tt class="py-lineno">546</tt>  <tt class="py-line">    <tt class="py-string">'.psflib'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-psflib'</tt><tt class="py-op">,</tt> </tt>
+<a name="L547"></a><tt class="py-lineno">547</tt>  <tt class="py-line">    <tt class="py-string">'.psid'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/prs.sid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L548"></a><tt class="py-lineno">548</tt>  <tt class="py-line">    <tt class="py-string">'.psw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pocket-word'</tt><tt class="py-op">,</tt> </tt>
+<a name="L549"></a><tt class="py-lineno">549</tt>  <tt class="py-line">    <tt class="py-string">'.pw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L550"></a><tt class="py-lineno">550</tt>  <tt class="py-line">    <tt class="py-string">'.py'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-python'</tt><tt class="py-op">,</tt> </tt>
+<a name="L551"></a><tt class="py-lineno">551</tt>  <tt class="py-line">    <tt class="py-string">'.pyc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-python-bytecode'</tt><tt class="py-op">,</tt> </tt>
+<a name="L552"></a><tt class="py-lineno">552</tt>  <tt class="py-line">    <tt class="py-string">'.pickle'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/python-pickle'</tt><tt class="py-op">,</tt> </tt>
+<a name="L553"></a><tt class="py-lineno">553</tt>  <tt class="py-line">    <tt class="py-string">'.pyo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-python-bytecode'</tt><tt class="py-op">,</tt> </tt>
+<a name="L554"></a><tt class="py-lineno">554</tt>  <tt class="py-line">    <tt class="py-string">'.qif'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-quicktime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L555"></a><tt class="py-lineno">555</tt>  <tt class="py-line">    <tt class="py-string">'.qml'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-qml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L556"></a><tt class="py-lineno">556</tt>  <tt class="py-line">    <tt class="py-string">'.qt'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/quicktime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L557"></a><tt class="py-lineno">557</tt>  <tt class="py-line">    <tt class="py-string">'.qti'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-qtiplot'</tt><tt class="py-op">,</tt> </tt>
+<a name="L558"></a><tt class="py-lineno">558</tt>  <tt class="py-line">    <tt class="py-string">'.qti.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-qtiplot'</tt><tt class="py-op">,</tt> </tt>
+<a name="L559"></a><tt class="py-lineno">559</tt>  <tt class="py-line">    <tt class="py-string">'.qtif'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-quicktime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L560"></a><tt class="py-lineno">560</tt>  <tt class="py-line">    <tt class="py-string">'.qtl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-quicktime-media-link'</tt><tt class="py-op">,</tt> </tt>
+<a name="L561"></a><tt class="py-lineno">561</tt>  <tt class="py-line">    <tt class="py-string">'.qtvr'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/quicktime'</tt><tt class="py-op">,</tt> </tt>
+<a name="L562"></a><tt class="py-lineno">562</tt>  <tt class="py-line">    <tt class="py-string">'.ra'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/vnd.rn-realaudio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L563"></a><tt class="py-lineno">563</tt>  <tt class="py-line">    <tt class="py-string">'.raf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-fuji-raf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L564"></a><tt class="py-lineno">564</tt>  <tt class="py-line">    <tt class="py-string">'.ram'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/ram'</tt><tt class="py-op">,</tt> </tt>
+<a name="L565"></a><tt class="py-lineno">565</tt>  <tt class="py-line">    <tt class="py-string">'.rar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-rar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L566"></a><tt class="py-lineno">566</tt>  <tt class="py-line">    <tt class="py-string">'.ras'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-cmu-raster'</tt><tt class="py-op">,</tt> </tt>
+<a name="L567"></a><tt class="py-lineno">567</tt>  <tt class="py-line">    <tt class="py-string">'.raw'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-panasonic-raw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L568"></a><tt class="py-lineno">568</tt>  <tt class="py-line">    <tt class="py-string">'.rax'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/vnd.rn-realaudio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L569"></a><tt class="py-lineno">569</tt>  <tt class="py-line">    <tt class="py-string">'.rb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ruby'</tt><tt class="py-op">,</tt> </tt>
+<a name="L570"></a><tt class="py-lineno">570</tt>  <tt class="py-line">    <tt class="py-string">'.rdf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/rdf+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L571"></a><tt class="py-lineno">571</tt>  <tt class="py-line">    <tt class="py-string">'.rdfs'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/rdf+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L572"></a><tt class="py-lineno">572</tt>  <tt class="py-line">    <tt class="py-string">'.reg'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ms-regedit'</tt><tt class="py-op">,</tt> </tt>
+<a name="L573"></a><tt class="py-lineno">573</tt>  <tt class="py-line">    <tt class="py-string">'.rej'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-reject'</tt><tt class="py-op">,</tt> </tt>
+<a name="L574"></a><tt class="py-lineno">574</tt>  <tt class="py-line">    <tt class="py-string">'.rgb'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-rgb'</tt><tt class="py-op">,</tt> </tt>
+<a name="L575"></a><tt class="py-lineno">575</tt>  <tt class="py-line">    <tt class="py-string">'.rle'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/rle'</tt><tt class="py-op">,</tt> </tt>
+<a name="L576"></a><tt class="py-lineno">576</tt>  <tt class="py-line">    <tt class="py-string">'.rm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.rn-realmedia'</tt><tt class="py-op">,</tt> </tt>
+<a name="L577"></a><tt class="py-lineno">577</tt>  <tt class="py-line">    <tt class="py-string">'.rmj'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.rn-realmedia'</tt><tt class="py-op">,</tt> </tt>
+<a name="L578"></a><tt class="py-lineno">578</tt>  <tt class="py-line">    <tt class="py-string">'.rmm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.rn-realmedia'</tt><tt class="py-op">,</tt> </tt>
+<a name="L579"></a><tt class="py-lineno">579</tt>  <tt class="py-line">    <tt class="py-string">'.rms'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.rn-realmedia'</tt><tt class="py-op">,</tt> </tt>
+<a name="L580"></a><tt class="py-lineno">580</tt>  <tt class="py-line">    <tt class="py-string">'.rmvb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.rn-realmedia'</tt><tt class="py-op">,</tt> </tt>
+<a name="L581"></a><tt class="py-lineno">581</tt>  <tt class="py-line">    <tt class="py-string">'.rmx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.rn-realmedia'</tt><tt class="py-op">,</tt> </tt>
+<a name="L582"></a><tt class="py-lineno">582</tt>  <tt class="py-line">    <tt class="py-string">'.rnc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/relax-ng-compact-syntax'</tt><tt class="py-op">,</tt> </tt>
+<a name="L583"></a><tt class="py-lineno">583</tt>  <tt class="py-line">    <tt class="py-string">'.rng'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L584"></a><tt class="py-lineno">584</tt>  <tt class="py-line">    <tt class="py-string">'.roff'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/troff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L585"></a><tt class="py-lineno">585</tt>  <tt class="py-line">    <tt class="py-string">'.rp'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.rn-realpix'</tt><tt class="py-op">,</tt> </tt>
+<a name="L586"></a><tt class="py-lineno">586</tt>  <tt class="py-line">    <tt class="py-string">'.rpm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-rpm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L587"></a><tt class="py-lineno">587</tt>  <tt class="py-line">    <tt class="py-string">'.rss'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/rss+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L588"></a><tt class="py-lineno">588</tt>  <tt class="py-line">    <tt class="py-string">'.rt'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vnd.rn-realtext'</tt><tt class="py-op">,</tt> </tt>
+<a name="L589"></a><tt class="py-lineno">589</tt>  <tt class="py-line">    <tt class="py-string">'.rtf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/rtf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L590"></a><tt class="py-lineno">590</tt>  <tt class="py-line">    <tt class="py-string">'.rtx'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/richtext'</tt><tt class="py-op">,</tt> </tt>
+<a name="L591"></a><tt class="py-lineno">591</tt>  <tt class="py-line">    <tt class="py-string">'.rv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vnd.rn-realvideo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L592"></a><tt class="py-lineno">592</tt>  <tt class="py-line">    <tt class="py-string">'.rvx'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vnd.rn-realvideo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L593"></a><tt class="py-lineno">593</tt>  <tt class="py-line">    <tt class="py-string">'.rw2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-panasonic-raw2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L594"></a><tt class="py-lineno">594</tt>  <tt class="py-line">    <tt class="py-string">'.s3m'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-s3m'</tt><tt class="py-op">,</tt> </tt>
+<a name="L595"></a><tt class="py-lineno">595</tt>  <tt class="py-line">    <tt class="py-string">'.sam'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-amipro'</tt><tt class="py-op">,</tt> </tt>
+<a name="L596"></a><tt class="py-lineno">596</tt>  <tt class="py-line">    <tt class="py-string">'.sami'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sami'</tt><tt class="py-op">,</tt> </tt>
+<a name="L597"></a><tt class="py-lineno">597</tt>  <tt class="py-line">    <tt class="py-string">'.sav'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-spss-sav'</tt><tt class="py-op">,</tt> </tt>
+<a name="L598"></a><tt class="py-lineno">598</tt>  <tt class="py-line">    <tt class="py-string">'.scala'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-scala'</tt><tt class="py-op">,</tt> </tt>
+<a name="L599"></a><tt class="py-lineno">599</tt>  <tt class="py-line">    <tt class="py-string">'.scm'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-scheme'</tt><tt class="py-op">,</tt> </tt>
+<a name="L600"></a><tt class="py-lineno">600</tt>  <tt class="py-line">    <tt class="py-string">'.sda'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.draw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L601"></a><tt class="py-lineno">601</tt>  <tt class="py-line">    <tt class="py-string">'.sdc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.calc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L602"></a><tt class="py-lineno">602</tt>  <tt class="py-line">    <tt class="py-string">'.sdd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.impress'</tt><tt class="py-op">,</tt> </tt>
+<a name="L603"></a><tt class="py-lineno">603</tt>  <tt class="py-line">    <tt class="py-string">'.sdp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/sdp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L604"></a><tt class="py-lineno">604</tt>  <tt class="py-line">    <tt class="py-string">'.sds'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.chart'</tt><tt class="py-op">,</tt> </tt>
+<a name="L605"></a><tt class="py-lineno">605</tt>  <tt class="py-line">    <tt class="py-string">'.sdw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.writer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L606"></a><tt class="py-lineno">606</tt>  <tt class="py-line">    <tt class="py-string">'.sgf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-go-sgf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L607"></a><tt class="py-lineno">607</tt>  <tt class="py-line">    <tt class="py-string">'.sgi'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-sgi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L608"></a><tt class="py-lineno">608</tt>  <tt class="py-line">    <tt class="py-string">'.sgl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.writer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L609"></a><tt class="py-lineno">609</tt>  <tt class="py-line">    <tt class="py-string">'.sgm'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/sgml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L610"></a><tt class="py-lineno">610</tt>  <tt class="py-line">    <tt class="py-string">'.sgml'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/sgml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L611"></a><tt class="py-lineno">611</tt>  <tt class="py-line">    <tt class="py-string">'.sh'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-shellscript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L612"></a><tt class="py-lineno">612</tt>  <tt class="py-line">    <tt class="py-string">'.shape'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-dia-shape'</tt><tt class="py-op">,</tt> </tt>
+<a name="L613"></a><tt class="py-lineno">613</tt>  <tt class="py-line">    <tt class="py-string">'.shar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-shar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L614"></a><tt class="py-lineno">614</tt>  <tt class="py-line">    <tt class="py-string">'.shn'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-shorten'</tt><tt class="py-op">,</tt> </tt>
+<a name="L615"></a><tt class="py-lineno">615</tt>  <tt class="py-line">    <tt class="py-string">'.siag'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-siag'</tt><tt class="py-op">,</tt> </tt>
+<a name="L616"></a><tt class="py-lineno">616</tt>  <tt class="py-line">    <tt class="py-string">'.sid'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/prs.sid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L617"></a><tt class="py-lineno">617</tt>  <tt class="py-line">    <tt class="py-string">'.sik'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-trash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L618"></a><tt class="py-lineno">618</tt>  <tt class="py-line">    <tt class="py-string">'.sis'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.symbian.install'</tt><tt class="py-op">,</tt> </tt>
+<a name="L619"></a><tt class="py-lineno">619</tt>  <tt class="py-line">    <tt class="py-string">'.sisx'</tt><tt class="py-op">:</tt> <tt class="py-string">'x-epoc/x-sisx-app'</tt><tt class="py-op">,</tt> </tt>
+<a name="L620"></a><tt class="py-lineno">620</tt>  <tt class="py-line">    <tt class="py-string">'.sit'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-stuffit'</tt><tt class="py-op">,</tt> </tt>
+<a name="L621"></a><tt class="py-lineno">621</tt>  <tt class="py-line">    <tt class="py-string">'.siv'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/sieve'</tt><tt class="py-op">,</tt> </tt>
+<a name="L622"></a><tt class="py-lineno">622</tt>  <tt class="py-line">    <tt class="py-string">'.sk'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-skencil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L623"></a><tt class="py-lineno">623</tt>  <tt class="py-line">    <tt class="py-string">'.sk1'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-skencil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L624"></a><tt class="py-lineno">624</tt>  <tt class="py-line">    <tt class="py-string">'.skr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/pgp-keys'</tt><tt class="py-op">,</tt> </tt>
+<a name="L625"></a><tt class="py-lineno">625</tt>  <tt class="py-line">    <tt class="py-string">'.sldm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-powerpoint.slide.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L626"></a><tt class="py-lineno">626</tt>  <tt class="py-line">    <tt class="py-string">'.sldx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.presentationml.slide'</tt><tt class="py-op">,</tt> </tt>
+<a name="L627"></a><tt class="py-lineno">627</tt>  <tt class="py-line">    <tt class="py-string">'.slk'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/spreadsheet'</tt><tt class="py-op">,</tt> </tt>
+<a name="L628"></a><tt class="py-lineno">628</tt>  <tt class="py-line">    <tt class="py-string">'.smaf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-smaf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L629"></a><tt class="py-lineno">629</tt>  <tt class="py-line">    <tt class="py-string">'.smc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-snes-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L630"></a><tt class="py-lineno">630</tt>  <tt class="py-line">    <tt class="py-string">'.smd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.mail'</tt><tt class="py-op">,</tt> </tt>
+<a name="L631"></a><tt class="py-lineno">631</tt>  <tt class="py-line">    <tt class="py-string">'.smf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.math'</tt><tt class="py-op">,</tt> </tt>
+<a name="L632"></a><tt class="py-lineno">632</tt>  <tt class="py-line">    <tt class="py-string">'.smi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sami'</tt><tt class="py-op">,</tt> </tt>
+<a name="L633"></a><tt class="py-lineno">633</tt>  <tt class="py-line">    <tt class="py-string">'.smil'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/smil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L634"></a><tt class="py-lineno">634</tt>  <tt class="py-line">    <tt class="py-string">'.sml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/smil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L635"></a><tt class="py-lineno">635</tt>  <tt class="py-line">    <tt class="py-string">'.sms'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sms-rom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L636"></a><tt class="py-lineno">636</tt>  <tt class="py-line">    <tt class="py-string">'.snd'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/basic'</tt><tt class="py-op">,</tt> </tt>
+<a name="L637"></a><tt class="py-lineno">637</tt>  <tt class="py-line">    <tt class="py-string">'.so'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sharedlib'</tt><tt class="py-op">,</tt> </tt>
+<a name="L638"></a><tt class="py-lineno">638</tt>  <tt class="py-line">    <tt class="py-string">'.spc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-pkcs7-certificates'</tt><tt class="py-op">,</tt> </tt>
+<a name="L639"></a><tt class="py-lineno">639</tt>  <tt class="py-line">    <tt class="py-string">'.spd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-speedo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L640"></a><tt class="py-lineno">640</tt>  <tt class="py-line">    <tt class="py-string">'.spec'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-rpm-spec'</tt><tt class="py-op">,</tt> </tt>
+<a name="L641"></a><tt class="py-lineno">641</tt>  <tt class="py-line">    <tt class="py-string">'.spl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-shockwave-flash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L642"></a><tt class="py-lineno">642</tt>  <tt class="py-line">    <tt class="py-string">'.spm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-source-rpm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L643"></a><tt class="py-lineno">643</tt>  <tt class="py-line">    <tt class="py-string">'.spx'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-speex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L644"></a><tt class="py-lineno">644</tt>  <tt class="py-line">    <tt class="py-string">'.sql'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-sql'</tt><tt class="py-op">,</tt> </tt>
+<a name="L645"></a><tt class="py-lineno">645</tt>  <tt class="py-line">    <tt class="py-string">'.sr2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-sony-sr2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L646"></a><tt class="py-lineno">646</tt>  <tt class="py-line">    <tt class="py-string">'.src'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-wais-source'</tt><tt class="py-op">,</tt> </tt>
+<a name="L647"></a><tt class="py-lineno">647</tt>  <tt class="py-line">    <tt class="py-string">'.src.rpm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-source-rpm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L648"></a><tt class="py-lineno">648</tt>  <tt class="py-line">    <tt class="py-string">'.srf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-sony-srf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L649"></a><tt class="py-lineno">649</tt>  <tt class="py-line">    <tt class="py-string">'.srt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-subrip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L650"></a><tt class="py-lineno">650</tt>  <tt class="py-line">    <tt class="py-string">'.ss'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-scheme'</tt><tt class="py-op">,</tt> </tt>
+<a name="L651"></a><tt class="py-lineno">651</tt>  <tt class="py-line">    <tt class="py-string">'.ssa'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-ssa'</tt><tt class="py-op">,</tt> </tt>
+<a name="L652"></a><tt class="py-lineno">652</tt>  <tt class="py-line">    <tt class="py-string">'.stc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.calc.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L653"></a><tt class="py-lineno">653</tt>  <tt class="py-line">    <tt class="py-string">'.std'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.draw.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L654"></a><tt class="py-lineno">654</tt>  <tt class="py-line">    <tt class="py-string">'.sti'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.impress.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L655"></a><tt class="py-lineno">655</tt>  <tt class="py-line">    <tt class="py-string">'.stm'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-stm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L656"></a><tt class="py-lineno">656</tt>  <tt class="py-line">    <tt class="py-string">'.stw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.writer.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L657"></a><tt class="py-lineno">657</tt>  <tt class="py-line">    <tt class="py-string">'.sty'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L658"></a><tt class="py-lineno">658</tt>  <tt class="py-line">    <tt class="py-string">'.sub'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-subviewer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L659"></a><tt class="py-lineno">659</tt>  <tt class="py-line">    <tt class="py-string">'.sun'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-sun-raster'</tt><tt class="py-op">,</tt> </tt>
+<a name="L660"></a><tt class="py-lineno">660</tt>  <tt class="py-line">    <tt class="py-string">'.sv'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-svsrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L661"></a><tt class="py-lineno">661</tt>  <tt class="py-line">    <tt class="py-string">'.sv4cpio'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sv4cpio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L662"></a><tt class="py-lineno">662</tt>  <tt class="py-line">    <tt class="py-string">'.sv4crc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-sv4crc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L663"></a><tt class="py-lineno">663</tt>  <tt class="py-line">    <tt class="py-string">'.svg'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/svg+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L664"></a><tt class="py-lineno">664</tt>  <tt class="py-line">    <tt class="py-string">'.svgz'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/svg+xml-compressed'</tt><tt class="py-op">,</tt> </tt>
+<a name="L665"></a><tt class="py-lineno">665</tt>  <tt class="py-line">    <tt class="py-string">'.svh'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-svhdr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L666"></a><tt class="py-lineno">666</tt>  <tt class="py-line">    <tt class="py-string">'.swf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-shockwave-flash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L667"></a><tt class="py-lineno">667</tt>  <tt class="py-line">    <tt class="py-string">'.swm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ms-wim'</tt><tt class="py-op">,</tt> </tt>
+<a name="L668"></a><tt class="py-lineno">668</tt>  <tt class="py-line">    <tt class="py-string">'.sxc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.calc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L669"></a><tt class="py-lineno">669</tt>  <tt class="py-line">    <tt class="py-string">'.sxd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.draw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L670"></a><tt class="py-lineno">670</tt>  <tt class="py-line">    <tt class="py-string">'.sxg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.writer.global'</tt><tt class="py-op">,</tt> </tt>
+<a name="L671"></a><tt class="py-lineno">671</tt>  <tt class="py-line">    <tt class="py-string">'.sxi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.impress'</tt><tt class="py-op">,</tt> </tt>
+<a name="L672"></a><tt class="py-lineno">672</tt>  <tt class="py-line">    <tt class="py-string">'.sxm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.math'</tt><tt class="py-op">,</tt> </tt>
+<a name="L673"></a><tt class="py-lineno">673</tt>  <tt class="py-line">    <tt class="py-string">'.sxw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.sun.xml.writer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L674"></a><tt class="py-lineno">674</tt>  <tt class="py-line">    <tt class="py-string">'.sylk'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/spreadsheet'</tt><tt class="py-op">,</tt> </tt>
+<a name="L675"></a><tt class="py-lineno">675</tt>  <tt class="py-line">    <tt class="py-string">'.t'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/troff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L676"></a><tt class="py-lineno">676</tt>  <tt class="py-line">    <tt class="py-string">'.t2t'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-txt2tags'</tt><tt class="py-op">,</tt> </tt>
+<a name="L677"></a><tt class="py-lineno">677</tt>  <tt class="py-line">    <tt class="py-string">'.tar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L678"></a><tt class="py-lineno">678</tt>  <tt class="py-line">    <tt class="py-string">'.tar.bz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L679"></a><tt class="py-lineno">679</tt>  <tt class="py-line">    <tt class="py-string">'.tar.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L680"></a><tt class="py-lineno">680</tt>  <tt class="py-line">    <tt class="py-string">'.tar.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L681"></a><tt class="py-lineno">681</tt>  <tt class="py-line">    <tt class="py-string">'.tar.lrz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lrzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L682"></a><tt class="py-lineno">682</tt>  <tt class="py-line">    <tt class="py-string">'.tar.lzma'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lzma-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L683"></a><tt class="py-lineno">683</tt>  <tt class="py-line">    <tt class="py-string">'.tar.lzo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tzo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L684"></a><tt class="py-lineno">684</tt>  <tt class="py-line">    <tt class="py-string">'.tar.xz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xz-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L685"></a><tt class="py-lineno">685</tt>  <tt class="py-line">    <tt class="py-string">'.tar.z'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tarz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L686"></a><tt class="py-lineno">686</tt>  <tt class="py-line">    <tt class="py-string">'.taz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tarz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L687"></a><tt class="py-lineno">687</tt>  <tt class="py-line">    <tt class="py-string">'.tb2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L688"></a><tt class="py-lineno">688</tt>  <tt class="py-line">    <tt class="py-string">'.tbz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L689"></a><tt class="py-lineno">689</tt>  <tt class="py-line">    <tt class="py-string">'.tbz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L690"></a><tt class="py-lineno">690</tt>  <tt class="py-line">    <tt class="py-string">'.tcl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tcl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L691"></a><tt class="py-lineno">691</tt>  <tt class="py-line">    <tt class="py-string">'.tex'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L692"></a><tt class="py-lineno">692</tt>  <tt class="py-line">    <tt class="py-string">'.texi'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-texinfo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L693"></a><tt class="py-lineno">693</tt>  <tt class="py-line">    <tt class="py-string">'.texinfo'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-texinfo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L694"></a><tt class="py-lineno">694</tt>  <tt class="py-line">    <tt class="py-string">'.tga'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-tga'</tt><tt class="py-op">,</tt> </tt>
+<a name="L695"></a><tt class="py-lineno">695</tt>  <tt class="py-line">    <tt class="py-string">'.tgz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L696"></a><tt class="py-lineno">696</tt>  <tt class="py-line">    <tt class="py-string">'.theme'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-theme'</tt><tt class="py-op">,</tt> </tt>
+<a name="L697"></a><tt class="py-lineno">697</tt>  <tt class="py-line">    <tt class="py-string">'.themepack'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-windows-themepack'</tt><tt class="py-op">,</tt> </tt>
+<a name="L698"></a><tt class="py-lineno">698</tt>  <tt class="py-line">    <tt class="py-string">'.tif'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/tiff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L699"></a><tt class="py-lineno">699</tt>  <tt class="py-line">    <tt class="py-string">'.tiff'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/tiff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L700"></a><tt class="py-lineno">700</tt>  <tt class="py-line">    <tt class="py-string">'.tk'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-tcl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L701"></a><tt class="py-lineno">701</tt>  <tt class="py-line">    <tt class="py-string">'.tlrz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lrzip-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L702"></a><tt class="py-lineno">702</tt>  <tt class="py-line">    <tt class="py-string">'.tlz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-lzma-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L703"></a><tt class="py-lineno">703</tt>  <tt class="py-line">    <tt class="py-string">'.tnef'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-tnef'</tt><tt class="py-op">,</tt> </tt>
+<a name="L704"></a><tt class="py-lineno">704</tt>  <tt class="py-line">    <tt class="py-string">'.tnf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-tnef'</tt><tt class="py-op">,</tt> </tt>
+<a name="L705"></a><tt class="py-lineno">705</tt>  <tt class="py-line">    <tt class="py-string">'.toc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-cdrdao-toc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L706"></a><tt class="py-lineno">706</tt>  <tt class="py-line">    <tt class="py-string">'.torrent'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-bittorrent'</tt><tt class="py-op">,</tt> </tt>
+<a name="L707"></a><tt class="py-lineno">707</tt>  <tt class="py-line">    <tt class="py-string">'.tpic'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-tga'</tt><tt class="py-op">,</tt> </tt>
+<a name="L708"></a><tt class="py-lineno">708</tt>  <tt class="py-line">    <tt class="py-string">'.tr'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/troff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L709"></a><tt class="py-lineno">709</tt>  <tt class="py-line">    <tt class="py-string">'.ts'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mp2t'</tt><tt class="py-op">,</tt> </tt>
+<a name="L710"></a><tt class="py-lineno">710</tt>  <tt class="py-line">    <tt class="py-string">'.tsv'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/tab-separated-values'</tt><tt class="py-op">,</tt> </tt>
+<a name="L711"></a><tt class="py-lineno">711</tt>  <tt class="py-line">    <tt class="py-string">'.tta'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-tta'</tt><tt class="py-op">,</tt> </tt>
+<a name="L712"></a><tt class="py-lineno">712</tt>  <tt class="py-line">    <tt class="py-string">'.ttc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-ttf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L713"></a><tt class="py-lineno">713</tt>  <tt class="py-line">    <tt class="py-string">'.ttf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-ttf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L714"></a><tt class="py-lineno">714</tt>  <tt class="py-line">    <tt class="py-string">'.ttx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-font-ttx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L715"></a><tt class="py-lineno">715</tt>  <tt class="py-line">    <tt class="py-string">'.txt'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/plain'</tt><tt class="py-op">,</tt> </tt>
+<a name="L716"></a><tt class="py-lineno">716</tt>  <tt class="py-line">    <tt class="py-string">'.txz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xz-compressed-tar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L717"></a><tt class="py-lineno">717</tt>  <tt class="py-line">    <tt class="py-string">'.tzo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-tzo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L718"></a><tt class="py-lineno">718</tt>  <tt class="py-line">    <tt class="py-string">'.ufraw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ufraw'</tt><tt class="py-op">,</tt> </tt>
+<a name="L719"></a><tt class="py-lineno">719</tt>  <tt class="py-line">    <tt class="py-string">'.ui'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gtk-builder'</tt><tt class="py-op">,</tt> </tt>
+<a name="L720"></a><tt class="py-lineno">720</tt>  <tt class="py-line">    <tt class="py-string">'.uil'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-uil'</tt><tt class="py-op">,</tt> </tt>
+<a name="L721"></a><tt class="py-lineno">721</tt>  <tt class="py-line">    <tt class="py-string">'.ult'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L722"></a><tt class="py-lineno">722</tt>  <tt class="py-line">    <tt class="py-string">'.uni'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mod'</tt><tt class="py-op">,</tt> </tt>
+<a name="L723"></a><tt class="py-lineno">723</tt>  <tt class="py-line">    <tt class="py-string">'.url'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-mswinurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L724"></a><tt class="py-lineno">724</tt>  <tt class="py-line">    <tt class="py-string">'.ustar'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ustar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L725"></a><tt class="py-lineno">725</tt>  <tt class="py-line">    <tt class="py-string">'.uue'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-uuencode'</tt><tt class="py-op">,</tt> </tt>
+<a name="L726"></a><tt class="py-lineno">726</tt>  <tt class="py-line">    <tt class="py-string">'.v'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-verilog'</tt><tt class="py-op">,</tt> </tt>
+<a name="L727"></a><tt class="py-lineno">727</tt>  <tt class="py-line">    <tt class="py-string">'.vala'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-vala'</tt><tt class="py-op">,</tt> </tt>
+<a name="L728"></a><tt class="py-lineno">728</tt>  <tt class="py-line">    <tt class="py-string">'.vapi'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-vala'</tt><tt class="py-op">,</tt> </tt>
+<a name="L729"></a><tt class="py-lineno">729</tt>  <tt class="py-line">    <tt class="py-string">'.vcard'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vcard'</tt><tt class="py-op">,</tt> </tt>
+<a name="L730"></a><tt class="py-lineno">730</tt>  <tt class="py-line">    <tt class="py-string">'.vcf'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vcard'</tt><tt class="py-op">,</tt> </tt>
+<a name="L731"></a><tt class="py-lineno">731</tt>  <tt class="py-line">    <tt class="py-string">'.vcs'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/calendar'</tt><tt class="py-op">,</tt> </tt>
+<a name="L732"></a><tt class="py-lineno">732</tt>  <tt class="py-line">    <tt class="py-string">'.vct'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vcard'</tt><tt class="py-op">,</tt> </tt>
+<a name="L733"></a><tt class="py-lineno">733</tt>  <tt class="py-line">    <tt class="py-string">'.vda'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-tga'</tt><tt class="py-op">,</tt> </tt>
+<a name="L734"></a><tt class="py-lineno">734</tt>  <tt class="py-line">    <tt class="py-string">'.vhd'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-vhdl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L735"></a><tt class="py-lineno">735</tt>  <tt class="py-line">    <tt class="py-string">'.vhdl'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-vhdl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L736"></a><tt class="py-lineno">736</tt>  <tt class="py-line">    <tt class="py-string">'.viv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vivo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L737"></a><tt class="py-lineno">737</tt>  <tt class="py-line">    <tt class="py-string">'.vivo'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/vivo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L738"></a><tt class="py-lineno">738</tt>  <tt class="py-line">    <tt class="py-string">'.vlc'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-mpegurl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L739"></a><tt class="py-lineno">739</tt>  <tt class="py-line">    <tt class="py-string">'.vob'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/mpeg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L740"></a><tt class="py-lineno">740</tt>  <tt class="py-line">    <tt class="py-string">'.voc'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-voc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L741"></a><tt class="py-lineno">741</tt>  <tt class="py-line">    <tt class="py-string">'.vor'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.stardivision.writer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L742"></a><tt class="py-lineno">742</tt>  <tt class="py-line">    <tt class="py-string">'.vrm'</tt><tt class="py-op">:</tt> <tt class="py-string">'model/vrml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L743"></a><tt class="py-lineno">743</tt>  <tt class="py-line">    <tt class="py-string">'.vrml'</tt><tt class="py-op">:</tt> <tt class="py-string">'model/vrml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L744"></a><tt class="py-lineno">744</tt>  <tt class="py-line">    <tt class="py-string">'.vsd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.visio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L745"></a><tt class="py-lineno">745</tt>  <tt class="py-line">    <tt class="py-string">'.vss'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.visio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L746"></a><tt class="py-lineno">746</tt>  <tt class="py-line">    <tt class="py-string">'.vst'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-tga'</tt><tt class="py-op">,</tt> </tt>
+<a name="L747"></a><tt class="py-lineno">747</tt>  <tt class="py-line">    <tt class="py-string">'.vsw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.visio'</tt><tt class="py-op">,</tt> </tt>
+<a name="L748"></a><tt class="py-lineno">748</tt>  <tt class="py-line">    <tt class="py-string">'.vtt'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vtt'</tt><tt class="py-op">,</tt> </tt>
+<a name="L749"></a><tt class="py-lineno">749</tt>  <tt class="py-line">    <tt class="py-string">'.w2p'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/w2p'</tt><tt class="py-op">,</tt> </tt>
+<a name="L750"></a><tt class="py-lineno">750</tt>  <tt class="py-line">    <tt class="py-string">'.wav'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-wav'</tt><tt class="py-op">,</tt> </tt>
+<a name="L751"></a><tt class="py-lineno">751</tt>  <tt class="py-line">    <tt class="py-string">'.wax'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-ms-asx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L752"></a><tt class="py-lineno">752</tt>  <tt class="py-line">    <tt class="py-string">'.wb1'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-quattropro'</tt><tt class="py-op">,</tt> </tt>
+<a name="L753"></a><tt class="py-lineno">753</tt>  <tt class="py-line">    <tt class="py-string">'.wb2'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-quattropro'</tt><tt class="py-op">,</tt> </tt>
+<a name="L754"></a><tt class="py-lineno">754</tt>  <tt class="py-line">    <tt class="py-string">'.wb3'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-quattropro'</tt><tt class="py-op">,</tt> </tt>
+<a name="L755"></a><tt class="py-lineno">755</tt>  <tt class="py-line">    <tt class="py-string">'.wbmp'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/vnd.wap.wbmp'</tt><tt class="py-op">,</tt> </tt>
+<a name="L756"></a><tt class="py-lineno">756</tt>  <tt class="py-line">    <tt class="py-string">'.wcm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-works'</tt><tt class="py-op">,</tt> </tt>
+<a name="L757"></a><tt class="py-lineno">757</tt>  <tt class="py-line">    <tt class="py-string">'.wdb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-works'</tt><tt class="py-op">,</tt> </tt>
+<a name="L758"></a><tt class="py-lineno">758</tt>  <tt class="py-line">    <tt class="py-string">'.webm'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/webm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L759"></a><tt class="py-lineno">759</tt>  <tt class="py-line">    <tt class="py-string">'.wim'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-ms-wim'</tt><tt class="py-op">,</tt> </tt>
+<a name="L760"></a><tt class="py-lineno">760</tt>  <tt class="py-line">    <tt class="py-string">'.wk1'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.lotus-1-2-3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L761"></a><tt class="py-lineno">761</tt>  <tt class="py-line">    <tt class="py-string">'.wk3'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.lotus-1-2-3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L762"></a><tt class="py-lineno">762</tt>  <tt class="py-line">    <tt class="py-string">'.wk4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.lotus-1-2-3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L763"></a><tt class="py-lineno">763</tt>  <tt class="py-line">    <tt class="py-string">'.wks'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-works'</tt><tt class="py-op">,</tt> </tt>
+<a name="L764"></a><tt class="py-lineno">764</tt>  <tt class="py-line">    <tt class="py-string">'.wma'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-ms-wma'</tt><tt class="py-op">,</tt> </tt>
+<a name="L765"></a><tt class="py-lineno">765</tt>  <tt class="py-line">    <tt class="py-string">'.wmf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-wmf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L766"></a><tt class="py-lineno">766</tt>  <tt class="py-line">    <tt class="py-string">'.wml'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vnd.wap.wml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L767"></a><tt class="py-lineno">767</tt>  <tt class="py-line">    <tt class="py-string">'.wmls'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/vnd.wap.wmlscript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L768"></a><tt class="py-lineno">768</tt>  <tt class="py-line">    <tt class="py-string">'.wmv'</tt><tt class="py-op">:</tt> <tt class="py-string">'video/x-ms-wmv'</tt><tt class="py-op">,</tt> </tt>
+<a name="L769"></a><tt class="py-lineno">769</tt>  <tt class="py-line">    <tt class="py-string">'.wmx'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-ms-asx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L770"></a><tt class="py-lineno">770</tt>  <tt class="py-line">    <tt class="py-string">'.woff'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/font-woff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L771"></a><tt class="py-lineno">771</tt>  <tt class="py-line">    <tt class="py-string">'.wp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.wordperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L772"></a><tt class="py-lineno">772</tt>  <tt class="py-line">    <tt class="py-string">'.wp4'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.wordperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L773"></a><tt class="py-lineno">773</tt>  <tt class="py-line">    <tt class="py-string">'.wp5'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.wordperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L774"></a><tt class="py-lineno">774</tt>  <tt class="py-line">    <tt class="py-string">'.wp6'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.wordperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L775"></a><tt class="py-lineno">775</tt>  <tt class="py-line">    <tt class="py-string">'.wpd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.wordperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L776"></a><tt class="py-lineno">776</tt>  <tt class="py-line">    <tt class="py-string">'.wpg'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-wpg'</tt><tt class="py-op">,</tt> </tt>
+<a name="L777"></a><tt class="py-lineno">777</tt>  <tt class="py-line">    <tt class="py-string">'.wpl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-wpl'</tt><tt class="py-op">,</tt> </tt>
+<a name="L778"></a><tt class="py-lineno">778</tt>  <tt class="py-line">    <tt class="py-string">'.wpp'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.wordperfect'</tt><tt class="py-op">,</tt> </tt>
+<a name="L779"></a><tt class="py-lineno">779</tt>  <tt class="py-line">    <tt class="py-string">'.wps'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-works'</tt><tt class="py-op">,</tt> </tt>
+<a name="L780"></a><tt class="py-lineno">780</tt>  <tt class="py-line">    <tt class="py-string">'.wri'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-mswrite'</tt><tt class="py-op">,</tt> </tt>
+<a name="L781"></a><tt class="py-lineno">781</tt>  <tt class="py-line">    <tt class="py-string">'.wrl'</tt><tt class="py-op">:</tt> <tt class="py-string">'model/vrml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L782"></a><tt class="py-lineno">782</tt>  <tt class="py-line">    <tt class="py-string">'.wsgi'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-python'</tt><tt class="py-op">,</tt> </tt>
+<a name="L783"></a><tt class="py-lineno">783</tt>  <tt class="py-line">    <tt class="py-string">'.wv'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-wavpack'</tt><tt class="py-op">,</tt> </tt>
+<a name="L784"></a><tt class="py-lineno">784</tt>  <tt class="py-line">    <tt class="py-string">'.wvc'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-wavpack-correction'</tt><tt class="py-op">,</tt> </tt>
+<a name="L785"></a><tt class="py-lineno">785</tt>  <tt class="py-line">    <tt class="py-string">'.wvp'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-wavpack'</tt><tt class="py-op">,</tt> </tt>
+<a name="L786"></a><tt class="py-lineno">786</tt>  <tt class="py-line">    <tt class="py-string">'.wvx'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-ms-asx'</tt><tt class="py-op">,</tt> </tt>
+<a name="L787"></a><tt class="py-lineno">787</tt>  <tt class="py-line">    <tt class="py-string">'.wwf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-wwf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L788"></a><tt class="py-lineno">788</tt>  <tt class="py-line">    <tt class="py-string">'.x3f'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-sigma-x3f'</tt><tt class="py-op">,</tt> </tt>
+<a name="L789"></a><tt class="py-lineno">789</tt>  <tt class="py-line">    <tt class="py-string">'.xac'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-gnucash'</tt><tt class="py-op">,</tt> </tt>
+<a name="L790"></a><tt class="py-lineno">790</tt>  <tt class="py-line">    <tt class="py-string">'.xbel'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xbel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L791"></a><tt class="py-lineno">791</tt>  <tt class="py-line">    <tt class="py-string">'.xbl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L792"></a><tt class="py-lineno">792</tt>  <tt class="py-line">    <tt class="py-string">'.xbm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-xbitmap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L793"></a><tt class="py-lineno">793</tt>  <tt class="py-line">    <tt class="py-string">'.xcf'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-xcf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L794"></a><tt class="py-lineno">794</tt>  <tt class="py-line">    <tt class="py-string">'.xcf.bz2'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-compressed-xcf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L795"></a><tt class="py-lineno">795</tt>  <tt class="py-line">    <tt class="py-string">'.xcf.gz'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-compressed-xcf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L796"></a><tt class="py-lineno">796</tt>  <tt class="py-line">    <tt class="py-string">'.xhtml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xhtml+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L797"></a><tt class="py-lineno">797</tt>  <tt class="py-line">    <tt class="py-string">'.xi'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-xi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L798"></a><tt class="py-lineno">798</tt>  <tt class="py-line">    <tt class="py-string">'.xla'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L799"></a><tt class="py-lineno">799</tt>  <tt class="py-line">    <tt class="py-string">'.xlam'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel.addin.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L800"></a><tt class="py-lineno">800</tt>  <tt class="py-line">    <tt class="py-string">'.xlc'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L801"></a><tt class="py-lineno">801</tt>  <tt class="py-line">    <tt class="py-string">'.xld'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L802"></a><tt class="py-lineno">802</tt>  <tt class="py-line">    <tt class="py-string">'.xlf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xliff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L803"></a><tt class="py-lineno">803</tt>  <tt class="py-line">    <tt class="py-string">'.xliff'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xliff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L804"></a><tt class="py-lineno">804</tt>  <tt class="py-line">    <tt class="py-string">'.xll'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L805"></a><tt class="py-lineno">805</tt>  <tt class="py-line">    <tt class="py-string">'.xlm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L806"></a><tt class="py-lineno">806</tt>  <tt class="py-line">    <tt class="py-string">'.xlr'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-works'</tt><tt class="py-op">,</tt> </tt>
+<a name="L807"></a><tt class="py-lineno">807</tt>  <tt class="py-line">    <tt class="py-string">'.xls'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L808"></a><tt class="py-lineno">808</tt>  <tt class="py-line">    <tt class="py-string">'.xlsb'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel.sheet.binary.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L809"></a><tt class="py-lineno">809</tt>  <tt class="py-line">    <tt class="py-string">'.xlsm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel.sheet.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L810"></a><tt class="py-lineno">810</tt>  <tt class="py-line">    <tt class="py-string">'.xlsx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</tt><tt class="py-op">,</tt> </tt>
+<a name="L811"></a><tt class="py-lineno">811</tt>  <tt class="py-line">    <tt class="py-string">'.xlt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L812"></a><tt class="py-lineno">812</tt>  <tt class="py-line">    <tt class="py-string">'.xltm'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel.template.macroenabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L813"></a><tt class="py-lineno">813</tt>  <tt class="py-line">    <tt class="py-string">'.xltx'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.openxmlformats-officedocument.spreadsheetml.template'</tt><tt class="py-op">,</tt> </tt>
+<a name="L814"></a><tt class="py-lineno">814</tt>  <tt class="py-line">    <tt class="py-string">'.xlw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel'</tt><tt class="py-op">,</tt> </tt>
+<a name="L815"></a><tt class="py-lineno">815</tt>  <tt class="py-line">    <tt class="py-string">'.xm'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-xm'</tt><tt class="py-op">,</tt> </tt>
+<a name="L816"></a><tt class="py-lineno">816</tt>  <tt class="py-line">    <tt class="py-string">'.xmf'</tt><tt class="py-op">:</tt> <tt class="py-string">'audio/x-xmf'</tt><tt class="py-op">,</tt> </tt>
+<a name="L817"></a><tt class="py-lineno">817</tt>  <tt class="py-line">    <tt class="py-string">'.xmi'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-xmi'</tt><tt class="py-op">,</tt> </tt>
+<a name="L818"></a><tt class="py-lineno">818</tt>  <tt class="py-line">    <tt class="py-string">'.xml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L819"></a><tt class="py-lineno">819</tt>  <tt class="py-line">    <tt class="py-string">'.xpi'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xpinstall'</tt><tt class="py-op">,</tt> </tt>
+<a name="L820"></a><tt class="py-lineno">820</tt>  <tt class="py-line">    <tt class="py-string">'.xpm'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-xpixmap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L821"></a><tt class="py-lineno">821</tt>  <tt class="py-line">    <tt class="py-string">'.xps'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/oxps'</tt><tt class="py-op">,</tt> </tt>
+<a name="L822"></a><tt class="py-lineno">822</tt>  <tt class="py-line">    <tt class="py-string">'.xsd'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L823"></a><tt class="py-lineno">823</tt>  <tt class="py-line">    <tt class="py-string">'.xsl'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xslt+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L824"></a><tt class="py-lineno">824</tt>  <tt class="py-line">    <tt class="py-string">'.xslfo'</tt><tt class="py-op">:</tt> <tt class="py-string">'text/x-xslfo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L825"></a><tt class="py-lineno">825</tt>  <tt class="py-line">    <tt class="py-string">'.xslm'</tt> <tt class="py-op">:</tt> <tt class="py-string">'application/vnd.ms-excel.sheet.macroEnabled.12'</tt><tt class="py-op">,</tt> </tt>
+<a name="L826"></a><tt class="py-lineno">826</tt>  <tt class="py-line">    <tt class="py-string">'.xslt'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xslt+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L827"></a><tt class="py-lineno">827</tt>  <tt class="py-line">    <tt class="py-string">'.xspf'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/xspf+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L828"></a><tt class="py-lineno">828</tt>  <tt class="py-line">    <tt class="py-string">'.xul'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/vnd.mozilla.xul+xml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L829"></a><tt class="py-lineno">829</tt>  <tt class="py-line">    <tt class="py-string">'.xwd'</tt><tt class="py-op">:</tt> <tt class="py-string">'image/x-xwindowdump'</tt><tt class="py-op">,</tt> </tt>
+<a name="L830"></a><tt class="py-lineno">830</tt>  <tt class="py-line">    <tt class="py-string">'.xyz'</tt><tt class="py-op">:</tt> <tt class="py-string">'chemical/x-pdb'</tt><tt class="py-op">,</tt> </tt>
+<a name="L831"></a><tt class="py-lineno">831</tt>  <tt class="py-line">    <tt class="py-string">'.xz'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-xz'</tt><tt class="py-op">,</tt> </tt>
+<a name="L832"></a><tt class="py-lineno">832</tt>  <tt class="py-line">    <tt class="py-string">'.yaml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-yaml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L833"></a><tt class="py-lineno">833</tt>  <tt class="py-line">    <tt class="py-string">'.yml'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-yaml'</tt><tt class="py-op">,</tt> </tt>
+<a name="L834"></a><tt class="py-lineno">834</tt>  <tt class="py-line">    <tt class="py-string">'.z'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-compress'</tt><tt class="py-op">,</tt> </tt>
+<a name="L835"></a><tt class="py-lineno">835</tt>  <tt class="py-line">    <tt class="py-string">'.zabw'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-abiword'</tt><tt class="py-op">,</tt> </tt>
+<a name="L836"></a><tt class="py-lineno">836</tt>  <tt class="py-line">    <tt class="py-string">'.zip'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/zip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L837"></a><tt class="py-lineno">837</tt>  <tt class="py-line">    <tt class="py-string">'.zoo'</tt><tt class="py-op">:</tt> <tt class="py-string">'application/x-zoo'</tt><tt class="py-op">,</tt> </tt>
+<a name="L838"></a><tt class="py-lineno">838</tt>  <tt class="py-line"><tt class="py-op">}</tt> </tt>
+<a name="L839"></a><tt class="py-lineno">839</tt>  <tt class="py-line"> </tt>
+<a name="L840"></a><tt class="py-lineno">840</tt>  <tt class="py-line"> </tt>
+<a name="contenttype"></a><div id="contenttype-def"><a name="L841"></a><tt class="py-lineno">841</tt> <a class="py-toggle" href="#" id="contenttype-toggle" onclick="return toggle('contenttype');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="gluon.contenttype-module.html#contenttype">contenttype</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-string">'text/plain'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="contenttype-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="contenttype-expanded"><a name="L842"></a><tt class="py-lineno">842</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L843"></a><tt class="py-lineno">843</tt>  <tt class="py-line"><tt class="py-docstring">    Returns the Content-Type string matching extension of the given filename.</tt> </tt>
+<a name="L844"></a><tt class="py-lineno">844</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L845"></a><tt class="py-lineno">845</tt>  <tt class="py-line"> </tt>
+<a name="L846"></a><tt class="py-lineno">846</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable gluon.utf8.i=gluon.utf8-module.html#i"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-1', 'i', 'link-1');">i</a></tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method gluon.utf8.Utf8.rfind()=gluon.utf8.Utf8-class.html#rfind"><a title="gluon.utf8.Utf8.rfind" class="py-name" href="#" onclick="return doclink('link-2', 'rfind', 'link-2');">rfind</a></tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L847"></a><tt class="py-lineno">847</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-3" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-3', 'i', 'link-1');">i</a></tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L848"></a><tt class="py-lineno">848</tt>  <tt class="py-line">        <tt class="py-name">default</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="gluon.contenttype.CONTENT_TYPE" class="py-name" href="#" onclick="return doclink('link-4', 'CONTENT_TYPE', 'link-0');">CONTENT_TYPE</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method gluon.dal.DAL.get()=gluon.dal.DAL-class.html#get,Method gluon.dal.Reference.get()=gluon.dal.Reference-class.html#get,Method gluon.dal.Row.get()=gluon.dal.Row-class.html#get"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-5', 'get', 'link-5');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">[</tt><tt id="link-6" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-6', 'i', 'link-1');">i</a></tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method gluon.dal.Expression.lower()=gluon.dal.Expression-class.html#lower,Method gluon.utf8.Utf8.lower()=gluon.utf8.Utf8-class.html#lower"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-7', 'lower', 'link-7');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">)</tt> </tt>
+<a name="L849"></a><tt class="py-lineno">849</tt>  <tt class="py-line">        <tt class="py-name">j</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="gluon.utf8.Utf8.rfind" class="py-name" href="#" onclick="return doclink('link-8', 'rfind', 'link-2');">rfind</a></tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name"><a title="gluon.utf8.i" class="py-name" href="#" onclick="return doclink('link-9', 'i', 'link-1');">i</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L850"></a><tt class="py-lineno">850</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">j</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L851"></a><tt class="py-lineno">851</tt>  <tt class="py-line">            <tt class="py-name">default</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="gluon.contenttype.CONTENT_TYPE" class="py-name" href="#" onclick="return doclink('link-10', 'CONTENT_TYPE', 'link-0');">CONTENT_TYPE</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="gluon.dal.DAL.get
+gluon.dal.Reference.get
+gluon.dal.Row.get" class="py-name" href="#" onclick="return doclink('link-11', 'get', 'link-5');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="gluon.dal.Expression.lower
+gluon.utf8.Utf8.lower" class="py-name" href="#" onclick="return doclink('link-12', 'lower', 'link-7');">lower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">)</tt> </tt>
+<a name="L852"></a><tt class="py-lineno">852</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">default</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method gluon.dal.Expression.startswith()=gluon.dal.Expression-class.html#startswith,Method gluon.dal.SQLCustomType.startswith()=gluon.dal.SQLCustomType-class.html#startswith,Method gluon.utf8.Utf8.startswith()=gluon.utf8.Utf8-class.html#startswith"><a title="gluon.dal.Expression.startswith
+gluon.dal.SQLCustomType.startswith
+gluon.utf8.Utf8.startswith" class="py-name" href="#" onclick="return doclink('link-13', 'startswith', 'link-13');">startswith</a></tt><tt class="py-op">(</tt><tt class="py-string">'text/'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L853"></a><tt class="py-lineno">853</tt>  <tt class="py-line">        <tt class="py-name">default</tt> <tt class="py-op">+=</tt> <tt class="py-string">'; charset=utf-8'</tt> </tt>
+<a name="L854"></a><tt class="py-lineno">854</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">default</tt> </tt>
+</div><a name="L855"></a><tt class="py-lineno">855</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:55 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

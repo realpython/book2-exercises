@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.sqlhtml.SQLFORM</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.sqlhtml-module.html" onclick="show_private();">Module&nbsp;sqlhtml</a> ::
+        Class&nbsp;SQLFORM
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.sqlhtml.SQLFORM-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class SQLFORM</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+       object --+            
+                |            
+<a href="gluon.html.XmlComponent-class.html" onclick="show_private();">html.XmlComponent</a> --+        
+                    |        
+             <a href="gluon.html.DIV-class.html">html.DIV</a> --+    
+                        |    
+                <a href="gluon.html.FORM-class.html">html.FORM</a> --+
+                            |
+                           <strong class="uidshort">SQLFORM</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+
+SQLFORM is used to map a table (and a current record) into an HTML form
+
+given a SQLTable stored in db.table
+
+generates an insert form::
+
+    SQLFORM(db.table)
+
+generates an update form::
+
+    record=db.table[some_id]
+    SQLFORM(db.table, record)
+
+generates an update with a delete button::
+
+    SQLFORM(db.table, record, deletable=True)
+
+if record is an int::
+
+    record=db.table[record]
+
+optional arguments:
+
+:param fields: a list of fields that should be placed in the form,
+    default is all.
+:param labels: a dictionary with labels for each field, keys are the field
+    names.
+:param col3: a dictionary with content for an optional third column
+        (right of each field). keys are field names.
+:param linkto: the URL of a controller/function to access referencedby
+    records
+        see controller appadmin.py for examples
+:param upload: the URL of a controller/function to download an uploaded file
+        see controller appadmin.py for examples
+
+any named optional attribute is passed to the &lt;form&gt; tag
+        for example _class, _id, _style, _action, _method, etc.
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sqlhtml.SQLFORM-class.html#assert_status" class="summary-sig-name">assert_status</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">status</span>,
+        <span class="summary-sig-arg">request_vars</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.assert_status">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sqlhtml.SQLFORM-class.html#__init__" class="summary-sig-name">__init__</a>()</span><br />
+      SQLFORM(db.table,...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="createform"></a><span class="summary-sig-name">createform</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">xfields</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.createform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sqlhtml.SQLFORM-class.html#accepts" class="summary-sig-name">accepts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request_vars</span>,
+        <span class="summary-sig-arg">session</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">formname</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">%(tablename)s/%(record_id)s</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">keepvalues</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">onvalidation</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">dbio</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">hideerror</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">detect_record_change</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      similar FORM.accepts but also does insert, update or delete in DAL.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.accepts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.FORM-class.html">html.FORM</a></code></b>:
+      <code><a href="gluon.html.FORM-class.html#add_button">add_button</a></code>,
+      <code><a href="gluon.html.FORM-class.html#as_dict">as_dict</a></code>,
+      <code><a href="gluon.html.FORM-class.html#as_json">as_json</a></code>,
+      <code><a href="gluon.html.FORM-class.html#as_xml">as_xml</a></code>,
+      <code><a href="gluon.html.FORM-class.html#as_yaml">as_yaml</a></code>,
+      <code><a href="gluon.html.FORM-class.html#hidden_fields">hidden_fields</a></code>,
+      <code><a href="gluon.html.FORM-class.html#process">process</a></code>,
+      <code><a href="gluon.html.FORM-class.html#validate">validate</a></code>,
+      <code><a href="gluon.html.FORM-class.html#xml">xml</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.FORM-class.html">html.FORM</a></code></b> (private):
+      <code><a href="gluon.html.FORM-class.html#_postprocessing" onclick="show_private();">_postprocessing</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.DIV-class.html">html.DIV</a></code></b>:
+      <code><a href="gluon.html.DIV-class.html#__delitem__">__delitem__</a></code>,
+      <code><a href="gluon.html.DIV-class.html#__getitem__">__getitem__</a></code>,
+      <code><a href="gluon.html.DIV-class.html#__len__">__len__</a></code>,
+      <code><a href="gluon.html.DIV-class.html#__nonzero__">__nonzero__</a></code>,
+      <code><a href="gluon.html.DIV-class.html#__setitem__">__setitem__</a></code>,
+      <code><a href="gluon.html.DIV-class.html#__str__">__str__</a></code>,
+      <code><a href="gluon.html.DIV-class.html#append">append</a></code>,
+      <code><a href="gluon.html.DIV-class.html#element">element</a></code>,
+      <code><a href="gluon.html.DIV-class.html#elements">elements</a></code>,
+      <code><a href="gluon.html.DIV-class.html#flatten">flatten</a></code>,
+      <code><a href="gluon.html.DIV-class.html#insert">insert</a></code>,
+      <code><a href="gluon.html.DIV-class.html#sibling">sibling</a></code>,
+      <code><a href="gluon.html.DIV-class.html#siblings">siblings</a></code>,
+      <code><a href="gluon.html.DIV-class.html#update">update</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.DIV-class.html">html.DIV</a></code></b> (private):
+      <code><a href="gluon.html.DIV-class.html#_fixup" onclick="show_private();">_fixup</a></code>,
+      <code><a href="gluon.html.DIV-class.html#_setnode" onclick="show_private();">_setnode</a></code>,
+      <code><a href="gluon.html.DIV-class.html#_traverse" onclick="show_private();">_traverse</a></code>,
+      <code><a href="gluon.html.DIV-class.html#_validate" onclick="show_private();">_validate</a></code>,
+      <code><a href="gluon.html.DIV-class.html#_wrap_components" onclick="show_private();">_wrap_components</a></code>,
+      <code><a href="gluon.html.DIV-class.html#_xml" onclick="show_private();">_xml</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.XmlComponent-class.html" onclick="show_private();">html.XmlComponent</a></code></b>:
+      <code><a href="gluon.html.XmlComponent-class.html#__add__">__add__</a></code>,
+      <code><a href="gluon.html.XmlComponent-class.html#__mul__">__mul__</a></code>,
+      <code><a href="gluon.html.XmlComponent-class.html#add_class">add_class</a></code>,
+      <code><a href="gluon.html.XmlComponent-class.html#remove_class">remove_class</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="dictform"></a><span class="summary-sig-name">dictform</span>(<span class="summary-sig-arg">dictionary</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.dictform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="smartdictform"></a><span class="summary-sig-name">smartdictform</span>(<span class="summary-sig-arg">session</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">filename</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">query</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.smartdictform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sqlhtml.SQLFORM-class.html#factory" class="summary-sig-name">factory</a>(<span class="summary-sig-arg">*fields</span>,
+        <span class="summary-sig-arg">**attributes</span>)</span><br />
+      generates a SQLFORM for the given fields.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="build_query"></a><span class="summary-sig-name">build_query</span>(<span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">keywords</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.build_query">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="search_menu"></a><span class="summary-sig-name">search_menu</span>(<span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">search_options</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">prefix</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">w2p</code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.search_menu">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="grid"></a><span class="summary-sig-name">grid</span>(<span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">field_id</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">left</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">headers</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">orderby</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">groupby</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">searchable</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">sortable</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">paginate</span>=<span class="summary-sig-default">20</span>,
+        <span class="summary-sig-arg">deletable</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">editable</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">details</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">selectable</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">create</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">csv</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">links</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">links_in_grid</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">upload</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">&lt;default&gt;</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">args</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="summary-sig-arg">user_signature</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">maxtextlengths</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">maxtextlength</span>=<span class="summary-sig-default">20</span>,
+        <span class="summary-sig-arg">onvalidation</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">onfailure</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">oncreate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">onupdate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ondelete</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">sorter_icons</span>=<span class="summary-sig-default">(XML('&amp;#x25B2;'),XML('&amp;#x25BC;'))</span>,
+        <span class="summary-sig-arg">ui</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">web2py</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">showbuttontext</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">_class</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">web2py_grid</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">formname</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">web2py_grid</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">search_widget</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">default</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">ignore_rw</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">formstyle</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">table3cols</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">exportclasses</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">formargs</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">createargs</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">editargs</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">viewargs</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">selectable_submit_button</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Submit</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">buttons_placement</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">right</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">links_placement</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">right</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">noconfirm</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">cache_count</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">client_side_delete</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">ignore_common_filters</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.grid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.sqlhtml.SQLFORM-class.html#smartgrid" class="summary-sig-name">smartgrid</a>(<span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">constraints</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">linked_tables</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">links</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">links_in_grid</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">args</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">user_signature</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">divider</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">&gt;</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">breadcrumbs_class</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      @auth.requires_login()
+def index():
+    db.define_table('person',Field('name'),format='%(name)s')
+    db.define_table('dog',
+        Field('name'),Field('owner',db.person),format='%(name)s')
+    db.define_table('comment',Field('body'),Field('dog',db.dog))
+    if db(db.person).isempty():
+        from gluon.contrib.populate import populate
+        populate(db.person,300)
+        populate(db.dog,300)
+        populate(db.comment,1000)
+        db.commit()
+form=SQLFORM.smartgrid(db[request.args(0) or 'person']) #***
+return dict(form=form)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.smartgrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.FORM-class.html">html.FORM</a></code></b>:
+      <code><a href="gluon.html.FORM-class.html#confirm">confirm</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.sqlhtml.SQLFORM-class.html#widgets" class="summary-name">widgets</a> = <code title="&lt;Storage {'multiple': &lt;class 'gluon.sqlhtml.MultipleOptionsWidget'&gt;, '\
+string': &lt;class 'gluon.sqlhtml.StringWidget'&gt;, 'text': &lt;class 'gluon.s\
+qlhtml.TextWidget'&gt;, 'datetime': &lt;class 'gluon.sqlhtml.DatetimeWidget'\
+&gt;, 'boolean': &lt;class 'gluon.sqlhtml.BooleanWidget'&gt;, 'radio': &lt;class '\
+gluon.sqlhtml.RadioWidget'&gt;, 'date': &lt;class 'gluon.sqlhtml.DateWidget'\
+&gt;, 'integer': &lt;class 'gluon.sqlhtml.IntegerWidget'&gt;, 'password': &lt;clas\
+s 'gluon.sqlhtml.PasswordWidget'&gt;, 'double': &lt;class 'gluon.sqlhtml.Dou\
+bleWidget'&gt;, 'decimal': &lt;class 'gluon.sqlhtml.DecimalWidget'&gt;, 'list':\
+...">&lt;Storage {'multiple': &lt;class 'gluon.sqlhtml.Multiple<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.sqlhtml.SQLFORM-class.html#formstyles" class="summary-name">formstyles</a> = <code title="&lt;Storage {'table2cols': &lt;function formstyle_table2cols at 0x403da28&gt;, \
+'ul': &lt;function formstyle_ul at 0x403db90&gt;, 'table3cols': &lt;function fo\
+rmstyle_table3cols at 0x403d0c8&gt;, 'inline': &lt;function formstyle_inline\
+ at 0x403db18&gt;, 'bootstrap': &lt;function formstyle_bootstrap at 0x403dc0\
+8&gt;, 'divs': &lt;function formstyle_divs at 0x403daa0&gt;, 'bootstrap3': &lt;fun\
+ction formstyle_bootstrap3 at 0x403dc80&gt;}&gt;">&lt;Storage {'table2cols': &lt;function formstyle_table<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FIELDNAME_REQUEST_DELETE"></a><span class="summary-name">FIELDNAME_REQUEST_DELETE</span> = <code title="'delete_this_record'"><code class="variable-quote">'</code><code class="variable-string">delete_this_record</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FIELDKEY_DELETE_RECORD"></a><span class="summary-name">FIELDKEY_DELETE_RECORD</span> = <code title="'delete_record'"><code class="variable-quote">'</code><code class="variable-string">delete_record</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ID_LABEL_SUFFIX"></a><span class="summary-name">ID_LABEL_SUFFIX</span> = <code title="'__label'"><code class="variable-quote">'</code><code class="variable-string">__label</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ID_ROW_SUFFIX"></a><span class="summary-name">ID_ROW_SUFFIX</span> = <code title="'__row'"><code class="variable-quote">'</code><code class="variable-string">__row</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.sqlhtml.SQLFORM-class.html#AUTOTYPES" class="summary-name">AUTOTYPES</a> = <code title="{&lt;type 'float'&gt;: ('double',
+                  &lt;gluon.validators.IS_FLOAT_IN_RANGE object at 0x4041\
+390&gt;),
+ &lt;type 'int'&gt;: ('integer',
+                &lt;gluon.validators.IS_INT_IN_RANGE object at 0x4041350&gt;\
+),
+ &lt;type 'bool'&gt;: ('boolean', None),
+ &lt;type 'list'&gt;: ('list:string', None),
+..."><code class="variable-group">{</code>&lt;type 'float'&gt;<code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">double</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;gluon.validators.IS_F<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.FORM-class.html">html.FORM</a></code></b>:
+      <code><a href="gluon.html.FORM-class.html#REDIRECT_JS">REDIRECT_JS</a></code>,
+      <code><a href="gluon.html.FORM-class.html#tag">tag</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.html.DIV-class.html">html.DIV</a></code></b>:
+      <code><a href="gluon.html.DIV-class.html#regex_attr">regex_attr</a></code>,
+      <code><a href="gluon.html.DIV-class.html#regex_class">regex_class</a></code>,
+      <code><a href="gluon.html.DIV-class.html#regex_id">regex_id</a></code>,
+      <code><a href="gluon.html.DIV-class.html#regex_tag">regex_tag</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="assert_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">assert_status</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">status</span>,
+        <span class="sig-arg">request_vars</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.assert_status">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.html.FORM-class.html#assert_status">html.FORM.assert_status</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>()</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+SQLFORM(db.table,
+       record=None,
+       fields=['name'],
+       labels={'name': 'Your name'},
+       linkto=URL(f='table/db/')
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="accepts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">accepts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">request_vars</span>,
+        <span class="sig-arg">session</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">formname</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">%(tablename)s/%(record_id)s</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">keepvalues</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">onvalidation</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">dbio</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">hideerror</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">detect_record_change</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.accepts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+similar FORM.accepts but also does insert, update or delete in DAL.
+but if detect_record_change == True than:
+  form.record_changed = False (record is properly validated/submitted)
+  form.record_changed = True (record cannot be submitted because changed)
+elseif detect_record_change == False than:
+  form.record_changed = None
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.html.FORM-class.html#accepts">html.FORM.accepts</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="factory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">factory</span>(<span class="sig-arg">*fields</span>,
+        <span class="sig-arg">**attributes</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.factory">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>generates a SQLFORM for the given fields.</p>
+  <p>Internally will build a non-database based data model to hold the 
+  fields.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="smartgrid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">smartgrid</span>(<span class="sig-arg">table</span>,
+        <span class="sig-arg">constraints</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">linked_tables</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">links</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">links_in_grid</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">args</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">user_signature</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">divider</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">&gt;</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">breadcrumbs_class</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.sqlhtml-pysrc.html#SQLFORM.smartgrid">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+@auth.requires_login()
+def index():
+    db.define_table('person',Field('name'),format='%(name)s')
+    db.define_table('dog',
+        Field('name'),Field('owner',db.person),format='%(name)s')
+    db.define_table('comment',Field('body'),Field('dog',db.dog))
+    if db(db.person).isempty():
+        from gluon.contrib.populate import populate
+        populate(db.person,300)
+        populate(db.dog,300)
+        populate(db.comment,1000)
+        db.commit()
+form=SQLFORM.smartgrid(db[request.args(0) or 'person']) #***
+return dict(form=form)
+
+*** builds a complete interface to navigate all tables links
+    to the request.args(0)
+    table: pagination, search, view, edit, delete,
+           children, parent, etc.
+
+constraints is a dict {'table':query} that limits which
+records can be accessible
+links is a dict like
+   {'tablename':[lambda row: A(....), ...]}
+that will add buttons when table tablename is displayed
+linked_tables is a optional list of tablenames of tables
+to be linked
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="widgets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">widgets</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&lt;Storage {'multiple': &lt;class 'gluon.sqlhtml.MultipleOptionsWidget'&gt;, '<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+string': &lt;class 'gluon.sqlhtml.StringWidget'&gt;, 'text': &lt;class 'gluon.s<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+qlhtml.TextWidget'&gt;, 'datetime': &lt;class 'gluon.sqlhtml.DatetimeWidget'<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+&gt;, 'boolean': &lt;class 'gluon.sqlhtml.BooleanWidget'&gt;, 'radio': &lt;class '<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+gluon.sqlhtml.RadioWidget'&gt;, 'date': &lt;class 'gluon.sqlhtml.DateWidget'<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+&gt;, 'integer': &lt;class 'gluon.sqlhtml.IntegerWidget'&gt;, 'password': &lt;clas<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+s 'gluon.sqlhtml.PasswordWidget'&gt;, 'double': &lt;class 'gluon.sqlhtml.Dou<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+bleWidget'&gt;, 'decimal': &lt;class 'gluon.sqlhtml.DecimalWidget'&gt;, 'list':<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="formstyles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">formstyles</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&lt;Storage {'table2cols': &lt;function formstyle_table2cols at 0x403da28&gt;, <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+'ul': &lt;function formstyle_ul at 0x403db90&gt;, 'table3cols': &lt;function fo<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+rmstyle_table3cols at 0x403d0c8&gt;, 'inline': &lt;function formstyle_inline<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ at 0x403db18&gt;, 'bootstrap': &lt;function formstyle_bootstrap at 0x403dc0<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+8&gt;, 'divs': &lt;function formstyle_divs at 0x403daa0&gt;, 'bootstrap3': &lt;fun<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ction formstyle_bootstrap3 at 0x403dc80&gt;}&gt;
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AUTOTYPES"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AUTOTYPES</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>&lt;type 'float'&gt;<code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">double</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+                  &lt;gluon.validators.IS_FLOAT_IN_RANGE object at 0x4041<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+390&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ &lt;type 'int'&gt;<code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">integer</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+                &lt;gluon.validators.IS_INT_IN_RANGE object at 0x4041350&gt;<code class="variable-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-group">)</code><code class="variable-op">,</code>
+ &lt;type 'bool'&gt;<code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">boolean</code><code class="variable-quote">'</code><code class="variable-op">, </code>None<code class="variable-group">)</code><code class="variable-op">,</code>
+ &lt;type 'list'&gt;<code class="variable-op">: </code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">list:string</code><code class="variable-quote">'</code><code class="variable-op">, </code>None<code class="variable-group">)</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:44 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

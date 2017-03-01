@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<h1>Welcome to FlaskTaskr.</h1>
+<h3>Please register to access the task list.</h3>
+  <form method="POST" action="">
+    {{ form.csrf_token }}
+    <p>
+      {{ form.name.label }}: {{ form.name }}
+      &nbsp;&nbsp;
+      {{ form.email.label }}: {{ form.email }}
+    </p>
+    <p>
+      {{ form.password.label }}: {{ form.password }}
+      &nbsp;&nbsp;
+      {{ form.confirm.label }}: {{ form.confirm }}
+    </p>
+    <p><input type="submit" value="Register"></p>
+  </form>
+
+  <br>
+
+  <p><em>Already registered?</em> Click <a href="/">here</a> to login.</p>
+
+{% endblock %}

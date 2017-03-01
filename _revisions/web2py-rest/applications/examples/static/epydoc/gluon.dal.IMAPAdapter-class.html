@@ -1,0 +1,1845 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.dal.IMAPAdapter</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.dal-module.html" onclick="show_private();">Module&nbsp;dal</a> ::
+        Class&nbsp;IMAPAdapter
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.dal.IMAPAdapter-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class IMAPAdapter</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+    object --+            
+             |            
+<a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a> --+        
+                 |        
+       <a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a> --+    
+                     |    
+          <a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a> --+
+                         |
+                        <strong class="uidshort">IMAPAdapter</strong>
+</pre>
+
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>,
+        <span class="summary-sig-arg">uri</span>,
+        <span class="summary-sig-arg">pool_size</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">folder</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">db_codec</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">UTF-8</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">credential_decoder</span>=<span class="summary-sig-default">&lt;function IDENTITY at 0x31ed1b8&gt;</span>,
+        <span class="summary-sig-arg">driver_args</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">adapter_args</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">do_connect</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">after_connection</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#reconnect" class="summary-sig-name">reconnect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">f</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cursor</span>=<span class="summary-sig-default">True</span>)</span><br />
+      IMAP4 Pool connection method</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.reconnect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_last_message"></a><span class="summary-sig-name">get_last_message</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.get_last_message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_uid_bounds"></a><span class="summary-sig-name">get_uid_bounds</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.get_uid_bounds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convert_date"></a><span class="summary-sig-name">convert_date</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">date</span>,
+        <span class="summary-sig-arg">add</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">imf</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.convert_date">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="encode_text"></a><span class="summary-sig-name">encode_text</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">charset</span>,
+        <span class="summary-sig-arg">errors</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">replace</code><code class="variable-quote">'</code></span>)</span><br />
+      convert text for mail to unicode</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.encode_text">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_charset"></a><span class="summary-sig-name">get_charset</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">message</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.get_charset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_mailboxes"></a><span class="summary-sig-name">get_mailboxes</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Query the mail database for mailbox names</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.get_mailboxes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_query_mailbox"></a><span class="summary-sig-name">get_query_mailbox</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.get_query_mailbox">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_flag"></a><span class="summary-sig-name">is_flag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">flag</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.is_flag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#define_tables" class="summary-sig-name">define_tables</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">mailbox_names</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Auto create common IMAP fileds</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.define_tables">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#create_table" class="summary-sig-name">create_table</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.create_table">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#_select" class="summary-sig-name" onclick="show_private();">_select</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">attributes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._select">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#select" class="summary-sig-name">select</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">attributes</span>)</span><br />
+      Search and Fetch records and return web2py rows</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.select">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#_insert" class="summary-sig-name" onclick="show_private();">_insert</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">fields</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._insert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#insert" class="summary-sig-name">insert</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">fields</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.insert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#_update" class="summary-sig-name" onclick="show_private();">_update</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>,
+        <span class="summary-sig-arg">commit</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#update" class="summary-sig-name">update</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">fields</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#_count" class="summary-sig-name" onclick="show_private();">_count</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">distinct</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._count">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#count" class="summary-sig-name">count</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">query</span>,
+        <span class="summary-sig-arg">distinct</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.count">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#delete" class="summary-sig-name">delete</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>,
+        <span class="summary-sig-arg">query</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#BELONGS" class="summary-sig-name">BELONGS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.BELONGS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#CONTAINS" class="summary-sig-name">CONTAINS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>,
+        <span class="summary-sig-arg">case_sensitive</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.CONTAINS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#GT" class="summary-sig-name">GT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.GT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#GE" class="summary-sig-name">GE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.GE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#LT" class="summary-sig-name">LT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.LT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#LE" class="summary-sig-name">LE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.LE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#NE" class="summary-sig-name">NE</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.NE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#EQ" class="summary-sig-name">EQ</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.EQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#AND" class="summary-sig-name">AND</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.AND">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#OR" class="summary-sig-name">OR</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>,
+        <span class="summary-sig-arg">second</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.OR">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.dal.IMAPAdapter-class.html#NOT" class="summary-sig-name">NOT</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">first</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.NOT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b>:
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ADD">ADD</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#AGGREGATE">AGGREGATE</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#AS">AS</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#DIV">DIV</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ENDSWITH">ENDSWITH</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#EXTRACT">EXTRACT</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ILIKE">ILIKE</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#LEFT_JOIN">LEFT_JOIN</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#LENGTH">LENGTH</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#LOWER">LOWER</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#MUL">MUL</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#ON">ON</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#PRIMARY_KEY">PRIMARY_KEY</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#RANDOM">RANDOM</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#STARTSWITH">STARTSWITH</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#SUB">SUB</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#SUBSTRING">SUBSTRING</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#UPPER">UPPER</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#alias">alias</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#close_connection">close_connection</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#commit">commit</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#commit_prepared">commit_prepared</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#concat_add">concat_add</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#constraint_name">constraint_name</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#create_sequence_and_triggers">create_sequence_and_triggers</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#distributed_transaction_begin">distributed_transaction_begin</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#drop">drop</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#execute">execute</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#id_query">id_query</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#lastrowid">lastrowid</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#log_execute">log_execute</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#migrate_table">migrate_table</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#prepare">prepare</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#represent">represent</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#represent_exceptions">represent_exceptions</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#rollback">rollback</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#rollback_prepared">rollback_prepared</a></code>,
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#rowslice">rowslice</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b> (private):
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#_delete" onclick="show_private();">_delete</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b>:
+      <code><a href="gluon.dal.BaseAdapter-class.html#ALLOW_NULL">ALLOW_NULL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CASE">CASE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CAST">CAST</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COALESCE">COALESCE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COALESCE_ZERO">COALESCE_ZERO</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COMMA">COMMA</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#CONCAT">CONCAT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#COUNT">COUNT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#EPOCH">EPOCH</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#INVERT">INVERT</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#JOIN">JOIN</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#LIKE">LIKE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#MOD">MOD</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#NOT_NULL">NOT_NULL</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#RAW">RAW</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#REGEXP">REGEXP</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#REPLACE">REPLACE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#adapt">adapt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#build_parsemap">build_parsemap</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#bulk_insert">bulk_insert</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#common_filter">common_filter</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#expand">expand</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#expand_all">expand_all</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_close">file_close</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_delete">file_delete</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_exists">file_exists</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#file_open">file_open</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#find_driver">find_driver</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#get_table">get_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#isOperationalError">isOperationalError</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#isProgrammingError">isProgrammingError</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#is_numerical_type">is_numerical_type</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#log">log</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse">parse</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_blob">parse_blob</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_boolean">parse_boolean</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_date">parse_date</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_datetime">parse_datetime</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_decimal">parse_decimal</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_double">parse_double</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_id">parse_id</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_integer">parse_integer</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_json">parse_json</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_integers">parse_list_integers</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_references">parse_list_references</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_list_strings">parse_list_strings</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_reference">parse_reference</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_time">parse_time</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#parse_value">parse_value</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#save_dbt">save_dbt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#select_limitby">select_limitby</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#sequence_name">sequence_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#smart_adapt">smart_adapt</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#table_alias">table_alias</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#tables">tables</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#trigger_name">trigger_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#truncate">truncate</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#varquote">varquote</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b> (private):
+      <code><a href="gluon.dal.BaseAdapter-class.html#_drop" onclick="show_private();">_drop</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_fetchall" onclick="show_private();">_fetchall</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_insert_empty" onclick="show_private();">_insert_empty</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_select_aux" onclick="show_private();">_select_aux</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#_truncate" onclick="show_private();">_truncate</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#after_connection">after_connection</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#after_connection_hook">after_connection_hook</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#close">close</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#find_or_make_work_folder">find_or_make_work_folder</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="header_represent"></a><span class="summary-sig-name">header_represent</span>(<span class="summary-sig-arg">f</span>,
+        <span class="summary-sig-arg">r</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.header_represent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b>:
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#to_unicode">to_unicode</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#close_all_instances">close_all_instances</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#set_folder">set_folder</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IMAPAdapter-class.html#drivers" class="summary-name">drivers</a> = <code title="('imaplib')"><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">imaplib</code><code class="variable-quote">'</code><code class="variable-group">)</code></code><br />
+      IMAP server adapter
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IMAPAdapter-class.html#types" class="summary-name">types</a> = <code title="{'bigint': &lt;type 'long'&gt;,
+ 'blob': &lt;type 'str'&gt;,
+ 'boolean': &lt;type 'bool'&gt;,
+ 'date': &lt;type 'datetime.date'&gt;,
+ 'datetime': &lt;type 'datetime.datetime'&gt;,
+ 'id': &lt;type 'long'&gt;,
+ 'integer': &lt;type 'int'&gt;,
+ 'list:string': &lt;type 'str'&gt;,
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">bigint</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'long'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">blob</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'str'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">boole</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="dbengine"></a><span class="summary-name">dbengine</span> = <code title="'imap'"><code class="variable-quote">'</code><code class="variable-string">imap</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gluon.dal.IMAPAdapter-class.html#REGEX_URI" class="summary-name">REGEX_URI</a> = <code title="re.compile(r'^(?P&lt;user&gt;[^:]+)(:(?P&lt;password&gt;[^@]*))?@(?P&lt;host&gt;[^:@]+)(\
+:(?P&lt;port&gt;[0-9]+))?$')">re.compile(r'^<code class="re-group">(?P&lt;</code><code class="re-ref">user</code><code class="re-group">&gt;</code><code class="re-group">[^</code>:<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>:<code class="re-group">(?P&lt;</code><code class="re-ref">password</code><code class="re-group">&gt;</code><code class="re-group">[^</code>@<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.NoSQLAdapter-class.html" onclick="show_private();">NoSQLAdapter</a></code></b>:
+      <code><a href="gluon.dal.NoSQLAdapter-class.html#can_select_for_update">can_select_for_update</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.BaseAdapter-class.html" onclick="show_private();">BaseAdapter</a></code></b>:
+      <code><a href="gluon.dal.BaseAdapter-class.html#FALSE">FALSE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#QUOTE_TEMPLATE">QUOTE_TEMPLATE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#TRUE">TRUE</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#T_SEP">T_SEP</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#commit_on_alter_table">commit_on_alter_table</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#connection">connection</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#dbpath">dbpath</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#driver">driver</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#driver_name">driver_name</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#folder">folder</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#native_json">native_json</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#support_distributed_transaction">support_distributed_transaction</a></code>,
+      <code><a href="gluon.dal.BaseAdapter-class.html#uploads_in_blob">uploads_in_blob</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.dal.ConnectionPool-class.html" onclick="show_private();">ConnectionPool</a></code></b>:
+      <code><a href="gluon.dal.ConnectionPool-class.html#POOLS">POOLS</a></code>,
+      <code><a href="gluon.dal.ConnectionPool-class.html#check_active_connection">check_active_connection</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">db</span>,
+        <span class="sig-arg">uri</span>,
+        <span class="sig-arg">pool_size</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">folder</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">db_codec</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">UTF-8</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">credential_decoder</span>=<span class="sig-default">&lt;function IDENTITY at 0x31ed1b8&gt;</span>,
+        <span class="sig-arg">driver_args</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">adapter_args</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">do_connect</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">after_connection</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reconnect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">reconnect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">f</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">cursor</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.reconnect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>IMAP4 Pool connection method</p>
+  <p>imap connection lacks of self cursor command. A custom command should 
+  be provided as a replacement for connection pooling to prevent uncaught 
+  remote session closing</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.ConnectionPool-class.html#reconnect">ConnectionPool.reconnect</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="define_tables"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">define_tables</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">mailbox_names</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.define_tables">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Auto create common IMAP fileds</p>
+  <p>This function creates fields definitions &quot;statically&quot; 
+  meaning that custom fields as in other adapters should not be supported 
+  and definitions handled on a service/mode basis (local syntax for 
+  Gmail(r), Ymail(r)</p>
+  <p>Returns a dictionary with tablename, server native mailbox name 
+  pairs.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="create_table"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">create_table</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.create_table">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#create_table">BaseAdapter.create_table</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_select"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_select</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">fields</span>,
+        <span class="sig-arg">attributes</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._select">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#_select" onclick="show_private();">BaseAdapter._select</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="select"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">select</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">fields</span>,
+        <span class="sig-arg">attributes</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.select">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Search and Fetch records and return web2py rows</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#select">BaseAdapter.select</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_insert"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_insert</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">fields</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._insert">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#_insert" onclick="show_private();">BaseAdapter._insert</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="insert"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">insert</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">fields</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.insert">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#insert">BaseAdapter.insert</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_update"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_update</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tablename</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">fields</span>,
+        <span class="sig-arg">commit</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#_update" onclick="show_private();">BaseAdapter._update</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tablename</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">fields</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#update">BaseAdapter.update</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_count"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_count</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">distinct</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter._count">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#_count" onclick="show_private();">BaseAdapter._count</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="count"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">count</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">query</span>,
+        <span class="sig-arg">distinct</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.count">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#count">BaseAdapter.count</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="delete"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">delete</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tablename</span>,
+        <span class="sig-arg">query</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.delete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#delete">BaseAdapter.delete</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="BELONGS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BELONGS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.BELONGS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#BELONGS">BaseAdapter.BELONGS</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CONTAINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CONTAINS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>,
+        <span class="sig-arg">case_sensitive</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.CONTAINS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#CONTAINS">BaseAdapter.CONTAINS</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.GT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#GT">BaseAdapter.GT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.GE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#GE">BaseAdapter.GE</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.LT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#LT">BaseAdapter.LT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.LE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#LE">BaseAdapter.LE</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="NE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NE</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.NE">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#NE">BaseAdapter.NE</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="EQ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">EQ</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.EQ">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#EQ">BaseAdapter.EQ</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AND"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AND</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.AND">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#AND">BaseAdapter.AND</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="OR"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OR</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>,
+        <span class="sig-arg">second</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.OR">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#OR">BaseAdapter.OR</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="NOT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NOT</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">first</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.dal-pysrc.html#IMAPAdapter.NOT">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.dal.BaseAdapter-class.html#NOT">BaseAdapter.NOT</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="drivers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">drivers</h3>
+  <pre class="literalblock">
+IMAP server adapter
+
+  This class is intended as an interface with
+email IMAP servers to perform simple queries in the
+web2py DAL query syntax, so email read, search and
+other related IMAP mail services (as those implemented
+by brands like Google(r), and Yahoo!(r)
+can be managed from web2py applications.
+
+The code uses examples by Yuji Tomita on this post:
+http://yuji.wordpress.com/2011/06/22/python-imaplib-imap-example-with-gmail/#comment-1137
+and is based in docs for Python imaplib, python email
+and email IETF's (i.e. RFC2060 and RFC3501)
+
+This adapter was tested with a small set of operations with Gmail(r). Other
+services requests could raise command syntax and response data issues.
+
+It creates its table and field names &quot;statically&quot;,
+meaning that the developer should leave the table and field
+definitions to the DAL instance by calling the adapter's
+.define_tables() method. The tables are defined with the
+IMAP server mailbox list information.
+
+.define_tables() returns a dictionary mapping dal tablenames
+to the server mailbox names with the following structure:
+
+{&lt;tablename&gt;: str &lt;server mailbox name&gt;}
+
+Here is a list of supported fields:
+
+Field       Type            Description
+################################################################
+uid         string
+answered    boolean        Flag
+created     date
+content     list:string    A list of dict text or html parts
+to          string
+cc          string
+bcc         string
+size        integer        the amount of octets of the message*
+deleted     boolean        Flag
+draft       boolean        Flag
+flagged     boolean        Flag
+sender      string
+recent      boolean        Flag
+seen        boolean        Flag
+subject     string
+mime        string         The mime header declaration
+email       string         The complete RFC822 message**
+attachments &lt;type list&gt;    Each non text part as dict
+encoding    string         The main detected encoding
+
+*At the application side it is measured as the length of the RFC822
+message string
+
+WARNING: As row id's are mapped to email sequence numbers,
+make sure your imap client web2py app does not delete messages
+during select or update actions, to prevent
+updating or deleting different messages.
+Sequence numbers change whenever the mailbox is updated.
+To avoid this sequence numbers issues, it is recommended the use
+of uid fields in query references (although the update and delete
+in separate actions rule still applies).
+
+# This is the code recommended to start imap support
+# at the app's model:
+
+imapdb = DAL(&quot;imap://user:password@server:port&quot;, pool_size=1) # port 993 for ssl
+imapdb.define_tables()
+
+Here is an (incomplete) list of possible imap commands:
+
+# Count today's unseen messages
+# smaller than 6000 octets from the
+# inbox mailbox
+
+q = imapdb.INBOX.seen == False
+q &amp;= imapdb.INBOX.created == datetime.date.today()
+q &amp;= imapdb.INBOX.size &lt; 6000
+unread = imapdb(q).count()
+
+# Fetch last query messages
+rows = imapdb(q).select()
+
+# it is also possible to filter query select results with limitby and
+# sequences of mailbox fields
+
+set.select(&lt;fields sequence&gt;, limitby=(&lt;int&gt;, &lt;int&gt;))
+
+# Mark last query messages as seen
+messages = [row.uid for row in rows]
+seen = imapdb(imapdb.INBOX.uid.belongs(messages)).update(seen=True)
+
+# Delete messages in the imap database that have mails from mr. Gumby
+
+deleted = 0
+for mailbox in imapdb.tables
+    deleted += imapdb(imapdb[mailbox].sender.contains(&quot;gumby&quot;)).delete()
+
+# It is possible also to mark messages for deletion instead of ereasing them
+# directly with set.update(deleted=True)
+
+
+# This object give access
+# to the adapter auto mailbox
+# mapped names (which native
+# mailbox has what table name)
+
+imapdb.mailboxes &lt;dict&gt; # tablename, server native name pairs
+
+# To retrieve a table native mailbox name use:
+imapdb.&lt;table&gt;.mailbox
+
+### New features v2.4.1:
+
+# Declare mailboxes statically with tablename, name pairs
+# This avoids the extra server names retrieval
+
+imapdb.define_tables({&quot;inbox&quot;: &quot;INBOX&quot;})
+
+# Selects without content/attachments/email columns will only
+# fetch header and flags
+
+imapdb(q).select(imapdb.INBOX.sender, imapdb.INBOX.subject)
+
+</pre>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">imaplib</code><code class="variable-quote">'</code><code class="variable-group">)</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="types"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">types</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">bigint</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'long'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">blob</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'str'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">boolean</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'bool'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">date</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'datetime.date'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">datetime</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'datetime.datetime'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">id</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'long'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">integer</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'int'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">list:string</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;type 'str'&gt;<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="REGEX_URI"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">REGEX_URI</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'^<code class="re-group">(?P&lt;</code><code class="re-ref">user</code><code class="re-group">&gt;</code><code class="re-group">[^</code>:<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code>:<code class="re-group">(?P&lt;</code><code class="re-ref">password</code><code class="re-group">&gt;</code><code class="re-group">[^</code>@<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code>@<code class="re-group">(?P&lt;</code><code class="re-ref">host</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="re-op">^</code>:@<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+:<code class="re-group">(?P&lt;</code><code class="re-ref">port</code><code class="re-group">&gt;</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">)</code><code class="re-op">?</code>$')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:39 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

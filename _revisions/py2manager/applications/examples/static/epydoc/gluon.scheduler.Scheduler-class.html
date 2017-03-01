@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gluon.scheduler.Scheduler</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="gluon-module.html">Package&nbsp;gluon</a> ::
+        <a href="gluon.scheduler-module.html">Module&nbsp;scheduler</a> ::
+        Class&nbsp;Scheduler
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gluon.scheduler.Scheduler-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Scheduler</h1><p class="nomargin-top"><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+        object --+            
+                 |            
+threading._Verbose --+        
+                     |        
+      threading.Thread --+    
+                         |    
+             <a href="gluon.scheduler.MetaScheduler-class.html">MetaScheduler</a> --+
+                             |
+                            <strong class="uidshort">Scheduler</strong>
+</pre>
+
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>,
+        <span class="summary-sig-arg">tasks</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">migrate</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">worker_name</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">group_names</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">main</code><code class="variable-quote">'</code><code class="variable-group">]</code></span>,
+        <span class="summary-sig-arg">heartbeat</span>=<span class="summary-sig-default">3</span>,
+        <span class="summary-sig-arg">max_empty_runs</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">discard_results</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">utc_time</span>=<span class="summary-sig-default">False</span>)</span><br />
+      This constructor should always be called with keyword arguments.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__get_migrate"></a><span class="summary-sig-name">__get_migrate</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tablename</span>,
+        <span class="summary-sig-arg">migrate</span>=<span class="summary-sig-default">True</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.__get_migrate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="now"></a><span class="summary-sig-name">now</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.now">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_requirements"></a><span class="summary-sig-name">set_requirements</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">scheduler_task</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.set_requirements">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="define_tables"></a><span class="summary-sig-name">define_tables</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>,
+        <span class="summary-sig-arg">migrate</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.define_tables">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#loop" class="summary-sig-name">loop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">worker_name</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.loop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="wrapped_assign_tasks"></a><span class="summary-sig-name">wrapped_assign_tasks</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.wrapped_assign_tasks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="wrapped_pop_task"></a><span class="summary-sig-name">wrapped_pop_task</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.wrapped_pop_task">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#pop_task" class="summary-sig-name">pop_task</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.pop_task">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#report_task" class="summary-sig-name">report_task</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">task</span>,
+        <span class="summary-sig-arg">task_report</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.report_task">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="adj_hibernation"></a><span class="summary-sig-name">adj_hibernation</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.adj_hibernation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#send_heartbeat" class="summary-sig-name">send_heartbeat</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">counter</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.send_heartbeat">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="being_a_ticker"></a><span class="summary-sig-name">being_a_ticker</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.being_a_ticker">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assign_tasks"></a><span class="summary-sig-name">assign_tasks</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">db</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.assign_tasks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#sleep" class="summary-sig-name">sleep</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.sleep">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_worker_status"></a><span class="summary-sig-name">set_worker_status</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group_names</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">action</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">ACTIVE</code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.set_worker_status">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="disable"></a><span class="summary-sig-name">disable</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group_names</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.disable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="resume"></a><span class="summary-sig-name">resume</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group_names</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.resume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="terminate"></a><span class="summary-sig-name">terminate</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group_names</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.terminate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="kill"></a><span class="summary-sig-name">kill</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group_names</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.kill">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#queue_task" class="summary-sig-name">queue_task</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>,
+        <span class="summary-sig-arg">pargs</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="summary-sig-arg">pvars</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Queue tasks.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.queue_task">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#task_status" class="summary-sig-name">task_status</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ref</span>,
+        <span class="summary-sig-arg">output</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Shortcut for task status retrieval</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.task_status">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gluon.scheduler.Scheduler-class.html#stop_task" class="summary-sig-name">stop_task</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ref</span>)</span><br />
+      Experimental!!!
+Shortcut for task termination.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.stop_task">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="gluon.scheduler.MetaScheduler-class.html">MetaScheduler</a></code></b>:
+      <code><a href="gluon.scheduler.MetaScheduler-class.html#async">async</a></code>,
+      <code><a href="gluon.scheduler.MetaScheduler-class.html#die">die</a></code>,
+      <code><a href="gluon.scheduler.MetaScheduler-class.html#give_up">give_up</a></code>,
+      <code><a href="gluon.scheduler.MetaScheduler-class.html#run">run</a></code>,
+      <code><a href="gluon.scheduler.MetaScheduler-class.html#start_heartbeats">start_heartbeats</a></code>,
+      <code><a href="gluon.scheduler.MetaScheduler-class.html#terminate_process">terminate_process</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>threading.Thread</code></b>:
+      <code>__repr__</code>,
+      <code>getName</code>,
+      <code>isAlive</code>,
+      <code>isDaemon</code>,
+      <code>is_alive</code>,
+      <code>join</code>,
+      <code>setDaemon</code>,
+      <code>setName</code>,
+      <code>start</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>threading.Thread</code></b> (private):
+      <code>_reset_internal_locks</code>,
+      <code>_set_daemon</code>,
+      <code>_set_ident</code>
+      </p></div>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>threading._Verbose</code></b> (private):
+      <code>_note</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>threading.Thread</code></b>:
+      <code>daemon</code>,
+      <code>ident</code>,
+      <code>name</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>threading.Thread</code></b> (private):
+      <code>_block</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">db</span>,
+        <span class="sig-arg">tasks</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">migrate</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">worker_name</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">group_names</span>=<span class="sig-default"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">main</code><code class="variable-quote">'</code><code class="variable-group">]</code></span>,
+        <span class="sig-arg">heartbeat</span>=<span class="sig-default">3</span>,
+        <span class="sig-arg">max_empty_runs</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">discard_results</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">utc_time</span>=<span class="sig-default">False</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This constructor should always be called with keyword arguments. 
+  Arguments are:</p>
+  <p>*group* should be None; reserved for future extension when a 
+  ThreadGroup class is implemented.</p>
+  <p>*target* is the callable object to be invoked by the run() method. 
+  Defaults to None, meaning nothing is called.</p>
+  <p>*name* is the thread name. By default, a unique name is constructed of
+  the form &quot;Thread-N&quot; where N is a small decimal number.</p>
+  <p>*args* is the argument tuple for the target invocation. Defaults to 
+  ().</p>
+  <p>*kwargs* is a dictionary of keyword arguments for the target 
+  invocation. Defaults to {}.</p>
+  <p>If a subclass overrides the constructor, it must make sure to invoke 
+  the base class constructor (Thread.__init__()) before doing anything else
+  to the thread.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="loop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">loop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">worker_name</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.loop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.scheduler.MetaScheduler-class.html#loop">MetaScheduler.loop</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pop_task"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pop_task</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">db</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.pop_task">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.scheduler.MetaScheduler-class.html#pop_task">MetaScheduler.pop_task</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="report_task"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">report_task</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">task</span>,
+        <span class="sig-arg">task_report</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.report_task">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.scheduler.MetaScheduler-class.html#report_task">MetaScheduler.report_task</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="send_heartbeat"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">send_heartbeat</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">counter</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.send_heartbeat">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.scheduler.MetaScheduler-class.html#send_heartbeat">MetaScheduler.send_heartbeat</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sleep"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sleep</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.sleep">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="gluon.scheduler.MetaScheduler-class.html#sleep">MetaScheduler.sleep</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="queue_task"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">queue_task</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>,
+        <span class="sig-arg">pargs</span>=<span class="sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="sig-arg">pvars</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.queue_task">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Queue tasks. This takes care of handling the validation of all
+values.
+:param function: the function (anything callable with a __name__)
+:param pargs: &quot;raw&quot; args to be passed to the function. Automatically
+    jsonified.
+:param pvars: &quot;raw&quot; kwargs to be passed to the function. Automatically
+    jsonified
+:param kwargs: all the scheduler_task columns. args and vars here should be
+    in json format already, they will override pargs and pvars
+
+returns a dict just as a normal validate_and_insert, plus a uuid key holding
+the uuid of the queued task. If validation is not passed, both id and uuid
+will be None, and you'll get an &quot;error&quot; dict holding the errors found.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="task_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">task_status</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ref</span>,
+        <span class="sig-arg">output</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.task_status">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Shortcut for task status retrieval
+
+:param ref: can be
+    - integer --&gt; lookup will be done by scheduler_task.id
+    - string  --&gt; lookup will be done by scheduler_task.uuid
+    - query   --&gt; lookup as you wish (as in db.scheduler_task.task_name == 'test1')
+:param output: fetch also the scheduler_run record
+
+Returns a single Row object, for the last queued task
+If output == True, returns also the last scheduler_run record
+    scheduler_run record is fetched by a left join, so it can
+    have all fields == None
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="stop_task"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stop_task</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ref</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gluon.scheduler-pysrc.html#Scheduler.stop_task">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+Experimental!!!
+Shortcut for task termination.
+If the task is RUNNING it will terminate it --&gt; execution will be set as FAILED
+If the task is QUEUED, its stop_time will be set as to &quot;now&quot;,
+    the enabled flag will be set to False, status to STOPPED
+
+:param ref: can be
+    - integer --&gt; lookup will be done by scheduler_task.id
+    - string  --&gt; lookup will be done by scheduler_task.uuid
+Returns:
+    - 1 if task was stopped (meaning an update has been done)
+    - None if task was not found, or if task was not RUNNING or QUEUED
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="gluon-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.web2py.com">web2py Web Framework</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov 28 13:54:43 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
