@@ -1,6 +1,6 @@
 body {
-  font-family: sans-serif;
   background: #eee;
+  font-family: sans-serif;
 }
 
 a, h1, h2 {
@@ -26,11 +26,11 @@ label {
 }
 
 .page {
-  margin: 2em auto;
-  width: 50em;
-  border: 5px solid #ccc;
-  padding: 0.8em;
   background: white;
+  border: 5px solid #ccc;
+  margin: 2em auto;
+  padding: 0.8em;
+  width: 50em;
 }
 
 .entries {
@@ -48,19 +48,19 @@ label {
 }
 
 .add-task {
-  font-size: 0.9em;
   border-bottom: 1px solid #ccc;
+  font-size: 0.9em;
 }
 .add-task dl {
   font-weight: bold;
 }
 
 .metanav {
-  text-align: right;
-  font-size: 0.8em;
-  padding: 0.3em;
-  margin-bottom: 1em;
   background: #fafafa;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  padding: 0.3em;
+  text-align: right;
 }
 
 .flash {
@@ -85,9 +85,9 @@ label {
 
 .datagrid {
   background: #fff;
-  overflow: hidden;
   border: 1px solid #000000;
   border-radius: 3px;
+  overflow: hidden;
 }
 
 .datagrid table td, .datagrid table th {
@@ -105,8 +105,8 @@ label {
 }
 
 .datagrid table tbody td {
-  color: #000000;
   border-left: 1px solid #E1EEF4;
+  color: #000000;
   font-size: 12px;
   font-weight: normal;
 }
@@ -125,12 +125,12 @@ label {
 }
 
 .button {
-  background-color:#000;
-  display:inline-block;
-  color:#ffffff;
-  font-size:13px;
-  padding:3px 12px;
+  background-color: #000;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 13px;
+  padding: 3px 12px;
+  position: relative;
   margin: 0;
-  text-decoration:none;
-  position:relative;
+  text-decoration: none;
 }
