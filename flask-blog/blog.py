@@ -72,8 +72,7 @@ def add():
         g.db = connect_db()
         g.db.execute(
             'insert into posts (title, post) values (?, ?)',
-            [request.form['title'], request.form['post']]
-        )
+            [title, post])
         g.db.commit()
         g.db.close()
         flash('New entry was successfully posted!')
