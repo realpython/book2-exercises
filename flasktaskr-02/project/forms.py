@@ -1,7 +1,7 @@
 # project/forms.py
 
 
-from flask_wtf import Form
+from flask_wtf import FlaskForm as Form
 from wtforms import StringField, DateField, IntegerField, \
     SelectField, PasswordField
 from wtforms.validators import DataRequired, Length, EqualTo
