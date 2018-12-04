@@ -8,7 +8,7 @@ while True:
     print("To exit this game type 'exit'")
     num1 = choice(random2)
     num2 = choice(random1)
-    answer = int(input("What is {} times {}? ".format(num1, num2)))
+    answer = input("What is {} times {}? ".format(num1, num2))
 
     # exit
     if answer == "exit":
@@ -16,7 +16,7 @@ while True:
         sys.exit()
 
     # determine if number is correct
-    elif answer == num1 * num2:
+    elif int(answer) == num1 * num2:
         print("Correct!")
         break
     else:
